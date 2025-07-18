@@ -1,3 +1,134 @@
+# 약어 가이드
+
+LG => LoGin
+MP => My Page
+MM => Member Manage (회원관리)
+CS => Customer Service (1:1 문의)
+
+# 사이트맵
+
+- About us
+
+  - 재즈묘묘
+  - 어바웃 묘묘
+  - 인테리어
+  - 스토리
+
+- Shop
+
+  - 굿즈
+  - LP/CD
+
+- Menu
+
+  - Wine
+  - Drinks
+  - Platter $ Sdies
+  - Set Menu
+  - Pre-order
+
+- Schedule
+
+  - 월간 공연 캘린더
+  - 공연 상세 안내
+  - 아티스트, 게스트 소개
+  - 티켓 예매
+  - 대관 신청
+
+- Community
+
+  - 공지사항
+    - 수정하기
+    - 글쓰기
+    - 삭제 모달
+  - FAQ
+  - SNS/뉴스레터(새소식) 구독
+
+    - 수정하기
+    - 글쓰기
+    - 삭제 모달
+
+  - 지난 공연 갤러리
+
+    - 수정하기
+    - 글쓰기
+    - 삭제 모달
+
+  - 한줄후기(이벤트 형식으로)
+
+    - 수정하기
+    - 글쓰기
+    - 삭제 모달
+
+  - 이벤트
+    - 삭제
+
+- 로그인/관리자(시은이)
+
+  - 회원가입
+  - 아이디/비번 찾기
+  - 아이디/비번 찾기 결과페이지
+
+- 마이페이지 (의연언니)
+
+  - 주문내역
+  - 회원정보 / 정보수정 / 탈퇴하기
+
+- 회원관리(관리자) (하은언니)
+- 장바구니(이은지)
+
+---
+
+- 1:1(문의는 이쪽이묘)(규린이)
+
+# 컴포넌트
+
+[src]
+index.js
+[components]
+WrapComponent.jsx
+[wrap]
+TopModalComponent.jsx
+HeaderComponent.jsx
+MainComponent.jsx
+[main] //메인페이지
+[scss]
+Section1Component.scss
+.
+.
+.
+Section8Component.scss
+[sub] //서브메뉴 페이지 >[scss]
+
+        [Sub01]  ABOUT US
+         >[scss]
+                Sub01ABOUT_US .jsx
+                [Sub02]  SHOP
+                      >[scss]
+                    Sub02SHOP.jsx
+
+                [Sub03]  MENU
+                      >[scss]
+                    Sub03MENU.jsx
+
+                [Sub04]  SCHEDULE
+                      >[scss]
+                    Sub04SCHEDULE.jsx
+
+                [Sub05]  COMMUNITY
+                     >[scss]
+                    Sub05COMMUNITY.jsx
+
+                [Sub06LG]
+                [Sub07MP]
+                [Sub08MM]
+                [Sub09Cart]
+                [sub10CS]
+
+          FooterComponent.jsx
+          MainModalComponent.jsx
+          ConfirmModalComponent.jsx
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
