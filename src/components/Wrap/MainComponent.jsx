@@ -1,9 +1,10 @@
 import React from "react";
+import Section1Component from "./main/Section1Component";
 
 export default function MainComponent(props) {
   return (
     <main id="main">
-      <h1>this is a main Component</h1>
+      <Section1Component />
     </main>
   );
 }
