@@ -2,8 +2,8 @@ import React from "react";
 
 function Sub08_2MmDetail(props) {
   return (
-    <div id="sub08_2MmDetail">
-      <h2>Sub08_2MmDetail</h2>
+    <div id="sub082MmDetail">
+      <h2>Sub082MmDetail</h2>
     </div>
   );
 }

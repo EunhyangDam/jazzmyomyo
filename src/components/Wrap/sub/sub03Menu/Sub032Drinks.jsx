@@ -2,8 +2,8 @@ import React from "react";
 
 function Sub03_2Drinks(props) {
   return (
-    <div id="sub03_2Drinks">
-      <h2>Sub03_2Drinks</h2>
+    <div id="sub032Drinks">
+      <h2>Sub032Drinks</h2>
     </div>
   );
 }
