@@ -12,6 +12,7 @@ import Section10Component from "./main/Section10Component";
 import Section11Component from "./main/Section11Component";
 import Section12Component from "./main/Section12Component";
 import Section13Component from "./main/Section13Component";
+import "./scss/section.scss";
 
 export default function MainComponent(props) {
   return (
