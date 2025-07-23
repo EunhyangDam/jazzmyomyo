@@ -1,4 +1,4 @@
-@use "../../../scss/variables" as *;
+@use "../../../scss/_variables" as *;
 #wrap {
   #section1 {
     width: 100%;
@@ -54,20 +54,29 @@
           }
         }
         .pic {
-          width: fit-content;
           position: absolute;
-          .img-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            background: $grey3;
-            padding: 10px;
-            padding-bottom: 50px;
-            img {
-              aspect-ratio: 1/1;
-            }
-            &:first-child {
+          background: $grey3;
+          padding: 10px;
+          padding-bottom: 50px;
+          .view-box {
+            aspect-ratio: 1/1;
+            width: 275px;
+            overflow: hidden;
+            .wrapper {
               position: relative;
+              top: -000%;
+              transition: 0.8s;
+              .img-container {
+                height: 275px;
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
+                &:first-child {
+                  position: relative;
+                }
+              }
             }
           }
           &.pic1 {

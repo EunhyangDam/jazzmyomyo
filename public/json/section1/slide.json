@@ -1,0 +1,11 @@
+{
+  "slide1": [
+    { "id": "slide01", "img": "1.jpg" },
+    { "id": "slide02", "img": "2.jpg" },
+    { "id": "slide03", "img": "3.jpg" }
+  ],
+  "slide2": [
+    { "id": "slide01", "img": "1.jpg" },
+    { "id": "slide02", "img": "2.jpg" }
+  ]
+}
