@@ -1,0 +1,28 @@
+@use "../../../scss/_variables" as *;
+#wrap {
+  #main {
+    #section2Component {
+      padding-top: $section-top;
+      .inner {
+        ul {
+          display: flex;
+          justify-content: space-between;
+          li {
+            padding-left: 22px;
+            border-left: 2px solid $grey1;
+            p {
+              text-align: center;
+              &.number {
+                font-family: $font2;
+                font-size: $size2;
+              }
+              &.text {
+                font-size: $size4;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
