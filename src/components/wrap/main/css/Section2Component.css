@@ -1,0 +1,21 @@
+#wrap #main #section2Component {
+  padding-top: 150px;
+}
+#wrap #main #section2Component .inner ul {
+  display: flex;
+  justify-content: space-between;
+}
+#wrap #main #section2Component .inner ul li {
+  padding-left: 22px;
+  border-left: 2px solid #211c1c;
+}
+#wrap #main #section2Component .inner ul li p {
+  text-align: center;
+}
+#wrap #main #section2Component .inner ul li p.number {
+  font-family: "TTHakgyoansimMulgyeolB";
+  font-size: 4.5rem;
+}
+#wrap #main #section2Component .inner ul li p.text {
+  font-size: 1.8rem;
+}
