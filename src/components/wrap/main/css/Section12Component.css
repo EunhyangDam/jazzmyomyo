@@ -1,9 +1,10 @@
+#section12Component {
+  background-color: #ead3c1;
+}
 #section12Component section {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1750px;
-  margin: 0 auto;
   height: auto;
 }
 #section12Component section .container {
@@ -12,32 +13,38 @@
 }
 #section12Component section .container .title {
   width: 100%;
-  padding: 30px 0;
+  padding: 30px 0 10px 0;
   height: auto;
 }
 #section12Component section .container .title h2 {
-  font-size: var(--size4);
+  font-size: 1.8rem;
   font-family: "TTHakgyoansimMulgyeolB";
   font-weight: 700;
-  color: var(--white);
+  color: #ffffff;
 }
 #section12Component section .container .content {
   width: 100%;
-  height: calc(100% - 100px);
+  height: auto;
 }
 #section12Component section#section12 {
   height: auto;
-  background-color: rgba(0, 0, 0, 0.4941176471);
 }
 #section12Component section#section12 .container .title {
-  background-color: none;
+  border-bottom: 1px solid #ffffff;
 }
-#section12Component section#section12 .container .title h2 {
-  border-bottom: 1px solid #fff;
+#section12Component section#section12 .container .title .title-container {
+  width: 100%;
+  max-width: 1750px;
+  margin: 0 auto;
+}
+#section12Component section#section12 .container .title .title-container h2 {
   line-height: 160%;
   padding-left: 20px;
 }
 #section12Component section#section12 .container .content {
+  width: 100%;
+  max-width: 1750px;
+  margin: 0 auto;
   display: flex;
 }
 #section12Component section#section12 .container .content .left {
@@ -66,253 +73,19 @@
   width: 100%;
   padding: 16px 10px;
   display: flex;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 #section12Component section#section12 .container .content .right ul li h2 {
-  font-size: var(--size4);
+  font-size: 1.8rem;
 }
 #section12Component section#section12 .container .content .right ul li h3 {
-  font-size: var(--size4);
+  font-size: 1.8rem;
   font-weight: 600;
 }
 #section12Component section#section12 .container .content .right ul li i {
   margin-right: 10px;
 }
 #section12Component section#section12 .container .content .right ul li p {
+  font-size: 1.5rem;
   font-family: "MaruBuriSemiBold";
-}
-#section12Component section#section2 {
-  background-color: #fff;
-  height: auto;
-}
-#section12Component section#section2 .container .title {
-  display: flex;
-  align-items: center;
-}
-#section12Component section#section2 .container .title .line {
-  width: 100%;
-  height: 3px;
-  background-color: var(--sub-color1);
-}
-#section12Component section#section2 .container .title h2 {
-  color: var(--sub-color1);
-  padding: 0 20px;
-}
-#section12Component section#section2 .container .content {
-  width: 100%;
-  padding: 40px 50px 60px 50px;
-  display: flex;
-  justify-content: space-between;
-}
-#section12Component section#section2 .container .content .left {
-  width: 40%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-#section12Component section#section2 .container .content .left .myo {
-  position: absolute;
-  top: 0;
-  left: 30px;
-  z-index: 1;
-}
-#section12Component section#section2 .container .content .left .myo img {
-  transform: rotate(10deg) translateX(10px);
-}
-#section12Component section#section2 .container .content .left .pick {
-  position: relative;
-  padding-top: 104px;
-  z-index: 2;
-  width: 100%;
-}
-#section12Component section#section2 .container .content .left .pick .gap {
-  width: 100%;
-  height: 100%;
-  padding: 30px;
-}
-#section12Component section#section2 .container .content .left .pick .gap a {
-  width: 100%;
-  height: 100%;
-  display: block;
-  overflow: hidden;
-  transition: all 0.3s;
-}
-#section12Component section#section2 .container .content .left .pick .gap a img {
-  border-radius: var(--border-radius);
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-#section12Component section#section2 .container .content .left .pick .gap a:hover {
-  transform: translateY(40px);
-}
-#section12Component section#section2 .container .content .left .pick .caption-box {
-  padding-top: 20px;
-  text-align: center;
-}
-#section12Component section#section2 .container .content .left .pick .caption-box h3 {
-  font-size: var(--size4);
-  background-color: var(--sub-color2);
-  display: inline-block;
-  padding: 8px 30px;
-  border-radius: 20px;
-  color: #fff;
-}
-#section12Component section#section2 .container .content .left .pick .caption-box a {
-  font-size: var(--size4);
-  width: 100%;
-  display: block;
-  padding: 20px 0;
-  text-transform: capitalize;
-  font-weight: 600;
-  letter-spacing: 1.6px;
-}
-#section12Component section#section2 .container .content .left .pick .caption-box a:hover {
-  color: var(--sub-color1);
-}
-#section12Component section#section2 .container .content .left .pick .caption-box strong {
-  width: 100%;
-  color: var(--grey2);
-  letter-spacing: 1.6px;
-}
-#section12Component section#section2 .container .content .right {
-  width: 60%;
-  height: 100%;
-}
-#section12Component section#section2 .container .content .right ul {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  padding-left: 50px;
-}
-#section12Component section#section2 .container .content .right ul li {
-  width: 50%;
-  height: 50%;
-  padding: 25px;
-}
-#section12Component section#section2 .container .content .right ul li .gap {
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-}
-#section12Component section#section2 .container .content .right ul li .gap a {
-  width: 100%;
-  display: block;
-  overflow: hidden;
-  transition: all 0.3s;
-}
-#section12Component section#section2 .container .content .right ul li .gap a img {
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: var(--border-radius);
-  border: 1px solid var(--grey3);
-}
-#section12Component section#section2 .container .content .right ul li .gap a:hover {
-  transform: translateY(20px);
-}
-#section12Component section#section2 .container .content .right ul li .caption-box {
-  text-align: center;
-}
-#section12Component section#section2 .container .content .right ul li .caption-box a {
-  font-size: var(--size4);
-  width: 100%;
-  display: block;
-  padding-bottom: 10px;
-  text-transform: capitalize;
-  letter-spacing: 1.6px;
-}
-#section12Component section#section2 .container .content .right ul li .caption-box a:hover {
-  color: var(--sub-color1);
-}
-#section12Component section#section2 .container .content .right ul li .caption-box strong {
-  width: 100%;
-  color: var(--grey2);
-  letter-spacing: 1.6px;
-}
-#section12Component section#section3 {
-  background-color: var(--sub-color4);
-}
-#section12Component section#section3 .container .title {
-  background-color: none;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-}
-#section12Component section#section3 .container .title h2 {
-  line-height: 160%;
-  padding-left: 20px;
-}
-#section12Component section#section3 .container .title h3 {
-  color: #fff;
-  font-size: var(--size4);
-  font-family: "TTHakgyoansimMulgyeolB";
-  padding-right: 20px;
-}
-#section12Component section#section3 .container .title .line {
-  width: 100%;
-  height: 18px;
-  border-top: 8px solid #fff;
-  border-bottom: 3px solid #fff;
-}
-#section12Component section#section3 .container .content {
-  width: 100%;
-}
-#section12Component section#section3 .container .content .reviews {
-  width: 100%;
-}
-#section12Component section#section3 .container .content .reviews ul {
-  width: 100%;
-  overflow: hidden;
-}
-#section12Component section#section3 .container .content .reviews ul li {
-  width: 100%;
-  display: inline-block;
-  white-space: nowrap;
-  animation: review_ani var(--duration) linear infinite;
-}
-#section12Component section#section3 .container .content .reviews ul li span {
-  line-height: 180%;
-  font-family: Arial;
-  font-size: var(--size3);
-  font-weight: 600;
-  display: inline-block;
-}
-#section12Component section#section3 .container .content .reviews ul li:nth-child(1) {
-  --duration: 10s;
-}
-#section12Component section#section3 .container .content .reviews ul li:nth-child(2) {
-  --duration: 12s;
-}
-#section12Component section#section3 .container .content .reviews ul li:nth-child(3) {
-  --duration: 10s;
-}
-#section12Component section#section3 .container .content .reviews ul li:nth-child(4) {
-  --duration: 14s;
-}
-@keyframes review_ani {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-#section12Component section#section3 .container .content .video {
-  width: 100%;
-  padding: 60px 0;
-}
-#section12Component section#section3 .container .content .video ul {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-}
-#section12Component section#section3 .container .content .video ul li {
-  width: 25%;
-  padding: 0 20px;
-}
-#section12Component section#section3 .container .content .video ul li iframe {
-  width: 100%;
 }

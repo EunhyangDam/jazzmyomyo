@@ -1,0 +1,88 @@
+{
+  "아이콘": [
+    { "이름": "별", "클래스이름": "bi bi-stars" },
+    { "이름": "달", "클래스이름": "bi bi-moon-stars-fill" },
+    { "이름": "음표", "클래스이름": "bi bi-music-note" },
+    { "이름": "별표", "클래스이름": "bi bi-asterisk" }
+  ],
+
+  "한줄후기": [
+    {
+      "ID": "review-row-01",
+      "후기1": "잊을 수 없는 경험, 칵테일 한 잔과 재즈 선율이 완벽한 밤이었어요.",
+      "후기2": "따뜻한 서비스와 친근한 분위기가 인상적이었어요. 다음에 또 오고싶어요!"
+    },
+    {
+      "ID": "review-row-02",
+      "후기1": "재즈 묘묘에서 감성 충전 제대로 했습니다. 친구들과 즐거운 시간 보냈어요",
+      "후기2": "은은한 조명 아래에서 재즈 연주 들으니까 하루 피로가 싹 풀리더라구요."
+    },
+    {
+      "ID": "review-row-03",
+      "후기1": "재즈를 몰라도 충분히 즐길 수 있어요! 분위기가 좋아요~",
+      "후기2": "묘묘가 너무 귀여워요. 아늑한 분위기에서 귀호강 했어요."
+    },
+    {
+      "ID": "review-row-04",
+      "후기1": "맛있는 음식 먹으면서 재즈 즐기기 딱 좋더라구요.",
+      "후기2": "분위기가 좋아서 커플끼리 와도 좋은 곳입니다. 다음에 또 올거예요"
+    }
+  ],
+  "영상소스": [
+    {
+      "ID": "shorts-01",
+      "원본 링크": "https://www.youtube.com/shorts/KC36-lcPgEA",
+      "영상 링크": "https://www.youtube.com/embed/KC36-lcPgEA"
+    },
+    {
+      "ID": "shorts-02",
+      "원본 링크": "https://www.youtube.com/shorts/x4MHa2pX0vk",
+      "영상 링크": "https://www.youtube.com/embed/x4MHa2pX0vk"
+    },
+    {
+      "ID": "shorts-03",
+      "원본 링크": "https://www.youtube.com/shorts/mSAlB4hPehA",
+      "영상 링크": "https://www.youtube.com/embed/mSAlB4hPehA"
+    },
+    {
+      "ID": "shorts-04",
+      "원본 링크": "https://www.youtube.com/shorts/biZtCoYRQp4",
+      "영상 링크": "https://www.youtube.com/embed/biZtCoYRQp4"
+    },
+    {
+      "ID": "shorts-05",
+      "원본 링크": "https://www.youtube.com/shorts/Re22_v5_yrI",
+      "영상 링크": "https://www.youtube.com/embed/Re22_v5_yrI"
+    },
+    {
+      "ID": "shorts-06",
+      "원본 링크": "https://www.youtube.com/shorts/9GmUpAiojBM",
+      "영상 링크": "https://www.youtube.com/embed/9GmUpAiojBM"
+    },
+    {
+      "ID": "shorts-07",
+      "원본 링크": "https://www.youtube.com/shorts/N7uuXHEefJQ",
+      "영상 링크": "https://www.youtube.com/embed/N7uuXHEefJQ"
+    },
+    {
+      "ID": "shorts-08",
+      "원본 링크": "https://www.youtube.com/shorts/2KucdYK2O_I",
+      "영상 링크": "https://www.youtube.com/embed/2KucdYK2O_I"
+    },
+    {
+      "ID": "shorts-09",
+      "원본 링크": "https://www.youtube.com/shorts/jeYFZUwtxnM",
+      "영상 링크": "https://www.youtube.com/embed/jeYFZUwtxnM"
+    },
+    {
+      "ID": "shorts-10",
+      "원본 링크": "https://www.youtube.com/shorts/kOAEf5LZbkU",
+      "영상 링크": "https://www.youtube.com/embed/kOAEf5LZbkU"
+    },
+    {
+      "ID": "shorts-11",
+      "원본 링크": "https://www.youtube.com/shorts/ER73lJrm6iQ",
+      "영상 링크": "https://www.youtube.com/embed/ER73lJrm6iQ"
+    }
+  ]
+}

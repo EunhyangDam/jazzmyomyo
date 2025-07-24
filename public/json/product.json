@@ -1,6 +1,7 @@
 {
   "product": [
     {
+      "idx": "01",
       "id": "product_mugcup_01",
       "상품명": "블랙 머그컵",
       "상품분류": "굿즈",
@@ -11,9 +12,10 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/coster_01.png"]
+      "이미지": ["./img/md/mugcup_01.png"]
     },
     {
+      "idx": "02",
       "id": "product_coster_01",
       "상품명": "LP 코스터 세트",
       "상품분류": "굿즈",
@@ -27,6 +29,7 @@
       "이미지": ["./img/md/coster_01.png"]
     },
     {
+      "idx": "03",
       "id": "product_keyring_01",
       "상품명": "재즈 묘묘 키링[3type]",
       "상품분류": "굿즈",
@@ -44,6 +47,7 @@
       ]
     },
     {
+      "idx": "04",
       "id": "product_doll_01",
       "상품명": "블랙 묘묘 인형 (30cm) [2type]",
       "상품분류": "굿즈",
@@ -57,6 +61,7 @@
       "이미지": ["./img/md/doll_01_1.png", "./img/md/doll_01_2.png"]
     },
     {
+      "idx": "05",
       "id": "product_pouch_01",
       "상품명": "블랙 묘묘 파우치",
       "상품분류": "굿즈",
@@ -70,6 +75,7 @@
       "이미지": ["./img/md/pouch_01.png"]
     },
     {
+      "idx": "06",
       "id": "product_lighter_01",
       "상품명": "블랙 라이터",
       "상품분류": "굿즈",
@@ -83,6 +89,7 @@
       "이미지": ["./img/md/lighter_01.png"]
     },
     {
+      "idx": "07",
       "id": "product_ballcap_01",
       "상품명": "재즈 묘묘 로고 볼캡 [2colors]",
       "상품분류": "굿즈",
@@ -99,6 +106,7 @@
       ]
     },
     {
+      "idx": "08",
       "id": "product_beanie_01",
       "상품명": "블랙 비니",
       "상품분류": "굿즈",
@@ -112,6 +120,7 @@
       "이미지": ["./img/md/beanie_01.png"]
     },
     {
+      "idx": "09",
       "id": "product_CD_01",
       "상품명": "Colde (콜드) - Love Part 2",
       "상품분류": "음반",
@@ -128,6 +137,7 @@
       ]
     },
     {
+      "idx": "10",
       "id": "product_CD_02",
       "상품명": "선우정아 - Stand",
       "상품분류": "음반",
@@ -141,6 +151,7 @@
       "이미지": ["./img/md/cd/swja_stand_1.png", "./img/md/cd/swja_stand_2.png"]
     },
     {
+      "idx": "11",
       "id": "product_CD_03",
       "상품명": "고상지 3집 - Tears of Pitou",
       "상품분류": "음반",
@@ -154,6 +165,7 @@
       "이미지": ["./img/md/cd/ksj_top_1.png", "./img/md/cd/ksj_top_2.png"]
     },
     {
+      "idx": "12",
       "id": "product_CD_04",
       "상품명": "잭킹콩 (JKC) - 2집 : Apophenia",
       "상품분류": "음반",
@@ -167,6 +179,7 @@
       "이미지": ["./img/md/cd/JKC_2nd_1.png", "./img/md/cd/JKC_2nd_2.png"]
     },
     {
+      "idx": "13",
       "id": "product_CD_05",
       "상품명": "잭킹콩 (JACKINGCONG) 1집 - Dress code",
       "상품분류": "음반",
@@ -180,6 +193,7 @@
       "이미지": ["./img/md/cd/JKC_1st_1.png", "./img/md/cd/JKC_1st_2.png"]
     },
     {
+      "idx": "14",
       "id": "product_CD_06",
       "상품명": "잭킹콩 (JACKINGCONG) - At My Peaceful Garden",
       "상품분류": "음반",
@@ -193,6 +207,7 @@
       "이미지": ["./img/md/cd/JKC_garden1.png", "./img/md/cd/JKC_garden2.png"]
     },
     {
+      "idx": "15",
       "id": "product_CD_07",
       "상품명": "잭킹콩 (JACKINGCONG) - JKC Exhibition : Four Seasons",
       "상품분류": "음반",
@@ -206,6 +221,7 @@
       "이미지": ["./img/md/cd/JKC_fs_1.png", "./img/md/cd/JKC_fs_2.png"]
     },
     {
+      "idx": "16",
       "id": "product_LP_01",
       "상품명": "최백호 - 찰나(刹那) ver.2 [투명 컬러 LP]",
       "상품분류": "음반",
@@ -219,6 +235,7 @@
       "이미지": ["./img/md/lp/cbh_1.png", "./img/md/lp/cbh_2.png"]
     },
     {
+      "idx": "17",
       "id": "product_LP_02",
       "상품명": "죠지 - 1집 FRR [LP]",
       "상품분류": "음반",
@@ -232,6 +249,7 @@
       "이미지": ["./img/md/lp/george_FRR_1.png", "./img/md/lp/george_FRR_2.png"]
     },
     {
+      "idx": "18",
       "id": "product_LP_03",
       "상품명": "죠지 - Cassette (EP)",
       "상품분류": "음반",
@@ -248,6 +266,7 @@
       ]
     },
     {
+      "idx": "19",
       "id": "product_LP_04",
       "상품명": "Lauv (라우브) - 2집 All 4 Nothing",
       "상품분류": "음반",
@@ -261,6 +280,7 @@
       "이미지": ["./img/md/lp/lauv_a4n_1.png", "./img/md/lp/lauv_a4n_2.png"]
     },
     {
+      "idx": "20",
       "id": "product_LP_05",
       "상품명": "Lauv (라우브) - 1집 How i'm feeling",
       "상품분류": "음반",
@@ -274,6 +294,7 @@
       "이미지": ["./img/md/lp/lauv_hif_1.png", "./img/md/lp/lauv_hif_2.png"]
     },
     {
+      "idx": "21",
       "id": "product_LP_06",
       "상품명": "Lauv (라우브) - I met you when i was 18",
       "상품분류": "음반",
@@ -287,6 +308,7 @@
       "이미지": ["./img/md/lp/lauv_18_1.png", "./img/md/lp/lauv_18_2.png"]
     },
     {
+      "idx": "22",
       "id": "product_LP_07",
       "상품명": "John Mayer - Where The Light Is: Live In Los Angeles 존 메이어 2007년 12월 LA 라이브 [4LP]",
       "상품분류": "음반",
@@ -300,6 +322,7 @@
       "이미지": ["./img/md/lp/john_mayer_1.png", "./img/md/lp/john_mayer_2.png"]
     },
     {
+      "idx": "23",
       "id": "product_LP_08",
       "상품명": "Carpenters (카펜터스) - 2집 Close to You [LP]",
       "상품분류": "음반",
@@ -316,6 +339,7 @@
       ]
     },
     {
+      "idx": "24",
       "id": "product_LP_09",
       "상품명": "Carpenters (카펜터스) - The Singles 1969-1973 [LP]",
       "상품분류": "음반",
@@ -332,6 +356,7 @@
       ]
     },
     {
+      "idx": "25",
       "id": "product_LP_10",
       "상품명": "Coldplay (콜드플레이) - 1집 Parachutes",
       "상품분류": "음반",

@@ -2,8 +2,6 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1750px;
-  margin: 0 auto;
   height: auto;
 }
 #section8Component section .container {
@@ -16,74 +14,87 @@
   height: auto;
 }
 #section8Component section .container .title h2 {
-  font-size: var(--size4);
   font-family: "TTHakgyoansimMulgyeolB";
   font-weight: 700;
-  color: var(--white);
+  color: #ffffff;
 }
 #section8Component section .container .content {
   width: 100%;
+  max-width: 1750px;
+  margin: 0 auto;
   height: calc(100% - 100px);
 }
 #section8Component section#section8 {
-  background-color: var(--sub-color4);
+  background-color: #ead3c1;
+  width: 100%;
+  height: auto;
+}
+#section8Component section#section8 .container {
+  padding: 0 0 100px 0;
 }
 #section8Component section#section8 .container .title {
-  background-color: none;
+  width: 100%;
+}
+#section8Component section#section8 .container .title .title-container {
+  width: 100%;
+  max-width: 1750px;
+  margin: 0 auto;
   display: flex;
-  flex-flow: row wrap;
   justify-content: space-between;
 }
-#section8Component section#section8 .container .title h2 {
+#section8Component section#section8 .container .title .title-container h2 {
+  font-size: 1.8rem;
   line-height: 160%;
-  padding-left: 20px;
 }
-#section8Component section#section8 .container .title h3 {
+#section8Component section#section8 .container .title .title-container h3 {
   color: #fff;
-  font-size: var(--size4);
+  font-size: 1.8rem;
   font-family: "TTHakgyoansimMulgyeolB";
-  padding-right: 20px;
+  display: flex;
+  align-items: center;
 }
 #section8Component section#section8 .container .title .line {
   width: 100%;
   height: 18px;
-  border-top: 8px solid #fff;
-  border-bottom: 3px solid #fff;
+  border-top: 8px solid #ffffff;
+  border-bottom: 3px solid #ffffff;
 }
 #section8Component section#section8 .container .content {
   width: 100%;
+  height: auto;
 }
 #section8Component section#section8 .container .content .reviews {
   width: 100%;
+  padding-bottom: 60px;
 }
 #section8Component section#section8 .container .content .reviews ul {
   width: 100%;
   overflow: hidden;
 }
 #section8Component section#section8 .container .content .reviews ul li {
-  width: 100%;
-  display: inline-block;
+  width: auto;
   white-space: nowrap;
   animation: review_ani var(--duration) linear infinite;
+  display: inline-flex;
 }
 #section8Component section#section8 .container .content .reviews ul li span {
   line-height: 180%;
   font-family: Arial;
-  font-size: var(--size3);
+  font-size: 3rem;
   font-weight: 600;
   display: inline-block;
 }
 #section8Component section#section8 .container .content .reviews ul li:nth-child(1) {
-  --duration: 10s;
+  --duration: 30s;
 }
 #section8Component section#section8 .container .content .reviews ul li:nth-child(2) {
-  --duration: 12s;
+  --duration: 25s;
 }
 #section8Component section#section8 .container .content .reviews ul li:nth-child(3) {
-  --duration: 10s;
+  --duration: 20s;
 }
 #section8Component section#section8 .container .content .reviews ul li:nth-child(4) {
-  --duration: 14s;
+  --duration: 23s;
 }
 @keyframes review_ani {
   0% {
@@ -95,17 +106,49 @@
 }
 #section8Component section#section8 .container .content .video {
   width: 100%;
-  padding: 60px 0;
+  height: auto;
 }
-#section8Component section#section8 .container .content .video ul {
+#section8Component section#section8 .container .content .video .video-container {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  height: 100vh;
+  background: url(../../../../../public/img/section8/tv_bg_edit.png) no-repeat 50% 50%;
+  background-size: contain;
+  overflow: hidden;
+}
+#section8Component section#section8 .container .content .video .video-container .slide-container {
+  position: absolute;
+  top: 15%;
+  left: 21%;
+  z-index: 2;
+  width: 50%;
+  overflow: hidden;
+}
+#section8Component section#section8 .container .content .video .video-container .slide-container .slide-view {
   width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+#section8Component section#section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap {
+  position: relative;
+  z-index: 3;
+  width: 3300px;
   display: flex;
-  justify-content: space-evenly;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 90px 0;
 }
-#section8Component section#section8 .container .content .video ul li {
-  width: 25%;
-  padding: 0 20px;
+#section8Component section#section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap li {
+  width: 300px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: center;
 }
-#section8Component section#section8 .container .content .video ul li iframe {
-  width: 100%;
+#section8Component section#section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap li iframe {
+  max-width: 260px;
+  height: auto;
+  aspect-ratio: 280/460;
+  border: none;
+  display: block;
 }

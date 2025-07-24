@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./scss/Section7Component.scss";
+import { Link } from "react-router-dom";
 
 export default function Section7Component(props) {
+  const [state, setState] = useState({
+    product: [],
+  });
 
+  useEffect(() => {
+    fetch("/json/product.json", { method: "GET" })
+      .then((res) => res.json())
+      .then((data) => {
+        setState({
+          product: data.product,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-
-  
+  if (!state.product || state.product.length < 24) return <div>Loading…</div>;
   return (
     <div id="Section7Component">
       <section id="section7" className="shop">
@@ -22,14 +37,29 @@ export default function Section7Component(props) {
               </div>
               <div className="pick">
                 <div className="gap">
-                  <a href="!#">
-                    <img src="./img/md/doll_01_1.png" alt="묘묘전신인형"/>
-                  </a>
+                  <Link to="./Sub02Merch03">
+                    <img
+                      src={state.product[3].이미지[0]}
+                      alt={state.product[3].상품명}
+                    />
+                    <img
+                      src={state.product[3].이미지[1]}
+                      alt={state.product[3].상품명}
+                    />
+                  </Link>
                 </div>
                 <div className="caption-box">
                   <h3>Best Seller</h3>
-                  <a href="!#">coldplay lp</a>
-                  <strong>$50.00</strong>
+                  <a href="!#">{state.product[3].상품명}</a>
+                  <s>{state.product[3].가격.toLocaleString("ko-KR")}원</s>
+                  <br />
+                  <em>
+                    {(
+                      state.product[3].가격 *
+                      (1 - state.product[3].할인율)
+                    ).toLocaleString("ko-KR")}
+                    원
+                  </em>
                 </div>
               </div>
             </div>
@@ -38,51 +68,67 @@ export default function Section7Component(props) {
                 <li className="item1">
                   <div className="gap">
                     <a href="!#">
-                      <img src="./img/md/doll_01_1.png" alt="임시"/>
+                      <img src={state.product[23].이미지[0]} alt="카펜터스" />
                     </a>
                   </div>
                   <div className="caption-box">
-                    <a href="!#">john lennon lp</a>
-                    <strong>$50.00</strong>
+                    <a href="!#">
+                      {state.product[23].상품명.split("-")[0]}
+                      <br />
+                      {state.product[23].상품명.split("-")[1]}
+                    </a>
+                    <strong>
+                      {state.product[23].가격.toLocaleString("ko-KR")}원
+                    </strong>
                   </div>
                 </li>
                 <li className="item2">
                   <div className="gap">
                     <a href="!#">
-                      <img src="./img/md/doll_01_1.png" alt="임시"/>
+                      <img src={state.product[12].이미지[0]} alt="잭킹콩" />
                     </a>
                   </div>
                   <div className="caption-box">
-                    <a href="!#">carpenters lp</a>
-                    <strong>$50.00</strong>
+                    <a href="!#">
+                      {state.product[12].상품명.split("-")[0]}
+                      <br />
+                      {state.product[12].상품명.split("-")[1]}
+                    </a>
+                    <strong>
+                      {state.product[12].가격.toLocaleString("ko-KR")}원
+                    </strong>
                   </div>
                 </li>
                 <li className="item3">
                   <div className="gap">
                     <a href="!#">
-                      <img src="./img/md/doll_01_1.png" alt="임시"/>
+                      <img src={state.product[1].이미지[0]} alt="코스터" />
                     </a>
                   </div>
                   <div className="caption-box">
-                    <a href="!#">lauv lp</a>
-                    <strong>$50.00</strong>
+                    <a href="!#">{state.product[1].상품명}</a>
+                    <strong>
+                      {state.product[1].가격.toLocaleString("ko-KR")}원
+                    </strong>
                   </div>
                 </li>
                 <li className="item4">
                   <div className="gap">
                     <a href="!#">
-                      <img src="./img/md/doll_01_1.png" alt="임시"/>
+                      <img src={state.product[5].이미지[0]} alt="라이터" />
                     </a>
                   </div>
                   <div className="caption-box">
-                    <a href="!#">john mayer lp</a>
-                    <strong>$50.00</strong>
+                    <a href="!#">{state.product[5].상품명}</a>
+                    <strong>
+                      {state.product[5].가격.toLocaleString("ko-KR")}원
+                    </strong>
                   </div>
                 </li>
               </ul>
             </div>
           </div>
-         </div>
+        </div>
       </section>
     </div>
   );
