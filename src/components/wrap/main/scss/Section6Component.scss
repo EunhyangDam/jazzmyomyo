@@ -1,11 +1,46 @@
+@use "../../../scss/variables.scss" as *;
 #wrap {
   #main {
     #section6Component {
       .inner {
         display: flex;
+        justify-content: space-between;
         .left {
+          h2 {
+            font-size: $size2;
+            font-weight: 600;
+            .line {
+              width: 210px;
+              height: 3px;
+              background: $grey1;
+              display: inline-block;
+            }
+          }
         }
         .right {
+          flex-grow: 1;
+          form {
+            ul {
+              li {
+                p {
+                  margin-bottom: 10px;
+                }
+                input[type="text"] {
+                  border: 0;
+                  border-bottom: 1px solid $grey1;
+                  width: 100%;
+                  padding: 5px;
+                  font-family: $font1;
+                  &:focus {
+                    outline: none;
+                  }
+                }
+                &:not(:last-child) {
+                  margin-bottom: 10px;
+                }
+              }
+            }
+          }
         }
       }
     }

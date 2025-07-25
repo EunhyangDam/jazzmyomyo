@@ -1,0 +1,344 @@
+#schedule.section {
+  .container {
+    padding: 0 20px;
+
+    .top-area {
+      padding: 30px 0 50px 0;
+      text-align: center;
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        padding: 10px 0;
+      }
+      h2 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #9b9b9b;
+      }
+    }
+
+    .split-area {
+      display: flex;
+      width: 700px;
+      justify-content: space-between;
+      padding: 20px 0 30px;
+      margin: 0 auto;
+
+      .left {
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 1.4;
+        text-align: center;
+        align-items: center;
+      }
+
+      .right {
+        flex-grow: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+
+        .day {
+          flex: 1;
+          text-align: center;
+          position: relative;
+          z-index: 2;
+          cursor: pointer;
+
+          &.today {
+            .weekday,
+            .date-text {
+              color: #d9534f;
+            }
+          }
+
+          > .today-label {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: #fff;
+            padding: 5px 7px;
+            background: #d9534f;
+            border-radius: 7px;
+            font-weight: 700;
+            white-space: nowrap;
+            z-index: 10;
+          }
+
+          .weekday {
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #333;
+            line-height: 1.2;
+          }
+
+          .date {
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            margin: 0 auto;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+
+            .date-text {
+              position: relative;
+              z-index: 2;
+              font-weight: 600;
+              color: #333;
+              display: block;
+              transition: color 0.3s ease;
+            }
+
+            &.has-today-circle {
+              .date-text {
+                color: #fff;
+              }
+            }
+
+            .today-circle {
+              position: absolute;
+              top: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 28px;
+              height: 28px;
+              border-radius: 50%;
+              background-color: #d9544f;
+              z-index: 1;
+              transition: all 0.3s ease;
+              pointer-events: none;
+            }
+          }
+        }
+      }
+    }
+
+    .slide-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 1920px;
+      margin: 0 auto;
+      position: relative;
+
+      .btn {
+        background: none;
+        border: none;
+        font-size: 3rem;
+        cursor: pointer;
+        color: #333;
+        padding: 0 15px;
+        user-select: none;
+        transition: color 0.3s ease;
+
+        &:disabled {
+          color: #ccc;
+          cursor: default;
+        }
+      }
+
+      .slide-wrapper {
+        overflow: hidden;
+        width: 100%;
+        max-width: 1440px;
+        padding: 0 300px;
+        box-sizing: content-box;
+
+        .slide-list {
+          display: flex;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          transition: transform 0.5s ease;
+          will-change: transform;
+
+          li.slide {
+            flex: 0 0 200px;
+            text-align: center;
+            opacity: 0.3;
+            transform: scale(0.6);
+            transition: all 0.5s ease;
+            user-select: none;
+            position: relative;
+            z-index: 1;
+
+            &.today-slide {
+              position: relative;
+
+              &::before {
+                content: "Today";
+                position: absolute;
+                top: 8px;
+                left: 8px;
+                background: #d9534f;
+                color: #fff;
+                padding: 4px 6px;
+                border-radius: 6px;
+                font-size: 0.7rem;
+                z-index: 20;
+              }
+            }
+
+            &.center {
+              flex: 0 0 360px;
+              opacity: 1;
+              transform: scale(1);
+              z-index: 10;
+            }
+
+            &:nth-child(n + 1):nth-child(-n + 7) {
+              opacity: 0.5;
+              transform: scale(0.8);
+              z-index: 5;
+            }
+
+            a {
+              display: block;
+
+              img {
+                width: 100%;
+                height: 320px;
+                object-fit: cover;
+                border-radius: 12px;
+                pointer-events: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ========================================
+  ✅ 반응형
+======================================== */
+
+// 1024px 이하: 슬라이드 크기 축소 + 정렬 유지
+@media (max-width: 1024px) {
+  #schedule.section {
+    .slide-area {
+      .slide-wrapper {
+        padding: 0 150px;
+
+        .slide-list {
+          li.slide {
+            flex: 0 0 140px;
+
+            &.center {
+              flex: 0 0 260px;
+            }
+
+            img {
+              height: 240px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// 440px 이하: 슬라이드 1장만 보이게 + 텍스트 위치 조정
+@media (max-width: 440px) {
+  #schedule.section {
+    .container {
+      .top-area {
+        padding-bottom: 10px;
+      }
+      .split-area {
+        width: 100%;
+        padding-top: 15px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+        .left {
+          width: 100%;
+          text-align: center;
+        }
+
+        .right {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: nowrap;
+          gap: 1px;
+          margin-top: 30px;
+
+          .day {
+            flex: 1 1 0;
+            min-width: 0;
+            padding-top: 5px;
+
+            .weekday,
+            .date-text {
+              font-size: 0.9rem;
+              word-break: keep-all;
+            }
+
+            > .today-label {
+              position: absolute;
+              top: -25px;
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 0.7rem;
+              color: #fff;
+              padding: 5px 7px;
+              background: #d9534f;
+              border-radius: 7px;
+              font-weight: 700;
+              white-space: nowrap;
+              z-index: 10;
+            }
+          }
+        }
+      }
+
+      .slide-area {
+        flex-wrap: nowrap;
+
+        .slide-wrapper {
+          padding: 0;
+          max-width: 100%;
+          overflow: hidden;
+
+          .slide-list {
+            display: flex;
+            transition: transform 0.3s ease;
+            width: 100%;
+
+            li.slide {
+              flex: 0 0 100%;
+              max-width: 100%;
+              transform: none;
+              opacity: 1;
+              transition: all 0.2s ease-in-out;
+              display: block; //  중요! 안 보이던 이유 중 하나
+
+              a {
+                display: block;
+
+                img {
+                  width: 100%;
+                  height: auto;
+                  object-fit: cover;
+                  border-radius: 12px;
+                }
+              }
+            }
+          }
+        }
+
+        .btn {
+          font-size: 2rem;
+          padding: 0 10px;
+        }
+      }
+    }
+  }
+}

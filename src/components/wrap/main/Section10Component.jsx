@@ -1,9 +1,12 @@
 import React from "react";
+import './scss/Section10Component.scss'
 
-export default function Section10Component(props) {
-  return (
-    <div id="section10Component">
-      <h2>Section10Component</h2>
-    </div>
-  );
+export default function Section10Component(){
+    return(
+        <section id="section10">
+            <div className="container_menu">
+                <h2>메뉴소개</h2>
+            </div>
+        </section>
+    )
 }

@@ -1,7 +1,11 @@
 import React from "react";
 
-function FooterComponent(props) {
-  return <footer id="footer"></footer>;
-}
+import './scss/FooterComponent.scss'
 
-export default FooterComponent;
+export default function FooterComponent (){
+    return (
+        <footer id="footer">
+            <h1>푸터컴포넌트</h1>
+        </footer>
+    )
+}
