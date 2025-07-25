@@ -5,7 +5,10 @@
       .inner {
         display: flex;
         justify-content: space-between;
+        $width: (100% / 3);
+        gap: $width;
         .left {
+          width: $width;
           h2 {
             font-size: $size2;
             font-weight: 600;
@@ -18,7 +21,8 @@
           }
         }
         .right {
-          flex-grow: 1;
+          // flex-grow: 1;
+          width: $width;
           form {
             ul {
               li {
