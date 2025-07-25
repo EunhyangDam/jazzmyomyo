@@ -2,7 +2,7 @@ import React from "react";
 import "./scss/Section6Component.scss";
 export default function Section6Component(props) {
   return (
-    <div id="section6Component">
+    <div id="section6Component" className="section">
       <div className="inner">
         <div className="left">
           <h2>

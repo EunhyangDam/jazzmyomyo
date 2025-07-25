@@ -17,7 +17,7 @@ export default function Section1Component(props) {
       .catch((err) => alert(err));
   }, []);
   return (
-    <div id="section1" className="section">
+    <div id="section1Component" className="section">
       <div className="inner">
         <div className="heading-container">
           <div className="heading heading1">

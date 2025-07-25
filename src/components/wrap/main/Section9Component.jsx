@@ -64,7 +64,7 @@ export default function Section9Component() {
   ];
 
   return (
-    <section id="section9">
+    <section id="section9Component" className="section">
       <div className="slide-container">
         {[...Array(totalSlides)].map((_, index) => (
           <div

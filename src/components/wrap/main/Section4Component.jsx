@@ -279,7 +279,7 @@ export default function Section4Component(props) {
   });
 
   return (
-    <div id="section4Component">
+    <div id="section4Component" className="section">
       <section id="schedule" class="section">
         <div class="container">
           <div class="top-area">

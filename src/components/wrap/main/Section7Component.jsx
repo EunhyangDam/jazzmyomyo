@@ -2,12 +2,8 @@ import React from "react";
 import "./scss/Section7Component.scss";
 
 export default function Section7Component(props) {
-
-
-
-  
   return (
-    <div id="Section7Component">
+    <div id="section7Component" className="section">
       <section id="section7" className="shop">
         <div className="container">
           <div className="title">
@@ -23,7 +19,7 @@ export default function Section7Component(props) {
               <div className="pick">
                 <div className="gap">
                   <a href="!#">
-                    <img src="./img/md/doll_01_1.png" alt="묘묘전신인형"/>
+                    <img src="./img/md/doll_01_1.png" alt="묘묘전신인형" />
                   </a>
                 </div>
                 <div className="caption-box">
@@ -38,7 +34,7 @@ export default function Section7Component(props) {
                 <li className="item1">
                   <div className="gap">
                     <a href="!#">
-                      <img src="./img/md/doll_01_1.png" alt="임시"/>
+                      <img src="./img/md/doll_01_1.png" alt="임시" />
                     </a>
                   </div>
                   <div className="caption-box">
@@ -49,7 +45,7 @@ export default function Section7Component(props) {
                 <li className="item2">
                   <div className="gap">
                     <a href="!#">
-                      <img src="./img/md/doll_01_1.png" alt="임시"/>
+                      <img src="./img/md/doll_01_1.png" alt="임시" />
                     </a>
                   </div>
                   <div className="caption-box">
@@ -60,7 +56,7 @@ export default function Section7Component(props) {
                 <li className="item3">
                   <div className="gap">
                     <a href="!#">
-                      <img src="./img/md/doll_01_1.png" alt="임시"/>
+                      <img src="./img/md/doll_01_1.png" alt="임시" />
                     </a>
                   </div>
                   <div className="caption-box">
@@ -71,7 +67,7 @@ export default function Section7Component(props) {
                 <li className="item4">
                   <div className="gap">
                     <a href="!#">
-                      <img src="./img/md/doll_01_1.png" alt="임시"/>
+                      <img src="./img/md/doll_01_1.png" alt="임시" />
                     </a>
                   </div>
                   <div className="caption-box">
@@ -82,7 +78,7 @@ export default function Section7Component(props) {
               </ul>
             </div>
           </div>
-         </div>
+        </div>
       </section>
     </div>
   );

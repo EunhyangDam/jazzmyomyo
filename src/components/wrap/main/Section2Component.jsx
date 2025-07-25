@@ -15,7 +15,7 @@ export default function Section2Component(props) {
       .catch((err) => alert(err));
   }, []);
   return (
-    <div id="section2Component">
+    <div id="section2Component" className="section">
       <div className="inner">
         <ul>
           {state.section.map((el) => (
