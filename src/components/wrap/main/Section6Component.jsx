@@ -1,6 +1,9 @@
 import React from "react";
 import "./scss/Section6Component.scss";
 export default function Section6Component(props) {
+  const clickSubscribe = (e) => {
+    e.preventDefault();
+  };
   return (
     <div id="section6Component" className="section">
       <div className="inner">
@@ -41,9 +44,13 @@ export default function Section6Component(props) {
                 <input type="text" />
               </li>
             </ul>
-            <button type="submit">구독하기</button>
-            <input type="checkbox" name="chkbox" id="chkbox" />
-            <p>개인정보 수집 및 활용에 동의합니다.</p>
+            <button type="submit" onClick={clickSubscribe}>
+              구독하기
+            </button>
+            <div className="chk">
+              <input type="checkbox" name="chkbox" id="chkbox" />
+              <p>개인정보 수집 및 활용에 동의합니다.</p>
+            </div>
           </form>
         </div>
       </div>

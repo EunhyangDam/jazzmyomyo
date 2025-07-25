@@ -58,13 +58,15 @@
           background: $grey3;
           padding: 10px;
           padding-bottom: 50px;
+          transition: 1s ease-out;
+          box-shadow: 5px 10px 10px 15px rgba($color: #000000, $alpha: 0.3);
           .view-box {
             aspect-ratio: 1/1;
             width: 275px;
             overflow: hidden;
             .wrapper {
               position: relative;
-              top: -000%;
+              top: 0%;
               transition: 0.8s;
               .img-container {
                 height: 275px;
@@ -81,15 +83,15 @@
           }
           &.pic1 {
             z-index: 1;
-            top: 0;
+            top: -10%;
             left: 35%;
-            transform: translateY(-30%) rotate(-10deg);
+            transform: translate(var(--x, 0px), var(--y, 0px)) rotate(-10deg);
           }
           &.pic2 {
             z-index: 3;
             top: 30%;
             right: 15%;
-            transform: rotate(16deg);
+            transform: translate(var(--x, 0px), var(--y, 0px)) rotate(16deg);
           }
         }
       }

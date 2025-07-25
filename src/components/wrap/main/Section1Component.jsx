@@ -15,6 +15,36 @@ export default function Section1Component(props) {
         });
       })
       .catch((err) => alert(err));
+
+    const pic1 = document.querySelector(".pic1 .wrapper");
+    const pic2 = document.querySelector(".pic2 .wrapper");
+    let cnt1 = 0;
+    let cnt2 = 0;
+
+    const mainSlide = () => {
+      pic1.style.top = `${cnt1 * -100}%`;
+      pic2.style.top = `${cnt2 * -100}%`;
+      pic1.style.transition = "top 1s";
+      pic2.style.transition = "top 1s";
+    };
+    const countUp = () => {
+      cnt1++;
+      if (cnt1 > 2) cnt1 = 0;
+      cnt2++;
+      if (cnt2 > 1) cnt2 = 0;
+      mainSlide();
+    };
+    setInterval(countUp, 3000);
+    const mouseMove = (e) => {
+      let centerX = window.innerWidth / 2;
+      let centerY = window.innerHeight / 2;
+      let moveX = (e.clientX - centerX) / 20; // 중심으로부터 거리 비율
+      let moveY = (e.clientY - centerY) / 20;
+      document.documentElement.style.setProperty("--x", `${moveX}px`);
+      document.documentElement.style.setProperty("--y", `${moveY}px`);
+    };
+    window.addEventListener("mousemove", mouseMove);
+    return () => window.removeEventListener("mousemove", mouseMove);
   }, []);
   return (
     <div id="section1Component" className="section">
