@@ -43,6 +43,7 @@ import Sub082MmDetail from "./wrap/sub/sub08Mm/Sub082MmDetail";
 import Sub083MmEdit from "./wrap/sub/sub08Mm/Sub083MmEdit";
 import Sub084MmGrade from "./wrap/sub/sub08Mm/Sub084MmGrade";
 import Sub09Cart from "./wrap/sub/sub09Cart/Sub09Cart";
+import Page404Component from "./wrap/Page404Component";
 import { Route, Routes } from "react-router-dom";
 export default function WrapComponent(props) {
   return (
@@ -90,10 +91,13 @@ export default function WrapComponent(props) {
         <Route path="/sub083MmEdit" element={<Sub083MmEdit />} />
         <Route path="/sub084MmGrade" element={<Sub084MmGrade />} />
         <Route path="/sub09Cart" element={<Sub09Cart />} />
+        <Route path="/*" element={<Page404Component />} />
+
       </Routes>
       <FooterComponent />
       <TopModalComponent />
       <ComfirmModalComponent />
+      
     </div>
   );
 }

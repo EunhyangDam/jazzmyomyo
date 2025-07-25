@@ -39,14 +39,17 @@ export default function Section7Component(props) {
                 <div className="gap">
                   <Link to="./Sub02Merch03">
                     <img
-                      src={state.product[3].이미지[0]}
-                      alt={state.product[3].상품명}
-                    />
-                    <img
                       src={state.product[3].이미지[1]}
                       alt={state.product[3].상품명}
                     />
+                    <div className="wish-list">
+                    {/* 위시리스트 컴포넌트 연결해야함 */}
+                      <a href="!#" title="Wishlist">    
+                        <i className="bi bi-suit-heart"></i> 
+                      </a>
+                  </div>
                   </Link>
+                  
                 </div>
                 <div className="caption-box">
                   <h3>Best Seller</h3>
@@ -70,6 +73,11 @@ export default function Section7Component(props) {
                     <a href="!#">
                       <img src={state.product[23].이미지[0]} alt="카펜터스" />
                     </a>
+                    <div className="wish-list">
+                      <a href="!#" title="Wishlist">  
+                        <i className="bi bi-suit-heart"></i> 
+                      </a>
+                    </div>
                   </div>
                   <div className="caption-box">
                     <a href="!#">
@@ -85,8 +93,13 @@ export default function Section7Component(props) {
                 <li className="item2">
                   <div className="gap">
                     <a href="!#">
-                      <img src={state.product[12].이미지[0]} alt="잭킹콩" />
+                      <img src={state.product[12].이미지[0]} alt="잭킹콩" />  
                     </a>
+                    <div className="wish-list">
+                      <a href="!#" title="Wishlist">  
+                        <i className="bi bi-suit-heart"></i> 
+                      </a>
+                    </div>
                   </div>
                   <div className="caption-box">
                     <a href="!#">
@@ -104,6 +117,11 @@ export default function Section7Component(props) {
                     <a href="!#">
                       <img src={state.product[1].이미지[0]} alt="코스터" />
                     </a>
+                    <div className="wish-list">
+                      <a href="!#" title="Wishlist">  
+                        <i className="bi bi-suit-heart"></i> 
+                      </a>
+                    </div>
                   </div>
                   <div className="caption-box">
                     <a href="!#">{state.product[1].상품명}</a>
@@ -117,6 +135,11 @@ export default function Section7Component(props) {
                     <a href="!#">
                       <img src={state.product[5].이미지[0]} alt="라이터" />
                     </a>
+                    <div className="wish-list">
+                      <a href="!#" title="Wishlist">  
+                        <i className="bi bi-suit-heart"></i> 
+                      </a>
+                    </div>
                   </div>
                   <div className="caption-box">
                     <a href="!#">{state.product[5].상품명}</a>
