@@ -1,0 +1,203 @@
+@use "../../scss/variables" as *;
+#wrap {
+  #header {
+    width: 100%;
+    background: $sub-color3;
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid $grey1;
+    .container {
+      height: 150px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 1030px;
+      width: 100%;
+      h1 {
+        width: 100%;
+        text-align: center;
+        a {
+          display: inline-block;
+          img {
+            width: 100px;
+          }
+        }
+      }
+      nav {
+        font-size: $size4;
+        width: 100%;
+        margin: 0 auto;
+        ul {
+          &.head {
+            display: flex;
+            justify-content: space-between;
+            li {
+              a {
+                span {
+                  font-weight: 500;
+                }
+              }
+            }
+          }
+          &.clicked {
+            display: none;
+          }
+        }
+      }
+      aside {
+        ul {
+          &.head {
+            display: flex;
+            column-gap: 20px;
+            li {
+              &.menu {
+                display: none;
+                font-size: 24px;
+              }
+              &.toggle {
+                position: absolute;
+                right: -150px;
+                bottom: -13px;
+                button {
+                  position: relative;
+                  background: 0;
+                  border: 0;
+                  width: 35px;
+                  height: 25px;
+                  top: 0;
+                  cursor: pointer;
+                  span {
+                    position: absolute;
+                    left: 0;
+                    width: 100%;
+                    height: 3px;
+                    background: $grey1;
+                    transition: 0.3s;
+                    &:nth-child(1) {
+                      top: 0;
+                    }
+                    &:nth-child(2) {
+                      top: 50%;
+                      transform: translateY(-50%);
+                    }
+                    &:nth-child(3) {
+                      bottom: 0;
+                    }
+                  }
+                }
+                &.active {
+                  button {
+                    span {
+                      &:nth-child(1) {
+                        top: 50%;
+                        transform: translateY(-50%) rotate(45deg);
+                      }
+                      &:nth-child(2) {
+                        top: 50%;
+                        transform: translateY(-50%);
+                        left: 100%;
+                        opacity: 0;
+                      }
+                      &:nth-child(3) {
+                        bottom: 50%;
+                        transform: translateY(50%) rotate(-45deg);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          &.clicked {
+            display: none;
+          }
+        }
+      }
+    }
+    &.active {
+      .container {
+        height: 100px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1750px;
+        h1 {
+          width: auto;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          margin-bottom: 0;
+        }
+        nav {
+          width: auto;
+          ul {
+            &.head {
+              column-gap: 115px;
+            }
+          }
+        }
+        aside {
+          ul {
+            &.head {
+              li {
+                &.menu {
+                  display: block;
+                }
+                &.toggle {
+                  position: relative;
+                  right: 0px;
+                  bottom: 0px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    &.toggle {
+      .container {
+        nav {
+          ul {
+            &.clicked {
+              position: fixed;
+              display: block;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: rgba($color: #000000, $alpha: 0.8);
+              padding: 10vh 10vw;
+              backdrop-filter: blur(10px);
+              > li {
+                color: $grey3;
+                font-family: $font2;
+                font-size: $size3;
+                display: flex;
+                align-items: center;
+                &:not(:last-child) {
+                  margin-bottom: 75px;
+                }
+                > a {
+                  margin-right: 30px;
+                }
+                ul.sub {
+                  display: flex;
+                  column-gap: 50px;
+                  li {
+                    flex-shrink: 0;
+                    font-family: $font1;
+                    font-size: $size4;
+                    font-weight: 600;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

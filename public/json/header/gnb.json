@@ -1,0 +1,41 @@
+{
+  "header": [
+    {
+      "id": "sub01AboutUs",
+      "main": "About us",
+      "link": "sub01AboutUs",
+      "sub": ["재즈묘묘", " 어바웃 묘묘", "인테리어", "스토리"]
+    },
+    {
+      "id": "sub02Shop",
+      "main": "Shop",
+      "link": "sub02Shop",
+      "sub": ["굿즈", "LP/CD"]
+    },
+    {
+      "id": "sub030Menu",
+      "main": "Menu",
+      "link": "sub030Menu",
+      "sub": ["와인", "주류&음료", "플래터 & 핑거푸 ", "묘한 세트", "사전주문"]
+    },
+    {
+      "id": "sub04AboutLive",
+      "main": "Schedule",
+      "link": "sub04AboutLive",
+      "sub": ["캘린더", "공연 정보", "아티스트 정보", "티켓 예매", "대관 신청"]
+    },
+    {
+      "id": "sub05Faq",
+      "main": "Community",
+      "link": "sub05Faq",
+      "sub": [
+        "공지사항",
+        "FAQ",
+        "SNS/뉴스레터",
+        "갤러리",
+        "공연 후기",
+        "이벤트"
+      ]
+    }
+  ]
+}

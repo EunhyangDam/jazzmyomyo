@@ -19,7 +19,7 @@ export default function Section2Component(props) {
       <div className="inner">
         <ul>
           {state.section.map((el) => (
-            <li>
+            <li key={el.id}>
               <p className="number">{el.number}</p>
               <p className="text">{el.text.toLocaleString("ko-KR")}</p>
             </li>

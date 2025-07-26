@@ -43,8 +43,7 @@ export default function Section12Component(props) {
                     style="border: 0"
                     allowfullscreen=""
                     loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                  ></iframe>
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </ErrorBoundary>
               </div>
             </div>
