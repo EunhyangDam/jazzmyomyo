@@ -54,7 +54,8 @@ export default function Section1Component(props) {
             <span className="culture">Culture</span>
             <span className="leads">Leads</span>
             <div className="notice">
-              고양이 발로 연주한 음악들, 너무 진지하게 보지 말기!
+              고양이 발로 연주한 음악들,
+              <br className="mobile" /> 너무 진지하게 보지 말기!
               <br />
               Cat vibes only. Don’t read too much into it!
             </div>

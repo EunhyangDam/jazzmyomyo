@@ -9,5 +9,10 @@
       max-width: 1750px;
       margin: 0 auto;
     }
+    @media all and (max-width: 1750px) {
+      .inner {
+        padding-inline: 5vw;
+      }
+    }
   }
 }

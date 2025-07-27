@@ -3,39 +3,60 @@
     {
       "id": "sub01AboutUs",
       "main": "About us",
-      "link": "sub01AboutUs",
-      "sub": ["재즈묘묘", " 어바웃 묘묘", "인테리어", "스토리"]
+      "link": "AboutUs",
+      "sub": [
+        { "name": "재즈묘묘", "link": "AboutUs" },
+        { "name": "어바웃 묘묘", "link": "Interior" },
+        { "name": "인테리어", "link": "MyoMyo" },
+        { "name": "스토리", "link": "Story" }
+      ]
     },
     {
       "id": "sub02Shop",
       "main": "Shop",
-      "link": "sub02Shop",
-      "sub": ["굿즈", "LP/CD"]
+      "link": "Shop",
+      "sub": [
+        { "name": "굿즈", "link": "Disc" },
+        { "name": "LP/CD", "link": "Merch" }
+      ]
     },
     {
       "id": "sub030Menu",
       "main": "Menu",
-      "link": "sub030Menu",
-      "sub": ["와인", "주류&음료", "플래터 & 핑거푸 ", "묘한 세트", "사전주문"]
-    },
-    {
-      "id": "sub04AboutLive",
-      "main": "Schedule",
-      "link": "sub04AboutLive",
-      "sub": ["캘린더", "공연 정보", "아티스트 정보", "티켓 예매", "대관 신청"]
-    },
-    {
-      "id": "sub05Faq",
-      "main": "Community",
-      "link": "sub05Faq",
+      "link": "Menu",
       "sub": [
-        "공지사항",
-        "FAQ",
-        "SNS/뉴스레터",
-        "갤러리",
-        "공연 후기",
-        "이벤트"
+        { "name": "와인", "link": "Menu" },
+        { "name": "주류&음료", "link": "Wine" },
+        { "name": "플래터 & 핑거푸", "link": "Drinks" },
+        { "name": "묘한 세트", "link": "Food" },
+        { "name": "사전주문", "link": "Pre" }
       ]
+    },
+    {
+      "id": "AboutLive",
+      "main": "Schedule",
+      "link": "AboutLive",
+      "sub": [
+        { "name": "캘린더", "link": "AboutLive" },
+        { "name": "공연 정보", "link": "Artist" },
+        { "name": "아티스트 정보", "link": "BuyTicket" },
+        { "name": "티켓 예매", "link": "Lental" },
+        { "name": "대관 신청", "link": "Monthly" }
+      ]
+    },
+    {
+      "id": "Faq",
+      "main": "Community",
+      "link": "Faq",
+      "sub": [
+        { "name": "공지사항", "link": "Faq" },
+        { "name": "FAQ", "link": "Gall" },
+        { "name": "SNS/뉴스레터", "link": "Ntc" },
+        { "name": "갤러리", "link": "Rev" },
+        { "name": "공연 후기", "link": "Sns" },
+        { "name": "이벤트", "link": "" }
+      ],
+      "sub link": ["Faq", "Gall", "Ntc", "Rev", "Sns"]
     }
   ]
 }

@@ -1,0 +1,204 @@
+#Section11Component.gallery.section {
+  width: 100%;
+  padding: 100px 50px;
+  background-color: #fff;
+
+  .container {
+    max-width: 1920px;
+    margin: 0 auto;
+    text-align: center;
+
+    .section-title {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 50px;
+    }
+
+    .gallery-wrapper {
+      width: 100%;
+
+      .slide-view {
+        overflow: hidden;
+        width: 100%;
+
+        .slide-track {
+          display: flex;
+          transition: transform 0.5s ease;
+          gap: 30px;
+
+          li {
+            flex: 0 0 auto;
+            width: calc((100% - 60px) / 3); // 슬라이드 3개
+            iframe {
+              width: 100%;
+              aspect-ratio: 16 / 9;
+              border: none;
+              border-radius: 8px;
+            }
+          }
+        }
+      }
+
+      .dots {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+
+        .dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #bbb;
+          border: 0;
+          margin: 0 4px;
+          transition: background-color 0.3s ease;
+
+          &.active {
+            background-color: #5c2424;
+          }
+        }
+      }
+
+      .button-row {
+        margin-top: 40px;
+        position: relative;
+        display: flex;
+        position: relative;
+
+        .button-align {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+
+          // 중앙 기준 맞춤
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .cat-deco {
+          margin-right: 10px;
+          position: absolute;
+          right: 105px;
+          bottom: 3px;
+          img {
+            display: block;
+            height: 60px;
+            object-fit: contain;
+          }
+        }
+
+        .button-group {
+          display: flex;
+          gap: 20px;
+
+          .btn {
+            width: 48px;
+            height: 48px;
+            background-color: #5c2424;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+
+            &:disabled {
+              opacity: 0.3;
+              cursor: not-allowed;
+            }
+
+            &:hover:not(:disabled) {
+              background-color: #7a3232;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 440px) {
+  #Section11Component.gallery.section {
+    padding: 50px 20px;
+
+    .container {
+      .section-title {
+        font-size: 32px;
+        margin-bottom: 30px;
+      }
+
+      .gallery-wrapper {
+        .slide-view {
+          overflow-x: scroll;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none; // Firefox
+          &::-webkit-scrollbar {
+            display: none; // Chrome, Safari
+          }
+
+          .slide-track {
+            display: flex;
+            width: fit-content;
+            gap: 16px;
+            padding: 10px 0;
+            transition: none !important;
+
+            li {
+              flex: 0 0 100%;
+              max-width: 100%;
+              scroll-snap-align: center;
+
+              iframe {
+                width: 100%;
+                aspect-ratio: 16 / 9;
+              }
+            }
+
+            .more {
+              flex: 0 0 100%;
+              scroll-snap-align: center;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-color: #eee;
+              color: #333;
+              text-decoration: none;
+              border-radius: 8px;
+              font-size: 18px;
+              font-weight: 600;
+              min-height: 180px;
+              padding: 20px;
+            }
+          }
+        }
+
+        .dots {
+          display: flex;
+          justify-content: center;
+          margin: 15px 0;
+
+          .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #bbb;
+            margin: 0 4px;
+
+            &.active {
+              background: #5c2424;
+            }
+          }
+        }
+
+        .button-row {
+          display: none;
+        }
+      }
+    }
+  }
+}

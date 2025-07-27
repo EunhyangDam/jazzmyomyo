@@ -41,37 +41,35 @@ export default function Section9Component() {
   };
 
   const slideContents = [
-    {}, // slide 0 (인트로) → 내용 없음
+    {},
     {
-      title: "Chapter 1. 재즈의 탄생",
-      desc: "1900년대 초 뉴올리언스에서 시작된 재즈의 뿌리를 만나보세요.",
+      title: "Chapter 1\n조명의 온기",
+      desc: "은은한 조명이 테이블 위를 비춰요.\n잔을 채운 와인과 재즈가 자연스럽게 어우러지고,\n조용한 분위기 속에서 하루가 천천히 정리돼요.",
     },
     {
-      title: "Chapter 2. 클래식한 밤",
-      desc: "빛바랜 LP에서 흘러나오는 섬세한 선율의 세계로.",
+      title: "Chapter 2\n시간을 담은 소리",
+      desc: "벽면을 가득 채운 LP와 턴테이블이 반겨요.\n바늘이 닿는 순간, 재즈가 천천히 퍼집니다.\n오래된 소리가 마음을 어루만지고,\n공간은 시간보다 느리게 흐릅니다.",
     },
     {
-      title: "Chapter 3. 묘묘의 추천",
-      desc: "묘묘가 골라주는 오늘 밤의 와인과 음악 조합.",
+      title: "Chapter 3\n사운드의 디테일",
+      desc: "재즈묘묘는 소리 하나하나에 정성을 담았습니다.\nYamaha 드럼과 Fender Rhodes 피아노,\n더블 베이스, Shure 마이크, 그리고 Bose 음향.",
     },
     {
-      title: "Chapter 4. 감성 한 스푼",
-      desc: "사람들과 나누고 싶은 따뜻한 이야기, 그리고 재즈.",
+      title: "Chapter 4\n따뜻한 선율의 마무리",
+      desc: "여기에 Gibson 세미 할로우 기타와\nFender Twin Reverb 앰프의 따뜻한 사운드까지.\n재즈묘묘의 공간은 연주자와 관객 모두를\n부드럽고 깊은 사운드 속으로 초대합니다.",
     },
-    {
-      title: "Chapter 5. 재즈묘묘를 닮은 밤",
-    },
+    {},
   ];
 
   return (
-    <section id="section9Component" className="section">
+    <section id="section9">
       <div className="slide-container">
         {[...Array(totalSlides)].map((_, index) => (
           <div
             key={index}
-            className={`slide ${index === currentSlide ? "active" : ""} 
-            ${index === 0 || index === totalSlides - 1 ? "" : "half"}`}
-          >
+            className={`slide ${index === currentSlide ? "active" : ""} ${
+              index === 0 || index === totalSlides - 1 ? "" : "half"
+            }`}>
             {(index === 0 || index === totalSlides - 1) && (
               <div
                 className={`bg-img ${
@@ -79,8 +77,7 @@ export default function Section9Component() {
                 }`}
                 style={{
                   backgroundImage: `url(./img/slide${index + 1}.jpg)`,
-                }}
-              ></div>
+                }}></div>
             )}
 
             {index !== 0 && index !== totalSlides - 1 && (
@@ -88,8 +85,7 @@ export default function Section9Component() {
                 className="bg-img"
                 style={{
                   backgroundImage: `url(./img/slide${index + 1}.jpg)`,
-                }}
-              ></div>
+                }}></div>
             )}
 
             <div className="container">
@@ -109,6 +105,22 @@ export default function Section9Component() {
                       </>
                     )}
                   </ul>
+                  {/*  마지막 슬라이드일 때만 버튼 보여줌 */}
+                  {index === totalSlides - 1 && (
+                    <div className="link-buttons">
+                      <ul>
+                        <li>
+                          <a href="/about">About</a>
+                        </li>
+                        <li>
+                          <a href="/menu">Menu</a>
+                        </li>
+                        <li>
+                          <a href="/shop">Shop</a>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="content-box">
@@ -124,16 +136,47 @@ export default function Section9Component() {
                       />
                     ))}
                   </div>
-                  <div className="text-box">
-                    <h2>{slideContents[index]?.title}</h2>
-                    {slideContents[index]?.desc && (
-                      <p>{slideContents[index].desc}</p>
+
+                  <div className={`text-box chapter${index}`}>
+                    {index >= 1 && index <= 4 ? (
+                      <>
+                        <h2>
+                          <span className="chapter-label">
+                            {slideContents[index]?.title.split("\n")[0]}
+                          </span>
+                          <br />
+                          {slideContents[index]?.title.split("\n")[1]}
+                        </h2>
+                        <p>
+                          {slideContents[index]?.desc
+                            .split("\n")
+                            .map((line, i) => (
+                              <span key={i}>
+                                {line}
+                                <br />
+                              </span>
+                            ))}
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <h2>{slideContents[index]?.title}</h2>
+                        <p>
+                          {slideContents[index]?.desc
+                            .split("\n")
+                            .map((line, i) => (
+                              <span key={i}>
+                                {line}
+                                <br />
+                              </span>
+                            ))}
+                        </p>
+                      </>
                     )}
                   </div>
                 </div>
               )}
             </div>
-
             <div className="nav-icons">
               <button onClick={goUp}>
                 <i className="bi bi-chevron-up"></i>

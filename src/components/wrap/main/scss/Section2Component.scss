@@ -23,6 +23,25 @@
           }
         }
       }
+      @media all and (max-width: 1750px) {
+        .inner {
+          padding-inline: 5vw;
+        }
+      }
+      @media all and (max-width: 570px) {
+        .inner {
+          ul {
+            flex-direction: column;
+            li {
+              border: 0;
+              padding-left: 0;
+              padding-block: 22px;
+              width: 100%;
+              border-bottom: 2px solid $grey1;
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -1,0 +1,198 @@
+.artist-section {
+  padding: 80px 50px;
+  background: #fff;
+
+  .container {
+    margin: 0 auto;
+    width: 100%;
+
+    .artist-title {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #4a1e1e;
+      margin-bottom: 100px;
+    }
+
+    .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+
+      .artist-list {
+        width: 70%;
+
+        .slide-track {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 30px;
+
+          .artist-card {
+            width: 30%;
+            flex-shrink: 0;
+            box-sizing: border-box;
+            text-align: center;
+
+            .img-box {
+              overflow: hidden;
+              border-radius: 8px;
+
+              .img {
+                width: 100%;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                  transform: scale(1.2);
+                }
+              }
+            }
+
+            .name {
+              margin-top: 12px;
+              font-size: 1.2rem;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+
+      .link-list {
+        width: 30%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+
+        li {
+          width: 100%;
+          padding: 40px 0;
+          &:first-child {
+            padding-top: 10px;
+          }
+
+          a {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #222;
+            transition: color 0.2s;
+            padding-left: 40px;
+            position: relative;
+            &::after {
+              content: "";
+              position: absolute;
+              width: 25px;
+              height: 25px;
+              left: 0;
+              bottom: 0;
+              background-image: url(../../../../../public/img/묘묘.png);
+              background-size: cover;
+            }
+
+            &:hover {
+              color: #ae3636;
+            }
+          }
+        }
+      }
+    }
+    .indicator {
+      display: none;
+    }
+
+    // ✅ 모바일: 440px 이하에서는 슬라이드로 전환
+
+    @media (max-width: 440px) {
+      .content {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        .artist-list {
+          width: 100%;
+          overflow: hidden;
+
+          .slide-track {
+            display: flex;
+            transition: transform 0.4s ease;
+            flex-wrap: nowrap;
+            gap: 0;
+            width: 100%;
+            .artist-card {
+              width: 100%;
+
+              .img-box {
+                width: 100%;
+                max-width: 288px; // ✅ 적당한 크기 제한
+                margin: 0 auto; // ✅ 가운데 정렬
+                border-radius: 8px;
+                overflow: hidden;
+                .img {
+                  width: 100%;
+
+                  &:hover {
+                    transform: none;
+                  }
+                }
+              }
+
+              .name {
+                font-size: 1.7rem;
+                margin-top: 10px;
+              }
+            }
+          }
+        }
+
+        .indicator {
+          display: flex;
+          justify-content: center;
+          margin-top: -20px;
+          gap: 8px;
+
+          .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ccc;
+            border-radius: 50%;
+
+            &.active {
+              background-color: #ed1111;
+            }
+          }
+        }
+
+        .link-list {
+          width: 100%;
+          padding-left: 30px;
+          text-align: start;
+          li {
+            width: 100%;
+            padding-bottom: 5px;
+            padding-left: 20px;
+            a {
+              position: relative;
+              display: block;
+              width: 100%;
+              padding-left: 30px; // 아이콘 여백
+              font-size: 1.8rem;
+              font-weight: 700;
+              color: #333;
+              text-align: left; // 텍스트 정렬 유지
+              &::after {
+                content: "";
+                position: absolute;
+                width: 23px;
+                height: 23px;
+                left: 0;
+                bottom: 0;
+                background-image: url(../../../../../public/img/묘묘.png);
+
+                background-size: cover;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

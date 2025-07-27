@@ -4,6 +4,7 @@ import "./scss/HeaderComponent.scss";
 export default function HeaderComponent(props) {
   const [state, setState] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const [scr, setScr] = useState(false);
   const [header, setHeader] = useState({
     header: [
       {
@@ -39,11 +40,44 @@ export default function HeaderComponent(props) {
     e.preventDefault();
     setToggle((prev) => !prev);
   };
+  useEffect(() => {
+    const mainBtn = document.querySelectorAll(".mainBtn");
+    const sub = document.querySelectorAll(".sub");
+    const mouseEnterHandler = (el, idx) => {
+      sub.forEach((remove, i) => {
+        remove.classList.remove("active");
+        remove.style.display = "none";
+      });
+      sub[idx].style.display = "flex";
+      sub[idx].classList.add("active");
+    };
+    mainBtn.forEach((el, idx) => {
+      el.addEventListener("mouseenter", () => mouseEnterHandler(el, idx));
+    });
+  }, [toggle]);
+  useEffect(() => {
+    let prevScr = 0;
+    let nowScr = null;
+    const handleScr = () => {
+      nowScr = window.scrollY;
+      console.log(nowScr - prevScr);
+      if (nowScr - prevScr > 0) {
+        setScr(true);
+      } else if (nowScr - prevScr < 0) {
+        setScr(false);
+      }
+      prevScr = nowScr;
+    };
+    window.addEventListener("scroll", handleScr);
+    return () => window.removeEventListener("scroll", handleScr);
+  }, []);
   return (
     <>
       <header
         id="header"
-        className={state ? "active" : "" || toggle ? "toggle" : ""}>
+        className={
+          state ? "active" : "" || toggle ? "toggle" : "" || scr ? "down" : ""
+        }>
         <div className="container">
           <h1 onClick={clickRemoveClass}>
             <Link to="/mainComponent">
@@ -60,28 +94,36 @@ export default function HeaderComponent(props) {
                 </li>
               ))}
             </ul>
-            <ul className="clicked">
-              {header.header.map((el) => (
-                <li key={el.id}>
-                  <Link to={`./${el.link}`}>{el.main}</Link>
-                  <ul className="sub">
-                    {el.sub.map((subEl, idx) => (
-                      <li key={idx}>{subEl}</li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
+            {toggle && (
+              <ul className="clicked" onClick={() => setToggle(false)}>
+                {header.header.map((el) => (
+                  <li key={el.id}>
+                    <Link to={`./${el.link}`} className="mainBtn">
+                      {el.main}
+                    </Link>
+                    <ul className="sub">
+                      {el.sub.map((subEl, idx) => (
+                        <li key={subEl.link}>
+                          <Link to={subEl.link}>
+                            <span>{subEl.name}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+            )}
           </nav>
           <aside>
             <ul className="head">
               <li className="menu">
-                <Link to="./sub09Cart">
+                <Link to="./Cart">
                   <i className="fa-solid fa-cart-arrow-down"></i>
                 </Link>
               </li>
               <li className="menu">
-                <Link to="./sub07MyProfile">
+                <Link to="./Mp">
                   <i className="fa-solid fa-user"></i>
                 </Link>
               </li>
@@ -100,30 +142,34 @@ export default function HeaderComponent(props) {
                 </button>
               </li>
             </ul>
-            <ul className="clicked">
-              <li className="menu">
-                <Link to="./sub09Cart">
-                  <i className="fa-solid fa-cart-arrow-down"></i>
-                </Link>
-              </li>
-              <li className="menu">
-                <Link to="./sub07MyProfile">
-                  <i className="fa-solid fa-user"></i>
-                </Link>
-              </li>
-              <li className="menu">
-                <Link to="./">
-                  <i className="fa-solid fa-heart"></i>
-                </Link>
-              </li>
-              <li className="toggle">
-                <button>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </button>
-              </li>
-            </ul>
+            {toggle && (
+              <ul className="clicked">
+                <li className="menu">
+                  <Link to="./Cart">
+                    <i className="fa-solid fa-cart-arrow-down"></i>
+                  </Link>
+                </li>
+                <li className="menu">
+                  <Link to="./Mp">
+                    <i className="fa-solid fa-user"></i>
+                  </Link>
+                </li>
+                <li className="menu">
+                  <Link to="./">
+                    <i className="fa-solid fa-heart"></i>
+                  </Link>
+                </li>
+                <li
+                  onClick={toggleMenu}
+                  className={`toggle ${toggle ? "active" : ""}`}>
+                  <button>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </button>
+                </li>
+              </ul>
+            )}
           </aside>
         </div>
       </header>
