@@ -27,42 +27,48 @@ export default function Section7Component(props) {
         <div className="container">
           <div className="title">
             <div className="line"></div>
-            <h2>shop</h2>
+            <Link to="/sub02Shop">
+              <h2>shop</h2>
+            </Link>
             <div className="line"></div>
           </div>
           <div className="content">
             <div className="left">
-              <div className="myo">
-                <img src="./img/section7/myomyopick_notail.png" alt="묘묘픽" />
-              </div>
-              <div className="pick">
-                <div className="gap">
-                  <Link to="./Sub02Merch03">
-                    <img
-                      src={state.product[3].이미지[1]}
-                      alt={state.product[3].상품명}
-                    />
-                    <div className="wish-list">
-                    {/* 위시리스트 컴포넌트 연결해야함 */}
-                      <a href="!#" title="Wishlist">    
-                        <i className="bi bi-suit-heart"></i> 
-                      </a>
-                  </div>
-                  </Link>
-                  
+              <div className="best">
+                <div className="myo">
+                  <img
+                    src="./img/section7/myomyopick_notail.png"
+                    alt="묘묘픽"
+                  />
                 </div>
-                <div className="caption-box">
-                  <h3>Best Seller</h3>
-                  <a href="!#">{state.product[3].상품명}</a>
-                  <s>{state.product[3].가격.toLocaleString("ko-KR")}원</s>
-                  <br />
-                  <em>
-                    {(
-                      state.product[3].가격 *
-                      (1 - state.product[3].할인율)
-                    ).toLocaleString("ko-KR")}
-                    원
-                  </em>
+                <div className="pick">
+                  <div className="gap">
+                    <Link to="./Sub02Merch03">
+                      <img
+                        src={state.product[3].이미지[1]}
+                        alt={state.product[3].상품명}
+                      />
+                    </Link>
+                    <div className="wish-list">
+                      {/* 위시리스트 컴포넌트 연결해야함 */}
+                      <a href="!#" title="Wishlist">
+                        <i className="bi bi-suit-heart"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div className="caption-box">
+                    <h3>Best Seller</h3>
+                    <a href="!#">{state.product[3].상품명}</a>
+                    <s>{state.product[3].가격.toLocaleString("ko-KR")}원</s>
+                    <br />
+                    <em>
+                      {(
+                        state.product[3].가격 *
+                        (1 - state.product[3].할인율)
+                      ).toLocaleString("ko-KR")}
+                      원
+                    </em>
+                  </div>
                 </div>
               </div>
             </div>
@@ -74,8 +80,8 @@ export default function Section7Component(props) {
                       <img src={state.product[23].이미지[0]} alt="카펜터스" />
                     </a>
                     <div className="wish-list">
-                      <a href="!#" title="Wishlist">  
-                        <i className="bi bi-suit-heart"></i> 
+                      <a href="!#" title="Wishlist">
+                        <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
                   </div>
@@ -93,11 +99,11 @@ export default function Section7Component(props) {
                 <li className="item2">
                   <div className="gap">
                     <a href="!#">
-                      <img src={state.product[12].이미지[0]} alt="잭킹콩" />  
+                      <img src={state.product[12].이미지[0]} alt="잭킹콩" />
                     </a>
                     <div className="wish-list">
-                      <a href="!#" title="Wishlist">  
-                        <i className="bi bi-suit-heart"></i> 
+                      <a href="!#" title="Wishlist">
+                        <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
                   </div>
@@ -118,8 +124,8 @@ export default function Section7Component(props) {
                       <img src={state.product[1].이미지[0]} alt="코스터" />
                     </a>
                     <div className="wish-list">
-                      <a href="!#" title="Wishlist">  
-                        <i className="bi bi-suit-heart"></i> 
+                      <a href="!#" title="Wishlist">
+                        <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
                   </div>
@@ -136,8 +142,8 @@ export default function Section7Component(props) {
                       <img src={state.product[5].이미지[0]} alt="라이터" />
                     </a>
                     <div className="wish-list">
-                      <a href="!#" title="Wishlist">  
-                        <i className="bi bi-suit-heart"></i> 
+                      <a href="!#" title="Wishlist">
+                        <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
                   </div>

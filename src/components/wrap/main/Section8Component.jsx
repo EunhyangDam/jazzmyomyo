@@ -116,7 +116,7 @@ export default function Section8Component(props) {
 
       // 우측이동
       if (dragEnd - dragStart < 0) {
-        console.log("다음슬라이드");
+        // console.log("다음슬라이드");
         cnt = Math.round(Math.abs(dragEnd - dragStart) / 300);
         if (cnt > 8) {
           cnt = 8;
@@ -164,7 +164,7 @@ export default function Section8Component(props) {
 
       // 우측이동
       if (dragEnd - dragStart < 0) {
-        console.log("다음슬라이드");
+        // console.log("다음슬라이드");
         cnt = Math.round(Math.abs(dragEnd - dragStart) / 300);
         if (cnt > 8) {
           cnt = 8;
@@ -238,7 +238,6 @@ export default function Section8Component(props) {
                         <li key={item.ID} data-key={item.ID}>
                           <iframe
                             src={item["영상 링크"]}
-                            frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerPolicy="strict-origin-when-cross-origin"
                             allowFullScreen

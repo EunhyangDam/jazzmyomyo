@@ -33,7 +33,6 @@ export default function Section12Component(props) {
               <div className="map">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.9235585612446!2d126.91827577642995!3d37.55686472468175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c990005899e5f%3A0xfb3deb28ddc599e3!2z64m07Jis7J6s7KaI65287Jq07KeA!5e0!3m2!1sko!2skr!4v1752743153151!5m2!1sko!2skr"
-                  style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
