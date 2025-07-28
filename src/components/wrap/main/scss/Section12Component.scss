@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #section12Component {
     section {
         position: relative;
@@ -325,10 +326,197 @@
                       width: 100%;
                     }
                   }
+=======
+@use "../../../scss/_variables" as *;
+
+#section12Component {
+  background-color: $sub-color4;
+
+  #section12 {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: auto; // 임시 높이
+    .container {
+      width: 100%;
+      height: 100%;
+      .title {
+        width: 100%;
+        padding: 30px 0 10px 0;
+        height: auto;
+        border-bottom: 1px solid $white;
+        .title-container {
+          width: 100%;
+          max-width: 1750px;
+          margin: 0 auto;
+          h2 {
+            line-height: 160%;
+            padding-left: 20px;
+            font-size: $size4;
+            font-family: $font2;
+            font-weight: 700;
+            color: $white;
+          }
+        }
+      }
+      .content {
+        width: 100%;
+        height: auto;
+        max-width: 1750px;
+        margin: 0 auto;
+        display: flex;
+        padding: 50px 0;
+        .left {
+          width: 60%;
+          .map {
+            width: 100%;
+            height: 600px;
+            display: flex;
+            iframe {
+              margin: auto;
+              width: 80%;
+              height: 90%;
+              border: 0;
+            }
+          }
+        }
+        .right {
+          width: 40%;
+          display: flex;
+          ul {
+            width: 100%;
+            margin: auto 0;
+            padding-left: 20px;
+            li {
+              width: 100%;
+              padding: 16px 10px;
+              display: flex;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
+              h2 {
+                font-size: $size4;
+              }
+              h3 {
+                font-size: $size4;
+                font-weight: 600;
+              }
+              i {
+                margin-right: 10px;
+              }
+              p {
+                font-size: 1.5rem;
+                font-family: "MaruBuriSemiBold";
+              }
+            }
+          }
+        }
+      }
+      @media all and (max-width: 1100px) {
+        .content {
+          padding: 30px 0;
+          .left {
+            .map {
+              height: 500px;
+            }
+          }
+          .right {
+            ul {
+              padding-left: 10px;
+              li {
+                h2 {
+                  font-size: 1.5rem;
+                }
+                h3 {
+                  font-size: 1.5rem;
+                }
+
+                p {
+                  font-size: 1.2rem;
+>>>>>>> origin/temp
                 }
               }
             }
           }
         }
       }
+<<<<<<< HEAD
+=======
+      @media all and (max-width: 868px) {
+        .title {
+          padding: 20px 0 10px 0;
+        }
+        .content {
+          padding: 10px 0;
+          .left {
+            width: 60%;
+            .map {
+              height: 400px;
+            }
+          }
+          .right {
+            width: 40%;
+            display: flex;
+            ul {
+              width: 100%;
+              margin: auto 0;
+              padding-left: 10px;
+              li {
+                h2 {
+                  font-size: 1.3rem;
+                }
+                h3 {
+                  font-size: 1.3rem;
+                }
+
+                p {
+                  font-size: 1rem;
+                }
+              }
+            }
+          }
+        }
+      }
+      @media all and (max-width: 750px) {
+        .title {
+          padding: 20px 0 10px 0;
+        }
+        .content {
+          padding: 10px 0;
+          flex-flow: row wrap;
+          .left {
+            width: 100%;
+            .map {
+              height: 400px;
+            }
+          }
+          .right {
+            width: 100%;
+            display: flex;
+            ul {
+              width: 100%;
+              margin: auto 0;
+              padding: 0 10%;
+            }
+          }
+        }
+      }
+      @media all and (max-width: 500px) {
+        .title {
+          .title-container {
+            h2 {
+              font-size: 1.3rem;
+            }
+          }
+        }
+        .content {
+          .left {
+            .map {
+              height: 300px;
+            }
+          }
+        }
+      }
+    }
+  }
+>>>>>>> origin/temp
 }

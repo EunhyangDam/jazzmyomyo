@@ -1,5 +1,6 @@
 @use "../../../scss/_variables" as *;
 
+<<<<<<< HEAD
 #section7Component {
   section {
     position: relative;
@@ -23,10 +24,42 @@
           font-family: "TTHakgyoansimMulgyeolB";
           font-weight: 700;
           color: $white;
+=======
+#Section7Component {
+  width: 100%;
+  #section7 {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    background-color: $white;
+    height: auto;
+    .container {
+      width: 100%;
+      height: 100%;
+      .title {
+        width: 100%;
+        height: auto;
+        padding: 30px 0;
+        display: flex;
+        align-items: center;
+
+        .line {
+          width: 100%;
+          height: 3px;
+          background-color: $sub-color1;
+        }
+        h2 {
+          font-size: $size3;
+          font-family: $font2;
+          font-weight: 700;
+          color: $sub-color1;
+          padding: 0 20px;
+>>>>>>> origin/temp
         }
       }
       .content {
         width: 100%;
+<<<<<<< HEAD
         height: calc(100% - 100px);
       }
     }
@@ -92,11 +125,106 @@
 
                   &:hover {
                     transform: translateY(40px);
+=======
+        max-width: 1750px;
+        margin: 0 auto;
+        padding: 2%;
+        display: flex;
+        flex-flow: row wrap;
+        .left {
+          width: 50%;
+          display: flex;
+          align-items: center;
+          .best {
+            width: 100%;
+            padding: 2.5%;
+            position: relative;
+            .myo {
+              position: absolute;
+              top: -7%;
+              left: 20%;
+              z-index: 1;
+              img {
+                transform: rotate(12deg);
+              }
+            }
+            .pick {
+              position: relative;
+              z-index: 2;
+              width: 100%;
+              .gap {
+                width: auto;
+                position: relative;
+                z-index: 1;
+                display: flex;
+                justify-content: center;
+
+                > a {
+                  position: relative;
+                  z-index: 2;
+                  width: 100%;
+                  max-width: 600px;
+                  height: auto;
+                  display: block;
+                  transition: all 0.5s;
+                  img {
+                    border-radius: $border-radius;
+                    width: 100%;
+                    height: 100%;
+                    aspect-ratio: 1/1;
+                    object-fit: cover;
+                    transition: all 0.5s;
+                    position: relative;
+                  }
+                  &:hover {
+                    img {
+                      transform: translateY(65px);
+                    }
+                  }
+                }
+                .wish-list {
+                  opacity: 0;
+                  position: absolute;
+                  right: 3%;
+                  top: 15%;
+                  z-index: 3;
+                  transition: all 0.3s;
+                  overflow: hidden;
+                  > a {
+                    border-radius: 50%;
+                    padding: 8px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    i {
+                      color: $primary-color;
+                      font-size: 18px;
+                      transition: all 0.5s;
+                    }
+                    &:hover {
+                      background-color: $primary-color;
+                      i {
+                        color: $white;
+                      }
+                    }
+                  }
+                }
+                &:hover {
+                  .wish-list {
+                    opacity: 1;
+                    transform: translateX(-50px);
+>>>>>>> origin/temp
                   }
                 }
               }
               .caption-box {
+<<<<<<< HEAD
                 padding-top: 20px;
+=======
+                position: relative;
+                z-index: 1;
+                padding-top: 70px;
+>>>>>>> origin/temp
                 text-align: center;
                 h3 {
                   font-size: $size4;
@@ -115,6 +243,118 @@
                   text-transform: capitalize;
                   font-weight: 600;
                   letter-spacing: 1.6px;
+<<<<<<< HEAD
+=======
+                  line-height: 160%;
+                  &:hover {
+                    color: $sub-color1;
+                  }
+                }
+
+                s {
+                  width: 100%;
+                  color: $grey2;
+                  letter-spacing: 1.6px;
+                  font-size: 1.5rem;
+                  line-height: 160%;
+                }
+                em {
+                  width: 100%;
+                  color: $grey2;
+                  letter-spacing: 1.6px;
+                  font-size: 1.5rem;
+                  line-height: 160%;
+                  color: $sub-color2;
+                  font-weight: 600;
+                }
+              }
+            }
+          }
+        }
+        .right {
+          width: 50%;
+          height: 100%;
+          ul {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            li {
+              width: 50%;
+              height: 50%;
+              padding: 25px;
+              .gap {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                padding: 20px;
+                overflow: hidden;
+                a {
+                  position: relative;
+                  z-index: 2;
+                  width: 100%;
+                  display: block;
+                  overflow: hidden;
+                  transition: all 0.3s;
+                  img {
+                    overflow: hidden;
+                    width: 100%;
+                    aspect-ratio: 1/1;
+                    object-fit: cover;
+                    border-radius: $border-radius;
+                    border: 1px solid $grey3;
+                  }
+                }
+                .wish-list {
+                  position: absolute;
+                  top: 40px;
+                  right: -40px;
+                  z-index: 3;
+                  background: none;
+                  border-radius: 50%;
+                  width: 30px;
+                  transition: all 0.3s;
+                  a {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: hidden;
+
+                    i {
+                      padding: 5px;
+                      color: $primary-color;
+                      font-size: 14px;
+                      transition: all 0.3s;
+                    }
+                  }
+                  &:hover {
+                    background-color: $primary-color;
+                    a {
+                      i {
+                        color: #fff;
+                      }
+                    }
+                  }
+                }
+                &:hover {
+                  .wish-list {
+                    transform: translateX(-80px);
+                  }
+                }
+              }
+              .caption-box {
+                text-align: center;
+                a {
+                  font-size: $size4;
+                  width: 100%;
+                  display: block;
+                  padding-bottom: 10px;
+                  text-transform: capitalize;
+                  letter-spacing: 1.6px;
+                  line-height: 160%;
+>>>>>>> origin/temp
                   &:hover {
                     color: $sub-color1;
                   }
@@ -123,11 +363,51 @@
                   width: 100%;
                   color: $grey2;
                   letter-spacing: 1.6px;
+<<<<<<< HEAD
+=======
+                  font-size: 1.5rem;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    @media all and (max-width: 1400px) {
+      .container {
+        .content {
+          .left {
+            .best {
+              .myo {
+                display: none;
+              }
+              .pick {
+                .gap {
+                  .wish-list {
+                    right: 2%;
+                  }
+                }
+                .caption-box {
+                  padding-top: 20px;
+                  h3 {
+                    font-size: 1.5rem;
+                  }
+                  a {
+                    font-size: 1.5rem;
+                  }
+                  s {
+                    font-size: 1.3rem;
+                  }
+                  em {
+                    font-size: 1.3rem;
+                  }
+>>>>>>> origin/temp
                 }
               }
             }
           }
           .right {
+<<<<<<< HEAD
             width: 60%;
             height: 100%;
             ul {
@@ -177,6 +457,16 @@
                     width: 100%;
                     color: $grey2;
                     letter-spacing: 1.6px;
+=======
+            ul {
+              li {
+                .caption-box {
+                  a {
+                    font-size: 1.5rem;
+                  }
+                  strong {
+                    font-size: 1.3rem;
+>>>>>>> origin/temp
                   }
                 }
               }
@@ -185,5 +475,56 @@
         }
       }
     }
+<<<<<<< HEAD
+=======
+
+    @media all and (max-width: 1170px) {
+      .container {
+        .content {
+          .left {
+            width: 100%;
+            .best {
+              .pick {
+                .gap {
+                  > a {
+                    width: 100%;
+                    max-width: 100%;
+                  }
+                }
+              }
+            }
+          }
+          .right {
+            width: 100%;
+          }
+        }
+      }
+    }
+    @media all and (max-width: 600px) {
+      .container {
+        .title {
+          padding: 15px 0;
+          .title-container {
+            h2 {
+              font-size: 1.3rem;
+            }
+          }
+        }
+        .content {
+          .left {
+            width: 100%;
+          }
+          .right {
+            width: 100%;
+            ul {
+              li {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+>>>>>>> origin/temp
   }
 }
