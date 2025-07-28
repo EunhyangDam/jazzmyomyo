@@ -44,16 +44,12 @@ import Sub083MmEdit from "./wrap/sub/sub08Mm/Sub083MmEdit";
 import Sub084MmGrade from "./wrap/sub/sub08Mm/Sub084MmGrade";
 import Sub09Cart from "./wrap/sub/sub09Cart/Sub09Cart";
 import { Route, Routes } from "react-router-dom";
-<<<<<<< HEAD
 import "./scss/WrapComponent.scss";
-=======
 import Page404Component from "./wrap/Page404Component";
->>>>>>> origin/temp
 export default function WrapComponent(props) {
   return (
     <div id="wrap">
       <Routes>
-<<<<<<< HEAD
         <Route path="/" element={<HeaderComponent />}>
           <Route index element={<MainComponent />} />
           {/* 서브페이지 */}
@@ -103,7 +99,6 @@ export default function WrapComponent(props) {
             element={<ComfirmModalComponent />}
           />
         </Route>
-=======
         <Route path="/" element={<HeaderComponent />} />
         <Route index element={<MainComponent />} />
         {/* 서브페이지 */}
@@ -147,7 +142,6 @@ export default function WrapComponent(props) {
         <Route path="/sub084MmGrade" element={<Sub084MmGrade />} />
         <Route path="/sub09Cart" element={<Sub09Cart />} />
         <Route path="/*" element={<Page404Component />} />
->>>>>>> origin/temp
       </Routes>
       <FooterComponent />
     </div>

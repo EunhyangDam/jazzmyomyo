@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-import React from "react";
-import "./scss/Section7Component.scss";
-=======
 import React, { useState, useEffect } from "react";
 import "./scss/Section7Component.scss";
 import { Link } from "react-router-dom";
->>>>>>> origin/temp
 
 export default function Section7Component(props) {
   const [state, setState] = useState({
@@ -27,41 +22,18 @@ export default function Section7Component(props) {
 
   if (!state.product || state.product.length < 24) return <div>Loading…</div>;
   return (
-<<<<<<< HEAD
-    <div id="section7Component" className="section">
-=======
     <div id="Section7Component">
->>>>>>> origin/temp
       <section id="section7" className="shop">
         <div className="container">
           <div className="title">
             <div className="line"></div>
-<<<<<<< HEAD
-            <h2>shop</h2>
-=======
             <Link to="/sub02Shop">
               <h2>shop</h2>
             </Link>
->>>>>>> origin/temp
             <div className="line"></div>
           </div>
           <div className="content">
             <div className="left">
-<<<<<<< HEAD
-              <div className="myo">
-                <img src="./img/section7/myomyopick_notail.png" alt="묘묘픽" />
-              </div>
-              <div className="pick">
-                <div className="gap">
-                  <a href="!#">
-                    <img src="./img/md/doll_01_1.png" alt="묘묘전신인형" />
-                  </a>
-                </div>
-                <div className="caption-box">
-                  <h3>Best Seller</h3>
-                  <a href="!#">coldplay lp</a>
-                  <strong>$50.00</strong>
-=======
               <div className="best">
                 <div className="myo">
                   <img
@@ -97,7 +69,6 @@ export default function Section7Component(props) {
                       원
                     </em>
                   </div>
->>>>>>> origin/temp
                 </div>
               </div>
             </div>
@@ -106,14 +77,6 @@ export default function Section7Component(props) {
                 <li className="item1">
                   <div className="gap">
                     <a href="!#">
-<<<<<<< HEAD
-                      <img src="./img/md/doll_01_1.png" alt="임시" />
-                    </a>
-                  </div>
-                  <div className="caption-box">
-                    <a href="!#">john lennon lp</a>
-                    <strong>$50.00</strong>
-=======
                       <img src={state.product[23].이미지[0]} alt="카펜터스" />
                     </a>
                     <div className="wish-list">
@@ -131,20 +94,11 @@ export default function Section7Component(props) {
                     <strong>
                       {state.product[23].가격.toLocaleString("ko-KR")}원
                     </strong>
->>>>>>> origin/temp
                   </div>
                 </li>
                 <li className="item2">
                   <div className="gap">
                     <a href="!#">
-<<<<<<< HEAD
-                      <img src="./img/md/doll_01_1.png" alt="임시" />
-                    </a>
-                  </div>
-                  <div className="caption-box">
-                    <a href="!#">carpenters lp</a>
-                    <strong>$50.00</strong>
-=======
                       <img src={state.product[12].이미지[0]} alt="잭킹콩" />
                     </a>
                     <div className="wish-list">
@@ -162,20 +116,11 @@ export default function Section7Component(props) {
                     <strong>
                       {state.product[12].가격.toLocaleString("ko-KR")}원
                     </strong>
->>>>>>> origin/temp
                   </div>
                 </li>
                 <li className="item3">
                   <div className="gap">
                     <a href="!#">
-<<<<<<< HEAD
-                      <img src="./img/md/doll_01_1.png" alt="임시" />
-                    </a>
-                  </div>
-                  <div className="caption-box">
-                    <a href="!#">lauv lp</a>
-                    <strong>$50.00</strong>
-=======
                       <img src={state.product[1].이미지[0]} alt="코스터" />
                     </a>
                     <div className="wish-list">
@@ -189,20 +134,11 @@ export default function Section7Component(props) {
                     <strong>
                       {state.product[1].가격.toLocaleString("ko-KR")}원
                     </strong>
->>>>>>> origin/temp
                   </div>
                 </li>
                 <li className="item4">
                   <div className="gap">
                     <a href="!#">
-<<<<<<< HEAD
-                      <img src="./img/md/doll_01_1.png" alt="임시" />
-                    </a>
-                  </div>
-                  <div className="caption-box">
-                    <a href="!#">john mayer lp</a>
-                    <strong>$50.00</strong>
-=======
                       <img src={state.product[5].이미지[0]} alt="라이터" />
                     </a>
                     <div className="wish-list">
@@ -216,7 +152,6 @@ export default function Section7Component(props) {
                     <strong>
                       {state.product[5].가격.toLocaleString("ko-KR")}원
                     </strong>
->>>>>>> origin/temp
                   </div>
                 </li>
               </ul>

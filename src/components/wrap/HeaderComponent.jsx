@@ -60,7 +60,6 @@ export default function HeaderComponent(props) {
     let nowScr = null;
     const handleScr = () => {
       nowScr = window.scrollY;
-      console.log(nowScr - prevScr);
       if (nowScr - prevScr > 0) {
         setScr(true);
       } else if (nowScr - prevScr < 0) {
@@ -77,7 +76,8 @@ export default function HeaderComponent(props) {
         id="header"
         className={
           state ? "active" : "" || toggle ? "toggle" : "" || scr ? "down" : ""
-        }>
+        }
+      >
         <div className="container">
           <h1 onClick={clickRemoveClass}>
             <Link to="/mainComponent">
@@ -134,7 +134,8 @@ export default function HeaderComponent(props) {
               </li>
               <li
                 onClick={toggleMenu}
-                className={`toggle ${toggle ? "active" : ""}`}>
+                className={`toggle ${toggle ? "active" : ""}`}
+              >
                 <button>
                   <span></span>
                   <span></span>
@@ -161,7 +162,8 @@ export default function HeaderComponent(props) {
                 </li>
                 <li
                   onClick={toggleMenu}
-                  className={`toggle ${toggle ? "active" : ""}`}>
+                  className={`toggle ${toggle ? "active" : ""}`}
+                >
                   <button>
                     <span></span>
                     <span></span>

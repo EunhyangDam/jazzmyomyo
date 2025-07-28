@@ -1,30 +1,5 @@
 @use "../../../scss/_variables" as *;
 
-<<<<<<< HEAD
-#section7Component {
-  section {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 1750px;
-    margin: 0 auto;
-    height: auto; // 임시 높이
-
-    .container {
-      width: 100%;
-      height: 100%;
-
-      .title {
-        width: 100%;
-        padding: 30px 0;
-        height: auto;
-
-        h2 {
-          font-size: $size4;
-          font-family: "TTHakgyoansimMulgyeolB";
-          font-weight: 700;
-          color: $white;
-=======
 #Section7Component {
   width: 100%;
   #section7 {
@@ -54,78 +29,10 @@
           font-weight: 700;
           color: $sub-color1;
           padding: 0 20px;
->>>>>>> origin/temp
         }
       }
       .content {
         width: 100%;
-<<<<<<< HEAD
-        height: calc(100% - 100px);
-      }
-    }
-
-    &#section7 {
-      background-color: #fff;
-      height: auto;
-      .container {
-        .title {
-          display: flex;
-          align-items: center;
-          .line {
-            width: 100%;
-            height: 3px;
-            background-color: $sub-color1;
-          }
-          h2 {
-            color: $sub-color1;
-            padding: 0 20px;
-          }
-        }
-        .content {
-          width: 100%;
-          padding: 40px 50px 60px 50px;
-          display: flex;
-          justify-content: space-between;
-          .left {
-            width: 40%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            position: relative;
-            .myo {
-              position: absolute;
-              top: 0;
-              left: 30px;
-              z-index: 1;
-              img {
-                transform: rotate(10deg) translateX(10px);
-              }
-            }
-
-            .pick {
-              position: relative;
-              padding-top: 104px;
-              z-index: 2;
-              width: 100%;
-              .gap {
-                width: 100%;
-                height: 100%;
-                padding: 30px;
-                a {
-                  width: 100%;
-                  height: 100%;
-                  display: block;
-                  overflow: hidden;
-                  transition: all 0.3s;
-                  img {
-                    border-radius: $border-radius;
-                    width: 100%;
-                    object-fit: cover;
-                  }
-
-                  &:hover {
-                    transform: translateY(40px);
-=======
         max-width: 1750px;
         margin: 0 auto;
         padding: 2%;
@@ -213,18 +120,13 @@
                   .wish-list {
                     opacity: 1;
                     transform: translateX(-50px);
->>>>>>> origin/temp
                   }
                 }
               }
               .caption-box {
-<<<<<<< HEAD
-                padding-top: 20px;
-=======
                 position: relative;
                 z-index: 1;
                 padding-top: 70px;
->>>>>>> origin/temp
                 text-align: center;
                 h3 {
                   font-size: $size4;
@@ -243,8 +145,6 @@
                   text-transform: capitalize;
                   font-weight: 600;
                   letter-spacing: 1.6px;
-<<<<<<< HEAD
-=======
                   line-height: 160%;
                   &:hover {
                     color: $sub-color1;
@@ -354,7 +254,6 @@
                   text-transform: capitalize;
                   letter-spacing: 1.6px;
                   line-height: 160%;
->>>>>>> origin/temp
                   &:hover {
                     color: $sub-color1;
                   }
@@ -363,8 +262,6 @@
                   width: 100%;
                   color: $grey2;
                   letter-spacing: 1.6px;
-<<<<<<< HEAD
-=======
                   font-size: 1.5rem;
                 }
               }
@@ -401,63 +298,11 @@
                   em {
                     font-size: 1.3rem;
                   }
->>>>>>> origin/temp
                 }
               }
             }
           }
           .right {
-<<<<<<< HEAD
-            width: 60%;
-            height: 100%;
-            ul {
-              width: 100%;
-              height: 100%;
-              display: flex;
-              flex-flow: row wrap;
-              padding-left: 50px;
-              li {
-                width: 50%;
-                height: 50%;
-                padding: 25px;
-                .gap {
-                  width: 100%;
-                  height: 100%;
-                  padding: 20px;
-                  a {
-                    width: 100%;
-                    display: block;
-                    overflow: hidden;
-                    transition: all 0.3s;
-                    img {
-                      width: 100%;
-                      object-fit: cover;
-                      border-radius: $border-radius;
-                      border: 1px solid $grey3;
-                    }
-                    &:hover {
-                      transform: translateY(20px);
-                    }
-                  }
-                }
-                .caption-box {
-                  text-align: center;
-                  a {
-                    font-size: $size4;
-                    width: 100%;
-                    display: block;
-                    padding-bottom: 10px;
-                    text-transform: capitalize;
-                    letter-spacing: 1.6px;
-                    &:hover {
-                      color: $sub-color1;
-                    }
-                  }
-                  strong {
-                    width: 100%;
-                    color: $grey2;
-                    letter-spacing: 1.6px;
-=======
             ul {
               li {
                 .caption-box {
@@ -466,7 +311,6 @@
                   }
                   strong {
                     font-size: 1.3rem;
->>>>>>> origin/temp
                   }
                 }
               }
@@ -475,8 +319,6 @@
         }
       }
     }
-<<<<<<< HEAD
-=======
 
     @media all and (max-width: 1170px) {
       .container {
@@ -525,6 +367,5 @@
         }
       }
     }
->>>>>>> origin/temp
   }
 }
