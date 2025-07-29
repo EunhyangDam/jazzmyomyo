@@ -32,10 +32,9 @@ function Page404Component(props) {
                 </li>
                 <li>
                   <h4>
-                    {" "}
-                    <a href="/" className="button">
+                    <Link to="/" className="button">
                       홈으로 돌아가기
-                    </a>
+                    </Link>
                   </h4>
                 </li>
               </ul>

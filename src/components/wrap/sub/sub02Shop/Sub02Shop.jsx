@@ -35,14 +35,14 @@ function Sub02Shop(props) {
           <div className="category-name">
             <ul>
               <li>
-                <a href="!#">
+                <Link to="/car">
                   <span>굿즈</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="!#">
+                <Link to="/car">
                   <span>음반/LP</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

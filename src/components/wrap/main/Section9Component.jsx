@@ -69,23 +69,30 @@ export default function Section9Component() {
             key={index}
             className={`slide ${index === currentSlide ? "active" : ""} ${
               index === 0 || index === totalSlides - 1 ? "" : "half"
-            }`}>
+            }`}
+          >
             {(index === 0 || index === totalSlides - 1) && (
               <div
                 className={`bg-img ${
                   index === totalSlides - 1 ? "no-filter" : ""
                 }`}
                 style={{
-                  backgroundImage: `url(./img/slide${index + 1}.jpg)`,
-                }}></div>
+                  backgroundImage: `url(./img/main_place/slide${
+                    index + 1
+                  }.jpg)`,
+                }}
+              ></div>
             )}
 
             {index !== 0 && index !== totalSlides - 1 && (
               <div
                 className="bg-img"
                 style={{
-                  backgroundImage: `url(./img/slide${index + 1}.jpg)`,
-                }}></div>
+                  backgroundImage: `url(./img/main_place/slide${
+                    index + 1
+                  }.jpg)`,
+                }}
+              ></div>
             )}
 
             <div className="container">
@@ -110,13 +117,13 @@ export default function Section9Component() {
                     <div className="link-buttons">
                       <ul>
                         <li>
-                          <a href="/about">About</a>
+                          <a href="!#">VIEW MORE</a>
                         </li>
                         <li>
-                          <a href="/menu">Menu</a>
+                          <a href="!#">공연일정</a>
                         </li>
                         <li>
-                          <a href="/shop">Shop</a>
+                          <a href="!#">대관문의</a>
                         </li>
                       </ul>
                     </div>
@@ -128,7 +135,7 @@ export default function Section9Component() {
                     {[...Array(totalSlides)].map((_, imgIdx) => (
                       <img
                         key={imgIdx}
-                        src={`./img/slide${imgIdx + 1}.jpg`}
+                        src={`./img/main_place/slide${imgIdx + 1}.jpg`}
                         alt=""
                         className={`slide-img ${
                           imgIdx === currentSlide ? "active" : ""

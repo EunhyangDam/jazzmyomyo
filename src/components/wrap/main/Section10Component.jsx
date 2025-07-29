@@ -8,7 +8,7 @@ export default function Section10Component() {
       title: "클래식 나잇 듀오라묘",
       wine: "Mystic Merlot (레드 와인)",
       items: ["묘묘의 클래식 소파 플래터", "트러플 감자튀김"],
-      img: "./img/set01.png",
+      img: "./img/main_menu/set01.png",
       price: "52,000",
     },
     {
@@ -16,7 +16,7 @@ export default function Section10Component() {
       title: "문라이트\n로맨틱라묘",
       wine: "Brut Rosé",
       items: ["묘묘의 달빛 야식 플래터", "프로슈토 멜론 스틱", "바나나 푸딩"],
-      img: "./img/set02.png",
+      img: "./img/main_menu/set02.png",
       price: "52,000",
     },
     {
@@ -24,7 +24,7 @@ export default function Section10Component() {
       title: "묘묘의 깊은밤을 날아서",
       wine: "ShiShiraz Whisper (레드)",
       items: ["페퍼로니 피자", "하몽 살라미 샐러드"],
-      img: "./img/set03.png",
+      img: "./img/main_menu/set03.png",
       price: "52,000",
     },
     {
@@ -32,7 +32,7 @@ export default function Section10Component() {
       title: "묘묘의\n달달한게\n딱 좋아",
       wine: "Moscato Dream (스파클링)",
       items: ["무화과 크림치즈 바이트", "트러플 초콜릿 & 견과"],
-      img: "./img/pizza.png",
+      img: "./img/main_menu/set04.png",
       price: "52,000",
     },
   ];

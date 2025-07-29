@@ -2,8 +2,6 @@ import React from "react";
 import HeaderComponent from "./wrap/HeaderComponent";
 import MainComponent from "./wrap/MainComponent";
 import FooterComponent from "./wrap/FooterComponent";
-import TopModalComponent from "./wrap/TopModalComponent";
-import ComfirmModalComponent from "./wrap/ComfirmModalComponent";
 import Sub01About from "./wrap/sub/sub01AboutUs/Sub01About";
 import Sub01AboutUs from "./wrap/sub/sub01AboutUs/Sub01AboutUs";
 import Sub01Interior from "./wrap/sub/sub01AboutUs/Sub01Interior";
@@ -43,9 +41,9 @@ import Sub082MmDetail from "./wrap/sub/sub08Mm/Sub082MmDetail";
 import Sub083MmEdit from "./wrap/sub/sub08Mm/Sub083MmEdit";
 import Sub084MmGrade from "./wrap/sub/sub08Mm/Sub084MmGrade";
 import Sub09Cart from "./wrap/sub/sub09Cart/Sub09Cart";
+import Page404Component from "./wrap/Page404Component";
 import { Route, Routes } from "react-router-dom";
 import "./scss/WrapComponent.scss";
-import Page404Component from "./wrap/Page404Component";
 export default function WrapComponent(props) {
   return (
     <div id="wrap">
@@ -93,55 +91,8 @@ export default function WrapComponent(props) {
           <Route path="/MmEdit" element={<Sub083MmEdit />} />
           <Route path="/MmGrade" element={<Sub084MmGrade />} />
           <Route path="/Cart" element={<Sub09Cart />} />
-          <Route path="/TopModalComponent" element={<TopModalComponent />} />
-          <Route
-            path="/ComfirmModalComponent"
-            element={<ComfirmModalComponent />}
-          />
+          <Route path="/car" element={<Page404Component />} />
         </Route>
-        <Route path="/" element={<HeaderComponent />} />
-        <Route index element={<MainComponent />} />
-        {/* 서브페이지 */}
-        <Route path="/sub01About" element={<Sub01About />} />
-        <Route path="/sub01AboutUs" element={<Sub01AboutUs />} />
-        <Route path="/sub01Interior" element={<Sub01Interior />} />
-        <Route path="/sub01MyoMyo" element={<Sub01MyoMyo />} />
-        <Route path="/sub01Story" element={<Sub01Story />} />
-        <Route path="/sub02Disc" element={<Sub02Disc />} />
-        <Route path="/sub02Merch" element={<Sub02Merch />} />
-        <Route path="/sub02Merch01" element={<Sub02Merch01 />} />
-        <Route path="/sub02Shop" element={<Sub02Shop />} />
-        <Route path="/sub030Menu" element={<Sub030Menu />} />
-        <Route path="/sub031Wine" element={<Sub031Wine />} />
-        <Route path="/sub032Drinks" element={<Sub032Drinks />} />
-        <Route path="/sub033Food" element={<Sub033Food />} />
-        <Route path="/sub034Set" element={<Sub034Set />} />
-        <Route path="/sub035Pre" element={<Sub035Pre />} />
-        <Route path="/sub04AboutLive" element={<Sub04AboutLive />} />
-        <Route path="/sub04Artist" element={<Sub04Artist />} />
-        <Route path="/sub04BuyTicket" element={<Sub04BuyTicket />} />
-        <Route path="/sub04Lental" element={<Sub04Lental />} />
-        <Route path="/sub04Monthly" element={<Sub04Monthly />} />
-        <Route path="/sub05Faq" element={<Sub05Faq />} />
-        <Route path="/sub05Gall" element={<Sub05Gall />} />
-        <Route path="/sub05Ntc" element={<Sub05Ntc />} />
-        <Route path="/sub05Rev" element={<Sub05Rev />} />
-        <Route path="/sub05Sns" element={<Sub05Sns />} />
-        <Route path="/sub06Lg" element={<Sub06Lg />} />
-        <Route path="/sub06SearchId" element={<Sub06SearchId />} />
-        <Route path="/sub06SearchRs" element={<Sub06SearchRs />} />
-        <Route path="/sub07DeleteAccount" element={<Sub07DeleteAccount />} />
-        <Route path="/sub07EditProfile" element={<Sub07EditProfile />} />
-        <Route path="/sub07Mp" element={<Sub07Mp />} />
-        <Route path="/sub07MyOrder" element={<Sub07MyOrder />} />
-        <Route path="/sub07MyProfile" element={<Sub07MyProfile />} />
-        <Route path="/sub080Mm" element={<Sub080Mm />} />
-        <Route path="/sub081MmList" element={<Sub081MmList />} />
-        <Route path="/sub082MmDetail" element={<Sub082MmDetail />} />
-        <Route path="/sub083MmEdit" element={<Sub083MmEdit />} />
-        <Route path="/sub084MmGrade" element={<Sub084MmGrade />} />
-        <Route path="/sub09Cart" element={<Sub09Cart />} />
-        <Route path="/*" element={<Page404Component />} />
       </Routes>
       <FooterComponent />
     </div>
