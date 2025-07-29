@@ -54,7 +54,7 @@ function Sub02Shop(props) {
                 data-key={item.상품명}
               >
                 <div className="gap">
-                  <Link to={`/sub02Merch${String(idx + 1).padStart(2, "0")}`}>
+                  <Link to={`/Merch${String(idx + 1).padStart(2, "0")}`}>
                     <img
                       src={
                         item.이미지.length > 1 ? item.이미지[0] : item.이미지
