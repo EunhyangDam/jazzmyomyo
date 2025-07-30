@@ -8,8 +8,7 @@ export default function FooterComponent() {
         <svg
           className="wave-svg first"
           viewBox="0 0 1440 320"
-          preserveAspectRatio="none"
-        >
+          preserveAspectRatio="none">
           <path
             fill="#1c2a2e"
             d="M0,128L48,144C96,160,192,192,288,181.3C384,171,480,117,576,112C672,107,768,149,864,181.3C960,213,1056,235,1152,240C1248,245,1344,235,1392,229.3L1440,224L1440,0L0,0Z"
@@ -41,8 +40,7 @@ export default function FooterComponent() {
         <svg
           className="wave-svg mid"
           viewBox="0 0 1440 320"
-          preserveAspectRatio="none"
-        >
+          preserveAspectRatio="none">
           <path
             fill="#512b2b"
             d="M0,160L48,149.3C96,139,192,117,288,112C384,107,480,117,576,138.7C672,160,768,192,864,192C960,192,1056,160,1152,138.7C1248,117,1344,107,1392,101.3L1440,96L1440,320L0,320Z"
@@ -52,8 +50,7 @@ export default function FooterComponent() {
         <svg
           className="wave-svg second"
           viewBox="0 0 1440 250"
-          preserveAspectRatio="none"
-        >
+          preserveAspectRatio="none">
           <path
             fill="#512b2b"
             d="M0,96L48,106.7C96,117,192,139,288,160C384,181,480,203,576,213.3C672,224,768,224,864,197.3C960,171,1056,117,1152,90.7C1248,64,1344,64,1392,64L1440,64L1440,320L0,320Z"
