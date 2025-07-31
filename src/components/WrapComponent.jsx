@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HeaderComponent from "./wrap/HeaderComponent";
 import MainComponent from "./wrap/MainComponent";
 import FooterComponent from "./wrap/FooterComponent";
@@ -44,8 +44,18 @@ import Sub09Cart from "./wrap/sub/sub09Cart/Sub09Cart";
 import Page404Component from "./wrap/Page404Component";
 import { Route, Routes } from "react-router-dom";
 import "./scss/WrapComponent.scss";
-import Sub10Wishilist from "./wrap/sub/sub10Wishilist/Sub10Wishilist";
+import Sub10Wishlist from "./wrap/sub/sub10Wishlist/Sub10Wishlist";
+import { useDispatch } from "react-redux";
+import { wishAction } from "../store/wishlist";
 export default function WrapComponent(props) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    let arr = [];
+    if (localStorage.getItem("위시리스트") !== null) {
+      arr = JSON.parse(localStorage.getItem("위시리스트"));
+    }
+    dispatch(wishAction(arr));
+  }, []);
   return (
     <div id="wrap">
       <Routes>
@@ -92,7 +102,7 @@ export default function WrapComponent(props) {
           <Route path="/MmEdit" element={<Sub083MmEdit />} />
           <Route path="/MmGrade" element={<Sub084MmGrade />} />
           <Route path="/Cart" element={<Sub09Cart />} />
-          <Route path="/Wishilist" element={<Sub10Wishilist />} />
+          <Route path="/Wishlist" element={<Sub10Wishlist />} />
           <Route path="/*" element={<Page404Component />} />
         </Route>
       </Routes>

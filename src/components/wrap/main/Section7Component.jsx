@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./scss/Section7Component.scss";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { wishAction } from "../../../store/wishlist";
 
 export default function Section7Component(props) {
   const [state, setState] = useState({
     product: [],
   });
-
+  const dispatch = useDispatch();
   useEffect(() => {
     fetch("/json/product.json", { method: "GET" })
       .then((res) => res.json())
@@ -19,7 +21,16 @@ export default function Section7Component(props) {
         console.log(err);
       });
   }, []);
-
+  const clickWishlist = (e, data) => {
+    e.preventDefault();
+    let arr = [];
+    if (localStorage.getItem("위시리스트") !== null) {
+      arr = JSON.parse(localStorage.getItem("위시리스트"));
+    }
+    if (arr.some((el) => el.id === data.id)) return;
+    arr = [data, ...arr];
+    dispatch(wishAction(arr));
+  };
   if (!state.product || state.product.length < 24) return <div>Loading…</div>;
   return (
     <div id="Section7Component">
@@ -50,10 +61,9 @@ export default function Section7Component(props) {
                       />
                     </Link>
                     <div className="wish-list">
-                      {/* 위시리스트 컴포넌트 연결해야함 */}
-                      <a href="!#" title="Wishlist">
+                      <Link to="/Wishlist" title="Wishlist">
                         <i className="bi bi-suit-heart"></i>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="caption-box">
@@ -80,7 +90,11 @@ export default function Section7Component(props) {
                       <img src={state.product[23].이미지[0]} alt="카펜터스" />
                     </a>
                     <div className="wish-list">
-                      <a href="!#" title="Wishlist">
+                      <a
+                        href="!#"
+                        title="Wishlist"
+                        onClick={(e) => clickWishlist(e, state.product[23])}
+                      >
                         <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
@@ -102,7 +116,11 @@ export default function Section7Component(props) {
                       <img src={state.product[12].이미지[0]} alt="잭킹콩" />
                     </a>
                     <div className="wish-list">
-                      <a href="!#" title="Wishlist">
+                      <a
+                        href="!#"
+                        title="Wishlist"
+                        onClick={(e) => clickWishlist(e, state.product[12])}
+                      >
                         <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
@@ -124,7 +142,11 @@ export default function Section7Component(props) {
                       <img src={state.product[1].이미지[0]} alt="코스터" />
                     </a>
                     <div className="wish-list">
-                      <a href="!#" title="Wishlist">
+                      <a
+                        href="!#"
+                        title="Wishlist"
+                        onClick={(e) => clickWishlist(e, state.product[1])}
+                      >
                         <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
@@ -142,7 +164,11 @@ export default function Section7Component(props) {
                       <img src={state.product[5].이미지[0]} alt="라이터" />
                     </a>
                     <div className="wish-list">
-                      <a href="!#" title="Wishlist">
+                      <a
+                        href="!#"
+                        title="Wishlist"
+                        onClick={(e) => clickWishlist(e, state.product[5])}
+                      >
                         <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>

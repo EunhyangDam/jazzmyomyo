@@ -9,7 +9,7 @@ const wishlist = createSlice({
   reducers: {
     wishAction(state, action) {
       state.위시리스트 = action.payload;
-      localStorage("위시리스트", JSON.stringify(state.위시리스트));
+      localStorage.setItem("위시리스트", JSON.stringify(state.위시리스트));
     },
   },
 });

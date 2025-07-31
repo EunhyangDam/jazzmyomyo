@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../scss/sub.scss";
-import "./scss/Sub10Wishilist.scss";
+import "./scss/Sub10Wishlist.scss";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 export default function Sub10Wishilist(props) {
+  const list = useSelector((state) => state.wishlist);
+  const [state, setState] = useState({
+    위시리스트: [],
+  });
+  useEffect(() => {
+    setState({
+      ...state,
+      위시리스트: list.위시리스트,
+    });
+    console.log(state.위시리스트);
+  }, [list]);
   return (
     <div id="sub10Wishilist" className="sub-page">
       <div className="inner">
@@ -42,27 +54,29 @@ export default function Sub10Wishilist(props) {
         </div>
         <div className="body">
           <h3>
-            찜 리스트 <span>(8)</span>
+            찜 리스트 <span>({state.위시리스트.length})</span>
           </h3>
           <ul className="content">
-            <li>
-              <div className="img-container">
-                <img src="" alt="" />
-                <div className="x-box">
-                  <button>
-                    <i className="bi bi-x"></i>
-                  </button>
+            {state.위시리스트.map((el) => (
+              <li key={el.id} data-key={el.id}>
+                <div className="img-container">
+                  <img src={el.이미지[0]} alt={el.설명} />
+                  <div className="x-box">
+                    <button>
+                      <i className="bi bi-x"></i>
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <h4>상품명</h4>
-              <p className="price">
-                <span>32000</span>원
-              </p>
-              <div className="box">
-                <span className="new">신상품</span>
-                <span className="sold-out">품절</span>
-              </div>
-            </li>
+                <h4>{el.상품명}</h4>
+                <p className="price">
+                  <span>{el.가격}</span>원
+                </p>
+                <div className="box">
+                  <span className="new">신상품</span>
+                  <span className="sold-out">품절</span>
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="foot">

@@ -118,17 +118,17 @@ export default function HeaderComponent(props) {
           <aside>
             <ul className="head">
               <li className="menu">
-                <Link to="./Cart">
+                <Link to="/Cart">
                   <i className="fa-solid fa-cart-arrow-down"></i>
                 </Link>
               </li>
               <li className="menu">
-                <Link to="./Mp">
+                <Link to="/Mp">
                   <i className="fa-solid fa-user"></i>
                 </Link>
               </li>
               <li className="menu">
-                <Link to="./Wishilist">
+                <Link to="/Wishlist">
                   <i className="fa-solid fa-heart"></i>
                 </Link>
               </li>
@@ -156,7 +156,7 @@ export default function HeaderComponent(props) {
                   </Link>
                 </li>
                 <li className="menu">
-                  <Link to="./Wishilist">
+                  <Link to="/Wishlist">
                     <i className="fa-solid fa-heart"></i>
                   </Link>
                 </li>

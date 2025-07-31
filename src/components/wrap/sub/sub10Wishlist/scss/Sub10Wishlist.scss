@@ -96,6 +96,9 @@
             width: 100%;
             position: relative;
             aspect-ratio: 1/1 auto;
+            img {
+              width: 100%;
+            }
             .x-box {
               position: absolute;
               top: 0;
