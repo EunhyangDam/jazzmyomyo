@@ -1,7 +1,27 @@
 import React from "react";
 import "./scss/Section3Component.scss";
 
+
+
 export default function Section3Component(props) {
+
+  const [artists, setArtists] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("/json/section3/section3.json") // public 폴더 기준
+      .then((res) => {
+        if (!res.ok) throw new Error("네트워크 오류");
+        return res.json();
+      })
+      .then((data) => {
+        setArtists(data.artistData);
+      })
+      .catch((err) => {
+        console.error("데이터 불러오기 실패:", err);
+      });
+  }, []);
+
+
   return (
     <div id="section3Component" className="section">
       <div className="con-info">

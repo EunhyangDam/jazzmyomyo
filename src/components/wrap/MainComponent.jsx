@@ -1,4 +1,5 @@
 import React from "react";
+import "./scss/section.scss";
 import Section1Component from "./main/Section1Component";
 import Section2Component from "./main/Section2Component";
 import Section3Component from "./main/Section3Component";
@@ -12,9 +13,8 @@ import Section10Component from "./main/Section10Component";
 import Section11Component from "./main/Section11Component";
 import Section12Component from "./main/Section12Component";
 import Section13Component from "./main/Section13Component";
-import "./scss/section.scss";
 
-export default function MainComponent(props) {
+export default function MainComponent() {
   return (
     <main id="main">
       <Section1Component />
@@ -28,8 +28,8 @@ export default function MainComponent(props) {
       <Section9Component />
       <Section10Component />
       <Section11Component />
-      <Section13Component />
       <Section12Component />
+      <Section13Component />
     </main>
   );
 }

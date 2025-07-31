@@ -42,13 +42,17 @@ import Sub083MmEdit from "./wrap/sub/sub08Mm/Sub083MmEdit";
 import Sub084MmGrade from "./wrap/sub/sub08Mm/Sub084MmGrade";
 import Sub09Cart from "./wrap/sub/sub09Cart/Sub09Cart";
 import Page404Component from "./wrap/Page404Component";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./scss/WrapComponent.scss";
 import Sub10Wishlist from "./wrap/sub/sub10Wishlist/Sub10Wishlist";
 import { useDispatch } from "react-redux";
 import { wishAction } from "../store/wishlist";
 export default function WrapComponent(props) {
   const dispatch = useDispatch();
+  const location = useLocation();
+  useEffect(() => {
+    console.log("페이지:", location.pathname);
+  }, [location]);
   useEffect(() => {
     let arr = [];
     if (localStorage.getItem("위시리스트") !== null) {

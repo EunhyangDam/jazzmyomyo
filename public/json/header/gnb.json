@@ -25,10 +25,10 @@
       "main": "Menu",
       "link": "Menu",
       "sub": [
-        { "name": "와인", "link": "Menu" },
-        { "name": "주류&음료", "link": "Wine" },
-        { "name": "플래터 & 핑거푸", "link": "Drinks" },
-        { "name": "묘한 세트", "link": "Food" },
+        { "name": "와인", "link": "Wine" },
+        { "name": "주류&음료", "link": "Drinks" },
+        { "name": "플래터 & 핑거푸드", "link": "Food" },
+        { "name": "묘한 세트", "link": "Set" },
         { "name": "사전주문", "link": "Pre" }
       ]
     },
