@@ -1,366 +1,244 @@
 import React from "react";
 import "./scss/Section4Component.scss";
+import { useEffect, useState, useRef } from "react";
 
 export default function Section4Component(props) {
-  (function () {
-    const myomyo = {
-      init() {
-        this.schedule();
-      },
+  const [slides, setSlides] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(
+    new Date().getDay() === 0 ? 6 : new Date().getDay() - 1
+  );
+  const slideListRef = useRef(null);
+  const wrapperRef = useRef(null);
+  const todayCircleRef = useRef(null);
+  const rightElRef = useRef(null);
+  const prevBtnRef = useRef(null);
+  const nextBtnRef = useRef(null);
 
-      schedule() {
-        const schedule = document.getElementById("schedule");
-        if (!schedule) return;
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+  const todayDate = today.getDate();
+  const weekdaysKor = ["월", "화", "수", "목", "금", "토", "일"];
+  const todayWeekday = today.getDay() === 0 ? 6 : today.getDay() - 1;
 
-        const container = schedule.querySelector(".container");
-        const yearMonthEl = container.querySelector(".left .year-month");
-        const weekNumEl = container.querySelector(".left .week-number");
-        const rightEl = container.querySelector(".right");
-        const slideListEl = container.querySelector(".slide-list");
-        const slideWrapperEl = container.querySelector(".slide-wrapper");
-        const prevBtn = container.querySelector(".btn.prev");
-        const nextBtn = container.querySelector(".btn.next");
+  //  fetch slides
+  useEffect(() => {
+    fetch("/json/Section4/Section4.json")
+      .then((res) => res.json())
+      .then((data) => setSlides(data))
+      .catch((err) => console.error("데이터 로드 실패:", err));
+  }, []);
 
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = today.getMonth() + 1;
-        const todayDate = today.getDate();
-        const weekdaysKor = ["월", "화", "수", "목", "금", "토", "일"];
-        const todayWeekday = today.getDay() === 0 ? 6 : today.getDay() - 1;
-        let currentIndex = todayWeekday;
-        let monday;
+  //  날짜 렌더링용: 현재 주차 계산
+  const getWeekNumber = (date) => {
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    const firstDayWeekday = firstDay.getDay() || 7;
+    const offsetDate = date.getDate() + firstDayWeekday - 1;
+    return Math.floor(offsetDate / 7) + 1;
+  };
 
-        const todayCircle = document.createElement("div");
-        todayCircle.className = "today-circle";
+  const getMondayDate = () => {
+    const monday = new Date(today);
+    monday.setDate(today.getDate() - todayWeekday);
+    return monday;
+  };
 
-        function getWeekNumber(date) {
-          const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-          const firstDayWeekday = firstDay.getDay() || 7;
-          const offsetDate = date.getDate() + firstDayWeekday - 1;
-          return Math.floor(offsetDate / 7) + 1;
-        }
+  const renderDate = (i) => {
+    const monday = getMondayDate();
+    const date = new Date(monday);
+    date.setDate(monday.getDate() + i);
+    return date;
+  };
 
-        function getMondayDate() {
-          const monday = new Date(today);
-          monday.setDate(today.getDate() - todayWeekday);
-          return monday;
-        }
+  const updateSlideTransform = () => {
+    const slideList = slideListRef.current;
+    const wrapper = wrapperRef.current;
+    const slidesEl = slideList.querySelectorAll("li.slide");
 
-        function renderYearMonthWeek() {
-          yearMonthEl.textContent = `${year}.${month
-            .toString()
-            .padStart(2, "0")}`;
-          const weekNum = getWeekNumber(today);
-          weekNumEl.textContent = `WEEK${weekNum}`;
-        }
+    slidesEl.forEach((slide, idx) => {
+      slide.classList.remove("center", "today-slide");
+      slide.style.opacity = "0.3";
+      slide.style.transform = "scale(0.6)";
+      if (idx === todayWeekday) slide.classList.add("today-slide");
+    });
 
-        function renderWeekdaysDates() {
-          rightEl.innerHTML = "";
-          monday = getMondayDate();
+    if (slidesEl[currentIndex]) {
+      slidesEl[currentIndex].classList.add("center");
+      slidesEl[currentIndex].style.opacity = "1";
+      slidesEl[currentIndex].style.transform = "scale(1)";
+    }
+    if (slidesEl[currentIndex - 1]) {
+      slidesEl[currentIndex - 1].style.opacity = "0.5";
+      slidesEl[currentIndex - 1].style.transform = "scale(0.8)";
+    }
+    if (slidesEl[currentIndex + 1]) {
+      slidesEl[currentIndex + 1].style.opacity = "0.5";
+      slidesEl[currentIndex + 1].style.transform = "scale(0.8)";
+    }
 
-          for (let i = 0; i < 7; i++) {
-            const dayDiv = document.createElement("div");
-            dayDiv.classList.add("day");
+    // 중앙 정렬
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const centerSlide = slidesEl[currentIndex];
+    const centerRect = centerSlide.getBoundingClientRect();
+    const prevTranslate = slideList.style.transform || "translateX(0px)";
+    const prevX = parseFloat(prevTranslate.match(/-?\d+\.?\d*/)?.[0] || 0);
 
-            const weekdayDiv = document.createElement("div");
-            weekdayDiv.classList.add("weekday");
-            weekdayDiv.textContent = weekdaysKor[i];
+    let newTranslate;
+    if (window.innerWidth <= 440) {
+      newTranslate = -currentIndex * wrapperRect.width;
+    } else {
+      const offset =
+        centerRect.left +
+        centerRect.width / 2 -
+        (wrapperRect.left + wrapperRect.width / 2);
+      newTranslate = prevX - offset;
+    }
 
-            const date = new Date(monday);
-            date.setDate(monday.getDate() + i);
-            const dateNumber = date.getDate();
+    slideList.style.transform = `translateX(${newTranslate}px)`;
 
-            const dateSpan = document.createElement("span");
-            dateSpan.classList.add("date-text");
-            dateSpan.textContent = dateNumber;
+    // Today circle 이동
+    const dayEls = rightElRef.current.querySelectorAll(".day");
+    dayEls.forEach((day) => {
+      const dateDiv = day.querySelector(".date");
+      dateDiv.classList.remove("has-today-circle");
+    });
 
-            const dateDiv = document.createElement("div");
-            dateDiv.classList.add("date");
-            dateDiv.appendChild(dateSpan);
+    const targetDay = dayEls[currentIndex];
+    if (targetDay) {
+      const targetDate = targetDay.querySelector(".date");
+      if (targetDate && todayCircleRef.current) {
+        targetDate.appendChild(todayCircleRef.current);
+        targetDate.classList.add("has-today-circle");
+      }
+    }
 
-            if (
-              date.getDate() === todayDate &&
-              date.getMonth() === today.getMonth() &&
-              date.getFullYear() === today.getFullYear()
-            ) {
-              const label = document.createElement("div");
-              label.classList.add("today-label");
-              label.textContent = "Today";
-              dayDiv.appendChild(label);
-              dateDiv.appendChild(todayCircle);
-              dateDiv.classList.add("has-today-circle");
-            }
+    prevBtnRef.current.disabled = currentIndex === 0;
+    nextBtnRef.current.disabled = currentIndex === 6;
+  };
 
-            dayDiv.appendChild(weekdayDiv);
-            dayDiv.appendChild(dateDiv);
+  useEffect(() => {
+    if (slides.length > 0) updateSlideTransform();
+  }, [slides, currentIndex]);
 
-            (function (idx) {
-              dayDiv.addEventListener("click", () => {
-                currentIndex = idx;
-                requestAnimationFrame(() => {
-                  updateSlides();
-                });
-              });
-            })(i);
+  // 📱 터치 스와이프
+  useEffect(() => {
+    if (window.innerWidth > 1024) return;
+    const wrapper = wrapperRef.current;
 
-            rightEl.appendChild(dayDiv);
-          }
-        }
+    let startX = 0;
+    let isDragging = false;
 
-        const imagePaths = [
-          "img/공연일정_휴무일.jpg",
-          "img/공연일정_휴무일.jpg",
-          "img/공연일정_포스터_회색지대.jpg",
-          "img/공연일정_포스터_섬광.jpg",
-          "img/공연일정_포스터_oyster.jpg",
-          "img/공연일정_포스터_파도.jpg",
-          "img/공연일정_포스터_jazz.jpg",
-        ];
-
-        function createSlideItem(idx) {
-          const li = document.createElement("li");
-          li.classList.add("slide");
-          const a = document.createElement("a");
-          a.href = "#";
-          const img = document.createElement("img");
-          img.src = imagePaths[idx];
-          img.alt = `요일 이미지 ${weekdaysKor[idx]}`;
-          a.appendChild(img);
-          li.appendChild(a);
-          return li;
-        }
-
-        function renderSlides() {
-          slideListEl.innerHTML = "";
-          for (let i = 0; i < 7; i++) {
-            slideListEl.appendChild(createSlideItem(i));
-          }
-
-          // DOM 그리기 → 레이아웃 계산 → updateSlides()
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              updateSlides();
-            });
-          });
-        }
-
-        function updateSlides() {
-          const lis = slideListEl.querySelectorAll("li.slide");
-          const dayEls = rightEl.querySelectorAll(".day");
-
-          //  Today 배지 추가
-          lis.forEach((li, idx) => {
-            li.classList.remove("today-slide");
-
-            if (idx === todayWeekday) {
-              li.classList.add("today-slide");
-            }
-          });
-
-          // 모두 초기화
-          lis.forEach((li, idx) => {
-            li.classList.remove("center");
-            li.style.opacity = "0.3";
-            li.style.transform = "scale(0.6)";
-          });
-
-          if (lis[currentIndex]) {
-            lis[currentIndex].classList.add("center");
-            lis[currentIndex].style.opacity = "1";
-            lis[currentIndex].style.transform = "scale(1)";
-          }
-
-          if (lis[currentIndex - 1]) {
-            lis[currentIndex - 1].style.opacity = "0.5";
-            lis[currentIndex - 1].style.transform = "scale(0.8)";
-          }
-
-          if (lis[currentIndex + 1]) {
-            lis[currentIndex + 1].style.opacity = "0.5";
-            lis[currentIndex + 1].style.transform = "scale(0.8)";
-          }
-
-          const wrapperRect = slideWrapperEl.getBoundingClientRect();
-          const centerSlide = lis[currentIndex];
-          const centerRect = centerSlide.getBoundingClientRect();
-
-          const currentTranslate =
-            slideListEl.style.transform || "translateX(0px)";
-          const match = currentTranslate.match(/-?\d+\.?\d*/);
-          const prevTranslateX = match ? parseFloat(match[0]) : 0;
-
-          let newTranslate;
-
-          //  화면 너비 440px 이하일 경우
-          if (window.innerWidth <= 440) {
-            const slideWidth = wrapperRect.width;
-            newTranslate = -currentIndex * slideWidth;
-          } else {
-            const offset =
-              centerRect.left +
-              centerRect.width / 2 -
-              (wrapperRect.left + wrapperRect.width / 2);
-            newTranslate = prevTranslateX - offset;
-          }
-
-          slideListEl.style.transform = `translateX(${newTranslate}px)`;
-
-          // Today circle 이동
-          const targetDay = dayEls[currentIndex];
-          if (targetDay) {
-            const targetDate = targetDay.querySelector(".date");
-            dayEls.forEach((day) => {
-              const dateDiv = day.querySelector(".date");
-              dateDiv.classList.remove("has-today-circle");
-            });
-
-            if (targetDate && todayCircle.parentNode !== targetDate) {
-              targetDate.appendChild(todayCircle);
-            }
-            targetDate.classList.add("has-today-circle");
-          }
-
-          prevBtn.disabled = currentIndex === 0;
-          nextBtn.disabled = currentIndex === lis.length - 1;
-        }
-
-        // 터치 스와이프 (반응형)
-        function bindTouchEvents() {
-          if (window.innerWidth > 1024) return; // 1024px 이하일 때만 적용
-
-          let startX = 0;
-          let isDragging = false;
-
-          slideWrapperEl.addEventListener("touchstart", (e) => {
-            startX = e.touches[0].clientX;
-            isDragging = true;
-          });
-
-          slideWrapperEl.addEventListener(
-            "touchmove",
-            (e) => {
-              if (!isDragging) return;
-              const deltaX = e.touches[0].clientX - startX;
-              if (Math.abs(deltaX) > 10) e.preventDefault();
-            },
-            { passive: false }
-          );
-
-          slideWrapperEl.addEventListener("touchend", (e) => {
-            if (!isDragging) return;
-            const endX = e.changedTouches[0].clientX;
-            const diffX = endX - startX;
-
-            if (Math.abs(diffX) > 50) {
-              if (diffX > 0) {
-                prevSlide();
-              } else {
-                nextSlide();
-              }
-            }
-
-            isDragging = false;
-          });
-        } // 터치 스와이프
-        function bindEvents() {
-          prevBtn.addEventListener("click", prevSlide);
-          nextBtn.addEventListener("click", nextSlide);
-
-          bindTouchEvents();
-        }
-
-        function prevSlide() {
-          if (currentIndex > 0) {
-            currentIndex--;
-            updateSlides();
-          }
-        }
-
-        function nextSlide() {
-          if (currentIndex < 6) {
-            currentIndex++;
-            updateSlides();
-          }
-        }
-
-        function bindEvents() {
-          prevBtn.addEventListener("click", prevSlide);
-          nextBtn.addEventListener("click", nextSlide);
-          window.addEventListener("resize", updateSlides);
-        }
-
-        renderYearMonthWeek();
-        renderWeekdaysDates();
-        renderSlides();
-        bindEvents();
-      },
+    const onTouchStart = (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
     };
 
-    myomyo.init();
-  })();
+    const onTouchMove = (e) => {
+      if (!isDragging) return;
+      const deltaX = e.touches[0].clientX - startX;
+      if (Math.abs(deltaX) > 10) e.preventDefault();
+    };
+
+    const onTouchEnd = (e) => {
+      if (!isDragging) return;
+      const endX = e.changedTouches[0].clientX;
+      const diffX = endX - startX;
+
+      if (Math.abs(diffX) > 50) {
+        setCurrentIndex((prev) =>
+          diffX > 0 ? Math.max(0, prev - 1) : Math.min(6, prev + 1)
+        );
+      }
+      isDragging = false;
+    };
+
+    wrapper.addEventListener("touchstart", onTouchStart);
+    wrapper.addEventListener("touchmove", onTouchMove, { passive: false });
+    wrapper.addEventListener("touchend", onTouchEnd);
+
+    return () => {
+      wrapper.removeEventListener("touchstart", onTouchStart);
+      wrapper.removeEventListener("touchmove", onTouchMove);
+      wrapper.removeEventListener("touchend", onTouchEnd);
+    };
+  }, []);
 
   return (
     <div id="section4Component">
-      <section id="schedule" class="section">
-        <div class="container">
-          <div class="top-area">
+      <section id="schedule" className="section">
+        <div className="container">
+          <div className="top-area">
             <h1>Weekly schedule</h1>
-            <h2>이번 주 공연일정</h2>
+            <p>이번 주 공연일정</p>
           </div>
-          <div class="split-area">
-            <div class="left">
-              <div class="year-month"></div>
-              <div class="week-number"></div>
+
+          {/* 날짜 */}
+          <div className="split-area">
+            <div className="left">
+              <div className="year-month">{`${year}.${String(month).padStart(
+                2,
+                "0"
+              )}`}</div>
+              <div className="week-number">{`WEEK${getWeekNumber(today)}`}</div>
             </div>
-            <div class="right">
-              <div class="weekdays"></div>
-              <div class="dates"></div>
+            <div className="right" ref={rightElRef}>
+              {weekdaysKor.map((day, i) => {
+                const date = renderDate(i);
+                const isToday =
+                  date.getDate() === todayDate &&
+                  date.getMonth() === today.getMonth() &&
+                  date.getFullYear() === today.getFullYear();
+
+                return (
+                  <div
+                    key={i}
+                    className="day"
+                    onClick={() => setCurrentIndex(i)}
+                  >
+                    {isToday && <div className="today-label">Today</div>}
+                    <div className="weekday">{day}</div>
+                    <div className="date">
+                      <span className="date-text">{date.getDate()}</span>
+                    </div>
+                  </div>
+                );
+              })}
+              <div ref={todayCircleRef} className="today-circle"></div>
             </div>
           </div>
-          <div class="slide-area">
-            <button class="btn prev" disabled>
-              ‹
+
+          {/* 슬라이드 */}
+          <div className="slide-area">
+            <button
+              ref={prevBtnRef}
+              className="btn prev"
+              onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
+            >
+              &lt;
             </button>
-            <div class="slide-wrapper">
-              <ul class="slide-list">
-                <li class="slide slide1">
-                  <a href="#">
-                    <img src="./img/사진1.jpg" alt="" />
-                  </a>
-                </li>
-                <li class="slide slide2">
-                  <a href="#">
-                    <img src="./img/사진2.jpg" alt="" />
-                  </a>
-                </li>
-                <li class="slide slide3">
-                  <a href="#">
-                    <img src="./img/사진1.jpg" alt="" />
-                  </a>
-                </li>
-                <li class="slide slide4">
-                  <a href="#">
-                    <img src="./img/사진2.jpg" alt="" />
-                  </a>
-                </li>
-                <li class="slide slide5">
-                  <a href="#">
-                    <img src="./img/사진1.jpg" alt="" />
-                  </a>
-                </li>
-                <li class="slide slide6">
-                  <a href="#">
-                    <img src="./img/사진2.jpg" alt="" />
-                  </a>
-                </li>
-                <li class="slide slide7">
-                  <a href="#">
-                    <img src="./img/사진1.jpg" alt="" />
-                  </a>
-                </li>
+            <div className="slide-wrapper" ref={wrapperRef}>
+              <ul className="slide-list" ref={slideListRef}>
+                {slides.map((item, i) => (
+                  <li
+                    key={i}
+                    className={`slide ${
+                      i === todayWeekday ? "today-slide" : ""
+                    } ${i === currentIndex ? "center" : ""}`}
+                  >
+                    <a href="!#">
+                      <img src={item.image} alt={`slide-${i}`} />
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
-            <button class="btn next">›</button>
+            <button
+              ref={nextBtnRef}
+              className="btn next"
+              onClick={() => setCurrentIndex((prev) => Math.min(6, prev + 1))}
+            >
+              &gt;
+            </button>
           </div>
         </div>
       </section>
