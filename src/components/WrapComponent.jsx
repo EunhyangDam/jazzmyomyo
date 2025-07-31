@@ -51,7 +51,7 @@ export default function WrapComponent(props) {
   const dispatch = useDispatch();
   const location = useLocation();
   useEffect(() => {
-    console.log("페이지:", location.pathname);
+    if (location.pathname === "/mainComponent") alert("a");
   }, [location]);
   useEffect(() => {
     let arr = [];

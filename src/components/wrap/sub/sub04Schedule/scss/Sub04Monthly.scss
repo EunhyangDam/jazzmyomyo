@@ -1,0 +1,290 @@
+
+#schedule-detail {
+    width: 100%;
+    padding: 60px 20px;
+    background: #fff;
+    margin-top: 250px;
+  
+    .container {
+      width: 100%;
+      .page-title{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 70px;
+        h2{
+          font-size: 4rem;
+          font-weight: 600;
+        }
+      }
+      .site-map{
+        width: 100%;
+        max-width: 1720px;
+        margin: 0 auto;
+        margin-bottom: 30px;
+        a{
+          i{
+            font-size: 24px;
+          }
+        }
+        span.arrow{
+          font-size: 19px;
+          padding: 0 8px;
+        }
+        span.schedule{
+          font-size: 1.2rem;
+        }
+      }
+  
+      .contents{
+        max-width: 1720px;
+        margin: 0 auto;
+        display: flex;
+        gap: 40px;
+  
+        .calendar-area {
+        width: 60%;
+        .calendar-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 80px;
+          padding: 0 10px;
+          background: #5d3136;
+          border-radius: 5px;
+          position: relative;
+          z-index: 1;
+  
+          .calendar-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #fff;
+            position: relative;
+            z-index: 2;
+          }
+  
+          button {
+            background: none;
+            border: none;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+          }
+        }
+  
+        .calendar-grid {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          gap: 10px;
+  
+          .day-label {
+            text-align: center;
+            font-weight: bold;
+            color: #888;
+            &:first-child{
+                color: #dd0000;
+            }
+            &:nth-child(7){
+                color: #003cff;
+            }
+          }
+  
+          .calendar-cell {
+            min-height: 80px;
+            text-align: center;
+            padding: 6px 4px;
+            border-radius: 6px;
+            position: relative;
+
+  
+            .date-circle {
+              display: inline-block;
+              width: 30px;
+              height: 30px;
+              line-height: 30px;
+              border-radius: 50%;
+              font-size: 1.1rem;
+              font-weight: 300;
+            }
+  
+            &.today .date-circle {
+              border: 2px solid #5d3136;
+              color: #ffffff;
+              background: #5d3136;
+              font-weight: bold;
+            }
+  
+            &.selected {
+              background-color: rgba(0, 0, 0, 0.07);
+            }
+  
+            .dots {
+              margin-top: 4px;
+              display: flex;
+              justify-content: center;
+              gap: 2px;
+  
+              .dot {
+                width: 6px;
+                height: 6px;
+                background: #e62037;
+                border-radius: 50%;
+              }
+            }
+          }
+        }
+        }
+      
+        .performance-area {
+        width: 40%;
+        padding-left: 20px;
+        .performance-header {
+          display: flex;
+          height: auto;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 80px;
+          background: #5d3136;
+          border-radius: 5px;
+          padding: 1px 10px;
+  
+          .current-date {
+            font-weight: 600;
+            font-size: 1.6rem;
+            color: #fff;
+          }
+          
+          button {
+            background: none;
+            color: #fff;
+            border: none;
+            font-size: 26px;
+            cursor: pointer;
+          }
+        }
+  
+        .performance-list {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+
+          >p{
+            display: flex;
+            width: 100%;
+            height: 200px;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 500;
+          }
+  
+          .performance-card {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+  
+            .number {
+              font-weight: 600;
+              font-size: 1.1rem;
+              margin-right: 25px;
+            }
+  
+            img {
+              width: 85px;
+              height: 85px;
+              object-fit: cover;
+              margin-right: 10px;
+              border-radius: 4px;
+            }
+  
+            .info {
+              width: calc(100% - 170px);
+              padding-left: 20px;
+  
+              h3 {
+                font-size: 1.4rem;
+                margin-bottom: 8px;
+              }
+  
+              p {
+                font-size: 1.2rem;
+                color: #666;
+              }
+            }
+  
+            .arrow {
+              font-size: 16px;
+              text-decoration: none;
+              color: #888;
+            }
+          }
+        }
+        }
+      }
+
+      .info-box{
+        margin-top: 200px;
+        width: 100%;
+        
+        .infomation{
+          margin: 0 auto;
+          width: 100%;
+          max-width: 1720px;
+          h2{
+            font-size: 3rem;
+            margin-bottom: 20px;
+            padding-left: 20px;
+          }
+          ul{
+            width: 100%;
+            padding: 70px 60px 70px 80px;
+            background: #5d3136;
+            border-radius: 25px;
+            width: 100%;
+            position: relative;
+            li{
+              display: flex;
+              padding-bottom: 35px;
+              &:nth-child(4){
+                padding-bottom: 0;
+              }
+              p{
+                font-size: 1.5rem;
+                color: #fff;
+              }
+            }
+            .img-box{
+              position: absolute;
+              bottom: 40px;
+              right: 80px;
+              width: auto;
+              transform: rotate(10deg);
+              img{
+                width: 80px;
+                height: 70px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+@media (max-width: 440px) {
+  .contents {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+  }
+
+  .calendar-area,
+  .performance-area {
+    width: 100%;
+  }
+
+  .info-box {
+    margin-top: 50px;
+  }
+}
+  
