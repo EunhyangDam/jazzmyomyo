@@ -73,7 +73,7 @@
     }
     .body {
       margin-bottom: 50px;
-      h3 {
+      > h3 {
         font-size: $size3;
         font-weight: 600;
         color: $sub-color1;
@@ -151,6 +151,21 @@
                 background: $sub-color1;
               }
             }
+          }
+        }
+      }
+      .empty {
+        height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        h3 {
+          font-weight: 600;
+          color: $grey3;
+          i {
+            margin-left: 5px;
+            transform: rotate(16deg);
           }
         }
       }

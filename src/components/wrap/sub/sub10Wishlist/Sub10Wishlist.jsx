@@ -65,30 +65,38 @@ export default function Sub10Wishilist(props) {
           <h3>
             찜 리스트 <span>({state.위시리스트.length})</span>
           </h3>
-          <ul className="content">
-            {state.위시리스트.map((el) => (
-              <li key={el.id} data-key={el.id}>
-                <div className="img-container">
-                  <Link to="/">
-                    <img src={el.이미지[0]} alt={el.설명} />
-                  </Link>
-                  <div className="x-box">
-                    <button onClick={(e) => clickWishDel(e, el)}>
-                      <i className="bi bi-x"></i>
-                    </button>
+          {state.위시리스트.length >= 0 ? (
+            <div className="empty">
+              <h3>
+                찜 리스트에 상품이 없습니다<i className="fa-solid fa-paw"></i>
+              </h3>
+            </div>
+          ) : (
+            <ul className="content">
+              {state.위시리스트.map((el) => (
+                <li key={el.id} data-key={el.id}>
+                  <div className="img-container">
+                    <Link to="/">
+                      <img src={el.이미지[0]} alt={el.설명} />
+                    </Link>
+                    <div className="x-box">
+                      <button onClick={(e) => clickWishDel(e, el)}>
+                        <i className="bi bi-x"></i>
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <h4>{el.상품명}</h4>
-                <p className="price">
-                  <span>{el.가격.toLocaleString("ko-kr")}</span>원
-                </p>
-                <div className="box">
-                  <span className="new">신상품</span>
-                  <span className="sold-out">품절</span>
-                </div>
-              </li>
-            ))}
-          </ul>
+                  <h4>{el.상품명}</h4>
+                  <p className="price">
+                    <span>{el.가격.toLocaleString("ko-kr")}</span>원
+                  </p>
+                  <div className="box">
+                    <span className="new">신상품</span>
+                    <span className="sold-out">품절</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
         <div className="foot">
           <ul>
