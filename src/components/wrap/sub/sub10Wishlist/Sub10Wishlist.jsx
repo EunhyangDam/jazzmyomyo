@@ -60,7 +60,9 @@ export default function Sub10Wishilist(props) {
             {state.위시리스트.map((el) => (
               <li key={el.id} data-key={el.id}>
                 <div className="img-container">
-                  <img src={el.이미지[0]} alt={el.설명} />
+                  <Link to="/">
+                    <img src={el.이미지[0]} alt={el.설명} />
+                  </Link>
                   <div className="x-box">
                     <button>
                       <i className="bi bi-x"></i>
@@ -69,7 +71,7 @@ export default function Sub10Wishilist(props) {
                 </div>
                 <h4>{el.상품명}</h4>
                 <p className="price">
-                  <span>{el.가격}</span>원
+                  <span>{el.가격.toLocaleString("ko-kr")}</span>원
                 </p>
                 <div className="box">
                   <span className="new">신상품</span>

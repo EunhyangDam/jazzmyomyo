@@ -28,8 +28,8 @@ export default function MainComponent(props) {
       <Section9Component />
       <Section10Component />
       <Section11Component />
-      <Section12Component />
       <Section13Component />
+      <Section12Component />
     </main>
   );
 }
