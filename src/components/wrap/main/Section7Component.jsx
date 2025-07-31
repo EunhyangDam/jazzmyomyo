@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./scss/Section7Component.scss";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { wishAction } from "../../../store/wishlist";
 
 export default function Section7Component(props) {
@@ -9,6 +9,7 @@ export default function Section7Component(props) {
     product: [],
   });
   const dispatch = useDispatch();
+  const wishlist = useSelector((state) => state.wishlist.위시리스트);
   useEffect(() => {
     fetch("/json/product.json", { method: "GET" })
       .then((res) => res.json())
@@ -61,8 +62,18 @@ export default function Section7Component(props) {
                       />
                     </Link>
                     <div className="wish-list">
-                      <Link to="/Wishlist" title="Wishlist">
-                        <i className="bi bi-suit-heart"></i>
+                      <Link
+                        to="/Wishlist"
+                        title="Wishlist"
+                        onClick={(e) => clickWishlist(e, state.product[3])}
+                      >
+                        {wishlist.some(
+                          (el) => el.id === state.product[3].id
+                        ) ? (
+                          <i className="bi bi-suit-heart-fill"></i>
+                        ) : (
+                          <i className="bi bi-suit-heart"></i>
+                        )}
                       </Link>
                     </div>
                   </div>
@@ -95,7 +106,13 @@ export default function Section7Component(props) {
                         title="Wishlist"
                         onClick={(e) => clickWishlist(e, state.product[23])}
                       >
-                        <i className="bi bi-suit-heart"></i>
+                        {wishlist.some(
+                          (el) => el.id === state.product[23].id
+                        ) ? (
+                          <i className="bi bi-suit-heart-fill"></i>
+                        ) : (
+                          <i className="bi bi-suit-heart"></i>
+                        )}
                       </a>
                     </div>
                   </div>
@@ -121,7 +138,13 @@ export default function Section7Component(props) {
                         title="Wishlist"
                         onClick={(e) => clickWishlist(e, state.product[12])}
                       >
-                        <i className="bi bi-suit-heart"></i>
+                        {wishlist.some(
+                          (el) => el.id === state.product[12].id
+                        ) ? (
+                          <i className="bi bi-suit-heart-fill"></i>
+                        ) : (
+                          <i className="bi bi-suit-heart"></i>
+                        )}
                       </a>
                     </div>
                   </div>
@@ -147,7 +170,13 @@ export default function Section7Component(props) {
                         title="Wishlist"
                         onClick={(e) => clickWishlist(e, state.product[1])}
                       >
-                        <i className="bi bi-suit-heart"></i>
+                        {wishlist.some(
+                          (el) => el.id === state.product[1].id
+                        ) ? (
+                          <i className="bi bi-suit-heart-fill"></i>
+                        ) : (
+                          <i className="bi bi-suit-heart"></i>
+                        )}
                       </a>
                     </div>
                   </div>
@@ -169,7 +198,13 @@ export default function Section7Component(props) {
                         title="Wishlist"
                         onClick={(e) => clickWishlist(e, state.product[5])}
                       >
-                        <i className="bi bi-suit-heart"></i>
+                        {wishlist.some(
+                          (el) => el.id === state.product[5].id
+                        ) ? (
+                          <i className="bi bi-suit-heart-fill"></i>
+                        ) : (
+                          <i className="bi bi-suit-heart"></i>
+                        )}
                       </a>
                     </div>
                   </div>

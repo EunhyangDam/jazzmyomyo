@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../scss/sub.scss";
 import "./scss/Sub10Wishlist.scss";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { wishAction } from "../../../../store/wishlist";
 export default function Sub10Wishilist(props) {
+  const dispatch = useDispatch();
   const list = useSelector((state) => state.wishlist);
   const [state, setState] = useState({
     위시리스트: [],
@@ -13,8 +15,15 @@ export default function Sub10Wishilist(props) {
       ...state,
       위시리스트: list.위시리스트,
     });
-    console.log(state.위시리스트);
   }, [list]);
+  const clickWishDel = (e, data) => {
+    let del = state.위시리스트.filter((el) => el.id !== data.id);
+    setState({
+      ...state,
+      위시리스트: del,
+    });
+    dispatch(wishAction(del));
+  };
   return (
     <div id="sub10Wishilist" className="sub-page">
       <div className="inner">
@@ -64,7 +73,7 @@ export default function Sub10Wishilist(props) {
                     <img src={el.이미지[0]} alt={el.설명} />
                   </Link>
                   <div className="x-box">
-                    <button>
+                    <button onClick={(e) => clickWishDel(e, el)}>
                       <i className="bi bi-x"></i>
                     </button>
                   </div>
