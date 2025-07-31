@@ -65,13 +65,7 @@ export default function Sub10Wishilist(props) {
           <h3>
             찜 리스트 <span>({state.위시리스트.length})</span>
           </h3>
-          {state.위시리스트.length >= 0 ? (
-            <div className="empty">
-              <h3>
-                찜 리스트에 상품이 없습니다<i className="fa-solid fa-paw"></i>
-              </h3>
-            </div>
-          ) : (
+          {state.위시리스트.length >= 1 ? (
             <ul className="content">
               {state.위시리스트.map((el) => (
                 <li key={el.id} data-key={el.id}>
@@ -96,6 +90,12 @@ export default function Sub10Wishilist(props) {
                 </li>
               ))}
             </ul>
+          ) : (
+            <div className="empty">
+              <h3>
+                찜 리스트에 상품이 없습니다<i className="fa-solid fa-paw"></i>
+              </h3>
+            </div>
           )}
         </div>
         <div className="foot">

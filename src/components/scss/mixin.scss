@@ -1,0 +1,35 @@
+@use "./variables" as *;
+@mixin site() {
+  .site {
+    padding-top: 40px;
+    display: flex;
+    column-gap: 11px;
+    color: $grey2;
+    a {
+      &.now {
+        color: $sub-color1;
+        font-weight: 600;
+      }
+    }
+  }
+}
+@mixin box() {
+  .box {
+    span {
+      display: inline-block;
+      padding: 6px;
+      font-weight: 600;
+      color: #fff;
+      cursor: default;
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+      &.new {
+        background: $primary-color;
+      }
+      &.sold-out {
+        background: $sub-color1;
+      }
+    }
+  }
+}
