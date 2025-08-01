@@ -1,11 +1,35 @@
 import React, { useState, useEffect } from "react";
 import "./scss/Sub02Shop.scss";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 function Sub02Shop(props) {
   const [state, setState] = useState({
     product: [],
   });
+
+  const [필터상품, set필터상품] = useState([]);
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("category");
+
+  const 필터링 = (카테고리) => {
+    if (카테고리 === "전체") {
+      set필터상품(state.product); // 전체 보기
+    } else {
+      const 결과 = state.product.filter((item) => item.상품분류 === 카테고리);
+      set필터상품(결과); // 해당 카테고리만 보기
+    }
+  };
+
+  useEffect(() => {
+    if (state.product.length > 0) {
+      if (category) {
+        const 결과 = state.product.filter((item) => item.상품분류 === category);
+        set필터상품(결과);
+      } else {
+        set필터상품(state.product);
+      }
+    }
+  }, [category, state.product]);
 
   useEffect(() => {
     fetch("/json/product.json", { method: "GET" })
@@ -14,6 +38,7 @@ function Sub02Shop(props) {
         setState({
           product: data.product,
         });
+        set필터상품(data.product);
       })
       .catch((err) => {
         console.log(err);
@@ -26,35 +51,35 @@ function Sub02Shop(props) {
       <div id="wrap">
         <div className="title">
           <div className="line"></div>
-          <Link to="/sub02Shop">
+          <a href="/Shop">
             <h2>shop</h2>
-          </Link>
+          </a>
           <div className="line"></div>
         </div>
         <div className="content">
           <div className="category-name">
             <ul>
               <li>
-                <Link to="/car">
+                <button onClick={() => 필터링("굿즈")}>
                   <span>굿즈</span>
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/car">
+                <button onClick={() => 필터링("음반")}>
                   <span>음반/LP</span>
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
           <ul className="item">
-            {state.product.map((item, idx) => (
+            {필터상품.map((item, idx) => (
               <li
                 className={`item${idx + 1}`}
                 key={item.상품명}
                 data-key={item.상품명}
               >
                 <div className="gap">
-                  <Link to={`/Merch${String(idx + 1).padStart(2, "0")}`}>
+                  <Link to={`/ShopDetail`}>
                     <img
                       src={
                         item.이미지.length > 1 ? item.이미지[0] : item.이미지
@@ -69,7 +94,7 @@ function Sub02Shop(props) {
                   </div>
                 </div>
                 <div className="caption-box">
-                  <Link to={`/sub02Merch${String(idx + 1).padStart(2, "0")}`}>
+                  <Link to={`/Merch${String(item.idx).padStart(2, "0")}`}>
                     {item.상품명.includes("-") ? (
                       <>
                         <span>{item.상품명.split("-")[1]}</span>

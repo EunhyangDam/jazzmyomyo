@@ -1,5 +1,7 @@
 #sub02Shop {
   width: 100%;
+  margin-top: 100px;
+  padding-bottom: 200px;
 }
 #sub02Shop #wrap {
   width: 100%;
@@ -11,7 +13,7 @@
   height: auto;
   display: flex;
   align-items: center;
-  background: #004643;
+  background: #23363f;
   border-bottom: 1px solid #ffffff;
 }
 #sub02Shop #wrap .title a {
@@ -20,7 +22,7 @@
   margin: 0 auto;
 }
 #sub02Shop #wrap .title a h2 {
-  color: #004643;
+  color: #23363f;
   font-size: 3rem;
   font-family: "TTHakgyoansimMulgyeolB";
   font-weight: 700;
@@ -44,14 +46,16 @@
 #sub02Shop #wrap .content .category-name ul li {
   margin: 0 20px;
 }
-#sub02Shop #wrap .content .category-name ul li a {
+#sub02Shop #wrap .content .category-name ul li button {
+  border: 0;
+  background: none;
   transition: all 0.3s;
 }
-#sub02Shop #wrap .content .category-name ul li a span {
+#sub02Shop #wrap .content .category-name ul li button span {
   font-size: 1.8rem;
   font-family: "MaruBuri";
 }
-#sub02Shop #wrap .content .category-name ul li a span:hover {
+#sub02Shop #wrap .content .category-name ul li button span:hover {
   border-bottom: 1px solid #000;
 }
 #sub02Shop #wrap .content > ul.item {
@@ -59,16 +63,16 @@
   height: 100%;
   display: flex;
   flex-flow: row wrap;
-  border-left: 0.5px solid #004643;
-  border-right: 0.5px solid #004643;
+  border-left: 0.5px solid #23363f;
+  border-right: 0.5px solid #23363f;
 }
 #sub02Shop #wrap .content > ul.item li {
   width: 25%;
   height: 50%;
-  border: 0.5px solid #004643;
+  border: 0.5px solid #23363f;
 }
 #sub02Shop #wrap .content > ul.item li .gap {
-  border-bottom: 0.5px solid #004643;
+  border-bottom: 0.5px solid #23363f;
   position: relative;
   width: 100%;
   height: 100%;
@@ -86,7 +90,7 @@
   width: 100%;
   aspect-ratio: 1/1;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   border: 1px solid #c6bdbd;
 }
 #sub02Shop #wrap .content > ul.item li .gap .wish-list {
@@ -142,7 +146,7 @@
   font-size: 1.4rem;
 }
 #sub02Shop #wrap .content > ul.item li .caption-box a:hover {
-  color: #004643;
+  color: #23363f;
 }
 #sub02Shop #wrap .content > ul.item li .caption-box strong {
   width: 100%;

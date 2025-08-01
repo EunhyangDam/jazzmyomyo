@@ -1,0 +1,319 @@
+#Section7Component {
+  width: 100%;
+}
+#Section7Component #section7 {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  background-color: #ffffff;
+  height: auto;
+}
+#Section7Component #section7 .container {
+  width: 100%;
+  height: 100%;
+}
+#Section7Component #section7 .container .title {
+  width: 100%;
+  height: auto;
+  padding: 30px 0;
+  display: flex;
+  align-items: center;
+}
+#Section7Component #section7 .container .title .line {
+  width: 100%;
+  height: 3px;
+  background-color: #23363f;
+}
+#Section7Component #section7 .container .title h2 {
+  font-size: 3rem;
+  font-family: "TTHakgyoansimMulgyeolB";
+  font-weight: 700;
+  color: #23363f;
+  padding: 0 20px;
+}
+#Section7Component #section7 .container .content {
+  width: 100%;
+  max-width: 1750px;
+  margin: 0 auto;
+  padding: 2%;
+  display: flex;
+  flex-flow: row wrap;
+}
+#Section7Component #section7 .container .content .left {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+#Section7Component #section7 .container .content .left .best {
+  width: 100%;
+  padding: 2.5%;
+  position: relative;
+}
+#Section7Component #section7 .container .content .left .best .myo {
+  position: absolute;
+  top: -7%;
+  left: 20%;
+  z-index: 1;
+}
+#Section7Component #section7 .container .content .left .best .myo img {
+  transform: rotate(12deg);
+}
+#Section7Component #section7 .container .content .left .best .pick {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+#Section7Component #section7 .container .content .left .best .pick .gap {
+  width: auto;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+#Section7Component #section7 .container .content .left .best .pick .gap > a {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: block;
+  transition: all 0.5s;
+}
+#Section7Component #section7 .container .content .left .best .pick .gap > a img {
+  border-radius: 13px;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: all 0.5s;
+  position: relative;
+}
+#Section7Component #section7 .container .content .left .best .pick .gap > a:hover img {
+  transform: translateY(65px);
+}
+#Section7Component #section7 .container .content .left .best .pick .gap .wish-list {
+  opacity: 0;
+  position: absolute;
+  right: 3%;
+  top: 15%;
+  z-index: 3;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+#Section7Component #section7 .container .content .left .best .pick .gap .wish-list > a {
+  border-radius: 50%;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#Section7Component #section7 .container .content .left .best .pick .gap .wish-list > a i {
+  color: #5d3136;
+  font-size: 18px;
+  transition: all 0.5s;
+}
+#Section7Component #section7 .container .content .left .best .pick .gap .wish-list > a:hover {
+  background-color: #5d3136;
+}
+#Section7Component #section7 .container .content .left .best .pick .gap .wish-list > a:hover i {
+  color: #ffffff;
+}
+#Section7Component #section7 .container .content .left .best .pick .gap:hover .wish-list {
+  opacity: 1;
+  transform: translateX(-90px);
+}
+#Section7Component #section7 .container .content .left .best .pick .caption-box {
+  position: relative;
+  z-index: 1;
+  padding-top: 70px;
+  text-align: center;
+}
+#Section7Component #section7 .container .content .left .best .pick .caption-box h3 {
+  font-size: 1.8rem;
+  background-color: #3a7773;
+  display: inline-block;
+  padding: 8px 30px;
+  border-radius: 20px;
+  color: #fff;
+}
+#Section7Component #section7 .container .content .left .best .pick .caption-box a {
+  font-size: 1.8rem;
+  width: 100%;
+  display: block;
+  padding: 20px 0;
+  text-transform: capitalize;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  line-height: 160%;
+}
+#Section7Component #section7 .container .content .left .best .pick .caption-box a:hover {
+  color: #23363f;
+}
+#Section7Component #section7 .container .content .left .best .pick .caption-box s {
+  width: 100%;
+  color: #565050;
+  letter-spacing: 1.6px;
+  font-size: 1.5rem;
+  line-height: 160%;
+}
+#Section7Component #section7 .container .content .left .best .pick .caption-box em {
+  width: 100%;
+  color: #565050;
+  letter-spacing: 1.6px;
+  font-size: 1.5rem;
+  line-height: 160%;
+  color: #3a7773;
+  font-weight: 600;
+}
+#Section7Component #section7 .container .content .right {
+  width: 50%;
+  height: 100%;
+}
+#Section7Component #section7 .container .content .right ul {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+#Section7Component #section7 .container .content .right ul li {
+  width: 50%;
+  height: 50%;
+  padding: 25px;
+}
+#Section7Component #section7 .container .content .right ul li .gap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  overflow: hidden;
+}
+#Section7Component #section7 .container .content .right ul li .gap a {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+#Section7Component #section7 .container .content .right ul li .gap a img {
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 13px;
+  border: 1px solid #c6bdbd;
+}
+#Section7Component #section7 .container .content .right ul li .gap .wish-list {
+  position: absolute;
+  top: 40px;
+  right: -40px;
+  z-index: 3;
+  background: none;
+  border-radius: 50%;
+  width: 30px;
+  transition: all 0.3s;
+}
+#Section7Component #section7 .container .content .right ul li .gap .wish-list a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+#Section7Component #section7 .container .content .right ul li .gap .wish-list a i {
+  padding: 5px;
+  color: #5d3136;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+#Section7Component #section7 .container .content .right ul li .gap .wish-list:hover {
+  background-color: #5d3136;
+}
+#Section7Component #section7 .container .content .right ul li .gap .wish-list:hover a i {
+  color: #fff;
+}
+#Section7Component #section7 .container .content .right ul li .gap:hover .wish-list {
+  transform: translateX(-80px);
+}
+#Section7Component #section7 .container .content .right ul li .caption-box {
+  text-align: center;
+}
+#Section7Component #section7 .container .content .right ul li .caption-box a {
+  font-size: 1.8rem;
+  width: 100%;
+  display: block;
+  padding-bottom: 10px;
+  text-transform: capitalize;
+  letter-spacing: 1.6px;
+  line-height: 160%;
+}
+#Section7Component #section7 .container .content .right ul li .caption-box a:hover {
+  color: #23363f;
+}
+#Section7Component #section7 .container .content .right ul li .caption-box strong {
+  width: 100%;
+  color: #565050;
+  letter-spacing: 1.6px;
+  font-size: 1.5rem;
+}
+@media all and (max-width: 1400px) {
+  #Section7Component #section7 .container .content .left .best .myo {
+    display: none;
+  }
+  #Section7Component #section7 .container .content .left .best .pick .gap .wish-list {
+    right: 2%;
+  }
+  #Section7Component #section7 .container .content .left .best .pick .caption-box {
+    padding-top: 20px;
+  }
+  #Section7Component #section7 .container .content .left .best .pick .caption-box h3 {
+    font-size: 1.5rem;
+  }
+  #Section7Component #section7 .container .content .left .best .pick .caption-box a {
+    font-size: 1.5rem;
+  }
+  #Section7Component #section7 .container .content .left .best .pick .caption-box s {
+    font-size: 1.3rem;
+  }
+  #Section7Component #section7 .container .content .left .best .pick .caption-box em {
+    font-size: 1.3rem;
+  }
+  #Section7Component #section7 .container .content .right ul li .caption-box a {
+    font-size: 1.5rem;
+  }
+  #Section7Component #section7 .container .content .right ul li .caption-box strong {
+    font-size: 1.3rem;
+  }
+}
+@media all and (max-width: 1170px) {
+  #Section7Component #section7 .container .content .left {
+    width: 100%;
+  }
+  #Section7Component #section7 .container .content .left .best .pick .gap > a {
+    width: 100%;
+    max-width: 100%;
+  }
+  #Section7Component #section7 .container .content .right {
+    width: 100%;
+  }
+}
+@media all and (max-width: 600px) {
+  #Section7Component #section7 .container .title {
+    padding: 15px 0;
+  }
+  #Section7Component #section7 .container .title .title-container h2 {
+    font-size: 1.3rem;
+  }
+  #Section7Component #section7 .container .content .left {
+    width: 100%;
+  }
+  #Section7Component #section7 .container .content .right {
+    width: 100%;
+  }
+  #Section7Component #section7 .container .content .right ul li {
+    width: 100%;
+  }
+}

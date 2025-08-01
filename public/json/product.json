@@ -12,7 +12,10 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/mugcup_01.png"]
+      "이미지": ["./img/md/mugcup_01.png"],
+      "신상품":true,
+      "품절":false
+
     },
     {
       "idx": "02",
@@ -26,7 +29,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/coster_01.png"]
+      "이미지": ["./img/md/coster_01.png"],
+      "신상품":true,
+      "품절":false
     },
     {
       "idx": "03",
@@ -44,7 +49,9 @@
         "./img/md/keyring_01_1.png",
         "./img/md/keyring_01_2.png",
         "./img/md/keyring_01_3.png"
-      ]
+      ],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "04",
@@ -58,7 +65,9 @@
       "옵션여부": true,
       "옵션": ["전신 묘묘", "앉은 묘묘"],
       "수량": 1,
-      "이미지": ["./img/md/doll_01_1.png", "./img/md/doll_01_2.png"]
+      "이미지": ["./img/md/doll_01_1.png", "./img/md/doll_01_2.png"],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "05",
@@ -72,7 +81,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/pouch_01.png"]
+      "이미지": ["./img/md/pouch_01.png"],
+      "신상품":false,
+      "품절":true
     },
     {
       "idx": "06",
@@ -86,7 +97,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/lighter_01.png"]
+      "이미지": ["./img/md/lighter_01.png"],
+      "신상품":true,
+      "품절":false
     },
     {
       "idx": "07",
@@ -103,7 +116,9 @@
       "이미지": [
         "./img/md/ballcap_01_black.png",
         "./img/md/ballcap_01_wine.png"
-      ]
+      ],
+      "신상품":true,
+      "품절":false
     },
     {
       "idx": "08",
@@ -117,7 +132,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/beanie_01.png"]
+      "이미지": ["./img/md/beanie_01.png"],
+      "신상품":false,
+      "품절":true
     },
     {
       "idx": "09",
@@ -134,7 +151,9 @@
       "이미지": [
         "./img/md/cd/colde_love2_1.png",
         "./img/md/cd/colde_love2_2.png"
-      ]
+      ],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "10",
@@ -148,7 +167,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/cd/swja_stand_1.png", "./img/md/cd/swja_stand_2.png"]
+      "이미지": ["./img/md/cd/swja_stand_1.png", "./img/md/cd/swja_stand_2.png"],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "11",
@@ -162,7 +183,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/cd/ksj_top_1.png", "./img/md/cd/ksj_top_2.png"]
+      "이미지": ["./img/md/cd/ksj_top_1.png", "./img/md/cd/ksj_top_2.png"],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "12",
@@ -176,7 +199,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/cd/JKC_2nd_1.png", "./img/md/cd/JKC_2nd_2.png"]
+      "이미지": ["./img/md/cd/JKC_2nd_1.png", "./img/md/cd/JKC_2nd_2.png"],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "13",
@@ -190,7 +215,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/cd/JKC_1st_1.png", "./img/md/cd/JKC_1st_2.png"]
+      "이미지": ["./img/md/cd/JKC_1st_1.png", "./img/md/cd/JKC_1st_2.png"],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "14",
@@ -204,7 +231,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/cd/JKC_garden1.png", "./img/md/cd/JKC_garden2.png"]
+      "이미지": ["./img/md/cd/JKC_garden1.png", "./img/md/cd/JKC_garden2.png"],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "15",
@@ -218,7 +247,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/cd/JKC_fs_1.png", "./img/md/cd/JKC_fs_2.png"]
+      "이미지": ["./img/md/cd/JKC_fs_1.png", "./img/md/cd/JKC_fs_2.png"],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "16",
@@ -232,7 +263,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/lp/cbh_1.png", "./img/md/lp/cbh_2.png"]
+      "이미지": ["./img/md/lp/cbh_1.png", "./img/md/lp/cbh_2.png"],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "17",
@@ -246,7 +279,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/lp/george_FRR_1.png", "./img/md/lp/george_FRR_2.png"]
+      "이미지": ["./img/md/lp/george_FRR_1.png", "./img/md/lp/george_FRR_2.png"],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "18",
@@ -263,7 +298,9 @@
       "이미지": [
         "./img/md/lp/george_cassette_1.png",
         "./img/md/lp/george_cassette_2.png"
-      ]
+      ],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "19",
@@ -277,7 +314,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/lp/lauv_a4n_1.png", "./img/md/lp/lauv_a4n_2.png"]
+      "이미지": ["./img/md/lp/lauv_a4n_1.png", "./img/md/lp/lauv_a4n_2.png"],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "20",
@@ -291,7 +330,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/lp/lauv_hif_1.png", "./img/md/lp/lauv_hif_2.png"]
+      "이미지": ["./img/md/lp/lauv_hif_1.png", "./img/md/lp/lauv_hif_2.png"],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "21",
@@ -305,7 +346,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/lp/lauv_18_1.png", "./img/md/lp/lauv_18_2.png"]
+      "이미지": ["./img/md/lp/lauv_18_1.png", "./img/md/lp/lauv_18_2.png"],
+      "신상품":false,
+      "품절":true
     },
     {
       "idx": "22",
@@ -319,7 +362,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/lp/john_mayer_1.png", "./img/md/lp/john_mayer_2.png"]
+      "이미지": ["./img/md/lp/john_mayer_1.png", "./img/md/lp/john_mayer_2.png"],
+      "신상품":false,
+      "품절":true
     },
     {
       "idx": "23",
@@ -336,7 +381,9 @@
       "이미지": [
         "./img/md/lp/carpenters_close_to_you_1.png",
         "./img/md/lp/carpenters_close_to_you_2.png"
-      ]
+      ],
+      "신상품":false,
+      "품절":true
     },
     {
       "idx": "24",
@@ -353,7 +400,9 @@
       "이미지": [
         "./img/md/lp/carpenters_the_singles_1.png",
         "./img/md/lp/carpenters_the_singles_2.png"
-      ]
+      ],
+      "신상품":false,
+      "품절":false
     },
     {
       "idx": "25",
@@ -367,7 +416,9 @@
       "옵션여부": false,
       "옵션": [],
       "수량": 1,
-      "이미지": ["./img/md/lp/coldplay_1.png", "./img/md/lp/coldplay_2.png"]
+      "이미지": ["./img/md/lp/coldplay_1.png", "./img/md/lp/coldplay_2.png"],
+      "신상품":false,
+      "품절":false
     }
   ]
 }

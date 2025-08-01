@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./scss/Section7Component.scss";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { wishAction } from "../../../store/wishlist";
 
 export default function Section7Component(props) {
@@ -9,7 +9,6 @@ export default function Section7Component(props) {
     product: [],
   });
   const dispatch = useDispatch();
-  const wishlist = useSelector((state) => state.wishlist.위시리스트);
   useEffect(() => {
     fetch("/json/product.json", { method: "GET" })
       .then((res) => res.json())
@@ -39,7 +38,7 @@ export default function Section7Component(props) {
         <div className="container">
           <div className="title">
             <div className="line"></div>
-            <Link to="/sub02Shop">
+            <Link to="/Shop">
               <h2>shop</h2>
             </Link>
             <div className="line"></div>
@@ -55,31 +54,21 @@ export default function Section7Component(props) {
                 </div>
                 <div className="pick">
                   <div className="gap">
-                    <Link to="./Sub02Merch03">
+                    <Link to="/ShopDetail">
                       <img
                         src={state.product[3].이미지[1]}
                         alt={state.product[3].상품명}
                       />
                     </Link>
                     <div className="wish-list">
-                      <Link
-                        to="/Wishlist"
-                        title="Wishlist"
-                        onClick={(e) => clickWishlist(e, state.product[3])}
-                      >
-                        {wishlist.some(
-                          (el) => el.id === state.product[3].id
-                        ) ? (
-                          <i className="bi bi-suit-heart-fill"></i>
-                        ) : (
-                          <i className="bi bi-suit-heart"></i>
-                        )}
+                      <Link to="/Wishlist" title="Wishlist">
+                        <i className="bi bi-suit-heart"></i>
                       </Link>
                     </div>
                   </div>
                   <div className="caption-box">
                     <h3>Best Seller</h3>
-                    <a href="!#">{state.product[3].상품명}</a>
+                    <Link to="/ShopDetail">{state.product[3].상품명}</Link>
                     <s>{state.product[3].가격.toLocaleString("ko-KR")}원</s>
                     <br />
                     <em>
@@ -97,22 +86,16 @@ export default function Section7Component(props) {
               <ul className="item">
                 <li className="item1">
                   <div className="gap">
-                    <a href="!#">
+                    <Link to="/ShopDetail">
                       <img src={state.product[23].이미지[0]} alt="카펜터스" />
-                    </a>
+                    </Link>
                     <div className="wish-list">
                       <a
                         href="!#"
                         title="Wishlist"
                         onClick={(e) => clickWishlist(e, state.product[23])}
                       >
-                        {wishlist.some(
-                          (el) => el.id === state.product[23].id
-                        ) ? (
-                          <i className="bi bi-suit-heart-fill"></i>
-                        ) : (
-                          <i className="bi bi-suit-heart"></i>
-                        )}
+                        <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
                   </div>
@@ -129,22 +112,16 @@ export default function Section7Component(props) {
                 </li>
                 <li className="item2">
                   <div className="gap">
-                    <a href="!#">
+                    <Link to="/ShopDetail">
                       <img src={state.product[12].이미지[0]} alt="잭킹콩" />
-                    </a>
+                    </Link>
                     <div className="wish-list">
                       <a
                         href="!#"
                         title="Wishlist"
                         onClick={(e) => clickWishlist(e, state.product[12])}
                       >
-                        {wishlist.some(
-                          (el) => el.id === state.product[12].id
-                        ) ? (
-                          <i className="bi bi-suit-heart-fill"></i>
-                        ) : (
-                          <i className="bi bi-suit-heart"></i>
-                        )}
+                        <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
                   </div>
@@ -161,22 +138,16 @@ export default function Section7Component(props) {
                 </li>
                 <li className="item3">
                   <div className="gap">
-                    <a href="!#">
+                    <Link to="/ShopDetail">
                       <img src={state.product[1].이미지[0]} alt="코스터" />
-                    </a>
+                    </Link>
                     <div className="wish-list">
                       <a
                         href="!#"
                         title="Wishlist"
                         onClick={(e) => clickWishlist(e, state.product[1])}
                       >
-                        {wishlist.some(
-                          (el) => el.id === state.product[1].id
-                        ) ? (
-                          <i className="bi bi-suit-heart-fill"></i>
-                        ) : (
-                          <i className="bi bi-suit-heart"></i>
-                        )}
+                        <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
                   </div>
@@ -189,22 +160,16 @@ export default function Section7Component(props) {
                 </li>
                 <li className="item4">
                   <div className="gap">
-                    <a href="!#">
+                    <Link to="/ShopDetail">
                       <img src={state.product[5].이미지[0]} alt="라이터" />
-                    </a>
+                    </Link>
                     <div className="wish-list">
                       <a
                         href="!#"
                         title="Wishlist"
                         onClick={(e) => clickWishlist(e, state.product[5])}
                       >
-                        {wishlist.some(
-                          (el) => el.id === state.product[5].id
-                        ) ? (
-                          <i className="bi bi-suit-heart-fill"></i>
-                        ) : (
-                          <i className="bi bi-suit-heart"></i>
-                        )}
+                        <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
                   </div>

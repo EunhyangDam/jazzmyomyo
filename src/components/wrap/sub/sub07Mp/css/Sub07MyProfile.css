@@ -1,0 +1,26 @@
+#sub07MyProfile {
+  width: 100%;
+  margin-top: 100px;
+  padding-bottom: 100px;
+  height: 100vh;
+}
+#sub07MyProfile .container {
+  width: 100%;
+  max-width: 1750px;
+  margin: 0 auto;
+}
+#sub07MyProfile .container .title {
+  padding: 100px 0 20px 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+#sub07MyProfile .container .title a {
+  display: block;
+}
+#sub07MyProfile .container .title a h2 {
+  font-size: 3rem;
+  font-family: "TTHakgyoansimMulgyeolB";
+  display: inline-block;
+}

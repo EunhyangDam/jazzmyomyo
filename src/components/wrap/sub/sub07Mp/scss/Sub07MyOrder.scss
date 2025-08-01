@@ -1,0 +1,212 @@
+@use "../../../../scss/variables" as *;
+
+#sub07MyOrder {
+  width: 100%;
+  margin-top: 100px;
+  padding-bottom: 100px;
+  user-select: none;
+  .container {
+    width: 100%;
+
+    .title {
+      width: 100%;
+      padding: 80px 0 40px 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      border-bottom: 1px solid #ccc;
+      background-color: #000;
+      color: #fff;
+      a {
+        display: block;
+        h2 {
+          font-size: $size3;
+          font-family: $font2;
+          display: inline-block;
+        }
+      }
+    }
+    .content {
+      width: 100%;
+      max-width: 1750px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 150px 0;
+
+      .head-box {
+        width: 100%;
+        max-width: 1140px;
+        margin: 0 auto;
+        height: 60px;
+        display: flex;
+        align-items: center;
+
+        ul.column-box {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+
+          li.col {
+            padding: 0 20px;
+
+            h3 {
+              font-size: 14px;
+              text-transform: capitalize;
+              font-weight: 500;
+              color: #232323;
+              height: 22px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            &.col1 {
+              width: 15%;
+            }
+            &.col2 {
+              width: 50%;
+            }
+            &.col3 {
+              width: 15%;
+            }
+            &.col4 {
+              width: 25%;
+            }
+          }
+        }
+      }
+      .list-box {
+        width: 100%;
+        max-width: 1140px;
+        margin: 0 auto;
+        border-top: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
+        > ul {
+          width: 100%;
+          > li {
+            width: 100%;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+
+            &:last-child {
+              border-bottom: 0;
+            }
+
+            ul.column-box {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+
+              li.col {
+                padding: 0 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &.col1 {
+                  width: 15%;
+                }
+                &.col2 {
+                  width: 50%;
+                }
+                &.col3 {
+                  width: 15%;
+                }
+                &.col4 {
+                  width: 25%;
+                }
+              }
+              a {
+                img {
+                  width: 84px;
+                }
+              }
+
+              h4 {
+                font-size: 14px;
+                text-transform: capitalize;
+                height: 22px;
+                display: flex;
+                align-items: center;
+                transition: all 0.3s;
+                a {
+                  color: #808080;
+                }
+                &:hover {
+                  color: rgb(245, 114, 80);
+                }
+              }
+
+              em {
+                font-size: 14px;
+                text-transform: capitalize;
+                color: #808080;
+                height: 22px;
+                display: flex;
+                align-items: center;
+                cursor: text;
+              }
+              strong {
+                padding: 6px 20px;
+                color: rgb(119, 164, 100);
+                border: 1px solid rgb(119, 164, 100);
+                font-weight: 500;
+                font-size: 12px;
+                cursor: text;
+              }
+              button {
+                width: 135px;
+                height: 30px;
+                background: #000;
+                color: #fff;
+                text-transform: uppercase;
+                border-radius: 3px;
+                font-size: 11px;
+                border: 2px solid #000;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s;
+
+                &:hover {
+                  background: #fff;
+                  color: #000;
+                }
+              }
+              a {
+                &.product-del-btn {
+                  i {
+                    font-size: 20px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .foot-box {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      padding-top: 30px;
+      button {
+        color: #232323;
+        font-size: 12px;
+        font-weight: 600;
+        background: 0;
+        border: 0;
+        cursor: pointer;
+        border-bottom: 2px solid #232323;
+        padding-bottom: 3px;
+        transition: all 0.3s;
+        &:hover {
+          color: rgb(245, 114, 80);
+          border-bottom: 2px solid rgb(245, 114, 80);
+        }
+      }
+    }
+  }
+}

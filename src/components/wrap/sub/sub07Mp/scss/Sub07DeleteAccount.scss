@@ -1,0 +1,42 @@
+@use "../../../../scss/variables" as *;
+#sub07DeleteAccount {
+  width: 100%;
+  margin-top: 100px;
+  padding-bottom: 100px;
+  height: 100vh;
+  .container {
+    width: 100%;
+    max-width: 1750px;
+    margin: 0 auto;
+    .title {
+      padding: 100px 0 60px 20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      a {
+        display: block;
+        h2 {
+          font-size: $size3;
+          font-family: $font2;
+          display: inline-block;
+        }
+      }
+    }
+    .content {
+      width: 100%;
+      max-width: 1700px;
+      margin: 0 auto;
+      background-color: yellow;
+      .head {
+        h3 {
+          font-size: $size4;
+          background: $primary-color;
+          display: inline-block;
+          color: $white;
+          padding: 20px 50px;
+        }
+      }
+    }
+  }
+}

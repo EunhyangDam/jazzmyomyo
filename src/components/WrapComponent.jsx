@@ -7,9 +7,10 @@ import Sub01AboutUs from "./wrap/sub/sub01AboutUs/Sub01AboutUs";
 import Sub01Interior from "./wrap/sub/sub01AboutUs/Sub01Interior";
 import Sub01MyoMyo from "./wrap/sub/sub01AboutUs/Sub01MyoMyo";
 import Sub01Story from "./wrap/sub/sub01AboutUs/Sub01Story";
-import Sub02Disc from "./wrap/sub/sub02Shop/Sub02Disc";
-import Sub02Merch from "./wrap/sub/sub02Shop/Sub02Merch";
-import Sub02Merch01 from "./wrap/sub/sub02Shop/Sub02Merch01";
+// Sub02Disc, Sub02Merch => 삭제!!
+// import Sub02Disc from "./wrap/sub/sub02Shop/Sub02Disc";
+// import Sub02Merch from "./wrap/sub/sub02Shop/Sub02Merch";
+import Sub02ShopDetail from "./wrap/sub/sub02Shop/Sub02ShopDetail";
 import Sub02Shop from "./wrap/sub/sub02Shop/Sub02Shop";
 import Sub030Menu from "./wrap/sub/sub03Menu/Sub030Menu";
 import Sub031Wine from "./wrap/sub/sub03Menu/Sub031Wine";
@@ -42,17 +43,13 @@ import Sub083MmEdit from "./wrap/sub/sub08Mm/Sub083MmEdit";
 import Sub084MmGrade from "./wrap/sub/sub08Mm/Sub084MmGrade";
 import Sub09Cart from "./wrap/sub/sub09Cart/Sub09Cart";
 import Page404Component from "./wrap/Page404Component";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./scss/WrapComponent.scss";
 import Sub10Wishlist from "./wrap/sub/sub10Wishlist/Sub10Wishlist";
 import { useDispatch } from "react-redux";
 import { wishAction } from "../store/wishlist";
 export default function WrapComponent(props) {
   const dispatch = useDispatch();
-  const location = useLocation();
-  useEffect(() => {
-    if (location.pathname === "/mainComponent") alert("a");
-  }, [location]);
   useEffect(() => {
     let arr = [];
     if (localStorage.getItem("위시리스트") !== null) {
@@ -72,9 +69,11 @@ export default function WrapComponent(props) {
           <Route path="/Interior" element={<Sub01Interior />} />
           <Route path="/MyoMyo" element={<Sub01MyoMyo />} />
           <Route path="/Story" element={<Sub01Story />} />
+          {/* Sub02Disc, Sub02Merch => 삭제!!
           <Route path="/Disc" element={<Sub02Disc />} />
-          <Route path="/Merch" element={<Sub02Merch />} />
-          <Route path="/Merch01" element={<Sub02Merch01 />} />
+          <Route path="/Merch" element={<Sub02Merch />} />  */}
+          {/* 상세페이지컴포넌트이름수정 */}
+          <Route path="/ShopDetail" element={<Sub02ShopDetail />} />
           <Route path="/Shop" element={<Sub02Shop />} />
           <Route path="/Menu" element={<Sub030Menu />} />
           <Route path="/Wine" element={<Sub031Wine />} />

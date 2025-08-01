@@ -187,7 +187,7 @@ export default function Section8Component(props) {
         <div className="container">
           <div className="title">
             <div className="title-container">
-              <Link to="./sub05Rev">
+              <Link to="./Rev">
                 <h2>재즈 묘묘 후기</h2>
               </Link>
               <h3>memories</h3>
