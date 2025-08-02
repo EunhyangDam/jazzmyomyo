@@ -6,8 +6,9 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import wishlist from "./store/wishlist";
+import header from "./store/header";
 let store = configureStore({
-  reducer: { wishlist },
+  reducer: { wishlist, header },
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

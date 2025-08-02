@@ -1,8 +1,8 @@
 import { React, useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import "./scss/HeaderComponent.scss";
+import { useSelector } from "react-redux";
 export default function HeaderComponent(props) {
-  const [state, setState] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [scr, setScr] = useState(false);
   const [header, setHeader] = useState({
@@ -15,6 +15,8 @@ export default function HeaderComponent(props) {
       },
     ],
   });
+  const [active, setActive] = useState(false);
+  let isMain = useSelector((state) => state.header);
   useEffect(() => {
     fetch("./json/header/gnb.json", { method: "GET" })
       .then((result) => result.json())
@@ -30,11 +32,6 @@ export default function HeaderComponent(props) {
   }, []);
   const clickAddClass = (e) => {
     e.preventDefault();
-    setState(true);
-  };
-  const clickRemoveClass = (e) => {
-    e.preventDefault();
-    setState(false);
   };
   const toggleMenu = (e) => {
     e.preventDefault();
@@ -70,16 +67,19 @@ export default function HeaderComponent(props) {
     window.addEventListener("scroll", handleScr);
     return () => window.removeEventListener("scroll", handleScr);
   }, []);
+  useEffect(() => {
+    let act = isMain.isMain;
+    setActive(act);
+  }, [isMain.isMain]);
   return (
     <>
       <header
         id="header"
         className={
-          state ? "active" : "" || toggle ? "toggle" : "" || scr ? "down" : ""
-        }
-      >
+          active ? "active" : "" || toggle ? "toggle" : "" || scr ? "down" : ""
+        }>
         <div className="container">
-          <h1 onClick={clickRemoveClass}>
+          <h1>
             <Link to="/mainComponent">
               <img src="./img/logo.png" alt="" />
             </Link>
@@ -134,8 +134,7 @@ export default function HeaderComponent(props) {
               </li>
               <li
                 onClick={toggleMenu}
-                className={`toggle ${toggle ? "active" : ""}`}
-              >
+                className={`toggle ${toggle ? "active" : ""}`}>
                 <button>
                   <span></span>
                   <span></span>
@@ -162,8 +161,7 @@ export default function HeaderComponent(props) {
                 </li>
                 <li
                   onClick={toggleMenu}
-                  className={`toggle ${toggle ? "active" : ""}`}
-                >
+                  className={`toggle ${toggle ? "active" : ""}`}>
                   <button>
                     <span></span>
                     <span></span>
