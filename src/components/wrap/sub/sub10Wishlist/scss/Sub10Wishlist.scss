@@ -75,6 +75,7 @@
       ul.content {
         display: flex;
         gap: 30px;
+        flex-wrap: wrap;
         li {
           $col: 6;
           width: calc((100% - (30px * $col)) / $col);
@@ -125,6 +126,11 @@
             font-size: $size4;
           }
           @include box();
+          &.sold-out {
+            color: #999;
+            h4 {
+            }
+          }
         }
       }
       .empty {
@@ -198,7 +204,8 @@
       padding: 50px;
 
       ul li.col {
-        h3, p.content {
+        h3,
+        p.content {
           font-size: 16px;
         }
       }
@@ -230,7 +237,8 @@
       padding: 46px;
 
       ul li.col {
-        h3, p.content {
+        h3,
+        p.content {
           font-size: 15px;
         }
       }
@@ -262,7 +270,8 @@
       padding: 40px;
 
       ul li.col {
-        h3, p.content {
+        h3,
+        p.content {
           font-size: 14px;
         }
       }
@@ -306,11 +315,15 @@
           width: 100%;
           border-right: none;
 
-          &.col1, &.col2, &.col3, &.col4 {
+          &.col1,
+          &.col2,
+          &.col3,
+          &.col4 {
             padding-left: 0;
           }
 
-          h3, p.content {
+          h3,
+          p.content {
             font-size: 13px;
           }
         }
@@ -347,7 +360,8 @@
       padding: 30px;
 
       ul li.col {
-        h3, p.content {
+        h3,
+        p.content {
           font-size: 12px;
         }
       }

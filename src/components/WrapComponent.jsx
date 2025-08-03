@@ -53,6 +53,7 @@ import Sub10Wishlist from "./wrap/sub/sub10Wishlist/Sub10Wishlist";
 import { useDispatch } from "react-redux";
 import { wishAction } from "../store/wishlist";
 import { headerAction } from "../store/header";
+import { cartAction } from "../store/cart";
 export default function WrapComponent(props) {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -66,6 +67,14 @@ export default function WrapComponent(props) {
     dispatch(wishAction(arr));
   }, []);
 
+  /**장바구니 */
+  useEffect(() => {
+    let arr = [];
+    if (localStorage.getItem("장바구니") !== null) {
+      arr = JSON.parse(localStorage.getItem("장바구니"));
+    }
+    dispatch(cartAction(arr));
+  }, []);
   /**페이지 추적 */
   useEffect(() => {
     if (location.pathname === "/" || location.pathname === "/mainComponent") {

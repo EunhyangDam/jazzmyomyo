@@ -1,8 +1,79 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../scss/sub.scss";
 import "./scss/Sub09Cart.scss";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { cartAction } from "../../../../store/cart";
 function Sub09Cart(props) {
+  const cartAsset = useSelector((state) => state.cart.cart);
+  const dispatch = useDispatch();
+  const navigation = useNavigate();
+  const [state, setState] = useState({
+    product: [],
+    check: [],
+  });
+  useEffect(() => {
+    setState({
+      ...state,
+      product: cartAsset,
+    });
+  }, [cartAsset]);
+
+  /**전체 삭제*/
+  const clickClean = () => {
+    dispatch(cartAction([]));
+  };
+  /**선택 삭제 */
+  const clickSelectDel = (e) => {
+    e.preventDefault();
+    let arr = cartAsset.filter(
+      (el) => !state.check.map((el) => el.id).includes(el.id)
+    );
+    dispatch(cartAction(arr));
+  };
+  /**체크 이벤트*/
+  const changeChk = (e, data) => {
+    let arr = state.check;
+    if (e.target.checked) {
+      arr = [data, ...arr];
+    } else {
+      arr = state.check.filter((el) => el.id !== data.id);
+    }
+    setState({
+      ...state,
+      check: arr,
+    });
+  };
+  /**전체 선택 */
+  const changeAll = (e) => {
+    let arr = [];
+    if (e.target.checked) {
+      arr = cartAsset;
+    }
+    setState({
+      ...state,
+      check: arr,
+    });
+  };
+  /**이전으로 돌아가기 */
+  const clickPrev = (e) => {
+    e.preventDefault();
+    navigation(-1);
+  };
+  const clickMinus = (e, data) => {
+    e.preventDefault();
+    let change = cartAsset.map((el) =>
+      el.id === data.id ? { ...el, 수량: el.수량 - 1 } : { ...el }
+    );
+    dispatch(cartAction(change));
+  };
+  const clickPlus = (e, data) => {
+    e.preventDefault();
+    let change = cartAsset.map((el) =>
+      el.id === data.id ? { ...el, 수량: el.수량 + 1 } : { ...el }
+    );
+    dispatch(cartAction(change));
+  };
   return (
     <div id="sub09Cart" className="sub-page">
       <div className="inner">
@@ -11,7 +82,7 @@ function Sub09Cart(props) {
             <i className="bi bi-house-fill"></i>
           </Link>
           <i>&gt;</i>
-          <Link to="./Sub10Wishilist" className="now">
+          <Link to="/Cart" className="now">
             장바구니
           </Link>
         </div>
@@ -19,58 +90,79 @@ function Sub09Cart(props) {
           <dl>
             <dt>
               <div className="col col1">
-                <input type="checkbox" id="allChk" name="allChk" />
+                <input
+                  type="checkbox"
+                  id="allChk"
+                  name="allChk"
+                  onChange={changeAll}
+                  checked={
+                    cartAsset.length === state.check.length &&
+                    cartAsset.length > 0
+                  }
+                />
               </div>
               <div className="col col2">상품정보</div>
               <div className="col col3">수량</div>
               <div className="col col4">배송구분</div>
               <div className="col col5">주문금액</div>
             </dt>
-            <dd>
-              <div className="col col1">
-                <input type="checkbox" id="allChk" name="allChk" />
-              </div>
-              <div className="col col2">
-                <div className="img-container">
-                  <img src="" alt="" />
+            {cartAsset.map((el, idx) => (
+              <dd className={el.품절 && "sold-out"} key={el.id}>
+                <div className="col col1">
+                  <input
+                    type="checkbox"
+                    id={`check${idx + 1}`}
+                    name={`check${idx + 1}`}
+                    onChange={(e) => changeChk(e, el)}
+                    checked={state.check.map((el) => el.id).includes(el.id)}
+                  />
                 </div>
-                <div className="txt-container">
-                  <h3>상품명</h3>
-                  <div className="bottom">
-                    <div className="box">
-                      <span className="new">신상품</span>
-                      <span className="sold-out">품절</span>
+                <div className="col col2">
+                  <div className="img-container">
+                    <img src={el.이미지[0]} alt="" />
+                  </div>
+                  <div className="txt-container">
+                    <h3>{el.상품명}</h3>
+                    <div className="bottom">
+                      <div className="box">
+                        {el.신상품 && <span className="new">신상품</span>}
+                        {el.품절 && <span className="sold-out">품절</span>}
+                      </div>
+                      <p>{el.옵션.length > 0 && "옵션:"}</p>
                     </div>
-                    <p>옵션:</p>
                   </div>
                 </div>
-              </div>
-              <div className="col col3">
-                <div className="container">
-                  <button>-</button>
-                  <input
-                    type="number"
-                    name="inputNumber"
-                    id="inputNumber"
-                    value={1}
-                  />
-                  <button className="active">+</button>
+                <div className="col col3">
+                  <div className="container">
+                    <button onClick={(e) => clickMinus(e, el)}>-</button>
+                    <input
+                      type="number"
+                      name="inputNumber"
+                      id="inputNumber"
+                      value={el.수량}
+                    />
+                    <button
+                      className="active"
+                      onClick={(e) => clickPlus(e, el)}>
+                      +
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="col col4">기본배송</div>
-              <div className="col col5">
-                <span>32,000</span>원
-              </div>
-            </dd>
+                <div className="col col4">기본배송</div>
+                <div className="col col5">
+                  <span>{(el.가격 * el.수량).toLocaleString("ko-kr")}</span>원
+                </div>
+              </dd>
+            ))}
           </dl>
           <div className="btn-box">
-            <button>선택 상품 삭제</button>
-            <button>전체 삭제</button>
+            <button onClick={clickSelectDel}>선택 상품 삭제</button>
+            <button onClick={clickClean}>전체 삭제</button>
           </div>
         </div>
         <div className="foot">
           <div className="container">
-            <button>이전화면</button>
+            <button onClick={clickPrev}>이전화면</button>
             <button>선택 상품 주문하기</button>
           </div>
         </div>

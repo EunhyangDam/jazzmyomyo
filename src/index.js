@@ -7,8 +7,9 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import wishlist from "./store/wishlist";
 import header from "./store/header";
+import cart from "./store/cart";
 let store = configureStore({
-  reducer: { wishlist, header },
+  reducer: { wishlist, header, cart },
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

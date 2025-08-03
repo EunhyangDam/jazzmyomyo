@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "../scss/sub.scss";
 import "./scss/Sub10Wishlist.scss";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { wishAction } from "../../../../store/wishlist";
+import { cartAction } from "../../../../store/cart";
 export default function Sub10Wishilist(props) {
   const dispatch = useDispatch();
+  const navigation = useNavigate();
   const list = useSelector((state) => state.wishlist);
+  const cart = useSelector((state) => state.cart.cart);
   const [state, setState] = useState({
     위시리스트: [],
   });
@@ -24,6 +27,14 @@ export default function Sub10Wishilist(props) {
     });
     dispatch(wishAction(del));
   };
+  const clickCart = (e, data) => {
+    e.preventDefault();
+    let arr = [];
+    arr = [data, ...cart];
+    if (cart.some((el) => el.id === data.id)) return;
+    dispatch(cartAction(arr));
+    // navigation("/ShopDetail", { state: data });
+  };
   return (
     <div id="sub10Wishilist" className="sub-page">
       <div className="inner">
@@ -34,7 +45,7 @@ export default function Sub10Wishilist(props) {
           <i>&gt;</i>
           <Link to="./">마이페이지</Link>
           <i>&gt;</i>
-          <Link to="./Sub10Wishilist" className="now">
+          <Link to="/Wishilist" className="now">
             찜리스트
           </Link>
         </div>
@@ -68,24 +79,31 @@ export default function Sub10Wishilist(props) {
           {state.위시리스트.length >= 1 ? (
             <ul className="content">
               {state.위시리스트.map((el) => (
-                <li key={el.id} data-key={el.id}>
+                <li
+                  key={el.id}
+                  data-key={el.id}
+                  className={el.품절 && "sold-out"}>
                   <div className="img-container">
-                    <Link to="/">
+                    <a href="!#" onClick={(e) => clickCart(e, el)}>
                       <img src={el.이미지[0]} alt={el.설명} />
-                    </Link>
+                    </a>
                     <div className="x-box">
                       <button onClick={(e) => clickWishDel(e, el)}>
                         <i className="bi bi-x"></i>
                       </button>
                     </div>
                   </div>
-                  <h4>{el.상품명}</h4>
+                  <h4>
+                    <a href="!#" onClick={(e) => clickCart(e, el)}>
+                      {el.상품명}
+                    </a>
+                  </h4>
                   <p className="price">
                     <span>{el.가격.toLocaleString("ko-kr")}</span>원
                   </p>
                   <div className="box">
-                    <span className="new">신상품</span>
-                    <span className="sold-out">품절</span>
+                    {el.신상품 && <span className="new">신상품</span>}
+                    {el.품절 && <span className="sold-out">품절</span>}
                   </div>
                 </li>
               ))}

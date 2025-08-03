@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./scss/Sub02Shop.scss";
 import { Link, useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { wishAction } from "../../../../store/wishlist";
 
 function Sub02Shop(props) {
+  const dispatch = useDispatch();
   const [state, setState] = useState({
     product: [],
   });
@@ -44,7 +47,16 @@ function Sub02Shop(props) {
         console.log(err);
       });
   }, []);
-
+  const clickWish = (e, data) => {
+    e.preventDefault();
+    let arr = [];
+    if (localStorage.getItem("위시리스트") !== null) {
+      arr = JSON.parse(localStorage.getItem("위시리스트"));
+    }
+    if (arr.some((el) => el.id === data.id)) return;
+    arr = [data, ...arr];
+    dispatch(wishAction(arr));
+  };
   if (!state.product || state.product.length < 24) return <div>Loading…</div>;
   return (
     <div id="sub02Shop">
@@ -76,8 +88,7 @@ function Sub02Shop(props) {
               <li
                 className={`item${idx + 1}`}
                 key={item.상품명}
-                data-key={item.상품명}
-              >
+                data-key={item.상품명}>
                 <div className="gap">
                   <Link to={`/ShopDetail`}>
                     <img
@@ -88,7 +99,10 @@ function Sub02Shop(props) {
                     />
                   </Link>
                   <div className="wish-list">
-                    <a href="!#" title="Wishlist">
+                    <a
+                      href="!#"
+                      title="Wishlist"
+                      onClick={(e) => clickWish(e, item)}>
                       <i className="bi bi-suit-heart"></i>
                     </a>
                   </div>
