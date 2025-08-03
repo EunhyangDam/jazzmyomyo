@@ -82,6 +82,7 @@
         padding: 40px;
         flex-direction: column;
         text-align: center;
+        width: 100%;
 
         h3 {
           font-size: 40px;
@@ -123,25 +124,190 @@
     }
   }
 
-  @media (max-width: 1024px) {
+  @media all and (max-width: 1024px) {
     .wine-title {
-      font-size: 36px;
+      font-size: 150px;
     }
-    .wine-item {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      height: auto;
-
-      .wine-text {
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      .wine-image img {
+    .wine-list {
+      .wine-item {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
         height: auto;
-        max-height: 400px;
+        padding: 40px 20px;
+        gap: 40px;
+
+        .wine-image {
+          order: 1;
+          img {
+            height: auto;
+            max-height: 400px;
+          }
+        }
+
+        .wine-text {
+          order: 2;
+          padding: 30px 20px;
+          max-width: 500px;
+          margin: 0 auto;
+          width: 100%;
+        }
       }
     }
   }
+  @media all and (max-width: 800px) {
+    .wine-list {
+      .wine-item {
+        padding: 35px 18px;
+        gap: 35px;
+
+        .wine-text {
+          max-width: 480px;
+          h3 {
+            font-size: 28px;
+          }
+          .desc {
+            font-size: 18px;
+          }
+          .food {
+            font-size: 15px;
+          }
+          .price {
+            font-size: 16px;
+          }
+        }
+
+        .wine-image {
+          img {
+            max-height: 280px;
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 600px) {
+    .wine-title {
+      font-size: 120px;
+    }
+    .wine-list {
+      .wine-item {
+        padding: 25px 14px;
+        gap: 30px;
+
+        .wine-text {
+          max-width: 100%;
+          h3 {
+            font-size: 24px;
+          }
+          .desc {
+            font-size: 16px;
+          }
+          .food {
+            font-size: 14px;
+          }
+          .price {
+            font-size: 15px;
+          }
+        }
+
+        .wine-image {
+          img {
+            max-height: 230px;
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 480px) {
+    .wine-title {
+      font-size: 100px;
+    }
+    .wine-event {
+      font-size: 15px;
+    }
+    .wine-tabs {
+      gap: 10px;
+      align-items: center;
+
+      button {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
+    }
+
+    .wine-list {
+      .wine-item {
+        padding: 24px 10px;
+        gap: 25px;
+
+        .wine-text {
+          max-width: 100%;
+          h3 {
+            font-size: 22px;
+          }
+          .desc {
+            font-size: 15px;
+          }
+          .food {
+            font-size: 13px;
+          }
+          .price {
+            font-size: 14px;
+          }
+        }
+
+        .wine-image {
+          img {
+            max-height: 200px;
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 380px) {
+    .wine-title {
+      font-size: 80px;
+    }
+    .wine-event {
+      font-size: 12px;
+    }
+    .wine-tabs {
+      gap: 10px;
+
+      button {
+        font-size: 13px;
+        padding: 6px 14px;
+      }
+    }
+
+    .wine-list {
+      .wine-item {
+        padding: 20px 8px;
+        gap: 20px;
+
+        .wine-text {
+          max-width: 100%;
+          h3 {
+            font-size: 20px;
+          }
+          .desc {
+            font-size: 14px;
+          }
+          .food {
+            font-size: 12px;
+          }
+          .price {
+            font-size: 13px;
+          }
+        }
+
+        .wine-image {
+          img {
+            max-height: 160px;
+          }
+        }
+      }
+    }
+  }
+  
 }

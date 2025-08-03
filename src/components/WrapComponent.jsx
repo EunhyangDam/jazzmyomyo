@@ -18,6 +18,10 @@ import Sub032Drinks from "./wrap/sub/sub03Menu/Sub032Drinks";
 import Sub033Food from "./wrap/sub/sub03Menu/Sub033Food";
 import Sub034Set from "./wrap/sub/sub03Menu/Sub034Set";
 import Sub035Pre from "./wrap/sub/sub03Menu/Sub035Pre";
+import Sub035PreView from "./wrap/sub/sub03Menu/Sub035PreView";
+import Sub035PreWrite from "./wrap/sub/sub03Menu/Sub035PreWrite";
+import Sub035PreEdit from "./wrap/sub/sub03Menu/Sub035PreEdit";
+
 import Sub04AboutLive from "./wrap/sub/sub04Schedule/Sub04AboutLive";
 import Sub04Artist from "./wrap/sub/sub04Schedule/Sub04Artist";
 import Sub04BuyTicket from "./wrap/sub/sub04Schedule/Sub04BuyTicket ";
@@ -94,6 +98,9 @@ export default function WrapComponent(props) {
           <Route path="/Food" element={<Sub033Food />} />
           <Route path="/Set" element={<Sub034Set />} />
           <Route path="/Pre" element={<Sub035Pre />} />
+          <Route path="/PreV/view/:id" element={<Sub035PreView />} />
+          <Route path="/PreW" element={<Sub035PreWrite />} />
+          <Route path="/PreE/edit/:id" element={<Sub035PreEdit />} />
           <Route path="/AboutLive" element={<Sub04AboutLive />} />
           <Route path="/Artist" element={<Sub04Artist />} />
           <Route path="/BuyTicket" element={<Sub04BuyTicket />} />

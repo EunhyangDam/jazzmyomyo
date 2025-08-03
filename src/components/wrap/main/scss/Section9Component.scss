@@ -1,3 +1,5 @@
+@use "../../../scss/variables" as *;
+
 #section9 {
   width: 100%;
   overflow: hidden;
@@ -65,7 +67,7 @@
       .text-box {
         margin-bottom: 30px;
         text-align: center;
-        font-size: 40px;
+        font-size: 30px;
         font-weight: bold;
         line-height: 1.5;
         text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -77,6 +79,7 @@
         }
         .link-buttons {
           text-align: center;
+          padding-top: 15px;
         
           ul {
             display: inline-flex;
@@ -92,7 +95,7 @@
                 display: inline-block;
                 padding: 12px 24px;
                 
-                border: 2px solid var(--sub-color4);
+                border: 2px solid $sub-color4;
                 border-radius: 50px;
 
                 text-decoration: none;
@@ -106,7 +109,7 @@
                 background-color: transparent;
         
                 &:hover {
-                  background-color: var(--sub-color4);
+                  background-color: $sub-color4;
                   color: #000;
                 }
               }
@@ -138,7 +141,7 @@
             transform: translateY(-50%);   
 
             width: 100%;
-            height: 85%;
+            height: 80%;
             object-fit: cover;
             opacity: 0;
             z-index: 0;
@@ -154,12 +157,13 @@
         .text-box {
           width: 30%;
           height: 300px;
+          font-family: $font3;
 
           h2 {
-            font-size: 50px;
+            font-size: 45px;
             margin-bottom: 16px;
             font-weight: 600;
-            color: var(--sub-color4);
+            color: $sub-color4;
           }
 
           p {
@@ -169,10 +173,11 @@
 
           .chapter-label {
             display: inline-block;
-            font-size: 80px;
-            color: var(--sub-color4);
+            font-size: 89px;
+            color: $sub-color4;
             font-weight: bold;
             font-style: italic;
+            font-family: $font1;
           }
         }
       }
@@ -223,6 +228,35 @@
         }
   
       }
+  }
+  @media all and (max-width: 1460px) {
+    .slide .content-box {
+      .text-box {
+        width: 38% !important; // 기존 30%에서 살짝 늘려도 되지만, 내용 줄이면 좋음
+  
+        .chapter-label {
+          font-size: 60px !important;
+        }
+  
+        h2 {
+          font-size: 32px !important;
+        }
+  
+        p,
+        ul {
+          font-size: 20px !important;
+          line-height: 1.5;
+        }
+      }
+  
+      .img-box {
+        width: 60% !important; // 여유 확보
+        .slide-img {
+          height: auto;
+          object-fit: contain;
+        }
+      }
+    }
   }
   @media all and (max-width: 1060px) {
     .slide .content-box {
@@ -275,6 +309,17 @@
       }
     }
   }
+  @media all and (max-width: 800px) {
+
+    .container {
+            .text-box {
+              ul {
+              font-size:25px;
+              }
+            }
+          }
+      
+  }
   @media all and (max-width: 700px) {
     .slide .content-box {
       flex-direction: column!important;
@@ -322,10 +367,13 @@
 
 
   }
-  @media all and (max-width: 560px) {
+  @media all and (max-width: 600px) {
 
     .container {
       .text-box {
+        ul {
+          font-size: 18px;
+          }
 
         .link-buttons {
           ul {
@@ -356,7 +404,7 @@
     .container {
             .text-box {
               ul {
-              font-size: 24px;
+              font-size: 18px;
               }
             }
           }
@@ -374,7 +422,7 @@
     .container {
             .text-box {
               ul {
-              font-size: 18px;
+              font-size: 15px;
               }
               .link-buttons {
                 ul {
@@ -419,9 +467,10 @@
     .container {
       .text-box {
         ul {
-        font-size: 16px;
+        font-size: 13px;
         }
         .link-buttons {
+          padding-top: 5px !important;
           ul {
             justify-content: center!important; 
             gap: 10px!important;
@@ -445,4 +494,6 @@
       }
     }
   }
+
+
 }

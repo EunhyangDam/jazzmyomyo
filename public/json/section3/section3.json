@@ -6,11 +6,20 @@
       "title": "가리온 X 재즈묘묘 : 모두의 마이크",
       "date": "2025년 07월 25일",
       "posterImg": "./img/poster1.png",
-      "artistImg": "",
-      "description": "가리온(Garion)은 1998년 결성된 대한민국 언더그라운드 힙합의 선구적 그룹으로<br />한국어 랩만을 사용한 독자적 스타일로 힙합 씬을 이끌어 왔습니다.<br />제1집 &lt;Garion&gt;(2004)은 말 그대로 힙합 마니아들을 중심으로 ‘역사적인 명반’이라 평가되었습니다.<br /><br />가리온의 음악은 다소 무겁고 철학적인 가사로<br />일상, 사회, 삶, 흑백 감성을 아우르는 태도로 구성되어 있어<br />무게감 있는 메시지 그리고 한국적 리듬 감성을 담은 비트로 한국 힙합의 고집과 정통성을 보여줍니다.",
+      "artistImg": "./img/section03_Artist_Modal/modalposter1.webp",
+      "description": "가리온(Garion)은 1998년 결성된 대한민국 언더그라운드 힙합의 선구적 그룹으로<br />한국어 랩만을 사용한 독자적 스타일로 힙합 씬을 이끌어 왔습니다.<br />제1집 &lt;Garion&gt;(2004)은 말 그대로 힙합 마니아들을 중심으로<br />‘역사적인 명반’이라 평가되었습니다.<br /><br />가리온의 음악은 다소 무겁고 철학적인 가사로<br />일상, 사회, 삶, 흑백 감성을 아우르는 태도로 구성되어 있어<br />무게감 있는 메시지 그리고 한국적 리듬 감성을 담은 비트로<br />한국 힙합의 고집과 정통성을 보여줍니다.",
       "instruments": ["Vocal", "Drums", "Piano"],
       "genre": "Korean Hip‑hop",
-      "members": [""]
+      "members": [
+        {
+          "name": "MC Meta",
+          "img": "./img/section03_Artist_Modal/modalposter1_1.webp"
+        },
+        {
+          "name": "Naachal",
+          "img": "./img/section03_Artist_Modal/modalposter1_2.webp"
+        }
+      ]
     },
     {
       "id": 2,
@@ -18,11 +27,16 @@
       "title": "천진우 단독콘서트 : 오싹 오싹 공포의 인간쓰레기",
       "date": "2025년 08월 17일",
       "posterImg": "./img/poster2.jpg",
-      "artistImg": "",
+      "artistImg": "./img/section03_Artist_Modal/modalposter2.webp",
       "description": "천진우는 중학교 교사로 활동하며 동시에 음악을 하는 감성 인디 싱어송라이터입니다.<br />2022년 EP &lt;굴다리&gt;로 정식 데뷔한 이후<br />블랙 코미디 같은 유머와 섬세한 서정성이 공존하는 가사와 음색으로 주목받고 있습니다.<br /><br />천진우의 음악은 밝지만 깊은 울림을 주는 멜로디,<br />때로는 씁쓸하면서도 위로를 건네는 가사,<br />마치 블랙 코미디처럼 웃기지만 우습지는 않은<br />따뜻하면서도 씁쓸한 이야기를 멜로디에 담고 있습니다.",
       "instruments": ["Vocal", "Guitar", "Piano"],
       "genre": "Indie, Acoustic",
-      "members": [""]
+      "members": [
+        {
+          "name": "천진우",
+          "img": "./img/section03_Artist_Modal/modalposter2_1.webp"
+        }
+      ]
     },
     {
       "id": 3,
@@ -30,11 +44,20 @@
       "title": "FRIDAY Ahn Dayoung & Marrakech",
       "date": "2025년 08월 15일",
       "posterImg": "./img/poster3.jpg",
-      "artistImg": "",
-      "description": "FRIDAY Ahn Dayoung & Marrakech는 싱어송라이터 안다영과 밴드 Marrakech가 함께 만드는<br />예술적이고 로맨틱한 협업 프로젝트입니다.<br />이들은 각자의 음악 세계를 유지하면서도 무대 위에서 충돌하고 교차하며<br />상식과 경계를 허무는 파격의 미학을 구현합니다.<br /><br />안다영의 맑고 서정적인 보컬은 몽환적인 밴드 사운드 위를 유영하며<br />감정의 미묘한 파장을 섬세하게 표현합니다.<br />드림팝, 앰비언트, 인디 감성이 뒤섞인 이번 무대는 단순한 공연을 넘어<br />다층적인 감각 경험을 선사하는 예술적 시도입니다.",
+      "artistImg": "./img/section03_Artist_Modal/modalposter3.webp",
+      "description": "FRIDAY Ahn Dayoung & Marrakech는 싱어송라이터 안다영과 밴드 Marrakech가 함께 <br />예술적이고 로맨틱한 협업 프로젝트를 통해<br />각자의 음악 세계를 유지하면서도 무대 위에서 충돌하고 교차하며<br />상식과 경계를 허무는 파격의 미학을 구현하는 공연입니다.<br /><br />안다영의 맑고 서정적인 보컬은 몽환적인 밴드 사운드 위를 유영하며<br />감정의 미묘한 파장을 섬세하게 표현합니다.<br />드림팝, 앰비언트, 인디 감성이 뒤섞인 다층적인 감각 경험을 선사하는 예술적 시도입니다.",
       "instruments": ["Vocal", "Guitar", "Bass", "Drums", "Synth"],
       "genre": "Indie, Dream Pop, Ambient",
-      "members": [""]
+      "members": [
+        {
+          "name": "안다영",
+          "img": "./img/section03_Artist_Modal/modalposter3_1.jpg"
+        },
+        {
+          "name": "Marrakech",
+          "img": "./img/section03_Artist_Modal/modalposter3_2.png"
+        }
+      ]
     },
     {
       "id": 4,
@@ -42,11 +65,16 @@
       "title": "기쿠하시 단독콘서트 : 섬광 퍼레이드",
       "date": "2025년 08월 14일",
       "posterImg": "./img/poster4.jpg",
-      "artistImg": "",
-      "description": "기쿠하시(gikuhasi)는 자신만의 정체성과 감각을 음악과 무대 위에 치밀하게 구축해 나가는 싱어송라이터입니다.<br />‘Laundria’ 시리즈를 중심으로 활동하며 외계적 감정, 낯선 정서, 신비한 언어와 비형식적 서사를 통해<br />관객에게 일상과는 전혀 다른 차원의 경험을 선사하고 있습니다.<br /><br />트레몰로와 딜레이가 섞인 빛나는 기타 리프, 우주 감각의 글라이드 베이스라인,<br />그리고 몽환적으로 퍼지는 아날로그 신스의 레이어는<br />기쿠하시의 서정성과 괴기성이 공존하는 세계를 더욱 깊이 있게 펼쳐냅니다.<br /><br />정형화된 장르 안에서 벗어나 자유롭게 흔들리는 기쿠하시의 음성은<br />관객의 내면 감각을 서서히 뒤흔들며 끝내 무대가 끝난 후에도 오래 남는 감정을 만들어냅니다.",
+      "artistImg": "./img/section03_Artist_Modal/modalposter4.webp",
+      "description": "기쿠하시(gikuhasi)는 자신만의 정체성과 감각을<br />음악과 무대 위에 치밀하게 구축해 나가는 싱어송라이터입니다.<br />‘Laundria’ 시리즈를 중심으로 활동하며 외계적 감정, 낯선 정서, 신비한 언어와<br />비형식적 서사를 통해 관객에게 일상과는 전혀 다른 차원의 경험을 선사하고 있습니다.<br /><br />트레몰로와 딜레이가 섞인 빛나는 기타 리프, 우주 감각의 글라이드 베이스라인,<br />그리고 몽환적으로 퍼지는 아날로그 신스의 레이어는<br />기쿠하시의 서정성과 괴기성이 공존하는 세계를 더욱 깊이 있게 펼쳐냅니다.",
       "instruments": ["Vocal", "Guitar", "Bass", "Drums", "Synth"],
       "genre": "Indie, Psychedelic, Experimental",
-      "members": [""]
+      "members": [
+        {
+          "name": "기쿠하시",
+          "img": "./img/section03_Artist_Modal/modalposter4.webp"
+        }
+      ]
     },
     {
       "id": 5,
@@ -54,11 +82,20 @@
       "title": "2025 CMYK : 아사달 & 투모로우",
       "date": "2025년 08월 08일",
       "posterImg": "./img/poster5.jpg",
-      "artistImg": "",
-      "description": "아사달(AsAdAL)과 투모로우(To More Raw)는 ‘2025 CMYK’ 프로젝트에서 빛난 두 강력한 인디 음악 셀럽입니다.<br />아사달은 신인 밴드 부문 TOP1에 오르며 음악적 잠재력을 입증했고<br />투모로우는 그만의 독창적 스타일과 라이브 퍼포먼스로 관객을 사로잡았습니다.<br /><br />두 팀의 합동 무대는 CMYK 무대의 에너제틱한 회복과 감각을 직접 느낄 수 있는 장이 될 예정입니다.<br />아사달의 드라이브감 있는 기타 리프와 투모로우의 열정적 리듬이 결합되어<br />강렬하지만 서늘한 인디 록 분위기를 완성합니다.",
+      "artistImg": "./img/section03_Artist_Modal/modalposter5.webp",
+      "description": "아사달(AsAdAL)과 투모로우(To More Raw)는 ‘2025 CMYK’ 프로젝트에서 빛난<br />두 강력한 인디 음악 아티스트입니다.<br />아사달은 신인 밴드 부문 TOP1에 오르며 음악적 잠재력을 입증했고<br />투모로우는 그만의 독창적 스타일과 라이브 퍼포먼스로 관객을 사로잡았습니다.<br /><br />두 팀의 합동 무대는 CMYK 무대의 에너제틱한 회복과 감각을<br />직접 느낄 수 있는 장이 될 예정입니다.<br />아사달의 드라이브감 있는 기타 리프와 투모로우의 열정적 리듬이 결합되어<br />강렬하지만 서늘한 인디 록 분위기를 완성합니다.",
       "instruments": ["Guitar", "Bass", "Drums", "Synth"],
       "genre": "Indie Rock, Alternative, Energetic",
-      "members": [""]
+      "members": [
+        {
+          "name": "아사달",
+          "img": "./img/section03_Artist_Modal/modalposter5_1.jpg"
+        },
+        {
+          "name": "투모로우",
+          "img": "./img/section03_Artist_Modal/modalposter5_2.jpg"
+        }
+      ]
     },
     {
       "id": 6,
@@ -66,11 +103,16 @@
       "title": "적란운 단독콘서트 : 회색지대",
       "date": "2025년 07월 18일",
       "posterImg": "./img/poster6.jpg",
-      "artistImg": "",
+      "artistImg": "./img/section03_Artist_Modal/modalposter6.jpg",
       "description": "적란운(ZEOKRANUN)은 일상 속에서 느끼는 불안과 회의, 잊고 있던 감정의 조각들을<br />아날로그 사운드와 서정적인 무드로 풀어내는 인디 밴드입니다.<br /> 2023년 데뷔 EP &lt;란&gt; 이후, &lt;뫼비우스&gt;, &lt;박하&gt; 등의 작업을 통해<br /> 조용하지만 강하게 마음을 흔드는 음악을 선보여 왔습니다.<br /><br /> 기타와 피아노 루프, 브러쉬 드럼과 아날로그 신스가 겹겹이 쌓이며<br /> 몽환적인 사운드 스케이프를 만들어내고<br /> 그 위에 얹힌 보컬은 조용히, 그리고 깊게 감정을 끌어올립니다.",
       "instruments": ["Vocal", "Guitar", "Piano", "Drums", "Bass", "Synth"],
       "genre": "Indie, Ambient, Emotional",
-      "members": [""]
+      "members": [
+        {
+          "name": "적란운",
+          "img": "./img/section03_Artist_Modal/modalposter6_1.jpg"
+        }
+      ]
     },
     {
       "id": 7,
@@ -78,11 +120,16 @@
       "title": "베리코이버니 단독콘서트 : Dream Hacker",
       "date": "2025년 06월 27일",
       "posterImg": "./img/poster7.jpg",
-      "artistImg": "",
-      "description": "베리코이버니(verycoybunny)는 ‘내성적인 토끼’라는 뜻의 이름처럼<br />조용하고 섬세하지만 내면의 강한 정서를 음악으로 풀어내는 싱어송라이터이자 프로듀서입니다.<br /><br />버블검 팝의 발랄함과 얼터너티브 록의 거친 결을 자유롭게 넘나들며<br />몽환적이면서도 파괴적인 아름다움을 담은 사운드를 구축해왔습니다.<br />2019년 데뷔 이후, &lt;Red Flag&gt;, &lt;Dream Hacker&gt; 등의 곡을 통해<br />감정의 파편들을 유쾌하면서도 날카롭게 표현하며 자신만의 독특한 세계관을 만들어가고 있습니다.<br /><br />거친 기타 리프와 반짝이는 신스,<br />그리고 가볍게 속삭이듯 흐르다가 어느 순간 날카롭게 치고 들어오는 보컬은<br />관객에게 묘하게 사랑스럽고 위험한 감정을 동시에 남깁니다.",
+      "artistImg": "./img/section03_Artist_Modal/modalposter7.webp",
+      "description": "베리코이버니(verycoybunny)는 ‘내성적인 토끼’라는 뜻의 이름처럼<br />조용하고 섬세하지만 강한 정서를 음악으로 풀어내는 싱어송라이터이자 프로듀서입니다.<br /><br />버블검 팝의 발랄함과 얼터너티브 록의 거친 결을 자유롭게 넘나들며<br />몽환적이면서도 파괴적인 아름다움을 담은 사운드를 구축해왔습니다.<br />거친 기타 리프와 반짝이는 신스,<br />그리고 가볍게 속삭이듯 흐르다가 어느 순간 날카롭게 치고 들어오는 보컬은<br />관객에게 묘하게 사랑스럽고 위험한 감정을 동시에 남깁니다.",
       "instruments": ["Vocals", "Electric Guitar", "Bass", "Drums", "Synth"],
       "genre": "Indie, Alternative Rock, Bubblegum Pop",
-      "members": [""]
+      "members": [
+        {
+          "name": "베리코이버니",
+          "img": "./img/section03_Artist_Modal/modalposter7_1.jpg"
+        }
+      ]
     },
     {
       "id": 8,
@@ -90,11 +137,16 @@
       "title": "오이스터 단독콘서트 : What If We Missed",
       "date": "2025년 05월 10일",
       "posterImg": "./img/poster8.jpg",
-      "artistImg": "",
-      "description": "오이스터(Oyster)는 2019년 데뷔 이후 &lt;조곤&gt;을 중심으로 한 4인조 한국 인디 록 밴드입니다.<br />밴드명은 ‘굴의 생명력’에서 따왔으며, 비린 맛처럼 호불호를 갈리는 음악으로도<br />자기만의 깊은 정체성을 만드는 ‘자생력’을 상징합니다.<br /><br />이제는 2025년 ‘O.Y.S.T.E.R’을 포함한 싱글과 퍼포먼스로 활동을 재개하며<br />에너지 넘치고 자유로운 록 사운드를 강하게 드러내고 있습니다.<br /><br />강렬한 기타 리프와 울림 깊은 베이스, 때로는 R&amp;B의 그루브가 섞인 드럼,<br />그리고 조곤의 힘 있는 보컬이 조화를 이루며<br />오이스터 특유의 직설적이면서도 몰입감 있는 음악이 지속적으로 전달됩니다.",
+      "artistImg": "./img/section03_Artist_Modal/modalposter8.webp",
+      "description": "오이스터(Oyster)는 2019년 데뷔한 4인조 한국 인디 록 밴드입니다.<br />밴드명은 ‘굴의 생명력’에서 따왔으며, 비린 맛처럼 호불호를 갈리는 음악으로도<br />자기만의 깊은 정체성을 만드는 ‘자생력’을 상징합니다.<br /><br />이제는 2025년 ‘O.Y.S.T.E.R’을 포함한 싱글과 퍼포먼스로 활동을 재개하며<br />에너지 넘치고 자유로운 록 사운드를 강하게 드러내고 있습니다.<br /><br />강렬한 기타 리프와 울림 깊은 베이스, R&amp;B의 그루브가 섞인 드럼,<br />그리고 조곤의 보컬이 조화를 이루며 몰입감 있는 음악이 지속적으로 전달됩니다.",
       "instruments": ["Vocals", "Electric Guitar", "Bass", "Drums", "Synth"],
       "genre": "Indie Rock, Alternative, R&B‑Infused Rock",
-      "members": [""]
+      "members": [
+        {
+          "name": "오이스터",
+          "img": "./img/section03_Artist_Modal/modalposter8_1.jpg"
+        }
+      ]
     },
     {
       "id": 9,
@@ -102,11 +154,16 @@
       "title": "Paloalto 단독콘서트 : JAZZHOP",
       "date": "2025년 06월 14일",
       "posterImg": "./img/poster9.jpg",
-      "artistImg": "",
-      "description": "Paloalto(팔로알토)는 한국 힙합 씬을 대표하는 래퍼이자, 오랜 시간 언더와 메인스트림을 넘나든 베테랑 뮤지션입니다.<br />Hi-Lite Records의 수장으로도 잘 알려져 있으며 냉철한 리릭과 리듬감 있는 한국어 랩으로<br />20년 넘게 한국 힙합의 정체성과 방향을 만들어왔습니다.<br /><br />팔로알토는 단순한 랩 공연이 아닌 힙합과 재즈가 대화하듯 흘러가는 라이브 세션입니다.<br />Paloalto의 직설적인 메시지와 깊이 있는 비트 위에 재즈의 감성과 라이브 악기의 질감이 얹혀져<br />묵직하고 세련된 음악적 몰입을 이끌어냅니다.",
+      "artistImg": "./img/section03_Artist_Modal/modalposter9.webp",
+      "description": "Paloalto(팔로알토)는 한국 힙합 씬을 대표하는 래퍼이자,<br />오랜 시간 언더와 메인스트림을 넘나든 베테랑 뮤지션입니다.<br />Hi-Lite Records의 수장으로도 잘 알려져 있으며 냉철한 리릭과<br />리듬감 있는 한국어 랩으로 20년 넘게 한국 힙합의 정체성과 방향을 만들어왔습니다.<br /><br />그는 단순한 랩 공연이 아닌 힙합과 재즈가 대화하듯 흘러가는 라이브 세션입니다.<br />그의 직설적인 메시지와 깊이 있는 비트 위에 재즈의 감성과 라이브 악기의 질감이 얹혀져<br />묵직하고 세련된 음악적 몰입을 이끌어냅니다.",
       "instruments": ["Vocal", "Piano", "Bass", "Drums", "Synth"],
       "genre": "Jazzhop",
-      "members": [""]
+      "members": [
+        {
+          "name": "팔로알토",
+          "img": "./img/section03_Artist_Modal/modalposter9_1.jpg"
+        }
+      ]
     },
     {
       "id": 10,
@@ -114,11 +171,16 @@
       "title": "김승주 단독 콘서트 : Hint",
       "date": "2025년 04월 04일",
       "posterImg": "./img/poster10.jpg",
-      "artistImg": "",
-      "description": "김승주는 '소년만화'로 돋보적인 세계관을 전개한 대한민국 인디 싱어송라이터입니다.<br />제 32회 유재하 음악 경연 대회에서 대상을 받은 이후<br />EP &lt;소년만화 상&gt;, &lt;소년만화 하&gt;, &lt;고시엔&gt;, 그리고 싱글 &lt;인류를구원할수없는통기타가수&gt;를 통해<br />'만화 같은 이야기의 감성'과 음악적 서사를 꾸준히 확장해왔습니다.<br /><br />일상 속 영감을 만화적 감수성으로 풀어내는 그의 음악은<br />어리숙하고 완벽하지 않은 '우리'의 모습을 닮았고<br />여러 음성과 코러스의 중첩은 들려주는 이들의 이야기가<br />곧 그의 음악이 되는 듯한 경험을 선사합니다.",
+      "artistImg": "./img/section03_Artist_Modal/modalposter10.webp",
+      "description": "김승주는 '소년만화'로 돋보적인 세계관을 전개한 대한민국 인디 싱어송라이터입니다.<br />제 32회 유재하 음악 경연 대회에서 대상을 받은 이후<br />EP &lt;소년만화 상&gt;, &lt;소년만화 하&gt;, &lt;고시엔&gt;,<br />그리고 싱글 &lt;인류를구원할수없는통기타가수&gt;를 통해<br />'만화 같은 이야기의 감성'과 음악적 서사를 꾸준히 확장해왔습니다.<br /><br />일상 속 영감을 만화적 감수성으로 풀어내는 그의 음악은<br />어리숙하고 완벽하지 않은 '우리'의 모습을 닮았고<br />여러 음성과 코러스의 중첩은 들려주는 이들의 이야기가<br />곧 그의 음악이 되는 듯한 경험을 선사합니다.",
       "instruments": ["Vocal", "Guitar", "Bass", "Drums"],
       "genre": "Indie Rock",
-      "members": [""]
+      "members": [
+        {
+          "name": "김승주",
+          "img": "./img/section03_Artist_Modal/modalposter10_1.jpg"
+        }
+      ]
     },
     {
       "id": 11,
@@ -126,11 +188,16 @@
       "title": "고고학 단독 콘서트 : 파도",
       "date": "2025년 04월 03일",
       "posterImg": "./img/poster11.jpg",
-      "artistImg": "",
-      "description": "고고학(Gogohawk)은 제한 없이 떠오르는 창작 영감을 조각하듯 음악으로 그려내는 인디 밴드입니다.<br />꿈과 독백을 주된 이야기로 삼으며 경계 없는 음악적 실험과 서정적인 가사로 주목받고 있습니다.<br /><br />고요하고 몽환적인 사운드 스케이프 위에 서정적인 기타/베이스 루프, 부드러운 드럼,<br />그리고 미니멀한 신스가 촘촘히 쌓이며 감정과 기억이 흐르는 내밀한 음악의 풍경을 펼칩니다.<br />보컬은 마치 꿈에서 들려오는 속삭임처럼 관객을 정서적 탐색의 여정으로 이끕니다.",
+      "artistImg": "./img/section03_Artist_Modal/modalposter11.webp",
+      "description": "고고학(Gogohawk)은 제한 없이 떠오르는 창작 영감을<br />조각하듯 음악으로 그려내는 인디 밴드입니다.<br />꿈과 독백을 주된 이야기로 삼으며 경계 없는 음악적 실험과<br />서정적인 가사로 주목받고 있습니다.<br /><br />고요하고 몽환적인 사운드 스케이프 위에 서정적인 기타/베이스 루프, 부드러운 드럼,<br />그리고 미니멀한 신스가 촘촘히 쌓이며 감정과 기억이 흐르는 음악의 풍경을 펼칩니다.<br />보컬은 마치 꿈에서 들려오는 속삭임처럼 관객을 정서적 탐색의 여정으로 이끕니다.",
       "instruments": ["Vocals", "Electric Guitar", "Bass", "Drums", "Synth"],
       "genre": "Indie, Dream Pop, Ambient",
-      "members": [""]
+      "members": [
+        {
+          "name": "고고학",
+          "img": "./img/section03_Artist_Modal/modalposter11_1.png"
+        }
+      ]
     },
     {
       "id": 12,
@@ -138,11 +205,16 @@
       "title": "이글루베이 단독 콘서트 : 영혼상점",
       "date": "2025년 03월 06일",
       "posterImg": "./img/poster12.jpg",
-      "artistImg": "",
-      "description": "이글루베이(igloobay)는 서울을 중심으로 자신들만의 사계절처럼 음악 세계를 넓혀가는 한국 인디 밴드입니다.<br />몽환적인 사운드와 서정적인 가사를 통해<br />외면의 온도와 내면의 감정을 조용히 끌어안는 음악으로 주목받고 있습니다.<br /><br />이들의 음악은 잔잔한 기타 루프 위에 감정이 깊게 스며든 보컬과<br />때로는 거친 파동처럼 들려오는 신스와 리듬으로<br />관객의 감각을 하나하나 깨우는 공감각적 음악 풍경을 만들어냅니다.",
+      "artistImg": "./img/section03_Artist_Modal/modalposter12.jpeg",
+      "description": "이글루베이(igloobay)는 서울을 중심으로 자신들만의 사계절처럼 <br />음악 세계를 넓혀가는 한국 인디 밴드입니다.<br />몽환적인 사운드와 서정적인 가사를 통해<br />외면의 온도와 내면의 감정을 조용히 끌어안는 음악으로 주목받고 있습니다.<br /><br />이들의 음악은 잔잔한 기타 루프 위에 감정이 깊게 스며든 보컬과<br />때로는 거친 파동처럼 들려오는 신스와 리듬으로<br />관객의 감각을 하나하나 깨우는 공감각적 음악 풍경을 만들어냅니다.",
       "instruments": ["Vocals", "Electric Guitar", "Bass", "Drums", "Synth"],
       "genre": "Indie Rock, Dream Pop, Ambient",
-      "members": [""]
+      "members": [
+        {
+          "name": "이글루베이",
+          "img": "./img/section03_Artist_Modal/modalposter12_1.webp"
+        }
+      ]
     }
   ]
 }

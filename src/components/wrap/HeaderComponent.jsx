@@ -75,9 +75,11 @@ export default function HeaderComponent(props) {
     <>
       <header
         id="header"
-        className={
-          active ? "active" : "" || toggle ? "toggle" : "" || scr ? "down" : ""
-        }>
+        className={`
+          ${active ? "active" : ""}
+          ${toggle ? "toggle" : ""}
+          ${scr ? "down" : ""}
+          `}>
         <div className="container">
           <h1>
             <Link to="/mainComponent">

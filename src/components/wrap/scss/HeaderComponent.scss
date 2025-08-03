@@ -196,6 +196,10 @@
             }
           }
           &.clicked {
+            display: flex;
+            position: fixed;
+            top: 10vh;
+            right: 10vw;
             align-items: center;
             column-gap: 30px;
             transition: 0.3s;
@@ -276,6 +280,9 @@
           }
         }
       }
+      &.down {
+        top: -100px;
+      }
     }
     &.toggle {
       .container {
@@ -286,6 +293,8 @@
         aside {
           ul {
             &.head {
+              position: relative;
+              z-index: -1;
               li {
                 &.toggle {
                   z-index: -1;
@@ -293,11 +302,6 @@
               }
             }
             &.clicked {
-              display: flex;
-              position: fixed;
-              top: 0;
-              right: 0;
-              padding: 10vh 10vw;
               li {
                 &.toggle {
                   button {
@@ -326,9 +330,6 @@
             }
           }
         }
-      }
-      &.down {
-        top: -100px;
       }
     }
     &.down {

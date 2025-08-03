@@ -95,20 +95,20 @@ export default function Sub033Food (){
       desc: "풍성한 고기와 치즈의 깊은 풍미가 느껴지는 샐러드."
     },
     {
-      title: "페퍼로니 피자 1조각",
-      price: "₩8,000",
+      title: "페퍼로니 피자\n(40cm / 한판)",
+      price: "₩8,000 /₩16,000",
       image: "./img/sub03Food/10slice.png",
-      desc: "누구나 좋아하는 클래식 페퍼로니 피자."
+      desc: "누구나 좋아 하는 클래식 페퍼로니 피자."
     },
     {
-      title: "하와이안 피자 1조각",
-      price: "₩8,000",
+      title: "하와이안 피자\n(40cm / 한판)",
+      price: "₩8,000 /₩16,000",
       image: "./img/sub03Food/10-2slice.png",
       desc: "달콤한 파인애플과 햄의 조화, 하와이안 리듬."
     },
     {
-      title: "고르곤졸라 피자 1조각",
-      price: "₩8,000",
+      title: "고르곤졸라 피자\n(40cm / 한판)",
+      price: "₩8,000 /₩16,000",
       image: "./img/sub03Food/10-3slice.png",
       desc: "짭짤한 고르곤졸라와 꿀의 달콤한 하모니."
     }
@@ -168,7 +168,7 @@ export default function Sub033Food (){
             <img src={selectedItem.image} alt={selectedItem.title} />
             <h3>{selectedItem.title}</h3>
             <p>{selectedItem.price}</p>
-            <p className="desc">맛 설명: {selectedItem.desc || "맛 설명이 아직 없어요."}</p>
+            <p className="desc">맛: {selectedItem.desc || "맛 설명이 아직 없어요."}</p>
           </div>
         </div>
       )}

@@ -1,0 +1,103 @@
+@use "../../../../scss/variables" as *;
+
+#sub_pre {
+  font-family: 'Pretendard', sans-serif;
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+
+  .board-view {
+    background: #fffdf9;
+    width: 800px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+
+  .view-header {
+    border-bottom: 2px solid #512b2b;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #512b2b;
+    }
+
+    .view-meta {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+
+  .view-body {
+    font-size: 16px;
+    line-height: 1.7;
+
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+
+      th {
+        text-align: left;
+        width: 100px;
+        padding: 8px;
+        background: #f6f2ea;
+        color: #333;
+        border-bottom: 1px solid #ddd;
+      }
+
+      td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        background: #fff;
+      }
+    }
+
+    .admin-reply {
+      background: #f1f6ff;
+      border-left: 4px solid #4e6eaa;
+      padding: 20px;
+      border-radius: 8px;
+
+      strong {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #4e6eaa;
+      }
+
+      p {
+        margin: 0;
+        white-space: pre-wrap;
+        color: #333;
+      }
+    }
+  }
+
+  .view-actions {
+    text-align: right;
+    margin-top: 30px;
+  
+    .back-btn,
+    .edit-btn,
+    .delete-btn {
+      padding: 10px 20px;
+      background-color: #512b2b;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+  
+    .delete-btn {
+      background-color: #aa4e4e;
+    }
+  }
+  
+}
