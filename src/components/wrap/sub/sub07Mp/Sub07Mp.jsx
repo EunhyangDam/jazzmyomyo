@@ -22,6 +22,7 @@ function Sub07Mp(props) {
               <div
                 className={`profile-front${isOn ? " on" : ""}`}
                 onClick={onClickProfile}
+                title="🐾"
               >
                 <p>MEMBER</p>
                 <p>김묘묘</p>
@@ -29,6 +30,7 @@ function Sub07Mp(props) {
               <div
                 className={`profile-back${isOn ? " on" : ""}`}
                 onClick={onClickProfile}
+                title="🐾"
               ></div>
             </div>
             <div className="right">

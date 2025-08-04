@@ -2,14 +2,14 @@
 #sub07DeleteAccount {
   width: 100%;
   margin-top: 100px;
-  padding-bottom: 100px;
-  height: 100vh;
+  padding-bottom: 200px;
+  height: auto;
   .container {
     width: 100%;
-    max-width: 1750px;
+    max-width: 1500px;
     margin: 0 auto;
     .title {
-      padding: 100px 0 60px 20px;
+      padding: 5% 0 5% 2%;
       width: 100%;
       display: flex;
       justify-content: space-between;
@@ -25,16 +25,281 @@
     }
     .content {
       width: 100%;
-      max-width: 1700px;
+      max-width: 1500px;
       margin: 0 auto;
-      background-color: yellow;
-      .head {
-        h3 {
-          font-size: $size4;
-          background: $primary-color;
-          display: inline-block;
-          color: $white;
-          padding: 20px 50px;
+      display: flex;
+      .menu {
+        width: 200px;
+        height: auto;
+        margin: 0 5%;
+
+        ul {
+          width: 100%;
+          li {
+            width: 100%;
+            padding: 4% 0;
+            display: block;
+            &.sub-title {
+              border-top: 1px solid #ccc;
+            }
+
+            h2 {
+              font-size: $size4;
+              font-weight: 600;
+              text-indent: 10px;
+            }
+            h3 {
+              font-size: $size4;
+              padding-top: 20px;
+              font-weight: 600;
+              text-indent: 10px;
+            }
+            a {
+              width: 100%;
+              display: block;
+              font-size: 18px;
+              padding: 5px 0;
+              text-indent: 10px;
+            }
+          }
+        }
+      }
+      .delete-notice {
+        ul {
+          border: 1px solid $primary-color;
+          max-width: 1000px;
+          padding: 0 4%;
+          li {
+            display: flex;
+            justify-content: center;
+            flex-flow: row wrap;
+            padding: 2% 0;
+            &:nth-child(3) {
+              padding-top: 0;
+            }
+            h3 {
+              font-size: 2.5rem;
+              display: inline-block;
+              color: $primary-color;
+              border-bottom: 2px solid $primary-color;
+            }
+
+            p {
+              width: 100%;
+              line-height: 180%;
+              font-size: $size4;
+              white-space: wrap;
+            }
+
+            button {
+              width: 300px;
+              height: 70px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: $size4;
+              transition: all 0.3s;
+
+              &:first-child {
+                margin-right: 30px;
+                border: 1px solid $primary-color;
+                &:hover {
+                  background-color: $grey3;
+                }
+              }
+              &:last-child {
+                background-color: $primary-color;
+                color: $white;
+                &:hover {
+                  background-color: $grey3;
+                  color: $primary-color;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 1320px) {
+    .container {
+      padding: 0 20px;
+    }
+  }
+  @media all and (max-width: 1035px) {
+    .container {
+      padding: 0 20px;
+      .content {
+        .delete-notice {
+          ul {
+            li {
+              h3 {
+                font-size: 2.2rem;
+              }
+              p {
+                font-size: 1.5rem;
+              }
+              button {
+                font-size: 1.5rem;
+                width: 200px;
+                height: 50px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 853px) {
+    .container {
+      padding: 0 20px;
+      .title {
+        a {
+          h2 {
+            font-size: 2.5rem;
+          }
+        }
+      }
+      .content {
+        .menu {
+          width: 160px;
+          ul {
+            li {
+              h2 {
+                font-size: 1.3rem;
+              }
+              h3 {
+                font-size: 1.3rem;
+              }
+              a {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+        .delete-notice {
+          width: 70%;
+          ul {
+            li {
+              padding: 3% 0;
+              h3 {
+                font-size: $size4;
+              }
+              p {
+                font-size: 1.1rem;
+              }
+              button {
+                font-size: 1.1rem;
+                width: 170px;
+                height: calc(70px * 0.8 * 0.8);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 665px) {
+    .container {
+      padding: 0 20px;
+      .title {
+        a {
+          h2 {
+            font-size: 2.2rem;
+          }
+        }
+      }
+      .content {
+        .menu {
+          width: 120px;
+          height: auto;
+          margin: 0 4%;
+
+          ul {
+            width: 100%;
+            li {
+              width: 100%;
+              padding: 4% 0;
+              display: block;
+              &.sub-title {
+                border-top: 1px solid #ccc;
+              }
+
+              h2 {
+                font-size: 1.3rem;
+                font-weight: 600;
+                text-indent: 10px;
+              }
+              h3 {
+                font-size: 1.3rem;
+                padding-top: 20px;
+                font-weight: 600;
+                text-indent: 10px;
+              }
+              a {
+                width: 100%;
+                display: block;
+                font-size: 14px;
+                padding: 5px 0;
+                text-indent: 10px;
+              }
+            }
+          }
+        }
+        .delete-notice {
+          width: 70%;
+          ul {
+            li {
+              padding: 3% 0;
+              h3 {
+                font-size: $size4;
+              }
+              p {
+                font-size: 1.1rem;
+              }
+              button {
+                font-size: 1.1rem;
+                width: 120px;
+                height: 40px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 539px) {
+    .container {
+      padding: 0 20px;
+      .title {
+        a {
+          h2 {
+            font-size: 2.2rem;
+          }
+        }
+      }
+      .content {
+        .menu {
+          display: none;
+        }
+        .delete-notice {
+          width: 100%;
+          ul {
+            li {
+              padding: 3% 0;
+              h3 {
+                font-size: $size4;
+              }
+              p {
+                font-size: 1.1rem;
+              }
+              button {
+                font-size: 1.1rem;
+                width: 120px;
+                height: 40px;
+              }
+            }
+          }
         }
       }
     }

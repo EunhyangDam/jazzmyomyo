@@ -9,7 +9,7 @@
     max-width: 1500px;
     margin: 0 auto;
     .title {
-      padding: 100px 0 80px 20px;
+      padding: 7.5% 0 5.5% 20px;
       width: 100%;
       display: flex;
       justify-content: space-between;
@@ -26,7 +26,7 @@
     }
     .content {
       .row1 {
-        padding-bottom: 100px;
+        padding-bottom: 7.5%;
         width: 100%;
         display: flex;
         justify-content: space-between;
@@ -34,7 +34,7 @@
           width: 20%;
           position: relative;
           div {
-            margin-left: 100px;
+            margin-left: 7.5%;
             width: 300px;
             height: 300px;
             aspect-ratio: 1/1;
@@ -85,7 +85,7 @@
         }
         .right {
           width: 80%;
-          padding-left: 200px;
+          padding-left: 10%;
           display: flex;
           ul {
             margin: auto;
@@ -95,7 +95,7 @@
             justify-content: space-between;
             border-top: 1px solid #ddd;
             border-bottom: 1px solid #ddd;
-            padding: 50px;
+            padding: 2%;
             li {
               width: 25%;
               border-right: 1px solid #ddd;
@@ -109,7 +109,7 @@
               h2 {
                 font-size: $size4;
                 font-weight: 500;
-                padding-bottom: 30px;
+                padding-bottom: 10%;
               }
               a {
                 p {
@@ -130,7 +130,7 @@
       .row2 {
         width: 100%;
         height: auto;
-        padding-bottom: 100px;
+        padding-bottom: 7.5%;
         ul {
           width: 100%;
           display: flex;
@@ -138,7 +138,7 @@
           > li {
             width: calc(100% / 3);
             text-align: center;
-            margin: 0 80px;
+            margin: 0 5%;
 
             h3 {
               width: 100%;
@@ -152,9 +152,356 @@
             a {
               width: 100%;
               display: block;
-              padding: 10px 0;
               font-size: $size4;
               padding: 20px 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 1520px) {
+    .container {
+      padding: 0 20px;
+    }
+  }
+  @media all and (max-width: 1200px) {
+    .container {
+      .content {
+        .row1 {
+          .left {
+            width: 20%;
+            position: relative;
+            div {
+              margin-left: 100px;
+              width: 300px;
+              height: 300px;
+              aspect-ratio: 1/1;
+              border-radius: 50%;
+              transition: all 1.5s ease-in;
+              overflow: hidden;
+              cursor: pointer;
+
+              &.profile-front {
+                transform: perspective(calc(300px * 1.5)) rotateY(0deg);
+                background: url("../../../../../../public/img/sub07/lp_img_400.png")
+                  no-repeat 50% 50%;
+                background-size: cover;
+                position: relative;
+                z-index: 2;
+                display: flex;
+                justify-content: space-between;
+                &:hover {
+                  transform: perspective(calc(300px * 1.5)) rotateY(0deg)
+                    rotate(360deg);
+                }
+                p {
+                  margin: auto 0;
+                  color: $white;
+                  font-size: $size4;
+                  padding: 0 16px;
+                }
+                &.on {
+                  z-index: 1;
+                  transform: perspective(calc(300px * 1.5)) rotateY(-180deg);
+                }
+              }
+              &.profile-back {
+                background: url("../../../../../../public/img/md/doll_01_2.png")
+                  no-repeat 50% 50%;
+                background-size: cover;
+                transform: perspective(calc(300px * 1.5)) rotateY(180deg);
+                z-index: 1;
+                position: absolute;
+                top: 0;
+                left: 0;
+                &.on {
+                  z-index: 2;
+                  transform: perspective(calc(300px * 1.5)) rotateY(0deg);
+                }
+              }
+            }
+          }
+          .right {
+            width: 80%;
+            padding-left: 200px;
+            display: flex;
+            ul {
+              margin: auto;
+              width: 100%;
+              height: 100%;
+              display: flex;
+              justify-content: space-between;
+              border-top: 1px solid #ddd;
+              border-bottom: 1px solid #ddd;
+              padding: 5%;
+              li {
+                h2 {
+                  font-size: 1.5rem;
+                }
+                a {
+                  p {
+                    font-size: 1.5rem;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .row2 {
+          ul {
+            > li {
+              h3 {
+                font-size: 2.5rem;
+                font-family: $font2;
+              }
+              a {
+                font-size: 1.5rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 1025px) {
+    .container {
+      .title {
+        justify-content: center;
+      }
+      .content {
+        .row1 {
+          padding-bottom: 0;
+          display: flex;
+          flex-flow: row wrap;
+          .left {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            div {
+              margin-left: 0px;
+              width: 300px;
+              height: 300px;
+              aspect-ratio: 1/1;
+              border-radius: 50%;
+              transition: all 1.5s ease-in;
+              overflow: hidden;
+              cursor: pointer;
+
+              &.profile-front {
+                transform: perspective(calc(300px * 1.5)) rotateY(0deg);
+                background: url("../../../../../../public/img/sub07/lp_img_400.png")
+                  no-repeat 50% 50%;
+                background-size: cover;
+                position: relative;
+                z-index: 2;
+                display: flex;
+                justify-content: space-between;
+                &:hover {
+                  transform: perspective(calc(300px * 1.5)) rotateY(0deg)
+                    rotate(360deg);
+                }
+                p {
+                  margin: auto 0;
+                  color: $white;
+                  font-size: $size4;
+                  padding: 0 16px;
+                }
+                &.on {
+                  z-index: 1;
+                  transform: perspective(calc(300px * 1.5)) rotateY(-180deg);
+                }
+              }
+              &.profile-back {
+                background: url("../../../../../../public/img/md/doll_01_2.png")
+                  no-repeat 50% 50%;
+                background-size: cover;
+                transform: perspective(calc(300px * 1.5)) rotateY(180deg);
+                z-index: 1;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -150px;
+                margin-left: -150px;
+                &.on {
+                  z-index: 2;
+                  transform: perspective(calc(300px * 1.5)) rotateY(0deg);
+                }
+              }
+            }
+          }
+          .right {
+            width: 100%;
+            padding: 5%;
+            display: flex;
+            ul {
+              margin: auto;
+              width: 100%;
+              height: 100%;
+              display: flex;
+              justify-content: space-between;
+              border-top: 1px solid #ddd;
+              border-bottom: 1px solid #ddd;
+              li {
+                h2 {
+                  font-size: 1.5rem;
+                }
+                a {
+                  p {
+                    font-size: 1.5rem;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .row2 {
+          ul {
+            > li {
+              h3 {
+                font-size: 2.5rem;
+                font-family: $font2;
+              }
+              a {
+                font-size: 1.5rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 800px) {
+    .container {
+      .title {
+        justify-content: center;
+      }
+      .content {
+        .row1 {
+          padding-bottom: 0;
+          display: flex;
+          flex-flow: row wrap;
+          .right {
+            ul {
+              li {
+                h2 {
+                  font-size: 1.3rem;
+                }
+                a {
+                  p {
+                    font-size: 1.3rem;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .row2 {
+          ul {
+            justify-content: space-evenly;
+            > li {
+              h3 {
+                font-size: 2rem;
+                font-family: $font2;
+              }
+              a {
+                font-size: 1.2rem;
+                padding: 14px 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 594px) {
+    .container {
+      .title {
+        justify-content: center;
+        a {
+          h2 {
+            font-size: 2.5rem;
+          }
+        }
+      }
+      .content {
+        .row1 {
+          padding-bottom: 0;
+          display: flex;
+          flex-flow: row wrap;
+          .left {
+            div {
+              width: 200px;
+              height: 200px;
+
+              &.profile-front {
+                transform: perspective(calc(200px * 1.5)) rotateY(0deg);
+                background: url("../../../../../../public/img/sub07/lp_img_400.png")
+                  no-repeat 50% 50%;
+                background-size: cover;
+                position: relative;
+                z-index: 2;
+                display: flex;
+                justify-content: space-between;
+                &:hover {
+                  transform: perspective(calc(200px * 1.5)) rotateY(0deg)
+                    rotate(360deg);
+                }
+                p {
+                  margin: auto 0;
+                  color: $white;
+                  font-size: 1rem;
+                  padding: 0 16px;
+                }
+                &.on {
+                  z-index: 1;
+                  transform: perspective(calc(200px * 1.5)) rotateY(-180deg);
+                }
+              }
+              &.profile-back {
+                background: url("../../../../../../public/img/md/doll_01_2.png")
+                  no-repeat 50% 50%;
+                background-size: cover;
+                transform: perspective(calc(200px * 1.5)) rotateY(180deg);
+                z-index: 1;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -100px;
+                margin-left: -100px;
+                &.on {
+                  z-index: 2;
+                  transform: perspective(calc(200px * 1.5)) rotateY(0deg);
+                }
+              }
+            }
+          }
+          .right {
+            ul {
+              li {
+                h2 {
+                  font-size: 1rem;
+                }
+                a {
+                  p {
+                    font-size: 1rem;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .row2 {
+          ul {
+            > li {
+              h3 {
+                font-size: 1.5rem;
+                font-family: $font2;
+              }
+              a {
+                font-size: 1rem;
+                padding: 10px 0;
+              }
             }
           }
         }

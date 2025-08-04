@@ -1,0 +1,261 @@
+#sub07DeleteAccount {
+  width: 100%;
+  margin-top: 100px;
+  padding-bottom: 200px;
+  height: auto;
+}
+#sub07DeleteAccount .container {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+#sub07DeleteAccount .container .title {
+  padding: 5% 0 5% 2%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+#sub07DeleteAccount .container .title a {
+  display: block;
+}
+#sub07DeleteAccount .container .title a h2 {
+  font-size: 3rem;
+  font-family: "TTHakgyoansimMulgyeolB";
+  display: inline-block;
+}
+#sub07DeleteAccount .container .content {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+}
+#sub07DeleteAccount .container .content .menu {
+  width: 200px;
+  height: auto;
+  margin: 0 5%;
+}
+#sub07DeleteAccount .container .content .menu ul {
+  width: 100%;
+}
+#sub07DeleteAccount .container .content .menu ul li {
+  width: 100%;
+  padding: 4% 0;
+  display: block;
+}
+#sub07DeleteAccount .container .content .menu ul li.sub-title {
+  border-top: 1px solid #ccc;
+}
+#sub07DeleteAccount .container .content .menu ul li h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-indent: 10px;
+}
+#sub07DeleteAccount .container .content .menu ul li h3 {
+  font-size: 1.8rem;
+  padding-top: 20px;
+  font-weight: 600;
+  text-indent: 10px;
+}
+#sub07DeleteAccount .container .content .menu ul li a {
+  width: 100%;
+  display: block;
+  font-size: 18px;
+  padding: 5px 0;
+  text-indent: 10px;
+}
+#sub07DeleteAccount .container .content .delete-notice ul {
+  border: 1px solid #5d3136;
+  max-width: 1000px;
+  padding: 0 4%;
+}
+#sub07DeleteAccount .container .content .delete-notice ul li {
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  padding: 2% 0;
+}
+#sub07DeleteAccount .container .content .delete-notice ul li:nth-child(3) {
+  padding-top: 0;
+}
+#sub07DeleteAccount .container .content .delete-notice ul li h3 {
+  font-size: 2.5rem;
+  display: inline-block;
+  color: #5d3136;
+  border-bottom: 2px solid #5d3136;
+}
+#sub07DeleteAccount .container .content .delete-notice ul li p {
+  width: 100%;
+  line-height: 180%;
+  font-size: 1.8rem;
+  white-space: wrap;
+}
+#sub07DeleteAccount .container .content .delete-notice ul li button {
+  width: 300px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  transition: all 0.3s;
+}
+#sub07DeleteAccount .container .content .delete-notice ul li button:first-child {
+  margin-right: 30px;
+  border: 1px solid #5d3136;
+}
+#sub07DeleteAccount .container .content .delete-notice ul li button:first-child:hover {
+  background-color: #c6bdbd;
+}
+#sub07DeleteAccount .container .content .delete-notice ul li button:last-child {
+  background-color: #5d3136;
+  color: #ffffff;
+}
+#sub07DeleteAccount .container .content .delete-notice ul li button:last-child:hover {
+  background-color: #c6bdbd;
+  color: #5d3136;
+}
+@media all and (max-width: 1320px) {
+  #sub07DeleteAccount .container {
+    padding: 0 20px;
+  }
+}
+@media all and (max-width: 1035px) {
+  #sub07DeleteAccount .container {
+    padding: 0 20px;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li h3 {
+    font-size: 2.2rem;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li p {
+    font-size: 1.5rem;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li button {
+    font-size: 1.5rem;
+    width: 200px;
+    height: 50px;
+  }
+}
+@media all and (max-width: 853px) {
+  #sub07DeleteAccount .container {
+    padding: 0 20px;
+  }
+  #sub07DeleteAccount .container .title a h2 {
+    font-size: 2.5rem;
+  }
+  #sub07DeleteAccount .container .content .menu {
+    width: 160px;
+  }
+  #sub07DeleteAccount .container .content .menu ul li h2 {
+    font-size: 1.3rem;
+  }
+  #sub07DeleteAccount .container .content .menu ul li h3 {
+    font-size: 1.3rem;
+  }
+  #sub07DeleteAccount .container .content .menu ul li a {
+    font-size: 14px;
+  }
+  #sub07DeleteAccount .container .content .delete-notice {
+    width: 70%;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li {
+    padding: 3% 0;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li h3 {
+    font-size: 1.8rem;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li p {
+    font-size: 1.1rem;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li button {
+    font-size: 1.1rem;
+    width: 170px;
+    height: 44.8px;
+  }
+}
+@media all and (max-width: 665px) {
+  #sub07DeleteAccount .container {
+    padding: 0 20px;
+  }
+  #sub07DeleteAccount .container .title a h2 {
+    font-size: 2.2rem;
+  }
+  #sub07DeleteAccount .container .content .menu {
+    width: 120px;
+    height: auto;
+    margin: 0 4%;
+  }
+  #sub07DeleteAccount .container .content .menu ul {
+    width: 100%;
+  }
+  #sub07DeleteAccount .container .content .menu ul li {
+    width: 100%;
+    padding: 4% 0;
+    display: block;
+  }
+  #sub07DeleteAccount .container .content .menu ul li.sub-title {
+    border-top: 1px solid #ccc;
+  }
+  #sub07DeleteAccount .container .content .menu ul li h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-indent: 10px;
+  }
+  #sub07DeleteAccount .container .content .menu ul li h3 {
+    font-size: 1.3rem;
+    padding-top: 20px;
+    font-weight: 600;
+    text-indent: 10px;
+  }
+  #sub07DeleteAccount .container .content .menu ul li a {
+    width: 100%;
+    display: block;
+    font-size: 14px;
+    padding: 5px 0;
+    text-indent: 10px;
+  }
+  #sub07DeleteAccount .container .content .delete-notice {
+    width: 70%;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li {
+    padding: 3% 0;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li h3 {
+    font-size: 1.8rem;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li p {
+    font-size: 1.1rem;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li button {
+    font-size: 1.1rem;
+    width: 120px;
+    height: 40px;
+  }
+}
+@media all and (max-width: 539px) {
+  #sub07DeleteAccount .container {
+    padding: 0 20px;
+  }
+  #sub07DeleteAccount .container .title a h2 {
+    font-size: 2.2rem;
+  }
+  #sub07DeleteAccount .container .content .menu {
+    display: none;
+  }
+  #sub07DeleteAccount .container .content .delete-notice {
+    width: 100%;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li {
+    padding: 3% 0;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li h3 {
+    font-size: 1.8rem;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li p {
+    font-size: 1.1rem;
+  }
+  #sub07DeleteAccount .container .content .delete-notice ul li button {
+    font-size: 1.1rem;
+    width: 120px;
+    height: 40px;
+  }
+}

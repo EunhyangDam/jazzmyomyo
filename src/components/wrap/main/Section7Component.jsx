@@ -93,7 +93,8 @@ export default function Section7Component(props) {
                       <a
                         href="!#"
                         title="Wishlist"
-                        onClick={(e) => clickWishlist(e, state.product[23])}>
+                        onClick={(e) => clickWishlist(e, state.product[23])}
+                      >
                         <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
@@ -118,7 +119,8 @@ export default function Section7Component(props) {
                       <a
                         href="!#"
                         title="Wishlist"
-                        onClick={(e) => clickWishlist(e, state.product[12])}>
+                        onClick={(e) => clickWishlist(e, state.product[12])}
+                      >
                         <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
@@ -143,7 +145,8 @@ export default function Section7Component(props) {
                       <a
                         href="!#"
                         title="Wishlist"
-                        onClick={(e) => clickWishlist(e, state.product[1])}>
+                        onClick={(e) => clickWishlist(e, state.product[1])}
+                      >
                         <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
@@ -164,7 +167,8 @@ export default function Section7Component(props) {
                       <a
                         href="!#"
                         title="Wishlist"
-                        onClick={(e) => clickWishlist(e, state.product[5])}>
+                        onClick={(e) => clickWishlist(e, state.product[5])}
+                      >
                         <i className="bi bi-suit-heart"></i>
                       </a>
                     </div>
