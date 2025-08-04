@@ -63,7 +63,9 @@ function Sub09Cart(props) {
   const clickMinus = (e, data) => {
     e.preventDefault();
     let change = cartAsset.map((el) =>
-      el.id === data.id ? { ...el, 수량: el.수량 - 1 } : { ...el }
+      el.id === data.id
+        ? { ...el, 수량: el.수량 - 1 <= 1 ? 1 : el.수량 - 1 }
+        : { ...el }
     );
     dispatch(cartAction(change));
   };
@@ -143,7 +145,8 @@ function Sub09Cart(props) {
                     />
                     <button
                       className="active"
-                      onClick={(e) => clickPlus(e, el)}>
+                      onClick={(e) => clickPlus(e, el)}
+                    >
                       +
                     </button>
                   </div>

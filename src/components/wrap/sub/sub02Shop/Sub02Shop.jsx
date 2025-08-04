@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./scss/Sub02Shop.scss";
 import { Link, useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { wishAction } from "../../../../store/wishlist";
 
 function Sub02Shop(props) {
+  const dispatch = useDispatch();
   const [state, setState] = useState({
     product: [],
   });
-
   const [필터상품, set필터상품] = useState([]);
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
@@ -44,6 +46,17 @@ function Sub02Shop(props) {
         console.log(err);
       });
   }, []);
+
+  const clickWishlist = (e, data) => {
+    e.preventDefault();
+    let arr = [];
+    if (localStorage.getItem("위시리스트") !== null) {
+      arr = JSON.parse(localStorage.getItem("위시리스트"));
+    }
+    if (arr.some((el) => el.id === data.id)) return;
+    arr = [data, ...arr];
+    dispatch(wishAction(arr));
+  };
 
   if (!state.product || state.product.length < 24) return <div>Loading…</div>;
   return (
@@ -86,7 +99,11 @@ function Sub02Shop(props) {
                     />
                   </Link>
                   <div className="wish-list">
-                    <a href="!#" title="Wishlist">
+                    <a
+                      href="!#"
+                      title="Wishlist"
+                      onClick={(e) => clickWishlist(e, item)}
+                    >
                       <i className="bi bi-suit-heart"></i>
                     </a>
                   </div>
