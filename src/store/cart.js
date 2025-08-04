@@ -9,7 +9,6 @@ const cart = createSlice({
     cartAction(state, action) {
       state.cart = action.payload;
       localStorage.setItem("장바구니", JSON.stringify(state.cart));
-      console.log(state.cart);
     },
   },
 });

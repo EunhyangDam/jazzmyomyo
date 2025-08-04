@@ -131,10 +131,10 @@
                 }
                 button {
                   font-size: 10px;
-                  cursor: pointer;
                   background: #ededed;
                   color: #aaa;
                   &.active {
+                    cursor: pointer;
                     color: $sub-color1;
                   }
                 }
@@ -154,6 +154,7 @@
           }
           &.sold-out {
             text-decoration: line-through;
+            color: #747474;
           }
         }
       }

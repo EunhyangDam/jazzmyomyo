@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./scss/Section7Component.scss";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { wishAction } from "../../../store/wishlist";
 
 export default function Section7Component(props) {
+  const dispatch = useDispatch();
+  const wishlist = useSelector((state) => state.wishlist.위시리스트);
   const [state, setState] = useState({
     product: [],
   });
-  const dispatch = useDispatch();
   useEffect(() => {
     fetch("/json/product.json", { method: "GET" })
       .then((res) => res.json())
@@ -23,12 +24,14 @@ export default function Section7Component(props) {
   }, []);
   const clickWishlist = (e, data) => {
     e.preventDefault();
-    let arr = [];
-    if (localStorage.getItem("위시리스트") !== null) {
-      arr = JSON.parse(localStorage.getItem("위시리스트"));
+    let arr = wishlist;
+    let isClicked = false;
+    arr.map((el) => el.id).includes(data.id) && (isClicked = true);
+    if (!isClicked) {
+      arr = [data, ...arr];
+    } else {
+      arr = arr.filter((el) => el.id !== data.id);
     }
-    if (arr.some((el) => el.id === data.id)) return;
-    arr = [data, ...arr];
     dispatch(wishAction(arr));
   };
   if (!state.product || state.product.length < 24) return <div>Loading…</div>;
@@ -62,7 +65,14 @@ export default function Section7Component(props) {
                     </Link>
                     <div className="wish-list">
                       <Link to="/Wishlist" title="Wishlist">
-                        <i className="bi bi-suit-heart"></i>
+                        <i
+                          className={`bi bi-suit-heart${
+                            wishlist
+                              .map((el) => el.id)
+                              .includes(state.product[3].id)
+                              ? "-fill"
+                              : ""
+                          }`}></i>
                       </Link>
                     </div>
                   </div>
@@ -93,9 +103,15 @@ export default function Section7Component(props) {
                       <a
                         href="!#"
                         title="Wishlist"
-                        onClick={(e) => clickWishlist(e, state.product[23])}
-                      >
-                        <i className="bi bi-suit-heart"></i>
+                        onClick={(e) => clickWishlist(e, state.product[23])}>
+                        <i
+                          className={`bi bi-suit-heart${
+                            wishlist
+                              .map((el) => el.id)
+                              .includes(state.product[23].id)
+                              ? "-fill"
+                              : ""
+                          }`}></i>
                       </a>
                     </div>
                   </div>
@@ -119,9 +135,15 @@ export default function Section7Component(props) {
                       <a
                         href="!#"
                         title="Wishlist"
-                        onClick={(e) => clickWishlist(e, state.product[12])}
-                      >
-                        <i className="bi bi-suit-heart"></i>
+                        onClick={(e) => clickWishlist(e, state.product[12])}>
+                        <i
+                          className={`bi bi-suit-heart${
+                            wishlist
+                              .map((el) => el.id)
+                              .includes(state.product[12].id)
+                              ? "-fill"
+                              : ""
+                          }`}></i>
                       </a>
                     </div>
                   </div>
@@ -145,9 +167,15 @@ export default function Section7Component(props) {
                       <a
                         href="!#"
                         title="Wishlist"
-                        onClick={(e) => clickWishlist(e, state.product[1])}
-                      >
-                        <i className="bi bi-suit-heart"></i>
+                        onClick={(e) => clickWishlist(e, state.product[1])}>
+                        <i
+                          className={`bi bi-suit-heart${
+                            wishlist
+                              .map((el) => el.id)
+                              .includes(state.product[1].id)
+                              ? "-fill"
+                              : ""
+                          }`}></i>
                       </a>
                     </div>
                   </div>
@@ -167,9 +195,15 @@ export default function Section7Component(props) {
                       <a
                         href="!#"
                         title="Wishlist"
-                        onClick={(e) => clickWishlist(e, state.product[5])}
-                      >
-                        <i className="bi bi-suit-heart"></i>
+                        onClick={(e) => clickWishlist(e, state.product[5])}>
+                        <i
+                          className={`bi bi-suit-heart${
+                            wishlist
+                              .map((el) => el.id)
+                              .includes(state.product[5].id)
+                              ? "-fill"
+                              : ""
+                          }`}></i>
                       </a>
                     </div>
                   </div>

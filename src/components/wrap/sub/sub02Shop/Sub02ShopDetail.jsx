@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./scss/Sub02ShopDetail.scss";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from "../../../../store/cart";
 import { wishAction } from "../../../../store/wishlist";
@@ -8,8 +8,10 @@ import { wishAction } from "../../../../store/wishlist";
 function Sub02ShopDetail(props) {
   const location = useLocation();
   const dispatch = useDispatch();
+  const navigation = useNavigate();
 
   const wishAsset = useSelector((state) => state.wishlist.위시리스트);
+  const cartAsset = useSelector((state) => state.cart.cart);
 
   const [state, setState] = useState({
     product: [],
@@ -88,6 +90,7 @@ function Sub02ShopDetail(props) {
         console.log(err);
       });
   }, []);
+
   const clickWishlist = (e) => {
     e.preventDefault();
     let arr = wishAsset;
@@ -99,6 +102,18 @@ function Sub02ShopDetail(props) {
       arr = arr.filter((el) => el.id !== product.data.id);
     }
     dispatch(wishAction(arr));
+  };
+  const clickCart = (e) => {
+    e.preventDefault();
+    let arr = cartAsset;
+    let isCliked = false;
+    arr.map((el) => el.id).includes(product.data.id) && (isCliked = true);
+    if (!isCliked) {
+      arr = [product.data, ...arr];
+    } else {
+    }
+    dispatch(cartAction(arr));
+    navigation("/Cart");
   };
   if (!state.product || state.product.length < 24) return <div>Loading…</div>;
   return (
@@ -141,7 +156,6 @@ function Sub02ShopDetail(props) {
                   <li className="item-price">
                     <em>{product.data.가격.toLocaleString("ko-KR")}원</em>
                   </li>
-
                   <li className="item-quantity">
                     <p>수량</p>
                     <div className="quantity-selector">
@@ -168,7 +182,9 @@ function Sub02ShopDetail(props) {
                   </li>
                   <li className="cart-wish">
                     <div className="add-cart">
-                      <a href="!#">장바구니에 추가</a>
+                      <a href="!#" onClick={clickCart}>
+                        장바구니에 추가
+                      </a>
                     </div>
                     <div className="add-wish">
                       <a href="!#" title="Wishlist" onClick={clickWishlist}>
@@ -179,8 +195,7 @@ function Sub02ShopDetail(props) {
                               .includes(product.data.id)
                               ? "-fill"
                               : ""
-                          }`}
-                        ></i>
+                          }`}></i>
                       </a>
                     </div>
                   </li>
@@ -218,19 +233,16 @@ function Sub02ShopDetail(props) {
                   return (
                     <li
                       key={idx}
-                      className={isToggleSection ? "plus" : "delivery"}
-                    >
+                      className={isToggleSection ? "plus" : "delivery"}>
                       <div
                         className="delivery-title"
-                        onClick={() => isToggleSection && handleToggle(idx)}
-                      >
+                        onClick={() => isToggleSection && handleToggle(idx)}>
                         <h3>[{title}]</h3>
                         {isToggleSection && (
                           <a
                             href="#"
                             className="icon"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                            onClick={(e) => e.preventDefault()}>
                             {isOpen ? (
                               <i className="bi bi-dash" />
                             ) : (
@@ -251,8 +263,7 @@ function Sub02ShopDetail(props) {
                                   <a
                                     href="!#"
                                     target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
+                                    rel="noopener noreferrer">
                                     '주문내역'
                                   </a>
                                   &nbsp;에서 확인할 수 있습니다.

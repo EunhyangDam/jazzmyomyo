@@ -13,9 +13,11 @@ function Sub09Cart(props) {
     check: [],
   });
   useEffect(() => {
+    let arr = cartAsset;
+    arr = arr.map((el) => (el.품절 === true ? { ...el, 수량: 0 } : { ...el }));
     setState({
       ...state,
-      product: cartAsset,
+      product: arr,
     });
   }, [cartAsset]);
 
@@ -64,7 +66,7 @@ function Sub09Cart(props) {
   /**증감 */
   const clickMinus = (e, data) => {
     e.preventDefault();
-    let change = cartAsset.map((el) =>
+    let change = state.product.map((el) =>
       el.id === data.id
         ? { ...el, 수량: el.수량 - 1 <= 1 ? 1 : el.수량 - 1 }
         : { ...el }
@@ -73,7 +75,7 @@ function Sub09Cart(props) {
   };
   const clickPlus = (e, data) => {
     e.preventDefault();
-    let change = cartAsset.map((el) =>
+    let change = state.product.map((el) =>
       el.id === data.id ? { ...el, 수량: el.수량 + 1 } : { ...el }
     );
     dispatch(cartAction(change));
@@ -82,7 +84,7 @@ function Sub09Cart(props) {
     <div id="sub09Cart" className="sub-page">
       <div className="inner">
         <div className="site">
-          <Link to="./">
+          <Link to="/mainComponent">
             <i className="bi bi-house-fill"></i>
           </Link>
           <i>&gt;</i>
@@ -100,8 +102,8 @@ function Sub09Cart(props) {
                   name="allChk"
                   onChange={changeAll}
                   checked={
-                    cartAsset.length === state.check.length &&
-                    cartAsset.length > 0
+                    state.product.length === state.check.length &&
+                    state.product.length > 0
                   }
                 />
               </div>
@@ -110,7 +112,7 @@ function Sub09Cart(props) {
               <div className="col col4">배송구분</div>
               <div className="col col5">주문금액</div>
             </dt>
-            {cartAsset.map((el, idx) => (
+            {state.product.map((el, idx) => (
               <dd className={el.품절 && "sold-out"} key={el.id}>
                 <div className="col col1">
                   <input
@@ -138,7 +140,11 @@ function Sub09Cart(props) {
                 </div>
                 <div className="col col3">
                   <div className="container">
-                    <button onClick={(e) => clickMinus(e, el)}>-</button>
+                    <button
+                      className={el.수량 > 1 && "active"}
+                      onClick={(e) => clickMinus(e, el)}>
+                      -
+                    </button>
                     <input
                       type="number"
                       name="inputNumber"
@@ -146,9 +152,8 @@ function Sub09Cart(props) {
                       value={el.수량}
                     />
                     <button
-                      className="active"
-                      onClick={(e) => clickPlus(e, el)}
-                    >
+                      className={el.수량 > 0 && "active"}
+                      onClick={(e) => clickPlus(e, el)}>
                       +
                     </button>
                   </div>
