@@ -64,15 +64,15 @@ export default function WrapComponent(props) {
 
   /**로컬스토레이지 불러오기 */
   useEffect(() => {
-    const localStorage = [
+    const localStorage_arr = [
       { key: "위시리스트", action: wishAction },
       { key: "장바구니", action: cartAction },
     ];
     try {
-      localStorage.forEach((el) => {
+      localStorage_arr.forEach((el) => {
         const data = localStorage.getItem(el.key);
         if (data) {
-          dispatch(data);
+          dispatch(el.action(data));
         }
       });
     } catch (error) {
