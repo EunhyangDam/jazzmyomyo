@@ -54,27 +54,33 @@ import { useDispatch } from "react-redux";
 import { wishAction } from "../store/wishlist";
 import { headerAction } from "../store/header";
 import { cartAction } from "../store/cart";
+import ConfirmModalComponent from "./wrap/ConfirmModalComponent";
 export default function WrapComponent(props) {
+  /**인스턴스 생성 */
   const dispatch = useDispatch();
   const location = useLocation();
 
-  /**위시리스트 */
+  /**스테이트 불러오기 */
+
+  /**로컬스토레이지 불러오기 */
   useEffect(() => {
-    let arr = [];
-    if (localStorage.getItem("위시리스트") !== null) {
-      arr = JSON.parse(localStorage.getItem("위시리스트"));
+    const localStorage = [
+      { key: "위시리스트", action: wishAction },
+      { key: "장바구니", action: cartAction },
+    ];
+    try {
+      localStorage.forEach((el) => {
+        const data = localStorage.getItem(el.key);
+        if (data) {
+          dispatch(data);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      alert("local storage error!");
     }
-    dispatch(wishAction(arr));
   }, []);
 
-  /**장바구니 */
-  useEffect(() => {
-    let arr = [];
-    if (localStorage.getItem("장바구니") !== null) {
-      arr = JSON.parse(localStorage.getItem("장바구니"));
-    }
-    dispatch(cartAction(arr));
-  }, []);
   /**페이지 추적 */
   useEffect(() => {
     if (location.pathname === "/" || location.pathname === "/mainComponent") {
@@ -139,6 +145,7 @@ export default function WrapComponent(props) {
         </Route>
       </Routes>
       <FooterComponent />
+      <ConfirmModalComponent />
     </div>
   );
 }

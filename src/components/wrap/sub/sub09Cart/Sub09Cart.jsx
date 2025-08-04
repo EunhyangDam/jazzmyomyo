@@ -60,6 +60,8 @@ function Sub09Cart(props) {
     e.preventDefault();
     navigation(-1);
   };
+
+  /**증감 */
   const clickMinus = (e, data) => {
     e.preventDefault();
     let change = cartAsset.map((el) =>
