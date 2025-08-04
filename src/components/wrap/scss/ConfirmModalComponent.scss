@@ -1,0 +1,73 @@
+@use "../../scss/variables" as *;
+#confirmModalComponent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba($color: #000000, $alpha: 0.7);
+  backdrop-filter: blur(5px);
+  z-index: 15;
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    .content {
+      margin: auto;
+      background: #fff;
+      max-width: 700px;
+      padding: 20px 30px;
+      border-radius: $border-radius;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      column-gap: 30px;
+      .col {
+        &.col1 {
+          .sentence {
+            margin-bottom: 30px;
+            p {
+              &.heading {
+                font-size: $size3;
+                font-family: $font2;
+                margin-bottom: 10px;
+                color: $primary-color;
+              }
+              &.explain {
+                text-align: justify;
+                color: #777;
+                line-height: 1.3;
+              }
+            }
+          }
+          .button {
+            button {
+              padding: 5px 10px;
+              background: none;
+              border: none;
+              cursor: pointer;
+              font-family: $font1;
+              font-weight: 900;
+              font-size: 16px;
+              &:first-child {
+                margin-right: 10px;
+                color: $primary-color;
+              }
+              &:last-child {
+                background: $primary-color;
+                border-radius: 6px;
+                color: #fff;
+              }
+            }
+          }
+        }
+        &.col2 {
+          i {
+            font-size: 150px;
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}

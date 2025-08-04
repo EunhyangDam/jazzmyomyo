@@ -50,17 +50,19 @@ import Page404Component from "./wrap/Page404Component";
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./scss/WrapComponent.scss";
 import Sub10Wishlist from "./wrap/sub/sub10Wishlist/Sub10Wishlist";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { wishAction } from "../store/wishlist";
 import { headerAction } from "../store/header";
 import { cartAction } from "../store/cart";
 import ConfirmModalComponent from "./wrap/ConfirmModalComponent";
+import { confirmModalAction } from "../store/confirmModal";
 export default function WrapComponent(props) {
   /**인스턴스 생성 */
   const dispatch = useDispatch();
   const location = useLocation();
 
   /**스테이트 불러오기 */
+  const confirmIsOn = useSelector((state) => state.confirmModal.isON);
 
   /**로컬스토레이지 불러오기 */
   useEffect(() => {
@@ -69,10 +71,10 @@ export default function WrapComponent(props) {
       { key: "장바구니", action: cartAction },
     ];
     try {
-      localStorage_arr.forEach((el) => {
-        const data = localStorage.getItem(el.key);
+      localStorage_arr.forEach(({ key, action }) => {
+        const data = localStorage.getItem(key);
         if (data) {
-          dispatch(el.action(data));
+          dispatch(action(JSON.stringify(data)));
         }
       });
     } catch (error) {
@@ -89,6 +91,9 @@ export default function WrapComponent(props) {
       dispatch(headerAction(true));
     }
   }, [location]);
+
+  /**컨펌모달 제어문 */
+  useEffect(() => {}, [confirmIsOn]);
   return (
     <div id="wrap">
       <Routes>
@@ -145,7 +150,7 @@ export default function WrapComponent(props) {
         </Route>
       </Routes>
       <FooterComponent />
-      <ConfirmModalComponent />
+      {confirmIsOn && <ConfirmModalComponent />}
     </div>
   );
 }

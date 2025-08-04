@@ -1,19 +1,16 @@
 import React from "react";
-
+import "./scss/ConfirmModalComponent.scss";
+import { useSelector } from "react-redux";
 function ConfirmModalComponent(props) {
+  const asset = useSelector((state) => state.confirmModal);
   return (
-    <div id="comfirmModalComponent">
+    <div id="confirmModalComponent">
       <div className="container">
         <div className="content">
           <div className="col1 col">
             <div className="sentence">
-              <p className="heading">냐냥냐묘묘</p>
-              <p className="explain">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Corrupti, error repellat voluptates eius ducimus molestias vitae
-                quasi, ea aliquid laboriosam molestiae facere est! Rem beatae
-                facilis pariatur laboriosam, exercitationem excepturi.
-              </p>
+              <p className="heading">{asset.heading}</p>
+              <p className="explain">{asset.explain}</p>
             </div>
             <div className="button">
               <button>취소</button>

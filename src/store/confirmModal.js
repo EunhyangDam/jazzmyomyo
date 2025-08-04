@@ -18,4 +18,4 @@ const confirmModal = createSlice({
   },
 });
 export default confirmModal.reducer;
-export const { wishAction } = confirmModal.actions;
+export const { confirmModalAction } = confirmModal.actions;

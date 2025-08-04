@@ -8,8 +8,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import wishlist from "./store/wishlist";
 import header from "./store/header";
 import cart from "./store/cart";
+import confirmModal from "./store/confirmModal";
 let store = configureStore({
-  reducer: { wishlist, header, cart },
+  reducer: { wishlist, header, cart, confirmModal },
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
