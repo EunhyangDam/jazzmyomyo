@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./scss/Sub02Shop.scss";
 import { Link, useSearchParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { wishAction } from "../../../../store/wishlist";
 
 function Sub02Shop(props) {
   const dispatch = useDispatch();
+  const wishlistAsset = useSelector((state) => state.wishlist.위시리스트);
   const [state, setState] = useState({
     product: [],
   });
@@ -49,12 +50,12 @@ function Sub02Shop(props) {
 
   const clickWishlist = (e, data) => {
     e.preventDefault();
-    let arr = [];
-    if (localStorage.getItem("위시리스트") !== null) {
-      arr = JSON.parse(localStorage.getItem("위시리스트"));
+    let arr = wishlistAsset;
+    if (arr.some((el) => el.id === data.id)) {
+      arr = arr.filter((el) => el.id !== data.id);
+    } else {
+      arr = [data, ...arr];
     }
-    if (arr.some((el) => el.id === data.id)) return;
-    arr = [data, ...arr];
     dispatch(wishAction(arr));
   };
 
@@ -90,7 +91,7 @@ function Sub02Shop(props) {
                 data-key={item.상품명}
               >
                 <div className="gap">
-                  <Link to={`/ShopDetail`}>
+                  <Link to="/ShopDetail" state={item}>
                     <img
                       src={
                         item.이미지.length > 1 ? item.이미지[0] : item.이미지
@@ -104,12 +105,18 @@ function Sub02Shop(props) {
                       title="Wishlist"
                       onClick={(e) => clickWishlist(e, item)}
                     >
-                      <i className="bi bi-suit-heart"></i>
+                      <i
+                        className={`bi bi-suit-heart${
+                          wishlistAsset.map((el) => el.id).includes(item.id)
+                            ? "-fill"
+                            : ""
+                        }`}
+                      ></i>
                     </a>
                   </div>
                 </div>
                 <div className="caption-box">
-                  <Link to={`/ShopDetail`}>
+                  <Link to="/ShopDetail" state={item}>
                     {item.상품명.includes("-") ? (
                       <>
                         <span>{item.상품명.split("-")[1]}</span>

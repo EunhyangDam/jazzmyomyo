@@ -1,12 +1,29 @@
 import React, { useState, useEffect } from "react";
 import "./scss/Sub02ShopDetail.scss";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { cartAction } from "../../../../store/cart";
+import { wishAction } from "../../../../store/wishlist";
 
 function Sub02ShopDetail(props) {
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  const wishAsset = useSelector((state) => state.wishlist.위시리스트);
+
   const [state, setState] = useState({
     product: [],
   });
+  const [product, setProduct] = useState({
+    data: {},
+  });
 
+  /**로케이션 데이터 불러오기 */
+  useEffect(() => {
+    setProduct({
+      data: location.state,
+    });
+  }, []);
   // 배송안내 관련
   const [delivery, setDelivery] = useState({
     delivery: [],
@@ -44,7 +61,6 @@ function Sub02ShopDetail(props) {
       ),
     }));
   };
-
   const onChangeNumber = () => {};
 
   useEffect(() => {
@@ -72,7 +88,18 @@ function Sub02ShopDetail(props) {
         console.log(err);
       });
   }, []);
-
+  const clickWishlist = (e) => {
+    e.preventDefault();
+    let arr = wishAsset;
+    let isCliked = false;
+    arr.map((el) => el.id).includes(product.data.id) && (isCliked = true);
+    if (!isCliked) {
+      arr = [product.data, ...arr];
+    } else {
+      arr = arr.filter((el) => el.id !== product.data.id);
+    }
+    dispatch(wishAction(arr));
+  };
   if (!state.product || state.product.length < 24) return <div>Loading…</div>;
   return (
     <div id="sub02ShopDetail">
@@ -102,17 +129,17 @@ function Sub02ShopDetail(props) {
               <div className="left">
                 <div className="img-box">
                   <div className="gap">
-                    <img src={state.product[0].이미지[0]} alt="상품이미지" />
+                    <img src={product.data.이미지[0]} alt="상품이미지" />
                   </div>
                 </div>
               </div>
               <div className="right">
                 <ul>
                   <li className="item-name">
-                    <h2>{state.product[0].상품명}</h2>
+                    <h2>{product.data.상품명}</h2>
                   </li>
                   <li className="item-price">
-                    <em>{state.product[0].가격.toLocaleString("ko-KR")}원</em>
+                    <em>{product.data.가격.toLocaleString("ko-KR")}원</em>
                   </li>
 
                   <li className="item-quantity">
@@ -144,8 +171,16 @@ function Sub02ShopDetail(props) {
                       <a href="!#">장바구니에 추가</a>
                     </div>
                     <div className="add-wish">
-                      <a href="!#" title="Wishlist">
-                        <i className="bi bi-suit-heart"></i>
+                      <a href="!#" title="Wishlist" onClick={clickWishlist}>
+                        <i
+                          className={`bi bi-suit-heart${
+                            wishAsset
+                              .map((el) => el.id)
+                              .includes(product.data.id)
+                              ? "-fill"
+                              : ""
+                          }`}
+                        ></i>
                       </a>
                     </div>
                   </li>
@@ -158,11 +193,11 @@ function Sub02ShopDetail(props) {
             <div className="bottom">
               <div className="description">
                 <h3>[제품 설명]</h3>
-                <p>상품명 : {state.product[0].상품명}</p>
-                <p>상품분류 : {state.product[0].상품분류}</p>
-                <p>상품소개 : {state.product[0].설명}</p>
+                <p>상품명 : {product.data.상품명}</p>
+                <p>상품분류 : {product.data.상품분류}</p>
+                <p>상품소개 : {product.data.설명}</p>
                 <div className="img-box">
-                  {state.product[0].이미지.map((img, index) => (
+                  {product.data.이미지.map((img, index) => (
                     <img
                       key={index}
                       src={img}

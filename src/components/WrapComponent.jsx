@@ -74,12 +74,11 @@ export default function WrapComponent(props) {
       localStorage_arr.forEach(({ key, action }) => {
         const data = localStorage.getItem(key);
         if (data) {
-          dispatch(action(JSON.stringify(data)));
+          dispatch(action(JSON.parse(data)));
         }
       });
     } catch (error) {
       console.log(error);
-      alert("local storage error!");
     }
   }, []);
 
@@ -92,8 +91,6 @@ export default function WrapComponent(props) {
     }
   }, [location]);
 
-  /**컨펌모달 제어문 */
-  useEffect(() => {}, [confirmIsOn]);
   return (
     <div id="wrap">
       <Routes>

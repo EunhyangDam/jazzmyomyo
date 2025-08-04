@@ -8,7 +8,6 @@ const header = createSlice({
   reducers: {
     headerAction(state, action) {
       state.isMain = action.payload;
-      console.log("페일로드", state.isMain);
     },
   },
 });

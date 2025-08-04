@@ -29,11 +29,10 @@ export default function Sub10Wishilist(props) {
   };
   const clickCart = (e, data) => {
     e.preventDefault();
-    let arr = [];
-    arr = [data, ...cart];
-    if (cart.some((el) => el.id === data.id)) return;
-    dispatch(cartAction(arr));
-    // navigation("/ShopDetail", { state: data });
+    navigation(
+      { hash: "", pathname: "/ShopDetail", search: `product=${data.id}` },
+      { state: data }
+    );
   };
   return (
     <div id="sub10Wishilist" className="sub-page">
@@ -82,7 +81,8 @@ export default function Sub10Wishilist(props) {
                 <li
                   key={el.id}
                   data-key={el.id}
-                  className={el.품절 && "sold-out"}>
+                  className={el.품절 && "sold-out"}
+                >
                   <div className="img-container">
                     <a href="!#" onClick={(e) => clickCart(e, el)}>
                       <img src={el.이미지[0]} alt={el.설명} />
