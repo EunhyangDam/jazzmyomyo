@@ -37,11 +37,11 @@
       "main": "Schedule",
       "link": "AboutLive",
       "sub": [
-        { "name": "캘린더", "link": "AboutLive" },
-        { "name": "공연 정보", "link": "Artist" },
-        { "name": "아티스트 정보", "link": "BuyTicket" },
-        { "name": "티켓 예매", "link": "Lental" },
-        { "name": "대관 신청", "link": "Monthly" }
+        { "name": "캘린더", "link": "Monthly" },
+        { "name": "공연 정보", "link": "AboutLive" },
+        { "name": "아티스트 정보", "link": "Artist" },
+        { "name": "티켓 예매", "link": "BuyTicket" },
+        { "name": "대관 신청", "link": "Lental" }
       ]
     },
     {
