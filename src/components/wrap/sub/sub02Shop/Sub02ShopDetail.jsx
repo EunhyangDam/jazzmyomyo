@@ -4,12 +4,14 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from "../../../../store/cart";
 import { wishAction } from "../../../../store/wishlist";
+import { confirmModalAction } from "../../../../store/confirmModal";
 
 function Sub02ShopDetail(props) {
   const location = useLocation();
   const dispatch = useDispatch();
 
   const wishAsset = useSelector((state) => state.wishlist.위시리스트);
+  const cartAsset = useSelector((state) => state.cart.cart);
 
   const [state, setState] = useState({
     product: [],
@@ -100,6 +102,31 @@ function Sub02ShopDetail(props) {
     }
     dispatch(wishAction(arr));
   };
+  const cartWish = (e) => {
+    e.preventDefault();
+    let arr = cartAsset;
+    let isClicked = false;
+    arr.map((el) => el.id).includes(product.data.id) && (isClicked = true);
+    if (!isClicked) {
+      arr = [product.data, ...arr];
+      let obj = {
+        heading: "장바구니에 추가되었습니다.",
+        explain: "",
+        isON: true,
+        isConfirm: false,
+      };
+      dispatch(confirmModalAction(obj));
+    } else {
+      let obj = {
+        heading: "이미 추가된 상품입니다.",
+        explain: "",
+        isON: true,
+        isConfirm: false,
+      };
+      dispatch(confirmModalAction(obj));
+    }
+    dispatch(cartAction(arr));
+  };
   if (!state.product || state.product.length < 24) return <div>Loading…</div>;
   return (
     <div id="sub02ShopDetail">
@@ -168,7 +195,9 @@ function Sub02ShopDetail(props) {
                   </li>
                   <li className="cart-wish">
                     <div className="add-cart">
-                      <a href="!#">장바구니에 추가</a>
+                      <a href="!#" onClick={cartWish}>
+                        장바구니에 추가
+                      </a>
                     </div>
                     <div className="add-wish">
                       <a href="!#" title="Wishlist" onClick={clickWishlist}>
