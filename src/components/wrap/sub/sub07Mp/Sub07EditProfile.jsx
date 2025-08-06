@@ -1,7 +1,46 @@
 import React from "react";
 import "./scss/Sub07EditProfile.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { confirmModalAction } from "../../../../store/confirmModal";
+
 function Sub07EditProfile(props) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const onClickCancelEdit = (e) => {
+    e.preventDefault();
+
+    const obj = {
+      heading: "수정을 취소합니다",
+      explain: "",
+      isON: true,
+      isConfirm: false,
+      message1: "",
+      message2: "",
+      isYes: false,
+    };
+
+    dispatch(confirmModalAction(obj));
+    navigate("/MyProfile");
+  };
+
+  const onClickFinishEdit = (e) => {
+    e.preventDefault();
+
+    const obj = {
+      heading: "수정이 완료되었습니다",
+      explain: "",
+      isON: true,
+      isConfirm: false,
+      message1: "",
+      message2: "",
+      isYes: false,
+    };
+
+    dispatch(confirmModalAction(obj));
+  };
+
   return (
     <div id="sub07EditProfile">
       <div className="container">
@@ -26,19 +65,26 @@ function Sub07EditProfile(props) {
                 <Link to="/EditProfile">회원정보 수정</Link>
               </li>
               <li>
+                <Link to="/AddressList">배송지 관리</Link>
+              </li>
+              <li>
                 <Link to="/DeleteAccount">회원 탈퇴</Link>
               </li>
+
               <li className="sub-title">
                 <h3>이용내역</h3>
               </li>
               <li>
-                <Link to="/MyOrder">예매내역 확인</Link>
+                <Link to="/MyOrder">티켓예매 내역</Link>
               </li>
               <li>
-                <Link to="/MyOrder">주문내역 확인</Link>
+                <Link to="/MyOrder">사전주문 내역</Link>
               </li>
               <li>
-                <Link to="/MyOrder">대관신청 확인</Link>
+                <Link to="/MyOrder">주문/ 배송조회</Link>
+              </li>
+              <li>
+                <Link to="/MyOrder">대관신청 내역</Link>
               </li>
               <li className="sub-title">
                 <h3>게시판</h3>
@@ -56,7 +102,7 @@ function Sub07EditProfile(props) {
           </div>
           <div className="user-info">
             <div className="head">
-              <h3>회원 정보 확인</h3>
+              <h3>회원 정보 수정</h3>
             </div>
             <div className="main">
               <ul>
@@ -129,16 +175,21 @@ function Sub07EditProfile(props) {
                     <span>이메일 수신 동의</span>
                   </div>
                   <div className="right">
-                    <input type="checkbox" />
-                    <span>동의</span>
-                    <input type="checkbox" /> <span>미동의</span>
+                    <label htmlFor="agree">
+                      <input type="checkbox" name="agree" id="agree" checked />
+                      <span>동의</span>
+                    </label>
+                    <label htmlFor="disagree">
+                      <input type="checkbox" name="disagree" id="disagree" />
+                      <span>미동의</span>
+                    </label>
                   </div>
                 </li>
               </ul>
             </div>
             <div className="foot">
-              <button>수정취소</button>
-              <button>수정완료</button>
+              <button onClick={onClickCancelEdit}>수정취소</button>
+              <button onClick={onClickFinishEdit}>수정완료</button>
             </div>
           </div>
         </div>

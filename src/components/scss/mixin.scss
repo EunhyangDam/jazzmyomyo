@@ -20,7 +20,6 @@
       padding: 6px;
       font-weight: 600;
       color: #fff;
-      cursor: default;
       &:not(:last-child) {
         margin-right: 5px;
       }
@@ -29,6 +28,16 @@
       }
       &.sold-out {
         background: $sub-color1;
+      }
+    }
+    @media all and (max-width: 580px) {
+      span {
+        font-size: $small;
+      }
+    }
+    @media all and (max-width: 475px) {
+      span {
+        padding: 4px 3px;
       }
     }
   }

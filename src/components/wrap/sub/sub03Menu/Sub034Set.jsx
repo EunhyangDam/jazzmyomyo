@@ -105,7 +105,11 @@ export default function Sub034Set() {
             className={`set-item ${idx % 2 === 1 ? 'row-reverse' : ''}`}
             key={idx}
           >
-            <div className="set-img" onClick={() => openModal(idx)}>
+            <div 
+            className="set-img" 
+            onClick={() => openModal(idx)}
+            style={{ cursor: 'url(/img/main_menu/cursor-cat.png), auto' }}
+            >
               <img src={set.image} alt={set.title} />
             </div>
             <div className="set-text">

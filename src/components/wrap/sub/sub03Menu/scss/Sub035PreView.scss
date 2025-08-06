@@ -1,6 +1,6 @@
 @use "../../../../scss/variables" as *;
 
-#sub_pre {
+#sub_preView {
   font-family: 'Pretendard', sans-serif;
   padding: 80px 20px;
   display: flex;
@@ -8,7 +8,8 @@
 
   .board-view {
     background: #fffdf9;
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
     border: 1px solid #ccc;
     border-radius: 12px;
     padding: 40px;
@@ -81,7 +82,8 @@
   .view-actions {
     text-align: right;
     margin-top: 30px;
-  
+    flex-wrap: wrap;
+
     .back-btn,
     .edit-btn,
     .delete-btn {
@@ -93,11 +95,68 @@
       font-size: 14px;
       cursor: pointer;
       margin-left: 8px;
+      margin-top: 8px;
     }
-  
+
     .delete-btn {
       background-color: #aa4e4e;
     }
   }
-  
+
+
+  @media all and (max-width: 480px) {
+    margin-top: 50px;
+    padding: 40px 10px;
+
+    .board-view {
+      padding: 24px;
+    }
+
+    .view-header {
+      h2 {
+        font-size: 18px;
+      }
+      .view-meta {
+        font-size: 12px;
+      }
+    }
+
+    .view-body {
+      font-size: 15px;
+
+      .info-table {
+        th, td {
+          display: block;
+          width: 100%;
+        }
+
+        th {
+          background: #f6f2ea;
+          font-weight: 600;
+        }
+
+        td {
+          background: #fff;
+          border-bottom: 1px solid #eee;
+          margin-bottom: 10px;
+        }
+      }
+
+      .admin-reply {
+        padding: 16px;
+        font-size: 14px;
+      }
+    }
+
+    .view-actions {
+      text-align: center;
+
+      .back-btn,
+      .edit-btn,
+      .delete-btn {
+        width: 100%;
+        margin: 6px 0;
+      }
+    }
+  }
 }

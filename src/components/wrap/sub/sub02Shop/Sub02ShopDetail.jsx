@@ -4,12 +4,14 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from "../../../../store/cart";
 import { wishAction } from "../../../../store/wishlist";
+import { confirmModalAction } from "../../../../store/confirmModal";
 
 function Sub02ShopDetail(props) {
   const location = useLocation();
   const dispatch = useDispatch();
 
   const wishAsset = useSelector((state) => state.wishlist.위시리스트);
+  const cartAsset = useSelector((state) => state.cart.cart);
 
   const [state, setState] = useState({
     product: [],
@@ -100,6 +102,35 @@ function Sub02ShopDetail(props) {
     }
     dispatch(wishAction(arr));
   };
+  const cartWish = (e) => {
+    e.preventDefault();
+    let arr = cartAsset;
+    let isClicked = false;
+    arr.map((el) => el.id).includes(product.data.id) && (isClicked = true);
+    if (!isClicked) {
+      arr = [product.data, ...arr];
+      let obj = {
+        heading: "장바구니에 추가되었습니다.",
+        explain: "",
+        isON: true,
+        isConfirm: false,
+      };
+      dispatch(confirmModalAction(obj));
+    } else {
+      let obj = {
+        heading: "이미 추가된 상품입니다.",
+        explain: "",
+        isON: true,
+        isConfirm: false,
+      };
+      dispatch(confirmModalAction(obj));
+    }
+    dispatch(cartAction(arr));
+  };
+  //카테고리 밑줄 표시
+  const isGoods = product.data.상품분류 === "굿즈";
+  const isDisc = product.data.상품분류 === "음반";
+
   if (!state.product || state.product.length < 24) return <div>Loading…</div>;
   return (
     <div id="sub02ShopDetail">
@@ -114,12 +145,12 @@ function Sub02ShopDetail(props) {
             <ul>
               <li>
                 <a href="/Shop?category=굿즈">
-                  <span>굿즈</span>
+                  <span className={isGoods && "on"}>굿즈</span>
                 </a>
               </li>
               <li>
                 <a href="Shop?category=음반">
-                  <span>음반/LP</span>
+                  <span className={isDisc && "on"}>음반/LP</span>
                 </a>
               </li>
             </ul>
@@ -163,12 +194,22 @@ function Sub02ShopDetail(props) {
                   </li>
                   <li className="select-option">
                     <select name="option" id="option">
-                      <option value="">옵션 없음</option>
+                      {product.data.옵션 === null ? (
+                        <option value="">옵션 없음</option>
+                      ) : (
+                        product.data.옵션.map((item) => (
+                          <option value={item} key={item} data-key={item}>
+                            {item}
+                          </option>
+                        ))
+                      )}
                     </select>
                   </li>
                   <li className="cart-wish">
                     <div className="add-cart">
-                      <a href="!#">장바구니에 추가</a>
+                      <a href="!#" onClick={cartWish}>
+                        장바구니에 추가
+                      </a>
                     </div>
                     <div className="add-wish">
                       <a href="!#" title="Wishlist" onClick={clickWishlist}>

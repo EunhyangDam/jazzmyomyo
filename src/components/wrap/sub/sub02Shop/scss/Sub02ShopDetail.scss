@@ -46,13 +46,7 @@
           padding: 30px 0;
           li {
             margin: 0 20px;
-            &:first-child {
-              a {
-                span {
-                  border-bottom: 2px solid $sub-color1;
-                }
-              }
-            }
+
             a {
               transition: all 0.3s;
               span {
@@ -60,6 +54,10 @@
                 font-family: $font1;
 
                 &:hover {
+                  border-bottom: 2px solid $sub-color1;
+                }
+
+                &.on {
                   border-bottom: 2px solid $sub-color1;
                 }
               }
