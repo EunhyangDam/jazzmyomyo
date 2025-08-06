@@ -7,9 +7,11 @@ const cart = createSlice({
   },
   reducers: {
     cartAction(state, action) {
-      state.cart = action.payload;
+      let arr = action.payload.map((el) =>
+        el.품절 === true ? { ...el, 수량: 0 } : { ...el }
+      );
+      state.cart = arr;
       localStorage.setItem("장바구니", JSON.stringify(state.cart));
-      console.log(state.cart);
     },
   },
 });
