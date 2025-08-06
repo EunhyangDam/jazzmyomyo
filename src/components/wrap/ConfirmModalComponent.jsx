@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import "./scss/ConfirmModalComponent.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { confirmModalAction } from "../../store/confirmModal";
+import { confirmModalYesNoAction } from "../../store/confirmModal";
+
 function ConfirmModalComponent(props) {
   const dispatch = useDispatch();
   const asset = useSelector((state) => state.confirmModal);
@@ -12,9 +14,35 @@ function ConfirmModalComponent(props) {
       explain: "",
       isON: false,
       isConfirm: false,
+      //여기 추가
+      message1: "",
+      message2: "",
+      isYes: false, // 응답이 예스/노
     };
     dispatch(confirmModalAction(obj));
   };
+
+  //
+  // 옵션 2개일 때
+  const onClickMessage1 = (e) => {
+    e.preventDefault();
+    dispatch(confirmModalYesNoAction(true)); // 예 응답
+
+    const obj = {
+      isON: false,
+    };
+    dispatch(confirmModalAction(obj));
+  };
+
+  const onClickMessage2 = (e) => {
+    e.preventDefault();
+    dispatch(confirmModalYesNoAction(false)); // 아니오 응답
+    const obj = {
+      isON: false,
+    };
+    dispatch(confirmModalAction(obj));
+  };
+
   return (
     <div id="confirmModalComponent">
       <div className="container">
@@ -27,10 +55,11 @@ function ConfirmModalComponent(props) {
               )}
             </div>
 
-            {asset.isCOnfirm ? (
+            {asset.isConfirm ? (
               <div className="button">
-                <button>취소</button>
-                <button>지우기</button>
+                {/* 취소 / 지우기를 메시지 직접 입력하는 것으로 수정  */}
+                <button onClick={onClickMessage1}>{asset.message1}</button>
+                <button onClick={onClickMessage2}>{asset.message2}</button>
               </div>
             ) : (
               <div className="button">
