@@ -127,10 +127,13 @@ function Sub02ShopDetail(props) {
     }
     dispatch(cartAction(arr));
   };
+<<<<<<< HEAD
   //카테고리 밑줄 표시
   const isGoods = product.data.상품분류 === "굿즈";
   const isDisc = product.data.상품분류 === "음반";
 
+=======
+>>>>>>> a6029f2edb5a866a5763a17ba6c31f60fecf14e1
   if (!state.product || state.product.length < 24) return <div>Loading…</div>;
   return (
     <div id="sub02ShopDetail">

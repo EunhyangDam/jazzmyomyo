@@ -10,12 +10,31 @@
           text-align: center;
           &.col1 {
             width: 5%;
+            @media all and (max-width: 820px) {
+              width: 55px;
+            }
           }
           &.col2 {
             flex-grow: 1;
+            @media all and (max-width: 940px) {
+              width: 45%;
+              flex-grow: 0;
+            }
+            @media all and (max-width: 755px) {
+              padding-right: 20px;
+            }
+            @media all and (max-width: 470px) {
+              width: calc(100% - 55px);
+            }
           }
           &.col3 {
             width: 10%;
+            @media all and (max-width: 925px) {
+              width: 100px;
+            }
+            @media all and (max-width: 465px) {
+              width: 70px;
+            }
           }
           &.col4 {
             width: 20%;
@@ -35,6 +54,9 @@
               background: url(../../../../../../public/img/sub09cart/check.svg);
               background-size: 160%;
               background-position: center center;
+            }
+            @media all and (max-width: 505px) {
+              width: 15px;
             }
           }
         }
@@ -64,11 +86,23 @@
             &.col6 {
             }
           }
+          @media all and (max-width: 470px) {
+            .col {
+              @for $i from 2 through 6 {
+                &.col#{$i} {
+                  display: none;
+                }
+              }
+            }
+          }
         }
         dd {
           display: flex;
           align-items: center;
           padding-block: 20px;
+          @media all and (max-width: 470px) {
+            flex-wrap: wrap;
+          }
           .col {
             @include percent();
             &.col1 {
@@ -82,10 +116,37 @@
                 aspect-ratio: 1/1;
                 background: #000;
                 overflow: hidden;
+                flex-shrink: 0;
                 img {
                   width: 100%;
                   height: 100%;
                   object-fit: cover;
+                }
+              }
+              @media all and (max-width: 760px) {
+                .img-container {
+                  width: 100px;
+                }
+              }
+              @media all and (max-width: 625px) {
+                .img-container {
+                  width: 80px;
+                  align-self: flex-start;
+                }
+              }
+              @media all and (max-width: 580px) {
+                .img-container {
+                  width: 70px;
+                }
+              }
+              @media all and (max-width: 520px) {
+                .img-container {
+                  width: 60px;
+                }
+              }
+              @media all and (max-width: 520px) {
+                .img-container {
+                  width: 50px;
                 }
               }
               .txt-container {
@@ -98,6 +159,11 @@
                   font-size: 16px;
                   font-weight: 600;
                 }
+                @media all and (max-width: 470px) {
+                  h3 {
+                    font-size: 1rem;
+                  }
+                }
                 .bottom {
                   @include box();
                   p {
@@ -108,17 +174,48 @@
                   }
                 }
               }
+              @media all and (max-width: 580px) {
+                .txt-container {
+                  padding-block: 0px;
+                }
+              }
+            }
+            @media all and (max-width: 650px) {
+              &.col2 {
+                column-gap: 15px;
+                .txt-container {
+                  padding-right: 15px;
+                }
+              }
+            }
+            @media all and (max-width: 470px) {
+              &.col2 {
+                .img-container {
+                  width: 60px;
+                }
+                > * {
+                  &:not(:last-child) {
+                    margin-bottom: 6px;
+                  }
+                }
+              }
             }
             &.col3 {
               display: flex;
               justify-content: center;
               .container {
+                display: flex;
                 border: 1px solid #ccc;
                 > * {
                   width: 30px;
                   aspect-ratio: 1/1;
                   border: 0;
                   background: none;
+                }
+                @media all and (max-width: 465px) {
+                  > * {
+                    width: 22px;
+                  }
                 }
                 input {
                   text-align: center;
@@ -149,6 +246,16 @@
               span {
                 font-size: $size4;
                 font-weight: 600;
+              }
+              @media all and (max-width: 615px) {
+                span {
+                  font-size: inherit;
+                }
+              }
+            }
+            @media all and (max-width: 500px) {
+              &.col5 {
+                font-size: 1rem;
               }
             }
           }
