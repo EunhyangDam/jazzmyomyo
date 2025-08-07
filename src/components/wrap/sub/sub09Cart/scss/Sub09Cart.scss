@@ -35,12 +35,18 @@
             @media all and (max-width: 465px) {
               width: 70px;
             }
+            @media all and (max-width: 470px) {
+              width: auto;
+            }
           }
           &.col4 {
             width: 20%;
           }
           &.col5 {
             width: 20%;
+            @media all and (max-width: 390px) {
+              flex-shrink: 0;
+            }
           }
         }
         @mixin input() {
@@ -102,11 +108,15 @@
           padding-block: 20px;
           @media all and (max-width: 470px) {
             flex-wrap: wrap;
+            row-gap: 10px;
           }
           .col {
             @include percent();
             &.col1 {
               @include input();
+              @media all and (max-width: 470px) {
+                align-self: flex-start;
+              }
             }
             &.col2 {
               display: flex;
@@ -191,7 +201,7 @@
             @media all and (max-width: 470px) {
               &.col2 {
                 .img-container {
-                  width: 60px;
+                  width: 80px;
                 }
                 > * {
                   &:not(:last-child) {
@@ -236,10 +246,18 @@
                   }
                 }
               }
+              @media all and (max-width: 470px) {
+                padding-left: 55px;
+              }
             }
             &.col4 {
               font-size: 13px;
               font-weight: 600;
+              @media all and (max-width: 470px) {
+                flex-grow: 1;
+                text-align: justify;
+                margin-left: 10px;
+              }
             }
             &.col5 {
               font-size: 18px;
