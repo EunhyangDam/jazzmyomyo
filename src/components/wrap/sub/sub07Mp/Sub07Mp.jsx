@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./scss/Sub07Mp.scss";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Sub07Mp(props) {
+  const cartAsset = useSelector((state) => state.cart.cart);
+  const wishAsset = useSelector((state) => state.wishlist.위시리스트);
   const [isOn, setIsOn] = useState(false);
   const onClickProfile = (e) => {
     setIsOn((prev) => !prev);
@@ -44,13 +47,13 @@ function Sub07Mp(props) {
                 <li className="col2">
                   <h2>위시리스트</h2>
                   <Link to="/Wishlist">
-                    <p>5</p>
+                    <p>{wishAsset.lenght}</p>
                   </Link>
                 </li>
                 <li className="col3">
                   <h2>장바구니</h2>
                   <Link to="/Cart">
-                    <p>1</p>
+                    <p>{cartAsset.lenght || "0"}</p>
                   </Link>
                 </li>
                 <li className="col4">
