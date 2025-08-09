@@ -30,28 +30,6 @@ export default function HeaderComponent(props) {
         console.log(err);
       });
   }, []);
-  const clickAddClass = (e) => {
-    e.preventDefault();
-  };
-  const toggleMenu = (e) => {
-    e.preventDefault();
-    setToggle((prev) => !prev);
-  };
-  useEffect(() => {
-    const mainBtn = document.querySelectorAll(".mainBtn");
-    const sub = document.querySelectorAll(".sub");
-    const mouseEnterHandler = (el, idx) => {
-      sub.forEach((remove, i) => {
-        remove.classList.remove("active");
-        remove.style.display = "none";
-      });
-      sub[idx].style.display = "flex";
-      sub[idx].classList.add("active");
-    };
-    mainBtn.forEach((el, idx) => {
-      el.addEventListener("mouseenter", () => mouseEnterHandler(el, idx));
-    });
-  }, [toggle]);
   useEffect(() => {
     let prevScr = 0;
     let nowScr = null;
@@ -71,108 +49,68 @@ export default function HeaderComponent(props) {
     let act = isMain.isMain;
     setActive(act);
   }, [isMain.isMain]);
+  const clickToggle = (e) => {
+    e.preventDefault();
+    setToggle((prev) => !prev);
+  };
   return (
     <>
-      <header
-        id="header"
-        className={`
-          ${active ? "active" : ""}
-          ${toggle ? "toggle" : ""}
-          ${scr ? "down" : ""}
-          `}>
+      <header id="header" className={`${active && "sub"} ${scr && "scrUp"}`}>
         <div className="container">
           <h1>
             <Link to="/mainComponent">
               <img src="./img/logo.png" alt="" />
             </Link>
           </h1>
-          <nav>
-            <ul className="head">
+          <nav id="nav">
+            <ul>
               {header.header.map((el) => (
-                <li key={el.id} onClick={clickAddClass}>
-                  <Link to={`./${el.link}`}>
-                    <span>{el.main}</span>
-                  </Link>
+                <li key={el.id}>
+                  <Link to={el.link}>{el.main}</Link>
                 </li>
               ))}
             </ul>
-            {toggle && (
-              <ul className="clicked" onClick={() => setToggle(false)}>
-                {header.header.map((el) => (
-                  <li key={el.id}>
-                    <Link to={`./${el.link}`} className="mainBtn">
-                      {el.main}
-                    </Link>
-                    <ul className="sub">
-                      {el.sub.map((subEl, idx) => (
-                        <li key={subEl.link}>
-                          <Link to={subEl.link}>
-                            <span>{subEl.name}</span>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <aside
+              id="aside"
+              className={toggle && "toggle"}
+              onClick={clickToggle}
+            >
+              <Link to="/Cart" className="icon">
+                <i className="bi bi-cart2"></i>
+              </Link>
+              <Link to="/Mp" className="icon">
+                <i className="fa-regular fa-user"></i>
+              </Link>
+              <Link to="/Wishlist" className="icon">
+                <i className="fa-regular fa-heart"></i>
+              </Link>
+              <a href="!#">
+                <span></span>
+                <span></span>
+                <span></span>
+              </a>
+            </aside>
           </nav>
-          <aside>
-            <ul className="head">
-              <li className="menu">
-                <Link to="/Cart">
-                  <i className="fa-solid fa-cart-arrow-down"></i>
-                </Link>
-              </li>
-              <li className="menu">
-                <Link to="/Mp">
-                  <i className="fa-solid fa-user"></i>
-                </Link>
-              </li>
-              <li className="menu">
-                <Link to="/Wishlist">
-                  <i className="fa-solid fa-heart"></i>
-                </Link>
-              </li>
-              <li
-                onClick={toggleMenu}
-                className={`toggle ${toggle ? "active" : ""}`}>
-                <button>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </button>
-              </li>
+          <div className="toggle-nav">
+            <ul className="nav">
+              {header.header.map((el) => (
+                <li key={el.id}>
+                  <Link to={el.link}>{el.main}</Link>
+                  <div className="sub">
+                    <div className="sub-container">
+                      <ul>
+                        {el.sub.map((el2) => (
+                          <li key={el2.link}>
+                            <Link to={el2.link}>{el2.name}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+              ))}
             </ul>
-            {toggle && (
-              <ul className="clicked">
-                <li className="menu">
-                  <Link to="./Cart">
-                    <i className="fa-solid fa-cart-arrow-down"></i>
-                  </Link>
-                </li>
-                <li className="menu">
-                  <Link to="./Mp">
-                    <i className="fa-solid fa-user"></i>
-                  </Link>
-                </li>
-                <li className="menu">
-                  <Link to="/Wishlist">
-                    <i className="fa-solid fa-heart"></i>
-                  </Link>
-                </li>
-                <li
-                  onClick={toggleMenu}
-                  className={`toggle ${toggle ? "active" : ""}`}>
-                  <button>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </button>
-                </li>
-              </ul>
-            )}
-          </aside>
+          </div>
         </div>
       </header>
       <Outlet />

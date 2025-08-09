@@ -37,11 +37,11 @@
       "main": "Schedule",
       "link": "AboutLive",
       "sub": [
-        { "name": "캘린더", "link": "AboutLive" },
-        { "name": "공연 정보", "link": "Artist" },
-        { "name": "아티스트 정보", "link": "BuyTicket" },
-        { "name": "티켓 예매", "link": "Lental" },
-        { "name": "대관 신청", "link": "Monthly" }
+        { "name": "캘린더", "link": "Monthly" },
+        { "name": "공연 정보", "link": "AboutLive" },
+        { "name": "아티스트 정보", "link": "Artist" },
+        { "name": "티켓 예매", "link": "BuyTicket" },
+        { "name": "대관 신청", "link": "Lental" }
       ]
     },
     {
@@ -49,14 +49,13 @@
       "main": "Community",
       "link": "Faq",
       "sub": [
-        { "name": "공지사항", "link": "Faq" },
-        { "name": "FAQ", "link": "Gall" },
-        { "name": "SNS/뉴스레터", "link": "Ntc" },
-        { "name": "갤러리", "link": "Rev" },
+        { "name": "공지사항", "link": "Ntc" },
+        { "name": "FAQ", "link": "Faq" },
+        { "name": "갤러리", "link": "Gall" },
         { "name": "공연 후기", "link": "Sns" },
         { "name": "이벤트", "link": "" }
       ],
-      "sub link": ["Faq", "Gall", "Ntc", "Rev", "Sns"]
+      "sub link": ["Ntc", "Faq", "Gall", "Sns"]
     }
   ]
 }

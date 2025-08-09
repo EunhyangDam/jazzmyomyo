@@ -27,14 +27,17 @@ import Sub04Artist from "./wrap/sub/sub04Schedule/Sub04Artist";
 import Sub04BuyTicket from "./wrap/sub/sub04Schedule/Sub04BuyTicket ";
 import Sub04Lental from "./wrap/sub/sub04Schedule/Sub04Lental";
 import Sub04Monthly from "./wrap/sub/sub04Schedule/Sub04Monthly";
-import Sub05Faq from "./wrap/sub/sub05Community.jsx/Sub05Faq";
-import Sub05Gall from "./wrap/sub/sub05Community.jsx/Sub05Gall";
-import Sub05Ntc from "./wrap/sub/sub05Community.jsx/Sub05Ntc";
-import Sub05Rev from "./wrap/sub/sub05Community.jsx/Sub05Rev";
-import Sub05Sns from "./wrap/sub/sub05Community.jsx/Sub05Sns";
+import Sub05Faq from "./wrap/sub/sub05Community/Sub05Faq";
+import Sub05Gall from "./wrap/sub/sub05Community/Sub05Gall";
+import Sub05Ntc from "./wrap/sub/sub05Community/Sub05Ntc";
+import Sub05Rev from "./wrap/sub/sub05Community/Sub05Rev";
+import Sub05Sns from "./wrap/sub/sub05Community/Sub05Sns";
 import Sub06Lg from "./wrap/sub/sub06Lg/Sub06Lg";
 import Sub06SearchId from "./wrap/sub/sub06Lg/Sub06SearchId";
 import Sub06SearchRs from "./wrap/sub/sub06Lg/Sub06SearchRs";
+
+// 배송지 관리 컴포넌트 추가
+import Sub07AddressList from "./wrap/sub/sub07Mp/Sub07AddressList";
 import Sub07DeleteAccount from "./wrap/sub/sub07Mp/Sub07DeleteAccount";
 import Sub07EditProfile from "./wrap/sub/sub07Mp/Sub07EditProfile";
 import Sub07Mp from "./wrap/sub/sub07Mp/Sub07Mp";
@@ -131,6 +134,8 @@ export default function WrapComponent(props) {
           <Route path="/Lg" element={<Sub06Lg />} />
           <Route path="/SearchId" element={<Sub06SearchId />} />
           <Route path="/SearchRs" element={<Sub06SearchRs />} />
+          {/* 배송지 관리 컴포넌트 추가 */}
+          <Route path="/AddressList" element={<Sub07AddressList />} />
           <Route path="/DeleteAccount" element={<Sub07DeleteAccount />} />
           <Route path="/EditProfile" element={<Sub07EditProfile />} />
           <Route path="/Mp" element={<Sub07Mp />} />

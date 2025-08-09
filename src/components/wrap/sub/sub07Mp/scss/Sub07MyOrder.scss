@@ -71,7 +71,7 @@
         }
       }
       .order {
-        width: 1000px;
+        width: calc(100% - 200px);
         div {
           &.md-order {
           }

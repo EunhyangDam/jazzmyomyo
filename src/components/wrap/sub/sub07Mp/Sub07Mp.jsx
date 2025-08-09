@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./scss/Sub07Mp.scss";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Sub07Mp(props) {
+  const cartAsset = useSelector((state) => state.cart.cart);
+  const wishAsset = useSelector((state) => state.wishlist.위시리스트);
   const [isOn, setIsOn] = useState(false);
   const onClickProfile = (e) => {
     setIsOn((prev) => !prev);
@@ -37,27 +40,27 @@ function Sub07Mp(props) {
               <ul>
                 <li className="col1">
                   <h2>예매 내역</h2>
-                  <a href="!#">
+                  <Link to="/MyOrder">
                     <p>3</p>
-                  </a>
+                  </Link>
                 </li>
                 <li className="col2">
                   <h2>위시리스트</h2>
-                  <a href="!#">
-                    <p>5</p>
-                  </a>
+                  <Link to="/Wishlist">
+                    <p>{wishAsset.lenght}</p>
+                  </Link>
                 </li>
                 <li className="col3">
                   <h2>장바구니</h2>
-                  <a href="!#">
-                    <p>1</p>
-                  </a>
+                  <Link to="/Cart">
+                    <p>{cartAsset.lenght || "0"}</p>
+                  </Link>
                 </li>
                 <li className="col4">
                   <h2>주문/배송</h2>
-                  <a href="!#">
+                  <Link to="/MyOrder">
                     <p>1</p>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -68,13 +71,15 @@ function Sub07Mp(props) {
                 <h3>계정관리</h3>
                 <Link to="/MyProfile">회원정보 확인</Link>
                 <Link to="/EditProfile">회원정보 수정</Link>
+                <Link to="/AddressList">배송지 관리</Link>
                 <Link to="/DeleteAccount">회원 탈퇴</Link>
               </li>
               <li>
                 <h3>이용내역</h3>
-                <Link to="/MyOrder">예매내역 확인</Link>
-                <Link to="/MyOrder">주문내역 확인</Link>
-                <Link to="/MyOrder">대관신청 확인</Link>
+                <Link to="/MyOrder">티켓예매 내역</Link>
+                <Link to="/MyOrder">사전주문 내역</Link>
+                <Link to="/MyOrder">주문/ 배송조회</Link>
+                <Link to="/MyOrder">대관신청 내역</Link>
               </li>
               <li>
                 <h3>게시판</h3>

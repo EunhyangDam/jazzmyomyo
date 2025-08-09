@@ -29,19 +29,26 @@ function Sub07MyProfile(props) {
                 <Link to="/EditProfile">회원정보 수정</Link>
               </li>
               <li>
+                <Link to="/AddressList">배송지 관리</Link>
+              </li>
+              <li>
                 <Link to="/DeleteAccount">회원 탈퇴</Link>
               </li>
+
               <li className="sub-title">
                 <h3>이용내역</h3>
               </li>
               <li>
-                <Link to="/MyOrder">예매내역 확인</Link>
+                <Link to="/MyOrder">티켓예매 내역</Link>
               </li>
               <li>
-                <Link to="/MyOrder">주문내역 확인</Link>
+                <Link to="/MyOrder">사전주문 내역</Link>
               </li>
               <li>
-                <Link to="/MyOrder">대관신청 확인</Link>
+                <Link to="/MyOrder">주문/ 배송조회</Link>
+              </li>
+              <li>
+                <Link to="/MyOrder">대관신청 내역</Link>
               </li>
               <li className="sub-title">
                 <h3>게시판</h3>
@@ -132,17 +139,20 @@ function Sub07MyProfile(props) {
                     <span>이메일 수신 동의</span>
                   </div>
                   <div className="right">
-                    <input type="checkbox" />
-                    <span>동의</span>
-                    <input type="checkbox" /> <span>미동의</span>
+                    <label htmlFor="agree">
+                      <input type="checkbox" name="agree" id="agree" checked />
+                      <span>동의</span>
+                    </label>
+                    <label htmlFor="disagree">
+                      <input type="checkbox" name="disagree" id="disagree" />
+                      <span>미동의</span>
+                    </label>
                   </div>
                 </li>
               </ul>
             </div>
             <div className="foot">
-              {/* <a href="/EditProfile">정보수정</a> */}
-              <a href="/EditProfile">정보수정</a>
-              {/* // <Link to="/DeleteAccount/">탈퇴하기</Link>/ */}
+              <Link to="/EditProfile">정보수정</Link>
               <Link to="/DeleteAccount">탈퇴하기</Link>
             </div>
           </div>

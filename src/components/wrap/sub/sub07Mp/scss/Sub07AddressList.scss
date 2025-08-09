@@ -1,0 +1,146 @@
+@use "../../../../scss/variables" as *;
+#sub07AddressList {
+  width: 100%;
+  height: auto;
+  margin-top: 100px;
+  padding-bottom: 200px;
+
+  .container {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    .title {
+      padding: 5% 0 5% 2%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      a {
+        display: block;
+        h2 {
+          font-size: $size3;
+          font-family: $font2;
+          display: inline-block;
+        }
+      }
+    }
+    .content {
+      width: 100%;
+      max-width: 1500px;
+      margin: 0 auto;
+      display: flex;
+      .menu {
+        width: 200px;
+        height: auto;
+        margin: 0 5%;
+
+        ul {
+          width: 100%;
+          li {
+            width: 100%;
+            padding: 4% 0;
+            display: block;
+            &.sub-title {
+              border-top: 1px solid #ccc;
+            }
+
+            h2 {
+              font-size: $size4;
+              font-weight: 600;
+              text-indent: 10px;
+            }
+            h3 {
+              font-size: $size4;
+              padding-top: 20px;
+              font-weight: 600;
+              text-indent: 10px;
+            }
+            a {
+              width: 100%;
+              display: block;
+              font-size: 18px;
+              padding: 5px 0;
+              text-indent: 10px;
+            }
+          }
+        }
+      }
+
+      .right {
+        width: calc(100% - 200px);
+        position: relative;
+        .bg-img {
+          width: 100%;
+          height: auto;
+          position: relative;
+          z-index: 1;
+          background: url(../../../../../../public/img/sub07/tape.jpg) no-repeat
+            50% 50%;
+          background-size: cover;
+        }
+
+        .notice {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 2;
+          ul {
+            border: 1px solid $primary-color;
+            max-width: 1000px;
+            padding: 0 4%;
+            li {
+              display: flex;
+              justify-content: center;
+              flex-flow: row wrap;
+              padding: 2% 0;
+              &:nth-child(3) {
+                padding-top: 0;
+              }
+              h3 {
+                font-size: 2.5rem;
+                display: inline-block;
+                color: $primary-color;
+                border-bottom: 2px solid $primary-color;
+              }
+
+              p {
+                width: 100%;
+                line-height: 180%;
+                font-size: $size4;
+                white-space: wrap;
+              }
+
+              button {
+                width: 300px;
+                height: 70px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: $size4;
+                transition: all 0.3s;
+                background: none;
+                border: 0;
+
+                &:first-child {
+                  margin-right: 30px;
+                  border: 1px solid $primary-color;
+                  &:hover {
+                    background-color: $grey3;
+                  }
+                }
+                &:last-child {
+                  background-color: $primary-color;
+                  color: $white;
+                  &:hover {
+                    background-color: $grey3;
+                    color: $primary-color;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
