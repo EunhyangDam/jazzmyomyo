@@ -31,6 +31,8 @@ import Sub05Faq from "./wrap/sub/sub05Community/Sub05Faq";
 import Sub05Gall from "./wrap/sub/sub05Community/Sub05Gall";
 import Sub05Ntc from "./wrap/sub/sub05Community/Sub05Ntc";
 import Sub05Rev from "./wrap/sub/sub05Community/Sub05Rev";
+// 리뷰작성컴포넌트추가
+import Sub05RevWrite from "./wrap/sub/sub05Community/Sub05RevWrite";
 import Sub05Sns from "./wrap/sub/sub05Community/Sub05Sns";
 import Sub06Lg from "./wrap/sub/sub06Lg/Sub06Lg";
 import Sub06SearchId from "./wrap/sub/sub06Lg/Sub06SearchId";
@@ -59,6 +61,7 @@ import { headerAction } from "../store/header";
 import { cartAction } from "../store/cart";
 import ConfirmModalComponent from "./wrap/ConfirmModalComponent";
 import { confirmModalAction } from "../store/confirmModal";
+import { reviewAction } from "../store/review";
 export default function WrapComponent(props) {
   /**인스턴스 생성 */
   const dispatch = useDispatch();
@@ -72,6 +75,7 @@ export default function WrapComponent(props) {
     const localStorage_arr = [
       { key: "위시리스트", action: wishAction },
       { key: "장바구니", action: cartAction },
+      { key: "리뷰", action: reviewAction },
     ];
     try {
       localStorage_arr.forEach(({ key, action }) => {
@@ -130,6 +134,8 @@ export default function WrapComponent(props) {
           <Route path="/Gall" element={<Sub05Gall />} />
           <Route path="/Ntc" element={<Sub05Ntc />} />
           <Route path="/Rev" element={<Sub05Rev />} />
+          {/* 리뷰 작성 컴포넌트 추가 */}
+          <Route path="/RevWrite" element={<Sub05RevWrite />} />
           <Route path="/Sns" element={<Sub05Sns />} />
           <Route path="/Lg" element={<Sub06Lg />} />
           <Route path="/SearchId" element={<Sub06SearchId />} />

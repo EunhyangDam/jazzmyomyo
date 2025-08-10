@@ -8,6 +8,17 @@ function Sub07MyProfile(props) {
   return (
     <div id="sub07MyProfile">
       <div className="container">
+        <div className="site">
+          <Link to="/">
+            <i className="bi bi-house-fill"></i>
+          </Link>
+          <i>&gt;</i>
+          <Link to="/Mp">마이페이지</Link>
+          <i>&gt;</i>
+          <Link to="./" className="now">
+            회원정보 확인
+          </Link>
+        </div>
         <div className="title">
           <Link to="/Mp">
             <h2>My Page</h2>

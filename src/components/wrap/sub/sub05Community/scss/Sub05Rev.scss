@@ -1,0 +1,295 @@
+@use "../../../../scss/variables" as *;
+@use "../../../../scss/mixin" as *;
+#sub05Rev {
+  width: 100%;
+  margin-top: 100px;
+  background: #fff;
+  .container {
+    @include site();
+    width: 100%;
+    margin-bottom: 200px;
+    .site {
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .title {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 3% 0 0 0;
+      width: 100%;
+      a {
+        display: block;
+        h2 {
+          font-size: $size3;
+          font-family: $font1;
+          font-weight: 900;
+          width: 100%;
+          padding-bottom: 30px;
+        }
+      }
+      h3 {
+        font-size: 18px;
+        font-family: $font1;
+      }
+    }
+    .content {
+      width: 100%;
+
+      .top {
+        max-width: 1500px;
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 20px 30px 0;
+        button {
+          padding: 10px 20px;
+          font-size: 17px;
+          border: 0;
+          background: $primary-color;
+          color: #fff;
+          border-radius: 8px;
+          cursor: pointer;
+          font-family: $font1;
+          font-weight: 500;
+        }
+        h4 {
+          color: #888;
+          i {
+            font-size: 13px;
+          }
+          span {
+            margin-left: 5px;
+          }
+        }
+      }
+      .review-box {
+        max-width: 1540px;
+        margin: 0 auto;
+        width: 100%;
+        user-select: none;
+        ul {
+          width: 100%;
+          display: flex;
+          flex-flow: row wrap;
+          li {
+            width: calc(100% / 3);
+            padding: 25px 18px;
+            .gap {
+              width: 100%;
+              height: 270px;
+              border: 2px solid #bbb;
+              border-radius: 15px;
+              padding: 40px 30px;
+              transition: all 0.3s;
+              background-color: #fff;
+              .row1 {
+                width: 100%;
+                height: 96px;
+                p {
+                  width: 100%;
+                  height: 100%;
+                  font-size: 20px;
+                  color: #23363f;
+                  font-weight: 700;
+                  line-height: 160%;
+                  white-space: wrap;
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                }
+              }
+              .row2 {
+                width: 100%;
+                color: #999;
+                padding-top: 30px;
+                padding-bottom: 5px;
+              }
+              .row3 {
+                width: 100%;
+                color: #999;
+                padding-bottom: 30px;
+              }
+              .row4 {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                em {
+                  width: 75%;
+                  color: #999;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                }
+                span {
+                  text-align: right;
+                  width: 25%;
+                  button {
+                    border: 0;
+                    background: transparent;
+                    transition: all 0.3s;
+                    &:hover {
+                      transform: scale(1.2);
+                    }
+                    i {
+                      color: #e52023;
+                      font-size: 18px;
+                      cursor: pointer;
+                    }
+                  }
+
+                  b {
+                    margin-left: 5px;
+                    color: #23363f;
+                    font-weight: 700;
+                  }
+                }
+              }
+              &:hover {
+                border-color: $primary-color;
+                transform: scale(1.1);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 1520px) {
+    .container {
+      padding: 0 20px;
+
+      .content {
+        .top {
+        }
+        .review-box {
+          ul {
+            li {
+              .gap {
+                .row1 {
+                  p {
+                    font-size: 18px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 1150px) {
+    .container {
+      margin-bottom: 150px;
+      .title {
+        a {
+          h2 {
+            font-size: 2.4rem;
+            padding-bottom: 20px;
+          }
+        }
+        h3 {
+          font-size: 16px;
+        }
+      }
+      .content {
+        .review-box {
+          ul {
+            li {
+              width: calc(100% / 2);
+              padding: 18px 15px;
+              .gap {
+                .row1 {
+                  p {
+                    font-size: 16px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 750px) {
+    .container {
+      margin-bottom: 100px;
+      .title {
+        a {
+          h2 {
+            font-size: $size4;
+            padding-bottom: 15px;
+          }
+        }
+        h3 {
+          font-size: 14px;
+        }
+      }
+      .content {
+        .top {
+          display: flex;
+          flex-flow: column wrap;
+          align-items: flex-start;
+          padding-bottom: 20px;
+          h4 {
+            padding-top: 15px;
+            width: 100%;
+          }
+        }
+        .review-box {
+          ul {
+            li {
+              width: calc(100% / 2);
+              padding: 15px 10px;
+              .gap {
+                .row1 {
+                  p {
+                    font-size: 14px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 550px) {
+    .container {
+      .title {
+        a {
+          h2 {
+            font-size: $size4;
+          }
+        }
+        h3 {
+          font-size: 13px;
+        }
+      }
+      .content {
+        .review-box {
+          ul {
+            li {
+              width: calc(100% / 1);
+              padding: 18px 15px;
+              .gap {
+                height: 240px;
+                .row1 {
+                  height: 80px;
+                }
+                .row2 {
+                  padding-top: 10px;
+                }
+                .row3 {
+                  padding-bottom: 15px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

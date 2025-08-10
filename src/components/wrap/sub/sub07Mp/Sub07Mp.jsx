@@ -14,6 +14,13 @@ function Sub07Mp(props) {
   return (
     <div id="sub07Mp">
       <div className="container">
+        <div className="site">
+          <Link to="/">
+            <i className="bi bi-house-fill"></i>
+          </Link>
+          <i>&gt;</i>
+          <Link to="./">마이페이지</Link>
+        </div>
         <div className="title">
           <Link to="/Mp">
             <h2>My Page</h2>
@@ -25,14 +32,16 @@ function Sub07Mp(props) {
               <div
                 className={`profile-front${isOn ? " on" : ""}`}
                 onClick={onClickProfile}
-                title="🐾">
+                title="🐾"
+              >
                 <p>MEMBER</p>
                 <p>김묘묘</p>
               </div>
               <div
                 className={`profile-back${isOn ? " on" : ""}`}
                 onClick={onClickProfile}
-                title="🐾"></div>
+                title="🐾"
+              ></div>
             </div>
             <div className="right">
               <ul>
@@ -45,13 +54,13 @@ function Sub07Mp(props) {
                 <li className="col2">
                   <h2>위시리스트</h2>
                   <Link to="/Wishlist">
-                    <p>{wishAsset.length || "0"}</p>
+                    <p>{wishAsset.lenght}</p>
                   </Link>
                 </li>
                 <li className="col3">
                   <h2>장바구니</h2>
                   <Link to="/Cart">
-                    <p>{cartAsset.length || "0"}</p>
+                    <p>{cartAsset.lenght || "0"}</p>
                   </Link>
                 </li>
                 <li className="col4">
@@ -83,7 +92,7 @@ function Sub07Mp(props) {
                 <h3>게시판</h3>
                 <Link to="/Ntc">공지사항</Link>
                 <Link to="/Faq">FAQ</Link>
-                <Link to="/Rev">작성 후기</Link>
+                <Link to="/Rev">후기 작성</Link>
               </li>
             </ul>
           </div>

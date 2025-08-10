@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./scss/Sub02ShopDetail.scss";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from "../../../../store/cart";
 import { wishAction } from "../../../../store/wishlist";
@@ -9,7 +9,6 @@ import { confirmModalAction } from "../../../../store/confirmModal";
 function Sub02ShopDetail(props) {
   const location = useLocation();
   const dispatch = useDispatch();
-  const navigation = useNavigate();
 
   const wishAsset = useSelector((state) => state.wishlist.위시리스트);
   const cartAsset = useSelector((state) => state.cart.cart);
@@ -91,7 +90,6 @@ function Sub02ShopDetail(props) {
         console.log(err);
       });
   }, []);
-
   const clickWishlist = (e) => {
     e.preventDefault();
     let arr = wishAsset;
@@ -147,12 +145,12 @@ function Sub02ShopDetail(props) {
             <ul>
               <li>
                 <a href="/Shop?category=굿즈">
-                  <span className={isGoods && "on"}>굿즈</span>
+                  <span className={isGoods ? "on" : ""}>굿즈</span>
                 </a>
               </li>
               <li>
                 <a href="Shop?category=음반">
-                  <span className={isDisc && "on"}>음반/LP</span>
+                  <span className={isDisc ? "on" : ""}>음반/LP</span>
                 </a>
               </li>
             </ul>
@@ -174,6 +172,7 @@ function Sub02ShopDetail(props) {
                   <li className="item-price">
                     <em>{product.data.가격.toLocaleString("ko-KR")}원</em>
                   </li>
+
                   <li className="item-quantity">
                     <p>수량</p>
                     <div className="quantity-selector">
@@ -193,19 +192,18 @@ function Sub02ShopDetail(props) {
                       </div>
                     </div>
                   </li>
-                  <li className="select-option">
-                    <select name="option" id="option">
-                      {product.data.옵션 === null ? (
-                        <option value="">옵션 없음</option>
-                      ) : (
-                        product.data.옵션.map((item) => (
+                  {product.data.옵션?.length > 0 && (
+                    <li className="select-option">
+                      <select name="option" id="option">
+                        {product.data.옵션.map((item) => (
                           <option value={item} key={item} data-key={item}>
                             {item}
                           </option>
-                        ))
-                      )}
-                    </select>
-                  </li>
+                        ))}
+                      </select>
+                    </li>
+                  )}
+
                   <li className="cart-wish">
                     <div className="add-cart">
                       <a href="!#" onClick={cartWish}>
@@ -221,7 +219,8 @@ function Sub02ShopDetail(props) {
                               .includes(product.data.id)
                               ? "-fill"
                               : ""
-                          }`}></i>
+                          }`}
+                        ></i>
                       </a>
                     </div>
                   </li>
@@ -259,16 +258,19 @@ function Sub02ShopDetail(props) {
                   return (
                     <li
                       key={idx}
-                      className={isToggleSection ? "plus" : "delivery"}>
+                      className={isToggleSection ? "plus" : "delivery"}
+                    >
                       <div
                         className="delivery-title"
-                        onClick={() => isToggleSection && handleToggle(idx)}>
+                        onClick={() => isToggleSection && handleToggle(idx)}
+                      >
                         <h3>[{title}]</h3>
                         {isToggleSection && (
                           <a
                             href="#"
                             className="icon"
-                            onClick={(e) => e.preventDefault()}>
+                            onClick={(e) => e.preventDefault()}
+                          >
                             {isOpen ? (
                               <i className="bi bi-dash" />
                             ) : (
@@ -289,7 +291,8 @@ function Sub02ShopDetail(props) {
                                   <a
                                     href="!#"
                                     target="_blank"
-                                    rel="noopener noreferrer">
+                                    rel="noopener noreferrer"
+                                  >
                                     '주문내역'
                                   </a>
                                   &nbsp;에서 확인할 수 있습니다.

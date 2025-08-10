@@ -9,8 +9,19 @@
   max-width: 1500px;
   margin: 0 auto;
 }
+#sub07DeleteAccount .container .site {
+  padding-top: 40px;
+  display: flex;
+  -moz-column-gap: 11px;
+       column-gap: 11px;
+  color: #565050;
+}
+#sub07DeleteAccount .container .site a.now {
+  color: #23363f;
+  font-weight: 600;
+}
 #sub07DeleteAccount .container .title {
-  padding: 5% 0 5% 2%;
+  padding: 3% 0 5% 2%;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -64,33 +75,51 @@
   padding: 5px 0;
   text-indent: 10px;
 }
-#sub07DeleteAccount .container .content .delete-notice ul {
+#sub07DeleteAccount .container .content .right {
+  width: calc(100% - 200px);
+  position: relative;
+}
+#sub07DeleteAccount .container .content .right .bg-img {
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
+  background: url(../../../../../../public/img/sub07/tape.jpg) no-repeat 50% 50%;
+  background-size: cover;
+}
+#sub07DeleteAccount .container .content .right .notice {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+#sub07DeleteAccount .container .content .right .notice ul {
   border: 1px solid #5d3136;
   max-width: 1000px;
   padding: 0 4%;
 }
-#sub07DeleteAccount .container .content .delete-notice ul li {
+#sub07DeleteAccount .container .content .right .notice ul li {
   display: flex;
   justify-content: center;
   flex-flow: row wrap;
   padding: 2% 0;
 }
-#sub07DeleteAccount .container .content .delete-notice ul li:nth-child(3) {
+#sub07DeleteAccount .container .content .right .notice ul li:nth-child(3) {
   padding-top: 0;
 }
-#sub07DeleteAccount .container .content .delete-notice ul li h3 {
+#sub07DeleteAccount .container .content .right .notice ul li h3 {
   font-size: 2.5rem;
   display: inline-block;
   color: #5d3136;
   border-bottom: 2px solid #5d3136;
 }
-#sub07DeleteAccount .container .content .delete-notice ul li p {
+#sub07DeleteAccount .container .content .right .notice ul li p {
   width: 100%;
   line-height: 180%;
   font-size: 1.8rem;
   white-space: wrap;
 }
-#sub07DeleteAccount .container .content .delete-notice ul li button {
+#sub07DeleteAccount .container .content .right .notice ul li button {
   width: 300px;
   height: 70px;
   display: flex;
@@ -98,19 +127,21 @@
   align-items: center;
   font-size: 1.8rem;
   transition: all 0.3s;
+  background: none;
+  border: 0;
 }
-#sub07DeleteAccount .container .content .delete-notice ul li button:first-child {
+#sub07DeleteAccount .container .content .right .notice ul li button:first-child {
   margin-right: 30px;
   border: 1px solid #5d3136;
 }
-#sub07DeleteAccount .container .content .delete-notice ul li button:first-child:hover {
+#sub07DeleteAccount .container .content .right .notice ul li button:first-child:hover {
   background-color: #c6bdbd;
 }
-#sub07DeleteAccount .container .content .delete-notice ul li button:last-child {
+#sub07DeleteAccount .container .content .right .notice ul li button:last-child {
   background-color: #5d3136;
   color: #ffffff;
 }
-#sub07DeleteAccount .container .content .delete-notice ul li button:last-child:hover {
+#sub07DeleteAccount .container .content .right .notice ul li button:last-child:hover {
   background-color: #c6bdbd;
   color: #5d3136;
 }

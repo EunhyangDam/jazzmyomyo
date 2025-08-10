@@ -9,8 +9,19 @@
   max-width: 1500px;
   margin: 0 auto;
 }
+#sub07EditProfile .container .site {
+  padding-top: 40px;
+  display: flex;
+  -moz-column-gap: 11px;
+       column-gap: 11px;
+  color: #565050;
+}
+#sub07EditProfile .container .site a.now {
+  color: #23363f;
+  font-weight: 600;
+}
 #sub07EditProfile .container .title {
-  padding: 5% 0 5% 2%;
+  padding: 3% 0 5% 2%;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -111,14 +122,52 @@
 #sub07EditProfile .container .content .user-info .main ul li .right {
   width: 70%;
 }
-#sub07EditProfile .container .content .user-info .main ul li.user-email-agree .right input {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
+#sub07EditProfile .container .content .user-info .main ul li.user-email-agree .right label {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 20px;
 }
-#sub07EditProfile .container .content .user-info .main ul li.user-email-agree .right span {
-  display: inline-block;
-  margin-right: 5%;
+#sub07EditProfile .container .content .user-info .main ul li.user-email-agree .right label input[type=checkbox] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  color: transparent;
+  background: transparent;
+  width: 22px;
+  height: 22px;
+  position: relative;
+  z-index: 1;
+}
+#sub07EditProfile .container .content .user-info .main ul li.user-email-agree .right label input[type=checkbox]::after {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "\f633";
+  font-family: "bootstrap-icons";
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  color: #ddd;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#sub07EditProfile .container .content .user-info .main ul li.user-email-agree .right label input[type=checkbox]:checked::after {
+  border: 1px solid #5d3136;
+  color: #5d3136;
+}
+#sub07EditProfile .container .content .user-info .main ul li.user-email-agree .right label span {
+  width: 80px;
+  margin-left: 10px;
 }
 #sub07EditProfile .container .content .user-info .foot {
   padding-top: 7%;
@@ -133,6 +182,8 @@
   align-items: center;
   font-size: 1.8rem;
   transition: all 0.3s;
+  background: 0;
+  border: 0;
 }
 #sub07EditProfile .container .content .user-info .foot button:first-child {
   margin-right: 30px;

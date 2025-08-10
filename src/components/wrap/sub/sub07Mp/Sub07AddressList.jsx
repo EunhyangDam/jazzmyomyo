@@ -5,6 +5,17 @@ function Sub07AddressList(props) {
   return (
     <div id="sub07AddressList">
       <div className="container">
+        <div className="site">
+          <Link to="./">
+            <i className="bi bi-house-fill"></i>
+          </Link>
+          <i>&gt;</i>
+          <Link to="./">마이페이지</Link>
+          <i>&gt;</i>
+          <Link to="/Wishilist" className="now">
+            찜리스트
+          </Link>
+        </div>
         <div className="title">
           <Link to="/Mp">
             <h2>배송지 관리</h2>

@@ -1,4 +1,5 @@
 @use "../../../../scss/variables" as *;
+@use "../../../../scss/mixin" as *;
 #sub07AddressList {
   width: 100%;
   height: auto;
@@ -9,8 +10,9 @@
     width: 100%;
     max-width: 1500px;
     margin: 0 auto;
+    @include site();
     .title {
-      padding: 5% 0 5% 2%;
+      padding: 3% 0 5% 2%;
       width: 100%;
       display: flex;
       justify-content: space-between;

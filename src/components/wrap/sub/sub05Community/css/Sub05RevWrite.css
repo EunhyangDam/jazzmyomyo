@@ -1,0 +1,203 @@
+#sub05RevWrite {
+  width: 100%;
+  margin-top: 100px;
+  padding-bottom: 200px;
+  background: #fff;
+}
+#sub05RevWrite .container {
+  max-width: 1500px;
+  margin: 0 auto;
+  width: 100%;
+}
+#sub05RevWrite .container .site {
+  padding-top: 40px;
+  display: flex;
+  -moz-column-gap: 11px;
+       column-gap: 11px;
+  color: #565050;
+}
+#sub05RevWrite .container .site a.now {
+  color: #23363f;
+  font-weight: 600;
+}
+#sub05RevWrite .container .title {
+  width: 100%;
+  padding: 3% 0 5% 0;
+}
+#sub05RevWrite .container .title a {
+  width: 100%;
+  display: block;
+}
+#sub05RevWrite .container .title a h2 {
+  width: 100%;
+  font-size: 3rem;
+  font-family: "MaruBuri";
+  font-weight: 900;
+}
+#sub05RevWrite .container .content {
+  width: 100%;
+}
+#sub05RevWrite .container .content .write-box {
+  width: 100%;
+}
+#sub05RevWrite .container .content .write-box ul {
+  width: 100%;
+  border-top: 2px solid #23363f;
+  border-bottom: 2px solid #23363f;
+}
+#sub05RevWrite .container .content .write-box ul li {
+  width: 100%;
+  padding-left: 3%;
+}
+#sub05RevWrite .container .content .write-box ul li:nth-child(1) {
+  height: 75px;
+  background: #eaeaea;
+  display: flex;
+  align-items: center;
+}
+#sub05RevWrite .container .content .write-box ul li:nth-child(1) h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+#sub05RevWrite .container .content .write-box ul li:nth-child(2) {
+  height: 75px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  margin-right: 10px;
+}
+#sub05RevWrite .container .content .write-box ul li:nth-child(2) span {
+  width: 5%;
+}
+#sub05RevWrite .container .content .write-box ul li:nth-child(2) input[type=text] {
+  width: 95%;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  font-family: "MaruBuri";
+  padding-left: 20px;
+  font-size: 18px;
+}
+#sub05RevWrite .container .content .write-box ul li:nth-child(2) input[type=text]:focus {
+  color: #000000;
+}
+#sub05RevWrite .container .content .write-box ul li:nth-child(3) {
+  height: 300px;
+}
+#sub05RevWrite .container .content .write-box ul li:nth-child(3) textarea {
+  width: 100%;
+  min-height: 100px;
+  height: auto;
+  border: 0;
+  outline: 0;
+  font-family: "MaruBuri";
+  padding: 20px;
+  font-size: 18px;
+}
+#sub05RevWrite .container .content .write-box ul li:nth-child(3) textarea:focus {
+  color: #000000;
+}
+#sub05RevWrite .container .content .button-box {
+  text-align: right;
+  padding-top: 1.5%;
+}
+#sub05RevWrite .container .content .button-box button {
+  background: #23363f;
+  color: #ffffff;
+  border: 0;
+  font-size: 25px;
+  font-weight: 600;
+  font-family: "MaruBuri";
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+#sub05RevWrite .container .content .button-box button:hover {
+  opacity: 0.7;
+}
+#sub05RevWrite .container .content .button-box button:last-child {
+  margin-left: 20px;
+  background-color: #565050;
+}
+@media all and (max-width: 1520px) {
+  #sub05RevWrite .container {
+    padding: 0 20px;
+  }
+}
+@media all and (max-width: 1150px) {
+  #sub05RevWrite .container .title a h2 {
+    font-size: 2.4rem;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(2) span {
+    width: 10%;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(2) input {
+    width: 90%;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(3) {
+    height: 240px;
+  }
+  #sub05RevWrite .container .content .button-box button {
+    font-size: 20px;
+  }
+}
+@media all and (max-width: 750px) {
+  #sub05RevWrite .container .title a h2 {
+    font-size: 1.8rem;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(1) {
+    height: 60px;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(1) h3 {
+    font-size: 18px;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(2) {
+    height: 60px;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(2) span {
+    width: 15%;
+    font-size: 16px;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(2) input {
+    width: 85%;
+    font-size: 16px;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(3) {
+    height: 240px;
+  }
+  #sub05RevWrite .container .content .button-box button {
+    font-size: 20px;
+  }
+  #sub05RevWrite .container .content .button-box button:last-child {
+    margin-left: 10px;
+  }
+}
+@media all and (max-width: 550px) {
+  #sub05RevWrite .container .title a h2 {
+    font-size: 1.8rem;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(1) {
+    height: 60px;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(1) h3 {
+    font-size: 18px;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(2) {
+    height: 60px;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(2) span {
+    width: 15%;
+    font-size: 16px;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(2) input {
+    width: 85%;
+    font-size: 16px;
+  }
+  #sub05RevWrite .container .content .write-box ul li:nth-child(3) {
+    height: 190px;
+  }
+  #sub05RevWrite .container .content .button-box button {
+    font-size: 18px;
+  }
+}

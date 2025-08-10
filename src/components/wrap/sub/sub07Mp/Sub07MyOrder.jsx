@@ -11,6 +11,17 @@ function Sub07MyOrder(props) {
             <h2>My Order</h2>
           </Link>
         </div>
+        <div className="site">
+          <Link to="/">
+            <i className="bi bi-house-fill"></i>
+          </Link>
+          <i>&gt;</i>
+          <Link to="/Mp">마이페이지</Link>
+          <i>&gt;</i>
+          <Link to="/Wishilist" className="now">
+            주문내역
+          </Link>
+        </div>
         <div className="content">
           <div className="menu">
             <ul>

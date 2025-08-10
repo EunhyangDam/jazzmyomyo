@@ -28,6 +28,22 @@
   font-family: "TTHakgyoansimMulgyeolB";
   display: inline-block;
 }
+#sub07MyOrder .container .site {
+  padding-top: 40px;
+  display: flex;
+  -moz-column-gap: 11px;
+       column-gap: 11px;
+  color: #565050;
+}
+#sub07MyOrder .container .site a.now {
+  color: #23363f;
+  font-weight: 600;
+}
+#sub07MyOrder .container .site {
+  width: 100%;
+  max-width: 1550px;
+  margin: 0 auto;
+}
 #sub07MyOrder .container .content {
   width: 100%;
   max-width: 1750px;
@@ -71,7 +87,7 @@
   text-indent: 10px;
 }
 #sub07MyOrder .container .content .order {
-  width: 1000px;
+  width: calc(100% - 200px);
 }
 #sub07MyOrder .container .content .order div.reservation {
   padding: 5% 0;

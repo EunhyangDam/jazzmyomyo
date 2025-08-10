@@ -34,6 +34,17 @@ function Sub07DeleteAccount(props) {
   return (
     <div id="sub07DeleteAccount">
       <div className="container">
+        <div className="site">
+          <Link to="/">
+            <i className="bi bi-house-fill"></i>
+          </Link>
+          <i>&gt;</i>
+          <Link to="/Mp">마이페이지</Link>
+          <i>&gt;</i>
+          <Link to="./" className="now">
+            회원탈퇴
+          </Link>
+        </div>
         <div className="title">
           <Link to="/Mp">
             <h2>회원탈퇴</h2>

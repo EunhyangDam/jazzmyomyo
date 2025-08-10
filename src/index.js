@@ -9,8 +9,9 @@ import wishlist from "./store/wishlist";
 import header from "./store/header";
 import cart from "./store/cart";
 import confirmModal from "./store/confirmModal";
+import review from "./store/review";
 let store = configureStore({
-  reducer: { wishlist, header, cart, confirmModal },
+  reducer: { wishlist, header, cart, confirmModal, review },
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
