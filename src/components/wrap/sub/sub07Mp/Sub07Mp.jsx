@@ -25,16 +25,14 @@ function Sub07Mp(props) {
               <div
                 className={`profile-front${isOn ? " on" : ""}`}
                 onClick={onClickProfile}
-                title="🐾"
-              >
+                title="🐾">
                 <p>MEMBER</p>
                 <p>김묘묘</p>
               </div>
               <div
                 className={`profile-back${isOn ? " on" : ""}`}
                 onClick={onClickProfile}
-                title="🐾"
-              ></div>
+                title="🐾"></div>
             </div>
             <div className="right">
               <ul>
@@ -47,13 +45,13 @@ function Sub07Mp(props) {
                 <li className="col2">
                   <h2>위시리스트</h2>
                   <Link to="/Wishlist">
-                    <p>{wishAsset.lenght}</p>
+                    <p>{wishAsset.length || "0"}</p>
                   </Link>
                 </li>
                 <li className="col3">
                   <h2>장바구니</h2>
                   <Link to="/Cart">
-                    <p>{cartAsset.lenght || "0"}</p>
+                    <p>{cartAsset.length || "0"}</p>
                   </Link>
                 </li>
                 <li className="col4">
