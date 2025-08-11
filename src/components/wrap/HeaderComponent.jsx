@@ -20,6 +20,7 @@ export default function HeaderComponent(props) {
   const [size, setSize] = useState({
     width: "",
   });
+  const [subHeight, setSubHeight] = useState([]);
   let isMain = useSelector((state) => state.header);
   useEffect(() => {
     fetch("./json/header/gnb.json", { method: "GET" })
@@ -67,6 +68,7 @@ export default function HeaderComponent(props) {
     liRefs.current[i] = el;
   };
   const mouseEnterLi = (e) => {
+    if (size > 1024) return;
     liRefs.current.forEach((el) => el.classList.remove("active"));
     e.target.closest("li").classList.add("active");
   };
@@ -83,21 +85,33 @@ export default function HeaderComponent(props) {
     subRefs.current[i] = node;
   };
 
+  const mobile = (e) => {
+    let subHeight = subRefs;
+    subHeight = subHeight.current.map((el) => el.scrollHeight);
+    setSubHeight(subHeight);
+    subRefs.current.forEach((el) => (el.style.height = 0));
+  };
+
   useEffect(() => {
     const handleResize = () => {
-      let size = window.innerWidth;
-      console.log(subRefs);
+      let size = document.documentElement.clientWidth;
       setSize({
         width: size,
       });
-      if (size < 1024) {
+
+      if (size <= 1024) {
+        mobile();
+      } else {
       }
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  const clickSubButton = (e) => {
+
+  const clickSubButton = (e, idx) => {
     e.preventDefault();
+    subRefs.current.forEach((el) => (el.style.height = 0));
+    subRefs.current[idx].style.height = `${subHeight[idx]}px`;
   };
   return (
     <>
@@ -148,7 +162,10 @@ export default function HeaderComponent(props) {
                     >
                       {el.main}
                     </Link>
-                    <button className="slideDown" onClick={clickSubButton}>
+                    <button
+                      className="slideDown"
+                      onClick={(e) => clickSubButton(e, i)}
+                    >
                       <i className="fa-solid fa-angle-down"></i>
                     </button>
                     <div className="sub" ref={(node) => setSub(node, i)}>

@@ -40,8 +40,6 @@
           font-size: 20px;
           font-weight: 600;
           column-gap: 120px;
-          li {
-          }
         }
         #aside {
           display: flex;
@@ -288,8 +286,6 @@
             column-gap: 25px;
             li {
               font-size: 17px;
-              a {
-              }
             }
           }
         }
@@ -327,6 +323,7 @@
                 display: block;
                 overflow: hidden;
                 width: 100%;
+                transition: 0.3s;
                 .sub-container {
                   height: 100%;
                   > ul {
@@ -338,7 +335,7 @@
                       opacity: 1;
                       a {
                         display: block;
-                        padding-left: 50px;
+                        padding: 10px 0px 10px 50px;
                       }
                     }
                   }

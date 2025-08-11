@@ -6,7 +6,7 @@
   padding: 0 20px;
   background-color: #fff;
   color: #222;
-  font-family: 'Pretendard', sans-serif;
+  font-family: "Pretendard", sans-serif;
   user-select: none;
 
   .container {
@@ -39,7 +39,6 @@
       }
     }
   }
-
 
   h2 {
     font-family: $font2;
@@ -170,7 +169,7 @@
         font-weight: 500;
         text-decoration: none;
         overflow: hidden;
-        white-space: nowrap; 
+        white-space: nowrap;
         text-overflow: ellipsis;
 
         &:hover {
@@ -214,7 +213,6 @@
       }
     }
   }
-
 
   @media all and (max-width: 600px) {
     h2 {
@@ -273,22 +271,21 @@
       tbody td {
         padding: 10px 12px;
         font-size: 13px;
-        line-height: 1.25; 
+        line-height: 1.25;
       }
 
       thead th {
         white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis; 
+        text-overflow: ellipsis;
       }
 
       tbody td {
         white-space: nowrap;
       }
 
-   
       thead th:nth-child(1),
-      tbody td:nth-child(1) { 
+      tbody td:nth-child(1) {
         width: 56px;
       }
 
@@ -442,12 +439,12 @@
       }
 
       thead th:nth-child(5),
-      tbody td:nth-child(5) { 
+      tbody td:nth-child(5) {
         width: 74px;
       }
 
       thead th:nth-child(3),
-      tbody td:nth-child(3) { 
+      tbody td:nth-child(3) {
         width: 88px;
       }
 
@@ -478,6 +475,4 @@
       }
     }
   }
-
-  
 }
