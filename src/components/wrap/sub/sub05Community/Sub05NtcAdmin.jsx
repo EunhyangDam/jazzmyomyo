@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./scss/Sub05Ntc.scss";
+import "./scss/Sub05NtcAdmin.scss";
 
-function Sub05Ntc() {
+function Sub05NtcAdmin() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredList, setFilteredList] = useState([]);
 
@@ -18,16 +18,16 @@ function Sub05Ntc() {
   const runFilter = (term) => {
     const q = term.trim().toLowerCase();
     if (!q) return notices;
-    return notices.filter(n => n.title.toLowerCase().includes(q));
+    return notices.filter((n) => n.title.toLowerCase().includes(q));
   };
 
-  // 실시간 필터링: 입력값이 바뀔 때마다 반영
+  // 실시간 반영
   useEffect(() => {
     setFilteredList(runFilter(searchTerm));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm]);
 
-  // 버튼/엔터로도 동작: 사용자가 의식적으로 "검색"을 눌러도 같은 결과
+  // 버튼/엔터도 같은 로직
   const handleSearch = () => {
     setFilteredList(runFilter(searchTerm));
   };
@@ -35,7 +35,7 @@ function Sub05Ntc() {
   const displayedList = searchTerm ? filteredList : notices;
 
   return (
-    <div id="sub05Ntc" className="container">
+    <div id="sub05NtcAdmin" className="container">
       <div className="breadcrumb">
         <Link to="/mainComponent"><i className="bi bi-house"></i></Link> &gt; 공지사항
       </div>
@@ -47,11 +47,10 @@ function Sub05Ntc() {
           type="text"
           placeholder="검색어를 입력하세요"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}  
-          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          onChange={(e) => setSearchTerm(e.target.value)}         // 실시간
+          onKeyDown={(e) => e.key === "Enter" && handleSearch()}  // 엔터
         />
         <button onClick={handleSearch}>검색</button>
-        <Link to="/NtcAdmin" className="admin-btn">관리자 페이지</Link>
       </div>
 
       <table>
@@ -68,11 +67,9 @@ function Sub05Ntc() {
           {displayedList.length > 0 ? (
             displayedList.map((item) => (
               <tr key={item.id}>
-                <td>
-                  {item.isNew ? <span className="badge-new">NEW</span> : item.id}
-                </td>
+                <td>{item.isNew ? <span className="badge-new">NEW</span> : item.id}</td>
                 <td className="title">
-                  <Link to={`/NtcV/${item.id}`}>{item.title}</Link>
+                  <Link to={`/NtcAdminV/${item.id}`}>{item.title}</Link>
                 </td>
                 <td>{item.date}</td>
                 <td>{item.writer}</td>
@@ -81,9 +78,7 @@ function Sub05Ntc() {
             ))
           ) : (
             <tr>
-              <td colSpan="5" style={{ textAlign: "center" }}>
-                검색 결과가 없습니다.
-              </td>
+              <td colSpan="5" style={{ textAlign: "center" }}>검색 결과가 없습니다.</td>
             </tr>
           )}
         </tbody>
@@ -93,9 +88,10 @@ function Sub05Ntc() {
         <button disabled>&laquo;</button>
         <button className="active">1</button>
         <button disabled>&raquo;</button>
+        <Link to="/NtcAdminW" className="write-btn">+ 글쓰기</Link>
       </div>
     </div>
   );
 }
 
-export default Sub05Ntc;
+export default Sub05NtcAdmin;

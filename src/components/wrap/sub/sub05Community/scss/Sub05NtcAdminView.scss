@@ -1,0 +1,227 @@
+@use "../../../../scss/variables" as *;
+
+#Sub05NtcAdminView {
+  margin-top: 100px;
+  margin-bottom: 50px;
+  background-color: #fff;
+  color: #222;
+  font-family: 'Pretendard', sans-serif;
+  user-select: none;
+  padding: 0 20px;
+
+  .breadcrumb {
+    font-size: 14px;
+    color: #bbbbbb;
+    padding-top: 30px;
+    padding-left: 20px;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    a {
+      display: flex;
+      align-items: center;
+      color: #666;
+      transition: all 0.3s;
+
+      i {
+        font-size: 16px;
+        vertical-align: middle;
+      }
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    color: $primary-color;
+    font-family: $font2;
+    font-size: 70px;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .content-box {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+
+    .notice-header {
+      border-top: 2px solid #333;
+      border-bottom: 1px solid #ccc;
+      padding: 20px;
+      background-color: #f9f9f9;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      .title {
+        font-weight: bold;
+        font-size: 18px;
+        flex: 1 1 auto;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .notice-meta {
+        font-size: 14px;
+        color: #666;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        justify-content: flex-end;
+        flex: 0 0 auto;
+        white-space: nowrap;
+      }
+    }
+
+    .notice-body {
+      padding: 40px 20px;
+      border-bottom: 1px solid #eee;
+      font-size: 16px;
+      line-height: 1.8;
+
+      .notice-image {
+        width: 100%;
+        height: 300px;
+        background-color: #f1f1f1;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #888;
+        font-size: 15px;
+      }
+
+      p {
+        white-space: pre-wrap;
+      }
+    }
+  }
+
+  .btn-wrap {
+    max-width: 900px;
+    margin: 40px auto 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    button,
+    a {
+      padding: 10px 24px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+      font-family: 'Pretendard', sans-serif;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #555;
+      color: #fff;
+    }
+
+    .edit-btn {
+      background-color: #3a7773;
+      color: #fff;
+
+      &:hover {
+        background-color: #2f5f5c;
+      }
+    }
+
+    .delete-btn {
+      background-color: #c03030;
+      color: #fff;
+
+      &:hover {
+        background-color: #a62828;
+      }
+    }
+  }
+
+  @media all and (max-width: 400px) {
+    margin-top: 100px; /* 유지 */
+    padding: 0 10px;
+
+    .breadcrumb {
+      font-size: 12px;
+      padding-top: 20px;
+      padding-left: 10px;
+      gap: 4px;
+
+      a i {
+        font-size: 14px;
+      }
+    }
+
+    h2 {
+      font-size: 60px;
+    }
+
+    .content-box {
+      .notice-header {
+        padding: 12px;
+        font-size: 14px;
+        gap: 8px;
+        flex-direction: column;        /* 한 줄에 꽉 차면 줄바꿈 */
+        align-items: flex-start;
+
+        .title {
+          font-size: 16px;
+          width: 100%;
+        }
+
+        .notice-meta {
+          font-size: 12px;
+          gap: 8px;
+          flex-wrap: wrap;             /* 날짜/조회 줄바꿈 허용 */
+          white-space: normal;
+        }
+      }
+
+      .notice-body {
+        padding: 20px 12px;
+        font-size: 14px;
+        line-height: 1.7;
+
+        .notice-image {
+          height: 200px;
+          font-size: 13px;
+        }
+      }
+    }
+
+    .btn-wrap {
+      margin-top: 24px;
+      gap: 8px;
+
+      button,
+      a {
+        padding: 9px 16px;
+        font-size: 14px;
+        min-width: 110px;             /* 너무 작아지지 않게 최소폭 */
+        text-align: center;
+      }
+    }
+  }
+  
+}

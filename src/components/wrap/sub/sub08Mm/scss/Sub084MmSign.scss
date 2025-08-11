@@ -1,0 +1,329 @@
+@use "../../../../scss/variables" as *;
+
+#sub084MmSign {
+  margin-top: 100px;
+  font-family: $font1;
+  background-color: $sub-color3;
+  user-select: none;
+
+  .admin-wrap {
+    display: flex;
+    min-height: 100vh;
+
+    /* 사이드바 */
+    .sidebar {
+      width: 220px;
+      background-color: $primary-color;
+      color: #fff;
+      padding: 30px 20px;
+
+      h2 {
+        font-size: 35px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-family: $font2;
+      }
+
+      ul {
+        list-style: none;
+
+        li {
+          margin-bottom: 5px;
+          padding: 12px;
+          border-radius: 6px;
+          transition: background 0.3s;
+
+          a {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+          }
+
+          &.active,
+          &:hover { background-color: $sub-color2; }
+        }
+      }
+    }
+
+    /* 메인 */
+    .main {
+      flex: 1;
+      padding: 40px;
+
+      .page-header {
+        text-align: center;
+        margin-bottom: 30px;
+
+        h1 {
+          font-family: $font2;
+          line-height: 1.1;
+          font-size: clamp(32px, 5vw, 70px);
+        }
+      }
+
+      .join-settings {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+        .form-group {
+          margin-bottom: 30px;
+          font-size: 18px;
+
+          &:not(:first-child) {
+            padding-top: 16px;
+            border-top: 1px dashed #e6e6e6;
+          }
+
+          label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #111;
+            letter-spacing: .01em;
+          }
+
+          select,
+          input[type="text"],
+          input[type="email"],
+          input[type="tel"] {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            background: #fff;
+            font-size: 14px;
+
+            &:focus {
+              outline: none;
+              border-color: $primary-color;
+              box-shadow: 0 0 0 3px rgba(0,0,0,0.03);
+            }
+          }
+
+          .form-check {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+            margin-right: 16px;
+            vertical-align: middle;
+
+            input { margin: 0; flex: 0 0 auto; }
+
+            label {
+              margin: 0;
+              line-height: 1;
+              cursor: pointer;
+              font-size: 15px;
+              color: $grey2;
+            }
+          }
+        }
+
+        .btn {
+          margin-top: 8px;
+          padding: 10px 20px;
+          background-color: $sub-color2;
+          color: #fff;
+          border: none;
+          border-radius: 20px;
+          cursor: pointer;
+          font-weight: 700;
+          transition: filter .2s;
+
+          &:hover { filter: brightness(0.95); }
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 1000px) {
+  #sub084MmSign {
+    .admin-wrap {
+      flex-direction: column;
+
+      .sidebar {
+        width: 100%;
+        margin-top: 70px;
+      }
+
+      .main {
+        padding: 24px;
+
+        .join-settings {
+          padding: 22px;
+
+          .form-group {
+            margin-bottom: 22px;
+
+            label { font-size: 15px; }
+
+            select,
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"] {
+              font-size: 13.5px;
+              padding: 9px 11px;
+            }
+
+            .form-check {
+              gap: 8px;
+              margin-top: 4px;
+
+              label { font-size: 14px; }
+            }
+          }
+
+          .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 200px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 768px) {
+  #sub084MmSign {
+    .admin-wrap {
+      .main {
+        .join-settings {
+          .form-group {
+            label { font-size: 14.5px; }
+
+            select,
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"] {
+              font-size: 13px;
+              padding: 9px 10px;
+            }
+
+            .form-check {
+              display: inline-flex;
+              flex-wrap: wrap;
+              row-gap: 6px;
+              column-gap: 12px;
+              margin-right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 520px) {
+  #sub084MmSign {
+    .admin-wrap {
+      .main {
+        .page-header {
+          h1 { font-size: 30px}
+        }
+
+        .join-settings {
+          padding: 18px;
+
+          .form-group {
+            margin-bottom: 18px;
+
+            label { font-size: 14px; }
+
+            select,
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"] {
+              font-size: 12.5px;
+              padding: 8px 10px;
+            }
+          }
+
+          .btn {
+            width: 100%;
+            max-width: 320px;
+            padding: 9px 16px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 480px) {
+  #sub084MmSign {
+    .admin-wrap {
+      .main {
+        padding: 20px;
+
+        .join-settings {
+          .form-group {
+            label { font-size: 13.5px; }
+
+            select,
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"] {
+              font-size: 12px;
+              padding: 8px 9px;
+            }
+
+            .form-check {
+              row-gap: 5px;
+              column-gap: 10px;
+
+              label { font-size: 12.5px; }
+            }
+          }
+
+          .btn {
+            max-width: 280px;
+            font-size: 13.5px;
+            padding: 8px 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 380px) {
+  #sub084MmSign {
+    .admin-wrap {
+      .main {
+        padding: 16px;
+
+        .join-settings {
+          padding: 14px;
+
+          .form-group {
+            margin-bottom: 14px;
+
+            label { font-size: 13px; }
+
+            select,
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"] {
+              font-size: 11.5px;
+              padding: 7px 9px;
+            }
+          }
+
+          .btn {
+            max-width: 240px;
+            font-size: 13px;
+            padding: 8px 12px;
+            border-radius: 18px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,16 +1,29 @@
 import React from 'react';
 import './scss/FooterComponent.scss';
+import { Link } from 'react-router-dom';
 
 export default function FooterComponent() {
   return (
 
       <footer id="footer">
         {/* 상단 물결 */}
-        <svg className="wave-svg first" viewBox="0 0 1440 260" preserveAspectRatio="none">
-          <path
-            fill="#1c2a2e"
-            d="M0,128L48,144C96,160,192,192,288,181.3C384,171,480,117,576,112C672,107,768,149,864,181.3C960,213,1056,235,1152,240C1248,245,1344,235,1392,229.3L1440,224L1440,0L0,0Z"
-          />
+        <svg className="wave-svg first" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="#1c2a2e">
+      <animate
+        attributeName="d"
+        dur="2.7s"
+        repeatCount="indefinite"
+        calcMode="spline"
+        keyTimes="0;0.5;1"
+        keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
+        values="
+          M0,128L48,150C96,172,192,210,288,190C384,170,480,110,576,100C672,90,768,160,864,190C960,220,1056,250,1152,255C1248,260,1344,240,1392,230L1440,220L1440,0L0,0Z;
+          M0,140L60,120C120,100,200,190,300,170C400,150,500,80,600,110C700,140,800,210,900,200C1000,190,1100,150,1200,180C1300,210,1400,160,1440,150L1440,0L0,0Z;
+          M0,128L48,150C96,172,192,210,288,190C384,170,480,110,576,100C672,90,768,160,864,190C960,220,1056,250,1152,255C1248,260,1344,240,1392,230L1440,220L1440,0L0,0Z
+        "
+      />
+
+      </path>
         </svg>
 
         <div className="footer-middle">
@@ -34,12 +47,24 @@ export default function FooterComponent() {
           </ul>
         </div>
 
-        {/* 중간 wave */}
-        <svg className="wave-svg second" viewBox="0 0 1440 320" preserveAspectRatio="none">
-          <path
-            fill="#1c2a2e"
-            d="M0,128L48,144C96,160,192,192,288,181.3C384,171,480,117,576,112C672,107,768,149,864,181.3C960,213,1056,235,1152,240C1248,245,1344,235,1392,229.3L1440,224L1440,0L0,0Z"
+        {/* 중간 물결 */}
+        <svg className="wave-svg second" viewBox="0 0 1440 280" preserveAspectRatio="none">
+          <path fill="#1c2a2e">
+          <animate
+            attributeName="d"
+            dur="2.7s"
+            repeatCount="indefinite"
+            calcMode="spline"
+            keyTimes="0;0.5;1"
+            keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
+            values="
+              M0,128L48,150C96,172,192,210,288,190C384,170,480,110,576,100C672,90,768,160,864,190C960,220,1056,250,1152,255C1248,260,1344,240,1392,230L1440,220L1440,0L0,0Z;
+              M0,140L60,120C120,100,200,190,300,170C400,150,500,80,600,110C700,140,800,210,900,200C1000,190,1100,150,1200,180C1300,210,1400,160,1440,150L1440,0L0,0Z;
+              M0,128L48,150C96,172,192,210,288,190C384,170,480,110,576,100C672,90,768,160,864,190C960,220,1056,250,1152,255C1248,260,1344,240,1392,230L1440,220L1440,0L0,0Z
+            "
           />
+
+          </path>
         </svg>
 
         <div className="footer-bottom">
@@ -87,13 +112,20 @@ export default function FooterComponent() {
           <div className="footer-bottom-inner">
             <div className="footer-info">
               <div className="categories">
-                <a href="#">About us</a> / <a href="#">Shop</a> / <a href="#">Menu</a> /<span className="mobile-br"></span> <a href="#">Schedule</a> / <a href="#">Community</a>
+              <a href="#">About us</a> / 
+              <a href="#"> Shop</a> / 
+              <a href="#"> Menu</a> / <span className="mobile-br"></span>
+              <a href="#"> Schedule</a>
+              <a href="#">/ Community</a>
+              <Link to="/Mm">  /  회원관리 관리자페이지</Link>
               </div>
               <div className="address">
-                주소 : 서울 마포구 동교로23길 12 복합빌딩 B1층 재즈묘묘<br />
-                운영시간 : 주~월 6PM~2AM (매주 9시 입장 / 2차 자유)<br />
-                전화번호 : 02 - 2111 - 2000
+                주소 : 서울 마포구 동교로<span className="nowrap">23길&nbsp;14</span> 복합빌딩 B1층 재즈묘묘<br />
+                운영시간 : 수~일 6PM~2AM (휴무일 대관 가능)<br />
+                전화번호 : 02 - 500 - 5200
               </div>
+
+
               <div className="copy">© 2025 JazzMyomyo. All That Jazz, All That Meow.</div>
             </div>
 
