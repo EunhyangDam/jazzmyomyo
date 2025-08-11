@@ -140,10 +140,12 @@ export default function HeaderComponent(props) {
                   <li
                     key={el.id}
                     className="nav-li"
-                    ref={(node) => setLi(node, i)}>
+                    ref={(node) => setLi(node, i)}
+                  >
                     <Link
                       onClick={(e) => clickSubToggle(e, el.link)}
-                      onMouseEnter={mouseEnterLi}>
+                      onMouseEnter={mouseEnterLi}
+                    >
                       {el.main}
                     </Link>
                     <button className="slideDown" onClick={clickSubButton}>
@@ -156,7 +158,8 @@ export default function HeaderComponent(props) {
                             <li key={el2.link}>
                               <Link
                                 to={el2.link}
-                                onClick={(e) => clickSubLi(e, el2.link)}>
+                                onClick={(e) => clickSubLi(e, el2.link)}
+                              >
                                 {el2.name}
                               </Link>
                             </li>

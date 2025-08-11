@@ -22,11 +22,6 @@ import Sub035PreView from "./wrap/sub/sub03Menu/Sub035PreView";
 import Sub035PreWrite from "./wrap/sub/sub03Menu/Sub035PreWrite";
 import Sub035PreEdit from "./wrap/sub/sub03Menu/Sub035PreEdit";
 
-import Sub035PreAdmin from "./wrap/sub/sub03Menu/Sub035PreAdmin";
-import Sub035PreAdminWrite from "./wrap/sub/sub03Menu/Sub035PreAdminWrite";
-import Sub035PreAdminEdit from "./wrap/sub/sub03Menu/Sub035PreAdminEdit";
-import Sub035PreAdminView from "./wrap/sub/sub03Menu/Sub035PreAdminView";
-
 import Sub04AboutLive from "./wrap/sub/sub04Schedule/Sub04AboutLive";
 import Sub04Artist from "./wrap/sub/sub04Schedule/Sub04Artist";
 import Sub04BuyTicket from "./wrap/sub/sub04Schedule/Sub04BuyTicket ";
@@ -42,9 +37,6 @@ import Sub05NtcAdminEdit from "./wrap/sub/sub05Community/Sub05NtcAdminEdit";
 import Sub05NtcAdmin from "./wrap/sub/sub05Community/Sub05NtcAdmin";
 import Sub05NtcAdminWrite from "./wrap/sub/sub05Community/Sub05NtcAdminWrite";
 
-
-
-
 import Sub05Rev from "./wrap/sub/sub05Community/Sub05Rev";
 import Sub05Sns from "./wrap/sub/sub05Community/Sub05Sns";
 import Sub06Lg from "./wrap/sub/sub06Lg/Sub06Lg";
@@ -59,14 +51,11 @@ import Sub07Mp from "./wrap/sub/sub07Mp/Sub07Mp";
 import Sub07MyOrder from "./wrap/sub/sub07Mp/Sub07MyOrder";
 import Sub07MyProfile from "./wrap/sub/sub07Mp/Sub07MyProfile";
 
-
 import Sub080Mm from "./wrap/sub/sub08Mm/Sub080Mm";
 import Sub081MmView from "./wrap/sub/sub08Mm/Sub081MmView";
 import Sub082MmEdit from "./wrap/sub/sub08Mm/Sub082MmEdit";
 import Sub083MmGrade from "./wrap/sub/sub08Mm/Sub083MmGrade";
 import Sub084MmSign from "./wrap/sub/sub08Mm/Sub084MmSign";
-
-
 
 import Sub09Cart from "./wrap/sub/sub09Cart/Sub09Cart";
 import Page404Component from "./wrap/Page404Component";
@@ -141,16 +130,6 @@ export default function WrapComponent(props) {
           <Route path="/PreV/view/:id" element={<Sub035PreView />} />
           <Route path="/PreW" element={<Sub035PreWrite />} />
           <Route path="/PreE/edit/:id" element={<Sub035PreEdit />} />
-          
-
-
-          <Route path="/PreAdmin" element={<Sub035PreAdmin />} />
-          <Route path="/PreAdminW" element={<Sub035PreAdminWrite />} />
-          <Route path="/PreAdminV/view/:id" element={<Sub035PreAdminView />} />
-          <Route path="/PreAdminE/edit/:id" element={<Sub035PreAdminEdit />} />
-
-
-
 
           <Route path="/AboutLive" element={<Sub04AboutLive />} />
           <Route path="/Artist" element={<Sub04Artist />} />
@@ -158,21 +137,17 @@ export default function WrapComponent(props) {
           <Route path="/Lental" element={<Sub04Lental />} />
           <Route path="/Monthly" element={<Sub04Monthly />} />
 
-
           <Route path="/Faq" element={<Sub05Faq />} />
           <Route path="/Gall" element={<Sub05Gall />} />
           <Route path="/Ntc" element={<Sub05Ntc />} />
           <Route path="/Rev" element={<Sub05Rev />} />
           <Route path="/Sns" element={<Sub05Sns />} />
 
-
-
           <Route path="/NtcV/:id" element={<Sub05NtcView />} />
           <Route path="/NtcAdminV/:id" element={<Sub05NtcAdminView />} />
           <Route path="/NtcAdminE/:id" element={<Sub05NtcAdminEdit />} />
           <Route path="/NtcAdmin" element={<Sub05NtcAdmin />} />
           <Route path="/NtcAdminW" element={<Sub05NtcAdminWrite />} />
-
 
           <Route path="/Lg" element={<Sub06Lg />} />
           <Route path="/SearchId" element={<Sub06SearchId />} />
@@ -185,17 +160,12 @@ export default function WrapComponent(props) {
           <Route path="/MyOrder" element={<Sub07MyOrder />} />
           <Route path="/MyProfile" element={<Sub07MyProfile />} />
 
-
-
           <Route path="/Mm" element={<Sub080Mm />} />
           <Route path="/MmView/:id" element={<Sub081MmView />} />
           <Route path="/MmEdit/:id" element={<Sub082MmEdit />} />
           <Route path="/MmGrade" element={<Sub083MmGrade />} />
           <Route path="/MmSign" element={<Sub084MmSign />} />
 
-
-
-          
           <Route path="/Cart" element={<Sub09Cart />} />
           <Route path="/Wishlist" element={<Sub10Wishlist />} />
           <Route path="/*" element={<Page404Component />} />
