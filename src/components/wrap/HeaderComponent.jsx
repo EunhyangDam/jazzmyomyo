@@ -7,21 +7,16 @@ export default function HeaderComponent(props) {
   const [toggle, setToggle] = useState(false);
   const [scr, setScr] = useState(false);
   const [header, setHeader] = useState({
-    header: [
-      {
-        id: "",
-        main: "",
-        link: "",
-        sub: [],
-      },
-    ],
+    header: [],
   });
   const [active, setActive] = useState(false);
   const [size, setSize] = useState({
     width: "",
   });
   const [subHeight, setSubHeight] = useState([]);
+  const [t, setT] = useState(Array(header.header.length).fill(false));
   let isMain = useSelector((state) => state.header);
+  /**fetch */
   useEffect(() => {
     fetch("./json/header/gnb.json", { method: "GET" })
       .then((result) => result.json())
@@ -29,12 +24,15 @@ export default function HeaderComponent(props) {
         setHeader({
           header: data.header,
         });
+        setT(Array(data.header.length).fill(false));
       })
       .catch((err) => {
         alert("header error");
         console.log(err);
       });
   }, []);
+
+  /**scroll event */
   useEffect(() => {
     let prevScr = 0;
     let nowScr = null;
@@ -42,6 +40,7 @@ export default function HeaderComponent(props) {
       nowScr = window.scrollY;
       if (nowScr - prevScr > 0) {
         setScr(true);
+        setToggle(false);
       } else if (nowScr - prevScr < 0) {
         setScr(false);
       }
@@ -50,10 +49,13 @@ export default function HeaderComponent(props) {
     window.addEventListener("scroll", handleScr);
     return () => window.removeEventListener("scroll", handleScr);
   }, []);
+
+  /**main 감지 */
   useEffect(() => {
     let act = isMain.isMain;
     setActive(act);
   }, [isMain.isMain]);
+
   const clickToggle = (e) => {
     e.preventDefault();
     setToggle((prev) => !prev);
@@ -63,10 +65,12 @@ export default function HeaderComponent(props) {
     setToggle((prev) => !prev);
     navigation(link);
   };
+
   const liRefs = useRef([]);
   const setLi = (el, i) => {
     liRefs.current[i] = el;
   };
+
   const mouseEnterLi = (e) => {
     if (size > 1024) return;
     liRefs.current.forEach((el) => el.classList.remove("active"));
@@ -75,11 +79,13 @@ export default function HeaderComponent(props) {
   const mouseLeaveNav = (e) => {
     liRefs.current.forEach((el) => el.classList.remove("active"));
   };
+
   const clickSubLi = (e, link) => {
     e.preventDefault();
     setToggle((prev) => !prev);
     navigation(link);
   };
+
   const subRefs = useRef([]);
   const setSub = (node, i) => {
     subRefs.current[i] = node;
@@ -87,6 +93,7 @@ export default function HeaderComponent(props) {
 
   const mobile = (e) => {
     let subHeight = subRefs;
+    if (!toggle) return;
     subHeight = subHeight.current.map((el) => el.scrollHeight);
     setSubHeight(subHeight);
     subRefs.current.forEach((el) => (el.style.height = 0));
@@ -98,20 +105,29 @@ export default function HeaderComponent(props) {
       setSize({
         width: size,
       });
-
       if (size <= 1024) {
         mobile();
       } else {
       }
     };
+
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [toggle]);
 
+  const [index, setIndex] = useState();
   const clickSubButton = (e, idx) => {
     e.preventDefault();
+
     subRefs.current.forEach((el) => (el.style.height = 0));
     subRefs.current[idx].style.height = `${subHeight[idx]}px`;
+
+    setIndex(idx);
+    if (idx === index) {
+      subRefs.current[idx].style.height = "0px";
+      setIndex(null);
+    }
   };
   return (
     <>
@@ -124,7 +140,7 @@ export default function HeaderComponent(props) {
           </h1>
           <nav id="nav">
             <ul>
-              {header.header.map((el) => (
+              {header.header.map((el, i) => (
                 <li key={el.id}>
                   <Link to={el.link}>{el.main}</Link>
                 </li>

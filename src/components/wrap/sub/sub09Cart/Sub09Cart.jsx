@@ -142,7 +142,8 @@ function Sub09Cart(props) {
                   <div className="container">
                     <button
                       className={el.수량 > 1 && "active"}
-                      onClick={(e) => clickMinus(e, el)}>
+                      onClick={(e) => clickMinus(e, el)}
+                    >
                       -
                     </button>
                     <input
@@ -153,7 +154,8 @@ function Sub09Cart(props) {
                     />
                     <button
                       className={el.수량 > 0 && "active"}
-                      onClick={(e) => clickPlus(e, el)}>
+                      onClick={(e) => clickPlus(e, el)}
+                    >
                       +
                     </button>
                   </div>

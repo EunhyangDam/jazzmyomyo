@@ -381,4 +381,17 @@
       }
     }
   }
+  @media all and (max-width: 720px) {
+    #header {
+      .container {
+        h1 {
+        }
+        #nav {
+          ul {
+            display: none;
+          }
+        }
+      }
+    }
+  }
 }
