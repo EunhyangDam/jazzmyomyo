@@ -4,6 +4,7 @@ import "./scss/Sub09Cart.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from "../../../../store/cart";
+import SiteMapComponent from "../../custom/SiteMapComponent";
 function Sub09Cart(props) {
   const cartAsset = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
@@ -83,15 +84,7 @@ function Sub09Cart(props) {
   return (
     <div id="sub09Cart" className="sub-page">
       <div className="inner">
-        <div className="site">
-          <Link to="/mainComponent">
-            <i className="bi bi-house-fill"></i>
-          </Link>
-          <i>&gt;</i>
-          <Link to="/Cart" className="now">
-            장바구니
-          </Link>
-        </div>
+        <SiteMapComponent firstLink="/Cart" fisrtName="장바구니" />
         <div className="body">
           <dl>
             <dt>

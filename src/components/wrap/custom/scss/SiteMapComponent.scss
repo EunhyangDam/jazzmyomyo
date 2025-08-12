@@ -1,0 +1,14 @@
+@use "../../../scss/variables" as *;
+.site {
+  padding-top: 40px;
+  display: flex;
+  align-items: center;
+  column-gap: 11px;
+  color: $grey2;
+  a {
+    &.now {
+      color: $sub-color1;
+      font-weight: 600;
+    }
+  }
+}

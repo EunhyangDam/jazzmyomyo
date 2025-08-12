@@ -6,38 +6,12 @@
   padding: 0 20px;
   background-color: #fff;
   color: #222;
-  font-family: "Pretendard", sans-serif;
+  // font-family: "Pretendard", sans-serif;
   user-select: none;
 
   .container {
     max-width: 900px;
     margin: 0 auto;
-  }
-
-  .breadcrumb {
-    font-size: 14px;
-    color: #bbbbbb;
-    padding-top: 30px;
-    padding-left: 20px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-
-    a {
-      display: flex;
-      align-items: center;
-      color: #666;
-      transition: 0.3s;
-
-      i {
-        font-size: 16px;
-        vertical-align: middle;
-      }
-
-      &:hover {
-        color: #000;
-      }
-    }
   }
 
   h2 {

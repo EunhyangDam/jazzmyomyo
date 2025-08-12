@@ -1,17 +1,5 @@
 @use "./variables" as *;
 @mixin site() {
-  .site {
-    padding-top: 40px;
-    display: flex;
-    column-gap: 11px;
-    color: $grey2;
-    a {
-      &.now {
-        color: $sub-color1;
-        font-weight: 600;
-      }
-    }
-  }
 }
 @mixin box() {
   .box {

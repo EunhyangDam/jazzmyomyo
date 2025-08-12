@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { wishAction } from "../../../../store/wishlist";
 import { cartAction } from "../../../../store/cart";
+import SiteMapComponent from "../../custom/SiteMapComponent";
 export default function Sub10Wishilist(props) {
   const dispatch = useDispatch();
   const navigation = useNavigate();
@@ -37,17 +38,12 @@ export default function Sub10Wishilist(props) {
   return (
     <div id="sub10Wishilist" className="sub-page">
       <div className="inner">
-        <div className="site">
-          <Link to="./">
-            <i className="bi bi-house-fill"></i>
-          </Link>
-          <i>&gt;</i>
-          <Link to="./">마이페이지</Link>
-          <i>&gt;</i>
-          <Link to="/Wishilist" className="now">
-            찜리스트
-          </Link>
-        </div>
+        <SiteMapComponent
+          firstLink="/Mp"
+          fisrtName="마이페이지"
+          secondLink="/Wishilist"
+          secondName="찜리스트"
+        />
         <div className="head">
           <ul>
             <li className="col col1">

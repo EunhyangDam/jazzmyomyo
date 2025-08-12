@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./scss/Sub07Mp.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import SiteMapComponent from "../../custom/SiteMapComponent";
 
 function Sub07Mp(props) {
   const cartAsset = useSelector((state) => state.cart.cart);
@@ -14,13 +15,7 @@ function Sub07Mp(props) {
   return (
     <div id="sub07Mp">
       <div className="container">
-        <div className="site">
-          <Link to="/">
-            <i className="bi bi-house-fill"></i>
-          </Link>
-          <i>&gt;</i>
-          <Link to="./">마이페이지</Link>
-        </div>
+        <SiteMapComponent firstLink="/Mp" fisrtName="마이페이지" />
         <div className="title">
           <Link to="/Mp">
             <h2>My Page</h2>
