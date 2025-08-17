@@ -7,8 +7,7 @@
       "sub": [
         { "name": "재즈묘묘", "link": "AboutUs" },
         { "name": "어바웃 묘묘", "link": "Interior" },
-        { "name": "인테리어", "link": "MyoMyo" },
-        { "name": "스토리", "link": "Story" }
+        { "name": "인테리어", "link": "MyoMyo" }
       ]
     },
     {

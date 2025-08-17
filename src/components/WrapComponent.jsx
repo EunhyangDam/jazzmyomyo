@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import HeaderComponent from "./wrap/HeaderComponent";
 import MainComponent from "./wrap/MainComponent";
 import FooterComponent from "./wrap/FooterComponent";
-import Sub01About from "./wrap/sub/sub01AboutUs/Sub01About";
 import Sub01AboutUs from "./wrap/sub/sub01AboutUs/Sub01AboutUs";
 import Sub01Interior from "./wrap/sub/sub01AboutUs/Sub01Interior";
 import Sub01MyoMyo from "./wrap/sub/sub01AboutUs/Sub01MyoMyo";
@@ -67,7 +66,6 @@ import { wishAction } from "../store/wishlist";
 import { headerAction } from "../store/header";
 import { cartAction } from "../store/cart";
 import ConfirmModalComponent from "./wrap/ConfirmModalComponent";
-import { confirmModalAction } from "../store/confirmModal";
 export default function WrapComponent(props) {
   /**인스턴스 생성 */
   const dispatch = useDispatch();
@@ -110,7 +108,6 @@ export default function WrapComponent(props) {
           <Route index element={<MainComponent />} />
           {/* 서브페이지 */}
           <Route path="/mainComponent" element={<MainComponent />} />
-          <Route path="/About" element={<Sub01About />} />
           <Route path="/AboutUs" element={<Sub01AboutUs />} />
           <Route path="/Interior" element={<Sub01Interior />} />
           <Route path="/MyoMyo" element={<Sub01MyoMyo />} />
