@@ -1,0 +1,368 @@
+@use "../../../../scss/variables" as *;
+
+#sub05Faq {
+  max-width: 1750px;
+  margin-top: $section-top;
+  margin-bottom: $section-top;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  /* 상단 페이지 경로 breadcrumb */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 30px 0 50px;
+    font-size: $small;
+
+    i {
+      font-size: $small;
+      font-weight: 600;
+      line-height: 1;
+      color: $grey2;
+    }
+
+    .crumb {
+      color: $grey2;
+      font-weight: 500;
+      &.current {
+        color: $sub-color1;   /* FAQ 큰 텍스트 */
+        font-weight: 800;
+      }
+    }
+  }
+
+  /* head */
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+
+    .title {
+      font-size: 30px;
+      font-weight: 800;
+      color: $sub-color1;  
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      input {
+        padding: 10px 12px;
+        border: 1px solid $grey3;
+        border-radius: 4px;
+        font-size: 14px;
+        width: 250px;
+        color: $sub-color1;
+
+        &::placeholder {
+          color: $grey2;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: $sub-color1;
+        }
+      }
+
+      button {
+        padding: 9px 16px;
+        background: $sub-color1;  
+        color: $white;
+        font-size: 14px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+          background: darken($sub-color1, 8%);
+        }
+      }
+    }
+  }
+
+  /* faq list */
+  .faq-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid $grey3;
+
+    .faq-item {
+      border-bottom: 1px solid $grey3;
+
+      /* 질문 버튼 */
+      .q-row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 25px 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: left;
+
+        .q-left {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          .q-index {
+            font-weight: 700;
+            color: $sub-color1;
+            line-height: 1;
+          }
+
+          .q-text {
+            color: $sub-color1;
+            line-height: 1.4;
+          }
+        }
+
+        i {
+          font-size: 14px;
+          color: $grey2;
+        }
+      }
+
+      /* 답변 패널 */
+      .a-panel {
+        max-height: 0; // 닫혀있을 때
+        overflow: hidden;
+        transition: max-height 0.6s ease;
+        .a-inner {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          padding: 15px 0;
+
+          .a-badge {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.6;
+            color: $sub-color2;
+          }
+
+          .a-text {
+            color: $sub-color1;
+            line-height: 1.6;
+            font-size: 16px;
+            font-weight: 400;
+
+            .hl {
+              color: $primary-color;
+              font-weight: 700;
+            }
+          }
+        }
+      }
+
+      /* 열렸을 때 */
+      &.open {
+        .a-panel {
+          max-height: 500px;
+        }
+        .q-text {
+          font-size: 16px;
+          font-weight: 600;
+          color: $sub-color2;
+        }
+      }
+    }
+
+    /* 검색 결과 없을 때 */
+    .empty {
+      text-align: center;
+      padding: 40px 0;
+      color: $sub-color1;
+      font-size: 17px;
+      font-weight: 500;
+    }
+  }
+
+  /* 페이지네이션 */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0 100px;
+
+    button {
+      min-width: 36px;
+      height: 36px;
+      border: 1px solid $grey3;
+      background: $white;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      color: $sub-color1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+
+      &.active {
+        background: $sub-color1;
+        border-color: $sub-color1;
+        color: $white;
+        font-weight: 700;
+      }
+
+      &:hover:not(:disabled):not(.active) {
+        background: lighten($sub-color1, 70%); 
+        border-color: $sub-color1; 
+        color: $sub-color1;        
+      }
+
+      &:disabled {
+        color: $grey3;
+        cursor: default;
+      }
+    }
+
+    /* 그룹 간격 조정 */
+    button:first-child,
+    button:nth-child(2) {
+      margin-right: 0; // 왼쪽 꺾쇠끼리 붙음
+    }
+
+    button:last-child,
+    button:nth-last-child(2) {
+      margin-left: 0; // 오른쪽 꺾쇠끼리 붙음
+    }
+
+    button:nth-child(2) {
+      margin-right: 12px; // 왼쪽 꺾쇠 숫자 그룹 간격
+    }
+
+    button:nth-last-child(2) {
+      margin-left: 12px; // 숫자 그룹 오른쪽 꺾쇠 간격
+    }
+  }
+}
+
+
+/* 반응형 */
+@media (max-width: 1200px) {
+  #sub05Faq {
+    .head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+
+      .title {
+        font-size: 26px;
+      }
+
+      .search input {
+        width: 200px;
+        font-size: 13px;
+      }
+    }
+
+    .faq-list .q-row {
+      font-size: 15px;
+      padding: 20px 0;
+    }
+
+    .faq-list .a-text {
+      font-size: 15px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #sub05Faq {
+    .head {
+      .title {
+        font-size: 22px;
+      }
+
+      .search {
+        width: 100%;
+        input {
+          flex: 1;
+          width: 100%;
+          font-size: 13px;
+        }
+        button {
+          flex-shrink: 0;
+          font-size: 13px;
+          padding: 8px 14px;
+        }
+      }
+    }
+
+    .faq-list .q-row {
+      font-size: 14px;
+      padding: 18px 0;
+    }
+
+    .faq-list .a-text {
+      font-size: 14px;
+    }
+
+    .pagination button {
+      min-width: 32px;
+      height: 32px;
+      font-size: 13px;
+    }
+  }
+}
+
+/* 반응형 */
+@media (max-width: 480px) {
+  #sub05Faq {
+    padding: 0 15px;
+
+    .head {
+      .title {
+        font-size: 20px;
+      }
+
+      .search {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+
+        input {
+          width: 100%;
+          font-size: 12px;
+        }
+        button {
+          width: 100%;
+          font-size: 12px;
+        }
+      }
+    }
+
+    .faq-list .q-row {
+      font-size: 13px;
+      padding: 16px 0;
+      .q-text {
+        line-height: 1.3;
+      }
+    }
+
+    .faq-list .a-text {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .pagination {
+      gap: 4px;
+      button {
+        min-width: 28px;
+        height: 28px;
+        font-size: 12px;
+      }
+    }
+  }
+}
