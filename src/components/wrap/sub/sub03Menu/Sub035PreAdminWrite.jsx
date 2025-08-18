@@ -1,71 +1,22 @@
-import React, { useEffect, useState } from "react";
-import "./scss/Sub035PreWrite.scss";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import './scss/Sub035PreAdminWrite.scss';
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
 
-function Sub035PreEdit() {
-  const { id } = useParams();
+function Sub035PreAdminWrite() {
   const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.confirmModal);
 
-  const dummyData = {
-    "1": { title: "[예약신청] 9월 12일 2인", writer: "이시은", reserveDate: "2025-09-12", time: "19:00", people: "2명", wine: "Shiraz Whisper", food: "재즈 나초", note: "견과류 알러지 있어요" },
-    "2": { title: "[예약신청] 9월 14일 3인", writer: "이은지", reserveDate: "2025-09-14", time: "20:00", people: "3명", wine: "Chablis", food: "감바스", note: "" },
-    "3": { title: "[예약신청] 9월 18일 4인", writer: "박의연", reserveDate: "2025-09-18", time: "18:30", people: "4명", wine: "Moscato Dream", food: "트러플 감자튀김", note: "창가 자리 요청" },
-    "4": { title: "[예약신청] 9월 22일 3인", writer: "정하은", reserveDate: "2025-09-22", time: "21:00", people: "3명", wine: "Petit Chablis", food: "치즈 플래터", note: "생일 케이크 지참 예정" },
-    "5": { title: "[예약신청] 9월 25일 2인", writer: "홍규린", reserveDate: "2025-09-25", time: "19:30", people: "2명", wine: "Brut Rosé", food: "재즈 나초", note: "분리 결제 요청" },
-    "6": { title: "[예약신청] 9월 30일 5인", writer: "홍길동", reserveDate: "2025-09-30", time: "18:00", people: "5명", wine: "Argento Malbec", food: "모둠 플래터", note: "" },
-  };
-
-  const [form, setForm] = useState({
-    title: "",
-    writer: "",
-    reserveDate: "",
-    time: "",
-    people: "",
-    wine: "",
-    food: "",
-    note: "",
-  });
-
-  useEffect(() => {
-    if (dummyData[id]) {
-      setForm(dummyData[id]);
-    } else {
-      // 없는 글 → 모달로 안내
-      dispatch(
-        confirmModalAction({
-          heading: "해당 글이 없습니다.",
-          explain: "",
-          isON: true,
-          isConfirm: false,
-          message1: "",
-          message2: "",
-        })
-      );
-    }
-  }, [id, dispatch]);
-
-  useEffect(() => {
-    if (modal.heading === "해당 글이 없습니다." && modal.isON === false) {
-      dispatch(confirmModalYesNoAction(false));
-      navigate("/Pre");
-    }
-  }, [modal.heading, modal.isON, dispatch, navigate]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+
     dispatch(
       confirmModalAction({
-        heading: "수정되었습니다.",
+        heading: "예약신청이 등록되었습니다.",
         explain: "",
         isON: true,
         isConfirm: false,
@@ -76,35 +27,35 @@ function Sub035PreEdit() {
   };
 
   useEffect(() => {
-    if (modal.heading === "수정되었습니다." && modal.isON) {
+    if (modal.heading === "예약신청이 등록되었습니다." && modal.isON) {
       dispatch(confirmModalYesNoAction(false));
-      navigate(`/PreV/view/${id}`);
+      navigate("/PreAdmin");
     }
-  }, [modal.heading, modal.isON, dispatch, navigate, id]);
+  }, [modal.heading, modal.isON, dispatch, navigate]);
 
   return (
-    <div id="sub_preWrite">
+    <div id="sub_preAdminWrite">
       <div className="board-view">
-        <h2 className="form-title">✏ 예약 정보 수정</h2>
+        <h2 className="form-title">사전 예약 신청</h2>
 
         <form className="write-form" onSubmit={handleSubmit}>
           <label>제목</label>
-          <input name="title" value={form.title} onChange={handleChange} />
+          <input type="text" placeholder="[예약신청] 날짜 / 인원" />
 
           <label>작성자</label>
-          <input name="writer" value={form.writer} onChange={handleChange} />
+          <input type="text" placeholder="예: 홍길동" />
 
           <label>예약 날짜</label>
-          <input name="reserveDate" type="date" value={form.reserveDate} onChange={handleChange} />
+          <input type="date" />
 
           <label>예약 시간</label>
-          <input name="time" type="time" value={form.time} onChange={handleChange} />
+          <input type="time" />
 
           <label>인원 수</label>
-          <input name="people" value={form.people} onChange={handleChange} />
+          <input type="number" min="1" max="10" />
 
           <label>와인</label>
-          <select name="wine" value={form.wine} onChange={handleChange}>
+          <select>
             <optgroup label="레드 와인 (Red)">
               <option>Chablis</option>
               <option>Argento Malbec</option>
@@ -153,7 +104,7 @@ function Sub035PreEdit() {
           </select>
 
           <label>안주</label>
-          <select name="food" value={form.food} onChange={handleChange}>
+          <select>
             <optgroup label="플래터 & 핑거푸드">
               <option>묘묘의 클래식 소파 플래터</option>
               <option>묘묘의 달빛 야식 플래터</option>
@@ -182,14 +133,21 @@ function Sub035PreEdit() {
           </select>
 
           <label>특이사항</label>
-          <textarea
-            name="note"
-            value={form.note}
-            onChange={handleChange}
-            placeholder="알러지 등 참고사항"
-          ></textarea>
+          <textarea placeholder="알러지 등 참고사항"></textarea>
 
-          <button type="submit" className="submit-btn">수정 완료</button>
+          <div className="admin-section">
+            <label>예약 상태</label>
+            <select>
+              <option>예약중</option>
+              <option>예약완료</option>
+              <option>예약취소</option>
+            </select>
+
+            <label>관리자 답변</label>
+            <textarea placeholder="회원에게 남길 안내 메시지를 입력하세요."></textarea>
+          </div>
+
+          <button type="submit" className="submit-btn">등록하기</button>
         </form>
 
         <div className="notice">
@@ -226,13 +184,11 @@ function Sub035PreEdit() {
         </div>
 
         <div className="view-actions">
-          <button className="back-btn" onClick={() => navigate(`/PreV/view/${id}`)}>
-            ← 돌아가기
-          </button>
+          <button className="back-btn" onClick={() => navigate(-1)}>← 게시판 목록으로</button>
         </div>
       </div>
     </div>
   );
 }
 
-export default Sub035PreEdit;
+export default Sub035PreAdminWrite;

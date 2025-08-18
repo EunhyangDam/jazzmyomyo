@@ -3,7 +3,7 @@ import './scss/Sub035Pre.scss';
 import { Link } from "react-router-dom";
 
 
-export default function Sub03Pre() {
+export default function Sub035PreAdmin() {
   const itemsPerPage = 5;
 
   const postData = [
@@ -77,19 +77,14 @@ export default function Sub03Pre() {
         <div className="clip"></div>
         <div className="paper">
           <h1>사전 예약 게시판</h1>
-          <Link to='/PreW'
+          <Link to='/PreAdminW'
          className="write-button">
           사전주문신청
           </Link>
 
-          {/* 관리자용 링크 */}
-          <Link to='/PreAdmin' className="admin-link right">
-            관리자 페이지로 이동
-          </Link>
-
           {currentPosts.map((post) => (
             <div key={post.id} className="card">
-              <Link to={`/PreV/view/${post.id}`} className="card-title">
+              <Link to={`/PreAdminV/view/${post.id}`} className="card-title">
                 {post.title}
               </Link>
               <p className="card-type">

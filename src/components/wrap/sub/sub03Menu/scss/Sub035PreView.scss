@@ -1,161 +1,158 @@
 @use "../../../../scss/variables" as *;
 
 #sub_preView {
-  font-family: 'Pretendard', sans-serif;
-  padding: 80px 20px;
-  display: flex;
-  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 60px;
+  font-family: $font1;
+  color: #222;
+  background: #fff;
+  user-select: none;
 
   .board-view {
-    background: #fffdf9;
-    width: 100%;
-    max-width: 800px;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    padding: 40px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-  }
-
-  .view-header {
-    border-bottom: 2px solid #512b2b;
-    padding-bottom: 16px;
-    margin-bottom: 24px;
-
-    h2 {
-      font-size: 22px;
-      margin-bottom: 10px;
-      color: #512b2b;
-    }
-
-    .view-meta {
-      font-size: 14px;
-      color: #666;
-    }
-  }
-
-  .view-body {
-    font-size: 16px;
-    line-height: 1.7;
-
-    .info-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 30px;
-
-      th {
-        text-align: left;
-        width: 100px;
-        padding: 8px;
-        background: #f6f2ea;
-        color: #333;
-        border-bottom: 1px solid #ddd;
-      }
-
-      td {
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-        background: #fff;
-      }
-    }
-
-    .admin-reply {
-      background: #f1f6ff;
-      border-left: 4px solid #4e6eaa;
-      padding: 20px;
-      border-radius: 8px;
-
-      strong {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-        color: #4e6eaa;
-      }
-
-      p {
-        margin: 0;
-        white-space: pre-wrap;
-        color: #333;
-      }
-    }
-  }
-
-  .view-actions {
-    text-align: right;
-    margin-top: 30px;
-    flex-wrap: wrap;
-
-    .back-btn,
-    .edit-btn,
-    .delete-btn {
-      padding: 10px 20px;
-      background-color: #512b2b;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-size: 14px;
-      cursor: pointer;
-      margin-left: 8px;
-      margin-top: 8px;
-    }
-
-    .delete-btn {
-      background-color: #aa4e4e;
-    }
-  }
-
-
-  @media all and (max-width: 480px) {
-    margin-top: 50px;
-    padding: 40px 10px;
-
-    .board-view {
-      padding: 24px;
-    }
+    width: min(1100px, 92%);
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.06);
+    padding: 28px;
 
     .view-header {
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      padding-bottom: 18px;
+      margin-bottom: 20px;
+
       h2 {
-        font-size: 18px;
+        font-size: clamp(20px, 2.4vw, 28px);
+        margin-bottom: 10px;
+        font-weight: 700;
+        line-height: 1.4;
       }
+
       .view-meta {
-        font-size: 12px;
+        font-size: 14px;
+        color: #777;
       }
     }
+
 
     .view-body {
-      font-size: 15px;
+      margin-bottom: 24px;
 
       .info-table {
-        th, td {
-          display: block;
-          width: 100%;
-        }
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        border-top: 1px solid rgba(0,0,0,.08);
 
-        th {
-          background: #f6f2ea;
-          font-weight: 600;
-        }
+        li {
+          display: flex;
+          border-bottom: 1px solid rgba(0,0,0,.08);
+          padding: 12px 8px;
 
-        td {
-          background: #fff;
-          border-bottom: 1px solid #eee;
-          margin-bottom: 10px;
+          strong {
+            width: 140px;
+            font-weight: 700;
+            color: #333;
+            flex-shrink: 0;
+          }
+
+          span {
+            flex: 1;
+            color: #444;
+            line-height: 1.6;
+            word-break: break-word;
+          }
         }
       }
 
+
       .admin-reply {
-        padding: 16px;
-        font-size: 14px;
+        border-left: 4px solid $primary-color;
+        background: rgba($primary-color, .06);
+        padding: 16px 18px;
+        border-radius: 12px;
+        margin-top: 20px;
+
+        strong {
+          display: block;
+          font-size: 15px;
+          color: $primary-color;
+          margin-bottom: 6px;
+        }
+
+        p {
+          margin: 0;
+          font-size: 15px;
+          color: #333;
+          line-height: 1.7;
+          white-space: pre-wrap;
+        }
       }
     }
 
-    .view-actions {
-      text-align: center;
 
-      .back-btn,
-      .edit-btn,
+    .view-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      border-top: 1px solid rgba(0,0,0,.08);
+      padding-top: 16px;
+
+      button {
+        border: 1px solid rgba(0,0,0,.1);
+        background: #fff;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.2s ease;
+
+        &:hover {
+          background: rgba(0,0,0,.04);
+        }
+      }
+
+      .edit-btn {
+        border-color: rgba($primary-color, .4);
+        background: rgba($primary-color, .06);
+        color: $primary-color;
+      }
+
       .delete-btn {
-        width: 100%;
-        margin: 6px 0;
+        border-color: rgba(220, 30, 60, .4);
+        background: rgba(220, 30, 60, .06);
+        color: #c5162e;
+      }
+    }
+  }
+
+
+  @media (max-width: 600px) {
+    .board-view {
+      padding: 20px;
+
+      .view-body {
+        .info-table li {
+          flex-direction: column;
+          gap: 4px;
+
+          strong {
+            width: 100%;
+            font-size: 14px;
+            color: #555;
+          }
+
+          span {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .view-actions {
+        flex-direction: column;
+        button {
+          width: 100%;
+        }
       }
     }
   }

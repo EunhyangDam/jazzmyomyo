@@ -10,7 +10,6 @@
     display: flex;
     min-height: 100vh;
 
-    /* 사이드바 */
     .sidebar {
       width: 220px;
       background-color: $primary-color;
@@ -45,7 +44,6 @@
       }
     }
 
-    /* 메인 */
     .main {
       flex: 1;
       padding: 40px;
@@ -62,6 +60,7 @@
       }
 
       .join-settings {
+        overflow: visible;
         background-color: #fff;
         padding: 30px;
         border-radius: 10px;

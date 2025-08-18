@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import "./scss/Sub082MmEdit.scss";
 
-// fallback 더미 (직접 주소 진입 대비)
+import { useDispatch, useSelector } from "react-redux";
+import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
+
 const dummyMembers = [
   {
     id: 1, userId: "myomyo", name: "김묘묘", gender: "여", birth: "2000-01-01",
@@ -25,6 +27,9 @@ function Sub082MmEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const dispatch = useDispatch();
+  const modal = useSelector((state) => state.confirmModal); // { heading, isON, isConfirm, isYes, ... }
 
   const memberFromState = location.state?.member;
   const fallback = dummyMembers.find((m) => String(m.id) === String(id));
@@ -53,22 +58,32 @@ function Sub082MmEdit() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-// 저장 핸들러만 수정
-const onSave = () => {
-  console.log("회원 수정 저장:", form);
-  alert("회원 정보가 저장되었습니다.");
+  const onSave = () => {
+    dispatch(
+      confirmModalAction({
+        heading: "수정되었습니다.",
+        explain: "",
+        isON: true,
+        isConfirm: false,
+        message1: "",
+        message2: "",
+      })
+    );
+  };
 
-  // 상세로 이동 + 업데이트 데이터 함께 전달
-  navigate(`/MmView/${form.id}`, { state: { member: form, updatedMember: form } });
-};
-
+  useEffect(() => {
+    if (modal.heading === "수정되었습니다." && modal.isON) {
+      dispatch(confirmModalYesNoAction(false));
+      navigate(`/MmView/${form.id}`, { state: { member: form, updatedMember: form } });
+    }
+  }, [modal.heading, modal.isON, dispatch, navigate, form]);
 
   const onCancel = () => navigate(`/MmView/${form.id}`);
 
   return (
     <div id="Sub082MmEdit">
       <div className="admin-wrap">
-        {/* 사이드바 */}
+
         <aside className="sidebar">
           <h2>회원관리</h2>
           <ul>
@@ -79,7 +94,6 @@ const onSave = () => {
           </ul>
         </aside>
 
-        {/* 메인 */}
         <main className="main">
           <div className="page-header">
             <h1>회원 정보 수정</h1>
@@ -151,12 +165,31 @@ const onSave = () => {
                 </div>
               </div>
 
+              {/* 등급: 셀렉트 → 라디오 (요청 반영) */}
               <div className="form-group">
-                <label htmlFor="grade">등급</label>
-                <select id="grade" name="grade" value={form.grade} onChange={onChange}>
-                  <option>일반회원</option>
-                  <option>단골회원</option>
-                </select>
+                <label>등급</label>
+                <div className="form-inline">
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="grade"
+                      value="일반회원"
+                      checked={form.grade === "일반회원"}
+                      onChange={onChange}
+                    />
+                    <span>일반회원</span>
+                  </label>
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="grade"
+                      value="단골회원"
+                      checked={form.grade === "단골회원"}
+                      onChange={onChange}
+                    />
+                    <span>단골회원</span>
+                  </label>
+                </div>
               </div>
 
               <div className="form-group">

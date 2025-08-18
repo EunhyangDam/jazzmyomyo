@@ -1,15 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './scss/Sub035PreWrite.scss';
 import { useNavigate } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
 
 function Sub035PreWrite() {
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+  const modal = useSelector((state) => state.confirmModal);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("예약이 등록되었습니다.");
-    navigate("/Pre");
+
+    dispatch(
+      confirmModalAction({
+        heading: "예약신청이 등록되었습니다.",
+        explain: "",
+        isON: true,
+        isConfirm: false,
+        message1: "",
+        message2: "",
+      })
+    );
   };
+
+  useEffect(() => {
+    if (modal.heading === "예약신청이 등록되었습니다." && modal.isON) {
+      dispatch(confirmModalYesNoAction(false));
+      navigate("/Pre");
+    }
+  }, [modal.heading, modal.isON, dispatch, navigate]);
 
   return (
     <div id="sub_preWrite">
@@ -17,7 +39,6 @@ function Sub035PreWrite() {
         <h2 className="form-title">사전 예약 신청</h2>
 
         <form className="write-form" onSubmit={handleSubmit}>
-
           <label>제목</label>
           <input type="text" placeholder="[예약신청] 날짜 / 인원" />
 
@@ -80,7 +101,8 @@ function Sub035PreWrite() {
               <option>스프라이트</option>
               <option>에비앙</option>
             </optgroup>
-            </select>
+          </select>
+
           <label>안주</label>
           <select>
             <optgroup label="플래터 & 핑거푸드">
@@ -117,38 +139,37 @@ function Sub035PreWrite() {
         </form>
 
         <div className="notice">
-  <div className="notice-line">
-    <i className="bi bi-bell"></i>
-    <div className="text">
-      <strong>결제 방식</strong> : 현장결제 (예약금 2만원, 계좌이체)
-    </div>
-  </div>
-  <div className="notice-line">
-    <i className="bi bi-bell-fill"></i>
-    <div className="text">
-      <strong>픽업 방식</strong> : 예약 시간에 맞춰 테이블로 서빙
-    </div>
-  </div>
-  <div className="notice-line">
-    <i className="bi bi-bell"></i>
-    <div className="text">
-      <strong>취소 안내</strong> : 공연 24시간 전까지 취소 가능 (이후에는 예약금 환불 불가)
-    </div>
-  </div>
-  <div className="notice-line">
-    <i className="bi bi-bell-fill"></i>
-    <div className="text">
-      <strong>문의사항</strong> : 기타 궁금한 점은 재즈묘묘로 연락주세요
-    </div>
-  </div>
-  <div className="notice-line">
-    <i className="bi bi-bell"></i>
-    <div className="text">
-      <strong>안내사항</strong> : 외부 음식 반입 금지
-    </div>
-  </div>
-</div>
-
+          <div className="notice-line">
+            <i className="bi bi-bell"></i>
+            <div className="text">
+              <strong>결제 방식</strong> : 현장결제 (예약금 2만원, 계좌이체)
+            </div>
+          </div>
+          <div className="notice-line">
+            <i className="bi bi-bell-fill"></i>
+            <div className="text">
+              <strong>픽업 방식</strong> : 예약 시간에 맞춰 테이블로 서빙
+            </div>
+          </div>
+          <div className="notice-line">
+            <i className="bi bi-bell"></i>
+            <div className="text">
+              <strong>취소 안내</strong> : 공연 24시간 전까지 취소 가능 (이후에는 예약금 환불 불가)
+            </div>
+          </div>
+          <div className="notice-line">
+            <i className="bi bi-bell-fill"></i>
+            <div className="text">
+              <strong>문의사항</strong> : 기타 궁금한 점은 재즈묘묘로 연락주세요
+            </div>
+          </div>
+          <div className="notice-line">
+            <i className="bi bi-bell"></i>
+            <div className="text">
+              <strong>안내사항</strong> : 외부 음식 반입 금지
+            </div>
+          </div>
+        </div>
 
         <div className="view-actions">
           <button className="back-btn" onClick={() => navigate(-1)}>← 게시판 목록으로</button>

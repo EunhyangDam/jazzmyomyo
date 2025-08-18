@@ -1,0 +1,182 @@
+@use "../../../../scss/variables" as *;
+
+#sub_preAdminEdit {
+  font-family: $font1;
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+  height: auto;
+
+  .board-view {
+    background-color: #fffdf9;
+    width: 800px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    padding: 40px 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .form-title {
+    font-size: 30px;
+    font-weight: 600;
+    color: #512b2b;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .write-form {
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #000000;
+    }
+
+    input,
+    select,
+    textarea {
+      color: #7d7d7d;
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #fff;
+    }
+
+    textarea {
+      resize: vertical;
+      height: 100px;
+    }
+
+    .admin-section {
+          margin-top: 40px;
+          padding-top: 20px;
+          border-top: 1px dashed #ccc;
+    }
+
+      
+
+    .submit-btn {
+      margin-top: 30px;
+      padding: 12px 20px;
+      background-color: #512b2b;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
+
+  .notice {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px dashed #aaa;
+    background-color: #fffdf9;
+  
+    .notice-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 14.5px;
+      line-height: 1.5;
+      color: #512b2b;
+  
+      i {
+        flex-shrink: 0;
+        font-size: 16px;
+        margin-top: 2px; // 텍스트 기준으로 아이콘 약간 내려줌
+      }
+  
+      .text {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+  
+        strong {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  
+  
+
+  .view-actions {
+    margin-top: 30px;
+    text-align: right;
+
+    .back-btn {
+      padding: 10px 20px;
+      background-color: #512b2b;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  }
+  
+}
+
+@media all and (max-width: 500px) {
+  #sub_preWrite {
+    padding: 40px 10px;
+
+    .board-view {
+      width: 100%;
+      padding: 24px 16px;
+    }
+
+    .form-title {
+      font-size: 22px;
+    }
+
+    .write-form {
+      label {
+        font-size: 13px;
+      }
+
+      input,
+      select,
+      textarea {
+        font-size: 13px;
+        padding: 8px;
+      }
+
+      .submit-btn {
+        font-size: 15px;
+        padding: 10px 16px;
+      }
+    }
+
+    .notice {
+      padding: 16px;
+
+      .notice-line {
+        font-size: 13.5px;
+
+        i {
+          font-size: 15px;
+        }
+
+        strong {
+          font-size: 13.5px;
+        }
+      }
+    }
+
+    .view-actions {
+      text-align: center;
+
+      .back-btn {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  }
+}

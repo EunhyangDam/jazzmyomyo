@@ -114,6 +114,7 @@
                 display: inline-flex;
                 align-items: center;
                 gap: 8px;
+                white-space: nowrap; // 라벨 줄바꿈 방지
 
                 input { margin: 0; }
                 span { font-size: 14px; }
@@ -333,6 +334,4 @@
       }
     }
   }
-
-
 }

@@ -1,7 +1,9 @@
-// Sub081MmView.jsx
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import "./scss/Sub081MmView.scss";
+
+import { useDispatch, useSelector } from "react-redux";
+import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
 
 const dummyMembers = [
   { id: 1, userId: "myomyo", name: "김묘묘", gender: "여", birth: "2000-01-01", phone: "010-1234-5678", email: "blue3@email.com", addr: "서울시 중구 장충동", consent: "Y", grade: "일반회원", status: "정상", joinedAt: "2025-07-07" },
@@ -17,6 +19,9 @@ function Sub081MmView() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const dispatch = useDispatch();
+  const modal = useSelector((state) => state.confirmModal); 
+
   const updatedFromEdit = location.state?.updatedMember;
   const memberFromState = location.state?.member;
 
@@ -25,7 +30,7 @@ function Sub081MmView() {
     memberFromState ??
     dummyMembers.find((m) => String(m.id) === String(id));
 
-  // 선택: 수정본이 오면 세션에 백업(뒤로가기 등 대비)
+
   useEffect(() => {
     if (updatedFromEdit) {
       try {
@@ -38,11 +43,25 @@ function Sub081MmView() {
     navigate("/Mm", { state: { updatedMember: member } });
   };
 
-  // 삭제 버튼: 실제 삭제 없이 확인 시에만 리스트로 이동
   const onAskDelete = () => {
-    const ok = window.confirm("정말 삭제하시겠습니까?");
-    if (ok) navigate("/Mm"); // 삭제 로직 없음
+    dispatch(
+      confirmModalAction({
+        heading: "정말 삭제하시겠습니까?",
+        explain: "신중하게 생각하세요",
+        isON: true,
+        isConfirm: true,
+        message1: "예",
+        message2: "아니오",
+      })
+    );
   };
+
+  useEffect(() => {
+    if (modal.isYes === true) {
+      dispatch(confirmModalYesNoAction(false)); 
+      navigate("/Mm");
+    }
+  }, [modal.isYes, dispatch, navigate]);
 
   return (
     <div id="sub081MmView">
