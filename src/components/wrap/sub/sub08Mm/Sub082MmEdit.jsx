@@ -1,27 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import "./scss/Sub082MmEdit.scss";
+import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
-
-const dummyMembers = [
-  {
-    id: 1, userId: "myomyo", name: "김묘묘", gender: "여", birth: "2000-01-01",
-    phone: "010-1234-5678", email: "blue3@email.com", addr: "서울시 중구 장충동",
-    consent: "Y", grade: "일반회원", status: "정상", joinedAt: "2025-07-07"
-  },
-  {
-    id: 2, userId: "catlover", name: "이냥냥", gender: "여", birth: "1998-03-12",
-    phone: "010-9876-5432", email: "nyang2@email.com", addr: "부산시 해운대구 우동",
-    consent: "Y", grade: "단골회원", status: "정상", joinedAt: "2025-06-15"
-  },
-  {
-    id: 6, userId: "coffeeholic", name: "정커피", gender: "여", birth: "1999-12-25",
-    phone: "010-7777-8888", email: "coffee@email.com", addr: "광주시 서구 치평동",
-    consent: "Y", grade: "일반회원", status: "탈퇴", joinedAt: "2025-02-01"
-  },
-];
 
 function Sub082MmEdit() {
   const { id } = useParams();
@@ -29,29 +13,69 @@ function Sub082MmEdit() {
   const location = useLocation();
 
   const dispatch = useDispatch();
-  const modal = useSelector((state) => state.confirmModal); // { heading, isON, isConfirm, isYes, ... }
+  const modal = useSelector((state) => state.confirmModal);
 
-  const memberFromState = location.state?.member;
-  const fallback = dummyMembers.find((m) => String(m.id) === String(id));
+  const [form, setForm] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(null);
 
-  const [form, setForm] = useState(() => ({
-    id: memberFromState?.id ?? fallback?.id ?? Number(id),
-    userId: memberFromState?.userId ?? fallback?.userId ?? "",
-    name: memberFromState?.name ?? fallback?.name ?? "",
-    gender: memberFromState?.gender ?? fallback?.gender ?? "여",
-    birth: memberFromState?.birth ?? fallback?.birth ?? "",
-    phone: memberFromState?.phone ?? fallback?.phone ?? "",
-    email: memberFromState?.email ?? fallback?.email ?? "",
-    addr: memberFromState?.addr ?? fallback?.addr ?? "",
-    consent: memberFromState?.consent ?? fallback?.consent ?? "Y",
-    grade: memberFromState?.grade ?? fallback?.grade ?? "일반회원",
-    status: memberFromState?.status ?? fallback?.status ?? "정상",
-    joinedAt: memberFromState?.joinedAt ?? fallback?.joinedAt ?? "",
-  }));
 
+  const normalizeStatus = (s) => (s === "휴먼" ? "휴면" : (s || "정상"));
+  const toForm = (m) => ({
+    id: m.id ?? Number(id),
+    userId: m.userId ?? "",
+    name: m.name ?? "",
+    gender: m.gender ?? "여",
+    birth: m.birth ?? "",
+    phone: m.phone ?? "",
+    email: m.email ?? "",
+    addr: m.addr ?? "",
+
+    consent: (m.consent ?? m.agree ?? "Y"),
+
+    grade: m.grade === "VIP회원" ? "일반회원" : (m.grade ?? "일반회원"),
+    status: normalizeStatus(m.status),
+    joinedAt: m.joinedAt ?? "",
+  });
+
+  // 1) state로 넘어온 값 먼저 적용(깜빡임 최소화)
   useEffect(() => {
-    if (!memberFromState && fallback) setForm((prev) => ({ ...prev, ...fallback }));
-  }, [memberFromState, fallback]);
+    const fromState = location.state?.member || location.state?.updatedMember;
+    if (fromState && String(fromState.id) === String(id)) {
+      setForm(toForm(fromState));
+      setLoading(false);
+    }
+  }, [id, location.state]);
+
+  // 2) JSON에서 해당 회원 로드 (최상위 키: 회원정보)
+  useEffect(() => {
+    const url = `${process.env.PUBLIC_URL || ""}/json/sub08/members.json?v=${Date.now()}`;
+    setLoading(true);
+    setErr(null);
+
+    axios
+      .get(url, { headers: { "Cache-Control": "no-cache" } })
+      .then((res) => {
+        const list =
+          Array.isArray(res.data?.회원정보) ? res.data.회원정보 :
+          Array.isArray(res.data?.members) ? res.data.members :
+          Array.isArray(res.data)          ? res.data : [];
+        const found = list.find((m) => String(m.id) === String(id));
+        if (!found) {
+          setForm(null);
+          return;
+        }
+        setForm(toForm(found));
+      })
+      .catch((e) => {
+        const msg = e?.response
+          ? `HTTP ${e.response.status} ${e.response.statusText}`
+          : (e?.message || "데이터 로드 실패");
+        setErr(msg);
+        console.error("[MmEdit] fetch error:", msg, "url:", url);
+      })
+      .finally(() => setLoading(false));
+  }, [id]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -59,6 +83,7 @@ function Sub082MmEdit() {
   };
 
   const onSave = () => {
+    // 실제 저장(파일/DB)은 없음. 모달만 띄우고 상세로 이동하며 state로 전달
     dispatch(
       confirmModalAction({
         heading: "수정되었습니다.",
@@ -76,9 +101,45 @@ function Sub082MmEdit() {
       dispatch(confirmModalYesNoAction(false));
       navigate(`/MmView/${form.id}`, { state: { member: form, updatedMember: form } });
     }
-  }, [modal.heading, modal.isON, dispatch, navigate, form]);
+  }, [modal.heading, modal.isON, navigate, form, dispatch]);
 
-  const onCancel = () => navigate(`/MmView/${form.id}`);
+  const onCancel = () => navigate(`/MmView/${form?.id ?? id}`);
+
+
+  if (loading) {
+    return (
+      <div id="Sub082MmEdit">
+        <div className="admin-wrap">
+          <main className="main" style={{ padding: 40, textAlign: "center" }}>불러오는 중…</main>
+        </div>
+      </div>
+    );
+  }
+  if (err) {
+    return (
+      <div id="Sub082MmEdit">
+        <div className="admin-wrap">
+          <main className="main" style={{ padding: 40, textAlign: "center", color: "#c00" }}>
+            데이터를 불러오지 못했어요. ({err})
+          </main>
+        </div>
+      </div>
+    );
+  }
+  if (!form) {
+    return (
+      <div id="Sub082MmEdit">
+        <div className="admin-wrap">
+          <main className="main" style={{ padding: 40, textAlign: "center" }}>
+            해당 회원 정보를 찾을 수 없습니다.
+            <div style={{ marginTop: 16 }}>
+              <button className="btn back" onClick={() => navigate("/Mm")}>목록으로</button>
+            </div>
+          </main>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div id="Sub082MmEdit">
@@ -90,7 +151,7 @@ function Sub082MmEdit() {
             <li><Link to="/Mm">회원리스트</Link></li>
             <li><Link to="/MmGrade">회원등급설정</Link></li>
             <li><Link to="/MmSign">회원가입설정</Link></li>
-            <li className="active"><Link to={`/MmEdit/${id}`}>회원수정</Link></li>
+            <li className="active"><Link to={`/MmEdit/${form.id}`}>회원수정</Link></li>
           </ul>
         </aside>
 
@@ -139,6 +200,7 @@ function Sub082MmEdit() {
                 <input id="addr" name="addr" value={form.addr} onChange={onChange} />
               </div>
 
+
               <div className="form-group radio-group">
                 <label>이메일 수신동의</label>
                 <div className="form-inline">
@@ -165,7 +227,7 @@ function Sub082MmEdit() {
                 </div>
               </div>
 
-              {/* 등급: 셀렉트 → 라디오 (요청 반영) */}
+
               <div className="form-group">
                 <label>등급</label>
                 <div className="form-inline">
@@ -192,13 +254,41 @@ function Sub082MmEdit() {
                 </div>
               </div>
 
+
               <div className="form-group">
-                <label htmlFor="status">상태</label>
-                <select id="status" name="status" value={form.status} onChange={onChange}>
-                  <option>정상</option>
-                  <option>휴면</option>
-                  <option>탈퇴</option>
-                </select>
+                <label>상태</label>
+                <div className="form-inline">
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="status"
+                      value="정상"
+                      checked={form.status === "정상"}
+                      onChange={onChange}
+                    />
+                    <span>정상</span>
+                  </label>
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="status"
+                      value="휴면"
+                      checked={form.status === "휴면"}
+                      onChange={onChange}
+                    />
+                    <span>휴면</span>
+                  </label>
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="status"
+                      value="탈퇴"
+                      checked={form.status === "탈퇴"}
+                      onChange={onChange}
+                    />
+                    <span>탈퇴</span>
+                  </label>
+                </div>
               </div>
 
               <div className="form-group">

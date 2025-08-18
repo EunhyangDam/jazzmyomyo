@@ -1,26 +1,85 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./scss/Sub05NtcAdminEdit.scss";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
 
 function Sub05NtcAdminEdit() {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
+  const dispatch = useDispatch();
+  const modal = useSelector((state) => state.confirmModal);
 
-  const { title, content } = location.state || {};
-
-  const [form, setForm] = useState({
-    title: "",
-    content: "",
-  });
+  const [form, setForm] = useState({ title: "", content: "" });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (title && content) {
-      setForm({ title, content });
-    } else {
-      alert("잘못된 접근입니다.");
-      navigate("/NtcAdmin");
+    const load = async () => {
+      try {
+        
+        const url = `${process.env.PUBLIC_URL || ""}/json/sub05/notice.json`;
+        const res = await axios.get(url);
+        const list = Array.isArray(res.data?.공지사항) ? res.data.공지사항 : [];
+
+        const found = list.find((it) => String(it.idx) === String(id));
+        if (!found) {
+          dispatch(confirmModalAction({
+            heading: "잘못된 접근입니다.",
+            explain: "",
+            isON: true,
+            isConfirm: false,
+            message1: "",
+            message2: "",
+          }));
+          return;
+        }
+
+        setForm({
+          title: found.subject ?? "",
+          content: found.content ?? "",
+        });
+      } catch (e) {
+        console.error(e);
+        dispatch(confirmModalAction({
+          heading: "잘못된 접근입니다.",
+          explain: "",
+          isON: true,
+          isConfirm: false,
+          message1: "",
+          message2: "",
+        }));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) load();
+    else {
+      dispatch(confirmModalAction({
+        heading: "잘못된 접근입니다.",
+        explain: "",
+        isON: true,
+        isConfirm: false,
+        message1: "",
+        message2: "",
+      }));
+      setLoading(false);
     }
-  }, [title, content, navigate]);
+  }, [id, dispatch]);
+
+  useEffect(() => {
+    if (
+      (modal.heading === "잘못된 접근입니다." || modal.heading === "수정되었습니다.") &&
+      modal.isON
+    ) {
+      dispatch(confirmModalYesNoAction(false));
+      if (id) navigate(`/NtcAdminV/${id}`);
+      else navigate("/NtcAdmin");
+    }
+  }, [modal.heading, modal.isON, dispatch, navigate, id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,19 +90,40 @@ function Sub05NtcAdminEdit() {
     e.preventDefault();
 
     if (!form.title || !form.content) {
-      alert("제목과 내용을 모두 입력해주세요.");
+      dispatch(confirmModalAction({
+        heading: "제목과 내용을 모두 입력해주세요.",
+        explain: "",
+        isON: true,
+        isConfirm: false,
+        message1: "",
+        message2: "",
+      }));
       return;
     }
 
-    // 백엔드 연결 예정
-    alert("공지사항이 수정되었습니다.");
-    navigate(-1);
+    // TODO: 백엔드 연동 시 여기서 저장 API 호출
+    dispatch(confirmModalAction({
+      heading: "수정되었습니다.",
+      explain: "",
+      isON: true,
+      isConfirm: false,
+      message1: "",
+      message2: "",
+    }));
   };
 
+  if (loading) {
+    return (
+      <div id="Sub05NtcAdminEdit" style={{ padding: 60, textAlign: "center" }}>
+        로딩 중…
+      </div>
+    );
+  }
+
   return (
-    <div id="Sub05NtcAdimEdit">
+    <div id="Sub05NtcAdminEdit">
       <div className="breadcrumb">
-        <i className="bi bi-house"></i> &gt; 공지사항 &gt; 글수정
+        <i className="bi bi-house"></i> &gt; <Link to="/NtcAdmin">공지사항</Link> &gt; 글수정
       </div>
 
       <h2>공지사항 수정</h2>

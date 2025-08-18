@@ -1,18 +1,11 @@
-import React, { useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import "./scss/Sub081MmView.scss";
+import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
-
-const dummyMembers = [
-  { id: 1, userId: "myomyo", name: "김묘묘", gender: "여", birth: "2000-01-01", phone: "010-1234-5678", email: "blue3@email.com", addr: "서울시 중구 장충동", consent: "Y", grade: "일반회원", status: "정상", joinedAt: "2025-07-07" },
-  { id: 2, userId: "catlover", name: "이냥냥", gender: "여", birth: "1998-03-12", phone: "010-9876-5432", email: "nyang2@email.com", addr: "부산시 해운대구 우동", consent: "Y", grade: "단골회원", status: "정상", joinedAt: "2025-06-15" },
-  { id: 3, userId: "jazzman", name: "박재즈", gender: "남", birth: "1995-09-20", phone: "010-1111-2222", email: "jazzman@email.com", addr: "서울시 마포구 서교동", consent: "N", grade: "일반회원", status: "정상", joinedAt: "2025-05-30" },
-  { id: 4, userId: "winequeen", name: "최와인", gender: "여", birth: "1992-07-05", phone: "010-3333-4444", email: "winequeen@email.com", addr: "인천시 연수구 송도동", consent: "Y", grade: "일반회원", status: "정상", joinedAt: "2025-04-25" },
-  { id: 5, userId: "guitarcat", name: "한기타", gender: "남", birth: "1988-11-11", phone: "010-5555-6666", email: "guitarcat@email.com", addr: "대구시 수성구 범어동", consent: "N", grade: "일반회원", status: "정상", joinedAt: "2025-03-18" },
-  { id: 6, userId: "coffeeholic", name: "정커피", gender: "여", birth: "1999-12-25", phone: "010-7777-8888", email: "coffee@email.com", addr: "광주시 서구 치평동", consent: "Y", grade: "단골회원", status: "정상", joinedAt: "2025-02-01" },
-];
 
 function Sub081MmView() {
   const { id } = useParams();
@@ -20,34 +13,70 @@ function Sub081MmView() {
   const location = useLocation();
 
   const dispatch = useDispatch();
-  const modal = useSelector((state) => state.confirmModal); 
+  const modal = useSelector((state) => state.confirmModal);
 
-  const updatedFromEdit = location.state?.updatedMember;
-  const memberFromState = location.state?.member;
-
-  const member =
-    updatedFromEdit ??
-    memberFromState ??
-    dummyMembers.find((m) => String(m.id) === String(id));
+  const [member, setMember] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(null);
 
 
   useEffect(() => {
-    if (updatedFromEdit) {
-      try {
-        sessionStorage.setItem("updatedMember", JSON.stringify(updatedFromEdit));
-      } catch {}
+    const fromState = location.state?.member || location.state?.updatedMember;
+    if (fromState && String(fromState.id) === String(id)) {
+      setMember(fromState);
+      setLoading(false);
     }
-  }, [updatedFromEdit]);
+  }, [id, location.state]);
+
+  useEffect(() => {
+    const url = `${process.env.PUBLIC_URL || ""}/json/sub08/members.json?v=${Date.now()}`;
+
+
+    setLoading((prev) => prev === true ? true : true);
+    setErr(null);
+
+    axios
+      .get(url, { headers: { "Cache-Control": "no-cache" } })
+      .then((res) => {
+        const list =
+          Array.isArray(res.data?.회원정보) ? res.data.회원정보 :
+          Array.isArray(res.data?.members) ? res.data.members :
+          Array.isArray(res.data)          ? res.data : [];
+
+        const found = list.find((m) => String(m.id) === String(id));
+        if (!found) {
+          setMember(null);
+          return;
+        }
+
+
+        const normalized = {
+          ...found,
+          consent: found.agree ?? found.consent ?? "", 
+        };
+        setMember(normalized);
+      })
+      .catch((e) => {
+        const msg = e?.response
+          ? `HTTP ${e.response.status} ${e.response.statusText}`
+          : (e?.message || "데이터 로드 실패");
+        setErr(msg);
+        console.error("[MmView] fetch error:", msg, "url:", url);
+      })
+      .finally(() => setLoading(false));
+  }, [id]);
+
 
   const goList = () => {
-    navigate("/Mm", { state: { updatedMember: member } });
+    navigate("/Mm", { state: member ? { updatedMember: member } : undefined });
   };
+
 
   const onAskDelete = () => {
     dispatch(
       confirmModalAction({
         heading: "정말 삭제하시겠습니까?",
-        explain: "신중하게 생각하세요",
+        explain: "신중하게 생각하세요 (삭제 누르지마세요)",
         isON: true,
         isConfirm: true,
         message1: "예",
@@ -56,12 +85,36 @@ function Sub081MmView() {
     );
   };
 
+
   useEffect(() => {
     if (modal.isYes === true) {
-      dispatch(confirmModalYesNoAction(false)); 
-      navigate("/Mm");
+      dispatch(confirmModalYesNoAction(false));
+      navigate("/Mm"); 
     }
   }, [modal.isYes, dispatch, navigate]);
+
+
+  if (loading) {
+    return (
+      <div id="sub081MmView">
+        <div className="admin-wrap">
+          <main className="main" style={{ padding: 40, textAlign: "center" }}>불러오는 중…</main>
+        </div>
+      </div>
+    );
+  }
+
+  if (err) {
+    return (
+      <div id="sub081MmView">
+        <div className="admin-wrap">
+          <main className="main" style={{ padding: 40, textAlign: "center", color: "#c00" }}>
+            데이터를 불러오지 못했어요. ({err})
+          </main>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div id="sub081MmView">
@@ -105,7 +158,7 @@ function Sub081MmView() {
                 <li><strong>연락처</strong> {member.phone}</li>
                 <li><strong>이메일</strong> {member.email}</li>
                 <li><strong>주소</strong> {member.addr}</li>
-                <li><strong>이메일 수신동의</strong> {member.consent}</li>
+                <li><strong>이메일 수신동의</strong> {member.consent ?? member.agree ?? "-"}</li>
                 <li><strong>등급</strong> {member.grade}</li>
                 <li><strong>상태</strong> {member.status}</li>
                 <li><strong>가입일</strong> {member.joinedAt}</li>

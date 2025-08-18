@@ -1,112 +1,141 @@
 @use "../../../../scss/variables" as *;
 
-#Sub05NtcAdimWrite {
+#Sub05NtcAdminWrite {
   margin-top: 100px;
   margin-bottom: 50px;
   background-color: #fff;
   color: #222;
-  font-family: 'Pretendard', sans-serif;
-  padding: 0 20px;
+  font-family: $font1;
   user-select: none;
+  padding: 0 20px; 
 
   .breadcrumb {
-    font-size: 14px;
-    color: #bbbbbb;
-    max-width: 900px;
-    margin: 0 auto;
-    padding-top: 30px;
+    width: 100%;
+    max-width: none;
+    margin: 0 0 10px;
+    padding: 30px 0 10px 20px;
     display: flex;
     align-items: center;
     gap: 6px;
+    justify-content: flex-start;
+    font-size: 14px;
+    color: #bbbbbb;
 
-    i {
-      font-size: 16px;
+    a {
+      display: flex;
+      align-items: center;
       color: #666;
+      text-decoration: none;
+      transition: color 0.2s;
+
+      i { font-size: 16px; 
+        vertical-align: middle; 
+      }
+      &:hover { 
+        color: #000;}
     }
   }
 
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
   h2 {
-    font-family: $font2;
     color: $primary-color;
-    font-size: 50px;
+    font-family: $font2;
+    font-size: 48px;
     font-weight: 700;
-    margin: 40px 0 30px;
+    margin: 30px 0 20px;
     text-align: center;
   }
 
   .write-form {
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 
     label {
-      font-weight: bold;
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    input,
-    textarea {
-      padding: 10px 14px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      display: block;
+      font-weight: 600;
+      margin-top: 12px;
+      margin-bottom: 8px;
       font-size: 15px;
-      resize: vertical;
+      color: #333;
     }
 
+    input[type="text"],
     textarea {
-      min-height: 200px;
-      line-height: 1.6;
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 15px;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 0 3px rgba($primary-color, 0.15);
+      }
     }
+
+    input[type="text"] { height: 44px; }
+    textarea { 
+      min-height: 220px; 
+      resize: vertical; 
+      line-height: 1.6; }
 
     .btn-group {
       display: flex;
-      justify-content: flex-end;
       gap: 10px;
-      margin-top: 20px;
+      justify-content: center;
+      margin-top: 22px;
 
       button {
-        padding: 10px 20px;
-        font-size: 15px;
+        padding: 10px 22px;
         border: none;
-        border-radius: 6px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 700;
         cursor: pointer;
-        transition: all 0.3s;
-
-        &:first-child {
-          background-color: #1e2a2f;
-          color: #fff;
-
-          &:hover {
-            background-color: #333;
-          }
-        }
-
-        &:last-child {
-          background-color: #f1f1f1;
-          color: #222;
-
-          &:hover {
-            background-color: #ddd;
-          }
-        }
+        font-family: 'Pretendard', sans-serif;
+        transition: background 0.2s;
       }
+
+      .primary { background: #3a7773; color: #fff; &:hover { background: #2f5f5c; } }
+      .ghost   { background: #f3f3f3; color: #333; &:hover { background: #e6e6e6; } }
     }
   }
 
-  @media all and (max-width: 420px) {
-    h2 {
-      font-size: 40px;
+  @media all and (max-width: 400px) {
+    padding: 0 10px;
+
+    .breadcrumb {
+      padding: 20px 0 8px 10px;
+      font-size: 12px;
+      gap: 4px;
+
+      a i { font-size: 14px; }
+    }
+
+    h2 { font-size: 34px; margin: 20px 0 16px; }
+
+    .write-form {
+      padding: 16px;
+
+      label { font-size: 14px; }
+
+      input[type="text"], textarea {
+        font-size: 14px; padding: 10px 12px;
+      }
+      textarea { min-height: 180px; }
+
+      .btn-group button { font-size: 14px; padding: 8px 14px; }
     }
   }
-
-  @media all and (max-width: 340px) {
-    h2 {
-      font-size: 30px;
-    }
-  }
-
-
 }

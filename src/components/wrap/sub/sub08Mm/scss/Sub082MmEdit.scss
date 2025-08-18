@@ -3,7 +3,7 @@
 #Sub082MmEdit {
   margin-top: 100px;
   font-family: $font1;
-  background-color: $sub-color3;
+  background-color:$primary-color;
   user-select: none;
 
   .admin-wrap {
@@ -53,6 +53,7 @@
         margin-bottom: 30px;
 
         h1 {
+          color: #fff;
           font-size: 70px;
           font-family: $font2;
           line-height: 1.1;

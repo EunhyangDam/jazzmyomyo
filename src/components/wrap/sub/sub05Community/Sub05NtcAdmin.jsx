@@ -1,93 +1,187 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import "./scss/Sub05NtcAdmin.scss";
 
 function Sub05NtcAdmin() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredList, setFilteredList] = useState([]);
 
-  const notices = [
-    { id: 5, title: "묘묘 키링 1차 재입고 안내", date: "2025.08.07", writer: "관리자", views: 281, isNew: true },
-    { id: 4, title: "여름 한정 신메뉴 “수박화채” 출시예정!", date: "2025.08.01", writer: "관리자", views: 586 },
-    { id: 3, title: "8월 정기 공연 세션 공개", date: "2025.07.17", writer: "관리자", views: 612 },
-    { id: 2, title: "재즈묘묘 정기 휴무 안내", date: "2025.02.08", writer: "관리자", views: 967 },
-    { id: 1, title: "감성재즈바 재즈묘묘 오픈!", date: "2025.01.14", writer: "관리자", views: 988 }
-  ];
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [selectField, setSelectField] = React.useState("");
 
-  // 공통 필터 함수
-  const runFilter = (term) => {
-    const q = term.trim().toLowerCase();
-    if (!q) return notices;
-    return notices.filter((n) => n.title.toLowerCase().includes(q));
+
+  const [list, setList] = React.useState([]); 
+  const [filteredList, setFilteredList] = React.useState([]); 
+
+
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const itemsPerPage = 10;
+
+
+  const parseDate = (s) => {
+    if (!s) return new Date(0);
+    return new Date(String(s).replace(/\./g, "-"));
   };
 
-  // 실시간 반영
-  useEffect(() => {
-    setFilteredList(runFilter(searchTerm));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchTerm]);
 
-  // 버튼/엔터도 같은 로직
-  const handleSearch = () => {
-    setFilteredList(runFilter(searchTerm));
+  React.useEffect(() => {
+    axios
+      .get("./json/sub05/notice.json")
+      .then((res) => {
+        const raw = Array.isArray(res.data?.공지사항) ? res.data.공지사항 : [];
+        const sorted = [...raw]
+          .sort((a, b) => {
+            const d = parseDate(b.date) - parseDate(a.date);
+            if (d !== 0) return d;
+            return (b.idx ?? 0) - (a.idx ?? 0);
+          })
+          .map((it, i) => ({ ...it, _rowId: `${it.idx}-${i}` }));
+        setList(sorted);
+        setFilteredList(sorted);
+        setCurrentPage(1);
+      })
+      .catch(console.error);
+  }, []);
+
+
+  const onSubmitSearch = (e) => {
+    e.preventDefault();
+    const q = (searchTerm || "").trim().toLowerCase();
+
+    if (!q) {
+      setFilteredList(list);
+      setSelectField("");
+      setCurrentPage(1);
+      return;
+    }
+
+    const field = selectField === "" ? "subject" : selectField;
+    const next = list.filter((item) =>
+      String(item[field] ?? "").toLowerCase().includes(q)
+    );
+
+    setFilteredList(next);
+    setCurrentPage(1);
   };
 
-  const displayedList = searchTerm ? filteredList : notices;
+
+  const onKeyDown = (e) => {
+    if (e.key === "Enter") onSubmitSearch(e);
+  };
+
+
+  const onChangeSelect = (e) => {
+    setSelectField(e.target.value);
+    setCurrentPage(1);
+  };
+
+
+  const totalItems = filteredList.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+  const indexOfLast = currentPage * itemsPerPage;
+  const indexOfFirst = indexOfLast - itemsPerPage;
+  const currentItems = filteredList.slice(indexOfFirst, indexOfLast);
+
+
+  React.useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
 
   return (
     <div id="sub05NtcAdmin" className="container">
+
       <div className="breadcrumb">
-        <Link to="/mainComponent"><i className="bi bi-house"></i></Link> &gt; 공지사항
+        <Link to="/mainComponent"><i className="bi bi-house"></i></Link> &gt; <Link to="." reloadDocument>공지사항</Link> 
       </div>
 
       <h2>공지사항</h2>
 
       <div className="search-bar">
-        <input
-          type="text"
-          placeholder="검색어를 입력하세요"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}         // 실시간
-          onKeyDown={(e) => e.key === "Enter" && handleSearch()}  // 엔터
-        />
-        <button onClick={handleSearch}>검색</button>
+        <form onSubmit={onSubmitSearch} className="search-form">
+          <div className="select">
+            {/* <select
+              id="admin-select"
+              name="select"
+              value={selectField}
+              onChange={onChangeSelect}
+              aria-label="검색 항목 선택"
+            >
+              <option value="">항목선택</option>
+              <option value="subject">제목</option>
+              <option value="date">날짜</option>
+            </select> */}
+          </div>
+
+          <input
+            type="text"
+            placeholder="검색어를 입력하세요"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={onKeyDown}
+          />
+          <button type="submit">검색</button>
+        </form>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>날짜</th>
-            <th>작성자</th>
-            <th>조회수</th>
-          </tr>
-        </thead>
-        <tbody>
-          {displayedList.length > 0 ? (
-            displayedList.map((item) => (
-              <tr key={item.id}>
-                <td>{item.isNew ? <span className="badge-new">NEW</span> : item.id}</td>
-                <td className="title">
-                  <Link to={`/NtcAdminV/${item.id}`}>{item.title}</Link>
-                </td>
-                <td>{item.date}</td>
-                <td>{item.writer}</td>
-                <td>{item.views}</td>
-              </tr>
+
+      <div className="notice-list">
+        <div className="list-header">
+          <span className="col-num">번호</span>
+          <span className="col-title">제목</span>
+          <span className="col-date">날짜</span>
+          <span className="col-writer">작성자</span>
+          <span className="col-views">조회수</span>
+        </div>
+
+        <ul className="list-body">
+          {currentItems.length > 0 ? (
+            currentItems.map((item, idx) => (
+              <li key={item._rowId}>
+
+                <span className="col-num">{totalItems - (indexOfFirst + idx)}</span>
+                <span className="col-title">
+                  <Link to={`/NtcAdminV/${item.idx}`} state={item}>
+                    {item.subject}
+                  </Link>
+                </span>
+                <span className="col-date">{item.date}</span>
+                <span className="col-writer">{item.name}</span>
+                <span className="col-views">{item.hit}</span>
+              </li>
             ))
           ) : (
-            <tr>
-              <td colSpan="5" style={{ textAlign: "center" }}>검색 결과가 없습니다.</td>
-            </tr>
+            <li className="no-result">검색 결과가 없습니다.</li>
           )}
-        </tbody>
-      </table>
+        </ul>
+      </div>
 
       <div className="pagination">
-        <button disabled>&laquo;</button>
-        <button className="active">1</button>
-        <button disabled>&raquo;</button>
+        <button
+          onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+          disabled={currentPage === 1}
+        >
+          &laquo;
+        </button>
+
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={`admin-page-${i + 1}`}
+            className={currentPage === i + 1 ? "active" : ""}
+            onClick={() => setCurrentPage(i + 1)}
+          >
+            {i + 1}
+          </button>
+        ))}
+
+        <button
+          onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+          disabled={currentPage === totalPages || totalPages === 0}
+        >
+          &raquo;
+        </button>
+
         <Link to="/NtcAdminW" className="write-btn">+ 글쓰기</Link>
       </div>
     </div>

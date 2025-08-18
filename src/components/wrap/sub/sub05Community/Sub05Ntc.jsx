@@ -1,134 +1,213 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import "./scss/Sub05Ntc.scss";
-import SiteMapComponent from "../../custom/SiteMapComponent";
 
 function Sub05Ntc() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredList, setFilteredList] = useState([]);
+  const [state, setState] = React.useState({
+    공지사항: [],
+    필터공지사항: [],
+    검색: "",
+    셀렉트: "",
+  });
 
-  const notices = [
-    {
-      id: 5,
-      title: "묘묘 키링 1차 재입고 안내",
-      date: "2025.08.07",
-      writer: "관리자",
-      views: 281,
-      isNew: true,
-    },
-    {
-      id: 4,
-      title: "여름 한정 신메뉴 “수박화채” 출시예정!",
-      date: "2025.08.01",
-      writer: "관리자",
-      views: 586,
-    },
-    {
-      id: 3,
-      title: "8월 정기 공연 세션 공개",
-      date: "2025.07.17",
-      writer: "관리자",
-      views: 612,
-    },
-    {
-      id: 2,
-      title: "재즈묘묘 정기 휴무 안내",
-      date: "2025.02.08",
-      writer: "관리자",
-      views: 967,
-    },
-    {
-      id: 1,
-      title: "감성재즈바 재즈묘묘 오픈!",
-      date: "2025.01.14",
-      writer: "관리자",
-      views: 988,
-    },
-  ];
 
-  // 공통 필터 함수
-  const runFilter = (term) => {
-    const q = term.trim().toLowerCase();
-    if (!q) return notices;
-    return notices.filter((n) => n.title.toLowerCase().includes(q));
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const itemsPerPage = 10; 
+
+
+  const parseDate = (s) => {
+    if (!s) return new Date(0);
+    return new Date(s.replace(/\./g, "-"));
   };
 
-  // 실시간 필터링: 입력값이 바뀔 때마다 반영
-  useEffect(() => {
-    setFilteredList(runFilter(searchTerm));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchTerm]);
+  React.useEffect(() => {
+    axios({
+      url: "./json/sub05/notice.json",
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          let list = res.data.공지사항 ?? [];
 
-  // 버튼/엔터로도 동작: 사용자가 의식적으로 "검색"을 눌러도 같은 결과
-  const handleSearch = () => {
-    setFilteredList(runFilter(searchTerm));
+          
+          list = [...list]
+            .sort((a, b) => {
+              const d = parseDate(b.date) - parseDate(a.date);
+              if (d !== 0) return d;
+              return (b.idx ?? 0) - (a.idx ?? 0);
+            })
+            // 각 항목에 고유 rowId 추가
+            .map((item, i) => ({ ...item, _rowId: `${item.idx}-${i}` }));
+
+          setState((prev) => ({
+            ...prev,
+            공지사항: list,
+            필터공지사항: list,
+          }));
+        }
+      })
+      .catch(console.error);
+  }, []);
+
+
+  const onChangeSearch = (e) => {
+    setState((prev) => ({ ...prev, 검색: e.target.value }));
   };
 
-  const displayedList = searchTerm ? filteredList : notices;
+
+  const onChangeSelect = (e) => {
+    setState((prev) => ({ ...prev, 셀렉트: e.target.value }));
+  };
+
+
+  const onSubmitSearch = (e) => {
+    e.preventDefault();
+    const { 검색, 셀렉트, 공지사항 } = state;
+    const q = (검색 || "").trim().toLowerCase();
+
+    if (q === "") {
+      setState((prev) => ({
+        ...prev,
+        필터공지사항: prev.공지사항,
+        셀렉트: "",
+      }));
+      setCurrentPage(1); 
+      return;
+    }
+
+    const field = 셀렉트 === "" ? "subject" : 셀렉트;
+    const filtered = 공지사항.filter((item) =>
+      String(item[field] ?? "").toLowerCase().includes(q)
+    );
+
+    setState((prev) => ({
+      ...prev,
+      필터공지사항: filtered,
+    }));
+    setCurrentPage(1);
+  };
+
+ 
+  const onKeyDownSearch = (e) => {
+    if (e.key === "Enter") onSubmitSearch(e);
+  };
+
+ 
+  const totalItems = state.필터공지사항.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const indexOfLast = currentPage * itemsPerPage;
+  const indexOfFirst = indexOfLast - itemsPerPage;
+  const currentItems = state.필터공지사항.slice(indexOfFirst, indexOfLast);
 
   return (
     <div id="sub05Ntc" className="container">
-      <SiteMapComponent firstLink="/Ntc" firstName="공지사항" />
+      
+      <div className="breadcrumb">
+        <Link to="/mainComponent">
+          <i className="bi bi-house"></i>
+        </Link>{" "}
+        &gt; <Link to="." reloadDocument>공지사항</Link> 
+      </div>
+
       <h2>공지사항</h2>
 
+     
       <div className="search-bar">
-        <input
-          type="text"
-          placeholder="검색어를 입력하세요"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-        />
-        <button onClick={handleSearch}>검색</button>
+        <form onSubmit={onSubmitSearch} className="search-form">
+          <div className="select">
+            <select
+              id="select"
+              name="select"
+              value={state.셀렉트}
+              onChange={onChangeSelect}
+              aria-label="검색 항목 선택"
+            >
+              <option value="">항목선택</option>
+              <option value="subject">제목</option>
+              <option value="date">날짜</option>
+            </select>
+          </div>
+
+          <input
+            type="text"
+            placeholder="검색어를 입력하세요"
+            value={state.검색}
+            onChange={onChangeSearch}
+            onKeyDown={onKeyDownSearch}
+            name="search"
+            id="search"
+          />
+          <button type="submit">검색</button>
+        </form>
+
         <Link to="/NtcAdmin" className="admin-btn">
           관리자 페이지
         </Link>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>날짜</th>
-            <th>작성자</th>
-            <th>조회수</th>
-          </tr>
-        </thead>
-        <tbody>
-          {displayedList.length > 0 ? (
-            displayedList.map((item) => (
-              <tr key={item.id}>
-                <td>
-                  {item.isNew ? (
-                    <span className="badge-new">NEW</span>
-                  ) : (
-                    item.id
-                  )}
-                </td>
-                <td className="title">
-                  <Link to={`/NtcV/${item.id}`}>{item.title}</Link>
-                </td>
-                <td>{item.date}</td>
-                <td>{item.writer}</td>
-                <td>{item.views}</td>
-              </tr>
+      
+      <div className="notice-list">
+        <div className="list-header">
+          <span className="col-num">번호</span>
+          <span className="col-title">제목</span>
+          <span className="col-date">날짜</span>
+          <span className="col-writer">작성자</span>
+          <span className="col-views">조회수</span>
+        </div>
+
+        <ul className="list-body">
+          {currentItems.length > 0 ? (
+            currentItems.map((item, idx) => (
+              <li key={item._rowId} className="row">
+                
+                <span className="col-num">
+                  {totalItems - (indexOfFirst + idx)}
+                </span>
+                <span className="col-title">
+                  <Link to={`/NtcV/${item.idx}`} state={item}>
+                    {item.subject}
+                  </Link>
+                </span>
+                <span className="col-date">{item.date}</span>
+                <span className="col-writer">{item.name}</span>
+                <span className="col-views">{item.hit}</span>
+              </li>
             ))
           ) : (
-            <tr>
-              <td colSpan="5" style={{ textAlign: "center" }}>
-                검색 결과가 없습니다.
-              </td>
-            </tr>
+            <li className="no-result">검색 결과가 없습니다.</li>
           )}
-        </tbody>
-      </table>
-
-      <div className="pagination">
-        <button disabled>&laquo;</button>
-        <button className="active">1</button>
-        <button disabled>&raquo;</button>
+        </ul>
       </div>
+
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+          >
+            &laquo;
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={`page-${i + 1}`}
+              className={currentPage === i + 1 ? "active" : ""}
+              onClick={() => setCurrentPage(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+
+          <button
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+          >
+            &raquo;
+          </button>
+        </div>
+      )}
     </div>
   );
 }

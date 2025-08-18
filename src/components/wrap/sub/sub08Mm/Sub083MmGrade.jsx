@@ -92,7 +92,7 @@ function Sub083MmGrade() {
   return (
     <div id="sub083MmGrade">
       <div className="admin-wrap">
-        {/* 사이드바 */}
+
         <aside className="sidebar">
           <h2>회원관리</h2>
           <ul>
@@ -108,7 +108,7 @@ function Sub083MmGrade() {
           </ul>
         </aside>
 
-        {/* 메인 */}        <main className="main">
+      <main className="main">
           <div className="page-header">
             <h1>회원등급 설정</h1>
           </div>

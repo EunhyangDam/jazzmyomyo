@@ -1,75 +1,89 @@
-import React, { useState } from "react";
-import './scss/Sub035Pre.scss';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
+import "./scss/Sub035Pre.scss";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 
 export default function Sub03Pre() {
   const itemsPerPage = 5;
 
-  const postData = [
-    {
-      id: 1,
-      title: "[예약신청] 9월 12일 2인",
-      author: "이시은",
-      date: "2025-09-12",
-      created: "2025-08-01",
-      type: "예약완료",
-    },
-    {
-      id: 2,
-      title: "[예약신청] 9월 14일 3인",
-      author: "이은지",
-      date: "2025-09-14",
-      created: "2025-08-02",
-      type: "예약중",
-    },
-    {
-      id: 3,
-      title: "[예약신청] 9월 18일 4인",
-      author: "박의연",
-      date: "2025-09-18",
-      created: "2025-08-03",
-      type: "예약중",
-    },
-    {
-      id: 4,
-      title: "[예약신청] 9월 22일 3인",
-      author: "정하은",
-      date: "2025-09-22",
-      created: "2025-08-04",
-      type: "예약완료",
-    },
-    {
-      id: 5,
-      title: "[예약신청] 9월 25일 2인",
-      author: "홍규린",
-      date: "2025-09-25",
-      created: "2025-08-05",
-      type: "예약중",
-    },
-    {
-      id: 6,
-      title: "[예약신청] 9월 30일 5인",
-      author: "홍길동",
-      date: "2025-09-30",
-      created: "2025-08-06",
-      type: "예약취소",
-    },
-  ];
-
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+
+
+  const parseDate = (s) => {
+    if (!s) return new Date(0);
+    return new Date(String(s).replace(/\./g, "-"));
+  };
+
+  useEffect(() => {
+    const url = `${process.env.PUBLIC_URL || ""}/json/sub03/preorder.json`;
+    axios
+      .get(url)
+      .then((res) => {
+        const arr = Array.isArray(res.data?.예약신청) ? res.data.예약신청 : [];
+
+        const mapped = arr.map((it, i) => ({
+          id: it.idx ?? i + 1,
+          title: it.title ?? "",
+          author: it.author ?? "",
+          date: it.reserveDate ?? "", 
+          created: it.writeDate ?? "",  
+          type: it.status ?? "",    
+        }));
+
+        const sorted = mapped.sort((a, b) => {
+          const d = parseDate(b.created) - parseDate(a.created);
+          if (d !== 0) return d;
+          return (b.id ?? 0) - (a.id ?? 0);
+        });
+
+        setPosts(sorted);
+        setCurrentPage(1);
+      })
+      .catch((e) => setErr(e?.message || "데이터 로드 실패"))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const totalPages = Math.max(1, Math.ceil(posts.length / itemsPerPage));
   const indexOfLast = currentPage * itemsPerPage;
   const indexOfFirst = indexOfLast - itemsPerPage;
-  const currentPosts = postData.slice(indexOfFirst, indexOfLast);
-  const totalPages = Math.ceil(postData.length / itemsPerPage);
+  const currentPosts = posts.slice(indexOfFirst, indexOfLast);
 
-  const goToPrev = () => {
-    if (currentPage > 1) setCurrentPage(prev => prev - 1);
-  };
+  const goToPrev = () => currentPage > 1 && setCurrentPage((p) => p - 1);
+  const goToNext = () => currentPage < totalPages && setCurrentPage((p) => p + 1);
 
-  const goToNext = () => {
-    if (currentPage < totalPages) setCurrentPage(prev => prev + 1);
-  };
+  if (loading) {
+    return (
+      <section id="sub_pre">
+        <div className="clipboard">
+          <div className="clip" />
+          <div className="paper">
+            <h1>사전 예약 게시판</h1>
+            <p style={{ textAlign: "center", padding: "40px 0" }}>불러오는 중…</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (err) {
+    return (
+      <section id="sub_pre">
+        <div className="clipboard">
+          <div className="clip" />
+          <div className="paper">
+            <h1>사전 예약 게시판</h1>
+            <p style={{ color: "#c00", textAlign: "center", padding: "40px 0" }}>
+              데이터를 불러오지 못했어요. ({err})
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="sub_pre">
@@ -77,31 +91,44 @@ export default function Sub03Pre() {
         <div className="clip"></div>
         <div className="paper">
           <h1>사전 예약 게시판</h1>
-          <Link to='/PreW'
-         className="write-button">
-          사전주문신청
+
+          <Link to="/PreW" className="write-button">
+            사전주문신청
           </Link>
 
-          {/* 관리자용 링크 */}
-          <Link to='/PreAdmin' className="admin-link right">
+          <Link to="/PreAdmin" className="admin-link right">
             관리자 페이지로 이동
           </Link>
+
+          {currentPosts.length === 0 && (
+            <div className="card" style={{ textAlign: "center", color: "#666" }}>
+              등록된 예약이 없습니다.
+            </div>
+          )}
 
           {currentPosts.map((post) => (
             <div key={post.id} className="card">
               <Link to={`/PreV/view/${post.id}`} className="card-title">
-                {post.title}
+                {post.title || "(제목 없음)"}
               </Link>
+
               <p className="card-type">
-                  <span className={`type-label ${post.type === '예약완료' ? 'complete' : post.type === '예약중' ? 'progress' : 'cancel'}`}>
-                    {post.type}
-                  </span>
+                <span
+                  className={`type-label ${
+                    post.type === "예약완료"
+                      ? "complete"
+                      : post.type === "예약중"
+                      ? "progress"
+                      : "cancel"
+                  }`}
+                >
+                  {post.type || "상태없음"}
+                </span>
               </p>
 
-              <p><strong>작성자:</strong> {post.author}</p>
-              <p><strong>예약일:</strong> {post.date}</p>
-              <p><strong>작성일:</strong> {post.created}</p>
-              
+              <p><strong>작성자:</strong> {post.author || "-"}</p>
+              <p><strong>예약일:</strong> {post.date || "-"}</p>
+              <p><strong>작성일:</strong> {post.created || "-"}</p>
             </div>
           ))}
 

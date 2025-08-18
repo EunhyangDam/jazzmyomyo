@@ -113,7 +113,7 @@ function Sub084MmSign() {
           </div>
 
           <div className="join-settings">
-            {/* 가입 승인 방식: 라디오 버튼 */}
+ 
             <div className="form-group">
               <label>가입 승인 방식</label>
               <div className="form-check">
@@ -138,7 +138,7 @@ function Sub084MmSign() {
               </div>
             </div>
 
-            {/* 기본 회원 등급: 라디오 버튼 */}
+
             <div className="form-group">
               <label>기본 회원 등급</label>
               <div className="form-check">
@@ -163,7 +163,7 @@ function Sub084MmSign() {
               </div>
             </div>
 
-            {/* 이메일 수신 여부 기본값 (기존 그대로) */}
+
             <div className="form-group">
               <label>이메일 수신 여부 기본값</label>
               <div className="form-check">

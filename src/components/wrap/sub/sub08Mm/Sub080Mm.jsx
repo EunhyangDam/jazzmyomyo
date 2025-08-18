@@ -1,57 +1,61 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./scss/Sub080Mm.scss";
+import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
 
-const DEFAULTS = [
-  { id: 1, userId: "myomyo", name: "이묘묘", gender: "여", birth: "2000-01-01", phone: "010-1234-5678", email: "blue3@email.com", addr: "서울시 중구 장충동", consent: "Y", grade: "일반회원", status: "정상", joinedAt: "2025-07-07" },
-  { id: 3, userId: "jazzman", name: "박재즈", gender: "여", birth: "1995-09-20", phone: "010-1111-2222", email: "jazzman@email.com", addr: "서울시 마포구 서교동", consent: "N", grade: "일반회원", status: "정상", joinedAt: "2025-05-30" },
-  { id: 4, userId: "winequeen", name: "이와인", gender: "여", birth: "1992-07-05", phone: "010-3333-4444", email: "winequeen@email.com", addr: "인천시 연수구 송도동", consent: "Y", grade: "일반회원", status: "정상", joinedAt: "2025-04-25" },
-  { id: 5, userId: "guitarcat", name: "홍기타", gender: "여", birth: "1988-11-11", phone: "010-5555-6666", email: "guitarcat@email.com", addr: "대구시 수성구 범어동", consent: "N", grade: "일반회원", status: "정상", joinedAt: "2025-03-18" },
-  { id: 6, userId: "coffeeholic", name: "정커피", gender: "여", birth: "1999-12-25", phone: "010-7777-8888", email: "coffee@email.com", addr: "광주시 서구 치평동", consent: "Y", grade: "단골회원", status: "정상", joinedAt: "2025-02-01" },
-];
-
-const getInitialMembers = () => {
-  try {
-    const saved = localStorage.getItem("members");
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-    }
-  } catch {}
-
-  try {
-    const backup = localStorage.getItem("members_backup");
-    if (backup) {
-      const parsed = JSON.parse(backup);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-    }
-  } catch {}
-  // 아무 것도 없으면 기본값 주입
-  try {
-    localStorage.setItem("members", JSON.stringify(DEFAULTS));
-    localStorage.setItem("members_backup", JSON.stringify(DEFAULTS));
-  } catch {}
-  return DEFAULTS;
-};
-
 function Sub080Mm() {
-  const [members, setMembers] = useState(getInitialMembers);
+
+  const [members, setMembers] = useState([]);
   const [keyword, setKeyword] = useState("");
-  const [sortKey, setSortKey] = useState("join"); // join | name | grade | userId
+  const [sortKey, setSortKey] = useState("joinDesc");
   const [selected, setSelected] = useState(new Set());
   const [page, setPage] = useState(1);
   const pageSize = 10;
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(null);
 
   const location = useLocation();
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const modal = useSelector((state) => state.confirmModal); // { isYes, isON, heading, ... }
+  const modal = useSelector((state) => state.confirmModal);
 
-  // 상세/수정에서 되돌아온 데이터 반영
+
+  useEffect(() => {
+    const url = `${process.env.PUBLIC_URL || ""}/json/sub08/members.json?v=${Date.now()}`;
+    setLoading(true);
+    setErr(null);
+
+    axios
+      .get(url, { headers: { "Cache-Control": "no-cache" } })
+      .then((res) => {
+        const arr =
+          Array.isArray(res.data?.회원정보) ? res.data.회원정보 :
+          Array.isArray(res.data?.members) ? res.data.members :
+          Array.isArray(res.data?.data)    ? res.data.data :
+          Array.isArray(res.data)          ? res.data :
+          [];
+
+        if (!arr.length) throw new Error("JSON은 로드됐지만 배열이 비었어요. (회원정보 확인)");
+
+        setMembers(arr);
+        setPage(1);
+      })
+      .catch((e) => {
+        const msg = e?.response
+          ? `HTTP ${e.response.status} ${e.response.statusText}`
+          : (e?.message || "데이터 로드 실패");
+        setErr(msg);
+        console.error("[Members] fetch error:", msg, "url:", url);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+
   useEffect(() => {
     const fromState = location.state?.updatedMember;
     const fromSession = (() => {
@@ -74,15 +78,7 @@ function Sub080Mm() {
     navigate(location.pathname, { replace: true, state: null });
   }, [location.state, location.pathname, navigate]);
 
-  // members 변경시 저장 + 백업 갱신
-  useEffect(() => {
-    try {
-      localStorage.setItem("members", JSON.stringify(members));
-      localStorage.setItem("members_backup", JSON.stringify(members));
-    } catch {}
-  }, [members]);
 
-  // 선택/삭제 등
   const allSelected = useMemo(
     () => members.length > 0 && selected.size === members.length,
     [members, selected]
@@ -101,7 +97,6 @@ function Sub080Mm() {
       return next;
     });
   };
-
 
   const onDeleteSelected = () => {
     if (selected.size === 0) {
@@ -129,15 +124,11 @@ function Sub080Mm() {
     );
   };
 
-
   useEffect(() => {
     if (modal.isYes === true && modal.isConfirm) {
-
       dispatch(confirmModalYesNoAction(false));
-
       setMembers((prev) => prev.filter((m) => !selected.has(m.id)));
       setSelected(new Set());
-
       dispatch(
         confirmModalAction({
           heading: "삭제되었습니다.",
@@ -152,6 +143,8 @@ function Sub080Mm() {
   }, [modal.isYes, modal.isConfirm, dispatch, selected]);
 
 
+  const toTime = (s) => new Date(String(s)).getTime() || 0;
+
   const filteredSorted = useMemo(() => {
     const k = keyword.trim().toLowerCase();
 
@@ -164,23 +157,45 @@ function Sub080Mm() {
       if (sortKey === "name") return a.name.localeCompare(b.name, "ko");
       if (sortKey === "grade") return a.grade.localeCompare(b.grade, "ko");
       if (sortKey === "userId") return a.userId.localeCompare(b.userId, "ko");
-
-      return new Date(a.joinedAt) - new Date(b.joinedAt);
+      if (sortKey === "joinAsc") return toTime(a.joinedAt) - toTime(b.joinedAt);
+      return toTime(b.joinedAt) - toTime(a.joinedAt); 
     });
 
     return sorted;
   }, [keyword, members, sortKey]);
 
   const totalPages = Math.max(1, Math.ceil(filteredSorted.length / pageSize));
-
   const paged = useMemo(() => {
     const start = (page - 1) * pageSize;
-    return filteredSorted.slice(start, start + pageSize);
+    return filteredSorted.slice(start, start + pageSize); 
   }, [filteredSorted, page]);
 
   useEffect(() => {
     setPage(1);
   }, [keyword, sortKey, members.length]);
+
+  
+  if (loading) {
+    return (
+      <div id="sub080Mm">
+        <div className="admin-wrap">
+          <main className="main" style={{ padding: 40, textAlign: "center" }}>불러오는 중…</main>
+        </div>
+      </div>
+    );
+  }
+
+  if (err) {
+    return (
+      <div id="sub080Mm">
+        <div className="admin-wrap">
+          <main className="main" style={{ padding: 40, textAlign: "center", color: "#c00" }}>
+            데이터를 불러오지 못했어요. ({err})
+          </main>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div id="sub080Mm">
@@ -221,7 +236,8 @@ function Sub080Mm() {
               onChange={(e) => setSortKey(e.target.value)}
               id="sortSelect"
             >
-              <option value="join">회원가입순</option>
+              <option value="joinDesc">가입일(최신순)</option> 
+              <option value="joinAsc">가입일(오래된순)</option>
               <option value="name">이름순</option>
               <option value="grade">등급순</option>
               <option value="userId">아이디순</option>
@@ -271,9 +287,7 @@ function Sub080Mm() {
                       {(page - 1) * pageSize + idx + 1}
                     </div>
 
-                    <div className="col col-userId" data-label="아이디">
-                      {m.userId}
-                    </div>
+                    <div className="col col-userId" data-label="아이디">{m.userId}</div>
 
                     <div className="col col-name" data-label="이름">
                       <Link to={`/MmView/${m.id}`} className="name-link" state={{ member: m }}>
@@ -286,7 +300,7 @@ function Sub080Mm() {
                     <div className="col col-phone" data-label="연락처">{m.phone}</div>
                     <div className="col col-email" data-label="이메일">{m.email}</div>
                     <div className="col col-addr" data-label="주소">{m.addr}</div>
-                    <div className="col col-consent" data-label="수신동의">{m.consent}</div>
+                    <div className="col col-consent" data-label="수신동의">{m.agree}</div>
                     <div className="col col-grade" data-label="등급">{m.grade}</div>
                     <div className="col col-status" data-label="상태">{m.status}</div>
                     <div className="col col-joinedAt" data-label="가입일">{m.joinedAt}</div>

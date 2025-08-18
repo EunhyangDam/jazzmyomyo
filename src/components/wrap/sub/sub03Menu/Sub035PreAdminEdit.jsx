@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import "./scss/Sub035PreAdminEdit.scss";
 import { useNavigate, useParams } from "react-router-dom";
 
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
 
@@ -9,18 +11,11 @@ function Sub035PreAdminEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.confirmModal);
 
-  const dummyData = {
-    "1": { title: "[예약신청] 9월 12일 2인", writer: "이시은", reserveDate: "2025-09-12", time: "19:00", people: "2명", wine: "Shiraz Whisper", food: "재즈 나초", note: "견과류 알러지 있어요" },
-    "2": { title: "[예약신청] 9월 14일 3인", writer: "이은지", reserveDate: "2025-09-14", time: "20:00", people: "3명", wine: "Chablis", food: "감바스", note: "" },
-    "3": { title: "[예약신청] 9월 18일 4인", writer: "박의연", reserveDate: "2025-09-18", time: "18:30", people: "4명", wine: "Moscato Dream", food: "트러플 감자튀김", note: "창가 자리 요청" },
-    "4": { title: "[예약신청] 9월 22일 3인", writer: "정하은", reserveDate: "2025-09-22", time: "21:00", people: "3명", wine: "Petit Chablis", food: "치즈 플래터", note: "생일 케이크 지참 예정" },
-    "5": { title: "[예약신청] 9월 25일 2인", writer: "홍규린", reserveDate: "2025-09-25", time: "19:30", people: "2명", wine: "Brut Rosé", food: "재즈 나초", note: "분리 결제 요청" },
-    "6": { title: "[예약신청] 9월 30일 5인", writer: "홍길동", reserveDate: "2025-09-30", time: "18:00", people: "5명", wine: "Argento Malbec", food: "모둠 플래터", note: "" }
-  };
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(null);
 
   const [form, setForm] = useState({
     title: "",
@@ -30,24 +25,50 @@ function Sub035PreAdminEdit() {
     people: "",
     wine: "",
     food: "",
-    note: ""
+    note: "",
+    status: "", 
+    reply: "", 
   });
 
   useEffect(() => {
-    if (dummyData[id]) {
-      setForm(dummyData[id]);
-    } else {
-      dispatch(
-        confirmModalAction({
-          heading: "해당 글이 없습니다.",
-          explain: "",
-          isON: true,
-          isConfirm: false,
-          message1: "",
-          message2: "",
-        })
-      );
-    }
+    const url = `${process.env.PUBLIC_URL || ""}/json/sub03/preorder.json`;
+    setLoading(true);
+    setErr(null);
+
+    axios
+      .get(url)
+      .then((res) => {
+        const arr = Array.isArray(res.data?.예약신청) ? res.data.예약신청 : [];
+        const found = arr.find((it) => String(it.idx) === String(id));
+        if (!found) {
+          dispatch(
+            confirmModalAction({
+              heading: "해당 글이 없습니다.",
+              explain: "",
+              isON: true,
+              isConfirm: false,
+              message1: "",
+              message2: "",
+            })
+          );
+          setLoading(false);
+          return;
+        }
+        setForm({
+          title: found.title ?? "",
+          writer: found.author ?? "",
+          reserveDate: found.reserveDate ?? "",
+          time: found.time ?? "",
+          people: found.people ?? "",
+          wine: found.wine ?? "",
+          food: found.food ?? "",
+          note: found.note ?? "",
+          status: found.status ?? "", 
+          reply: found.reply ?? "",
+        });
+      })
+      .catch((e) => setErr(e?.message || "데이터 로드 실패"))
+      .finally(() => setLoading(false));
   }, [id, dispatch]);
 
   useEffect(() => {
@@ -67,7 +88,7 @@ function Sub035PreAdminEdit() {
     dispatch(
       confirmModalAction({
         heading: "수정되었습니다.",
-        explain: "",
+        explain: "데모 모드: 실제 저장은 백엔드 연결 후 가능합니다.",
         isON: true,
         isConfirm: false,
         message1: "",
@@ -82,6 +103,24 @@ function Sub035PreAdminEdit() {
       navigate(`/PreAdminV/view/${id}`);
     }
   }, [modal.heading, modal.isON, dispatch, navigate, id]);
+
+  if (loading) {
+    return (
+      <div id="sub_preAdminEdit">
+        <div className="board-view" style={{ textAlign: "center", padding: 40 }}>불러오는 중…</div>
+      </div>
+    );
+  }
+
+  if (err) {
+    return (
+      <div id="sub_preAdminEdit">
+        <div className="board-view" style={{ textAlign: "center", padding: 40, color: "#c00" }}>
+          데이터를 불러오지 못했어요. ({err})
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div id="sub_preAdminEdit">
@@ -192,14 +231,20 @@ function Sub035PreAdminEdit() {
 
           <div className="admin-section">
             <label>예약 상태</label>
-            <select>
-              <option>예약중</option>
-              <option>예약완료</option>
-              <option>예약취소</option>
+            <select name="status" value={form.status} onChange={handleChange}>
+              <option value="">선택</option>
+              <option value="예약중">예약중</option>
+              <option value="예약완료">예약완료</option>
+              <option value="예약취소">예약취소</option>
             </select>
 
             <label>관리자 답변</label>
-            <textarea placeholder="회원에게 남길 안내 메시지를 입력하세요."></textarea>
+            <textarea
+              name="reply"
+              value={form.reply}
+              onChange={handleChange}
+              placeholder="회원에게 남길 안내 메시지를 입력하세요."
+            ></textarea>
           </div>
 
           <button type="submit" className="submit-btn">수정 완료</button>
@@ -208,33 +253,23 @@ function Sub035PreAdminEdit() {
         <div className="notice">
           <div className="notice-line">
             <i className="bi bi-bell"></i>
-            <div className="text">
-              <strong>결제 방식</strong> : 현장결제 (예약금 2만원, 계좌이체)
-            </div>
+            <div className="text"><strong>결제 방식</strong> : 현장결제 (예약금 2만원, 계좌이체)</div>
           </div>
           <div className="notice-line">
             <i className="bi bi-bell-fill"></i>
-            <div className="text">
-              <strong>픽업 방식</strong> : 예약 시간에 맞춰 테이블로 서빙
-            </div>
+            <div className="text"><strong>픽업 방식</strong> : 예약 시간에 맞춰 테이블로 서빙</div>
           </div>
           <div className="notice-line">
             <i className="bi bi-bell"></i>
-            <div className="text">
-              <strong>취소 안내</strong> : 공연 24시간 전까지 취소 가능 (이후에는 예약금 환불 불가)
-            </div>
+            <div className="text"><strong>취소 안내</strong> : 공연 24시간 전까지 취소 가능 (이후에는 예약금 환불 불가)</div>
           </div>
           <div className="notice-line">
             <i className="bi bi-bell-fill"></i>
-            <div className="text">
-              <strong>문의사항</strong> : 기타 궁금한 점은 재즈묘묘로 연락주세요
-            </div>
+            <div className="text"><strong>문의사항</strong> : 기타 궁금한 점은 재즈묘묘로 연락주세요</div>
           </div>
           <div className="notice-line">
             <i className="bi bi-bell"></i>
-            <div className="text">
-              <strong>안내사항</strong> : 외부 음식 반입 금지
-            </div>
+            <div className="text"><strong>안내사항</strong> : 외부 음식 반입 금지</div>
           </div>
         </div>
 

@@ -1,138 +1,158 @@
 import React from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import './scss/Sub05NtcAdminView.scss';
-
-
-
-const dummyData = {
-  1: {
-    title: "감성재즈바 재즈묘묘 오픈!",
-    date: "2025.06.10",
-    writer: "관리자",
-    views: 988,
-    content: `안녕하세요, 재즈묘묘입니다.
-
-홍보도 연주도 쉬어 가는 공간, 재즈가 흐르는 고양이와 벽!
-드디어 재즈바 재즈묘묘가 오픈했습니다.
-
-앞으로 많은 사랑 부탁드려요!
-고양이처럼 조용히, 재즈처럼 깊게 만나봐요.`,
-  },
-  2: {
-    title: "재즈묘묘 정기 휴무 안내",
-    date: "2025.07.01",
-    writer: "관리자",
-    views: 967,
-    content: `안녕하세요, 재즈묘묘입니다.
-
-정기 휴무일은 매주 월요일입니다.
-공연, 예약 및 운영은 화요일부터 일요일까지 가능합니다.
-
-늘 좋은 음악과 함께 기다릴게요.`,
-  },
-  3: {
-    title: "8월 정기 공연 세션 공개",
-    date: "2025.07.17",
-    writer: "관리자",
-    views: 612,
-    content: `8월 재즈 공연 라인업이 나왔어요!
-
-• 8/5(화) – 루디밴드
-• 8/12(화) – 임주환 트리오
-• 8/19(화) – 묘묘재즈하우스
-• 8/26(화) – 재즈앤젤스
-
-매주 화요일 저녁 8시, 묘묘에서 만나요 🎷`,
-  },
-  4: {
-    title: "여름 한정 신메뉴 “수박화채” 출시예정!",
-    date: "2025.08.01",
-    writer: "관리자",
-    views: 586,
-    content: `무더운 여름을 위한 상큼한 수박화채!
-
-수박+사이다+복숭아 등 여러과일이 들어간 재즈묘묘만의 여름 스폐셜 화채를 출시 할 예정입니다.
-시원한 안주와 함께 즐겨보세요 🍹`,
-  },
-  5: {
-    title: "묘묘 키링 1차 재입고 안내",
-    date: "2025.08.07",
-    writer: "관리자",
-    views: 281,
-    content: `안녕하세요, 재즈묘묘입니다.
-
-많은 분들의 성원에 힘입어 묘묘 키링 1차 재입고가 완료되었습니다!
-앞으로도 고양이와 재즈의 아름다운 조화를 전하기 위해 최선을 다하겠습니다.
-
-궁금하신 사항은 언제든 문의주세요.
-감사합니다.`,
-  },
-};
+import axios from "axios";
+import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
+import "./scss/Sub05NtcAdminView.scss";
 
 function Sub05NtcAdminView() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const notice = dummyData[id];
+  const location = useLocation();
 
-  if (!notice) {
-    return <div style={{ padding: "100px", textAlign: "center" }}>존재하지 않는 글입니다.</div>;
-  }
+  const dispatch = useDispatch();
+  const modal = useSelector((state) => state.confirmModal);
 
-  const handleDelete = () => {
-    const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
-    if (confirmDelete) {
-      alert("삭제되었습니다.");
+  const [notice, setNotice] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+
+  const mapToView = React.useCallback((raw) => {
+    if (!raw) return null;
+    return {
+      id: raw.idx,
+      title: raw.subject,
+      date: raw.date,
+      writer: raw.name,
+      views: raw.hit,
+      content: raw.content || "",
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (location.state && (location.state.idx || location.state.id)) {
+      const raw = {
+        idx: location.state.idx ?? location.state.id,
+        subject: location.state.subject ?? location.state.title,
+        date: location.state.date,
+        name: location.state.name ?? location.state.writer,
+        hit: location.state.hit ?? location.state.views,
+        content: location.state.content,
+      };
+      setNotice(mapToView(raw));
+      setLoading(false);
+      return;
+    }
+
+    const fetchOne = async () => {
+      try {
+        const url = `${process.env.PUBLIC_URL || ""}/json/sub05/notice.json`;
+        const res = await axios.get(url);
+        const list = Array.isArray(res.data?.공지사항) ? res.data.공지사항 : [];
+        const found = list.find((it) => String(it.idx) === String(id));
+        setNotice(mapToView(found));
+      } catch (e) {
+        console.error(e);
+        setNotice(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOne();
+  }, [id, location.state, mapToView]);
+
+  const onClickDeleteBtn = (e) => {
+    e.preventDefault();
+    dispatch(
+      confirmModalAction({
+        heading: "정말 삭제하시겠습니까?",
+        explain: "삭제 후에는 되돌릴 수 없습니다.",
+        isON: true,
+        isConfirm: true,
+        message1: "예",
+        message2: "아니오",
+      })
+    );
+  };
+
+  React.useEffect(() => {
+    if (modal.isYes === true) {
+      dispatch(confirmModalYesNoAction(false));
+      dispatch(
+        confirmModalAction({
+          heading: "삭제되었습니다",
+          explain: "",
+          isON: true,
+          isConfirm: false,
+          message1: "",
+          message2: "",
+        })
+      );
+    }
+  }, [modal.isYes, dispatch]);
+
+  React.useEffect(() => {
+    if (modal.heading === "삭제되었습니다" && modal.isON) {
       navigate("/NtcAdmin");
     }
-  };
+  }, [modal.heading, modal.isON, navigate]);
+
+  if (loading) {
+    return (
+      <div id="Sub05NtcAdminView">
+        <div className="container" style={{ padding: "100px", textAlign: "center" }}>
+          로딩 중…
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div id="Sub05NtcAdminView">
       <div className="breadcrumb">
-                <Link to="/"><i className="bi bi-house"></i></Link> &gt; 공지사항
+        <Link to="/"><i className="bi bi-house"></i></Link> &gt; <Link to="/NtcAdmin">공지사항</Link>
       </div>
-      <div className="container">
 
+      <div className="container">
         <h2>공지사항</h2>
 
-        <div className="content-box">
-          <div className="notice-header">
-            <div className="title">{notice.title}</div>
-            <div className="notice-meta">
-              <span>작성자 : {notice.writer}</span>
-              <span>등록일 : {notice.date}</span>
-              <span>조회수 : {notice.views}</span>
+        {!notice ? (
+          <div className="content-box" style={{ padding: "80px", textAlign: "center" }}>
+            존재하지 않는 글입니다.
+          </div>
+        ) : (
+          <div className="content-box">
+            <div className="notice-header">
+              <div className="title">{notice.title}</div>
+              <div className="notice-meta">
+                <span>작성자 : {notice.writer}</span>
+                <span>등록일 : {notice.date}</span>
+                <span>조회수 : {notice.views}</span>
+              </div>
+            </div>
+
+            <div className="notice-body">
+              <p>
+                {(notice.content || "").split("\n").map((line, idx) => (
+                  <span key={idx}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
+              </p>
+            </div>
+
+            <div className="btn-wrap">
+              <div className="left-actions">
+                <Link to={`/NtcAdminE/${notice.id}`} className="edit-btn">수정</Link>
+                <button onClick={onClickDeleteBtn} className="delete-btn">삭제</button>
+              </div>
+              <div className="right-actions">
+                <button className="list-btn" onClick={() => navigate("/NtcAdmin")}>목록</button>
+              </div>
             </div>
           </div>
-
-          <div className="notice-body">
-            <p>
-              {notice.content.split("\n").map((line, idx) => (
-                <span key={idx}>
-                  {line}
-                  <br />
-                </span>
-              ))}
-            </p>
-          </div>
-
-          
-
-        </div>
+        )}
       </div>
-      <div className="btn-wrap">
-  <button onClick={() => navigate(-1)}>목록</button>
-        <Link 
-        to={`/NtcAdminE/${id}`}
-        state={{ title: notice.title, content: notice.content }}
-        className="edit-btn"
-        >
-        수정
-        </Link>
-
-  <button onClick={() => handleDelete()} className="delete-btn">삭제</button>
-
-          </div>
     </div>
   );
 }

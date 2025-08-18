@@ -6,12 +6,32 @@
   padding: 0 20px;
   background-color: #fff;
   color: #222;
-  // font-family: "Pretendard", sans-serif;
+  font-family: $font1;
   user-select: none;
 
   .container {
     max-width: 900px;
     margin: 0 auto;
+  }
+
+  .breadcrumb {
+    font-size: 14px;
+    color: #bbbbbb;
+    padding-top: 30px;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    a {
+      display: flex;
+      align-items: center;
+      color: #666;
+      transition: 0.3s;
+
+      i { font-size: 16px; vertical-align: middle; }
+      &:hover { color: #000; }
+    }
   }
 
   h2 {
@@ -26,36 +46,65 @@
   .search-bar {
     display: flex;
     justify-content: flex-end;
-    gap: 8px;
+    gap: 12px;
     margin-bottom: 20px;
+    align-items: center;
 
-    input {
-      height: 40px;
-      line-height: 40px;
-      padding: 0 12px;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
+    .search-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
 
-      &::placeholder {
-        line-height: 40px;
+      .select {
+        position: relative;
+
+        select {
+          height: 40px;
+          padding: 0 36px 0 12px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          background: #fff;
+          font-size: 14px;
+          appearance: none;
+          cursor: pointer;
+          min-width: 120px;
+          line-height: 40px;
+          background-image:
+            linear-gradient(45deg, transparent 50%, #666 50%),
+            linear-gradient(135deg, #666 50%, transparent 50%);
+          background-position:
+            calc(100% - 18px) 16px,
+            calc(100% - 12px) 16px;
+          background-size: 6px 6px, 6px 6px;
+          background-repeat: no-repeat;
+        }
       }
-    }
 
-    button {
-      height: 40px;
-      line-height: 40px;
-      padding: 0 16px;
-      background-color: #1e2a2f;
-      color: #fff;
-      border: 0;
-      border-radius: 4px;
-      font-size: 14px;
-      cursor: pointer;
+      input {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 12px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        width: 280px;
 
-      &:hover {
-        background: #333;
+        &::placeholder { line-height: 40px; }
+      }
+
+      button {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 16px;
+        background-color: #1e2a2f;
+        color: #fff;
+        border: 0;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+
+        &:hover { background: #333; }
       }
     }
 
@@ -74,91 +123,92 @@
       white-space: nowrap;
       min-width: 110px;
 
-      &:hover {
-        color: #fff;
-        background: #1e2a2f;
-      }
+      &:hover { color: #fff; background: #1e2a2f; }
     }
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
+  .notice-list {
     margin-bottom: 30px;
-    table-layout: auto;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
 
-    thead {
+    .list-header {
+      display: grid;
+      grid-template-columns: 80px 1fr 120px 100px 80px;
       background-color: #f5f5f5;
-    }
-
-    th,
-    td {
-      padding: 14px;
-      text-align: center;
-      vertical-align: middle;
-      font-size: 15px;
-      border-bottom: none;
-    }
-
-    thead tr {
+      padding: 14px 8px;
       border-bottom: 1px solid #ddd;
-    }
+      font-size: 15px;
+      font-weight: 700;
 
-    tbody tr {
-      border-bottom: 1px solid #eee;
-    }
-
-    th:nth-child(1),
-    td:nth-child(1),
-    th:nth-child(3),
-    td:nth-child(3),
-    th:nth-child(5),
-    td:nth-child(5) {
-      white-space: nowrap;
-      font-variant-numeric: tabular-nums;
-    }
-
-    th:nth-child(1),
-    td:nth-child(1),
-    th:nth-child(5),
-    td:nth-child(5) {
-      overflow: visible;
-      text-overflow: clip;
-    }
-
-    th:nth-child(3),
-    td:nth-child(3),
-    th.date,
-    td.date {
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .title {
-      text-align: left;
-
-      a {
-        display: block;
-        color: #1e2a2f;
-        font-weight: 500;
-        text-decoration: none;
-        overflow: hidden;
+      span {
+        text-align: center;
         white-space: nowrap;
-        text-overflow: ellipsis;
+        font-variant-numeric: tabular-nums;
 
-        &:hover {
-          text-decoration: underline;
+        &.col-title {
+          text-align: center;
+          padding-left: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }
 
-    .badge-new {
-      background: #c03030;
-      color: #fff;
-      font-size: 12px;
-      padding: 4px 8px;
-      border-radius: 12px;
-      white-space: nowrap;
+    .list-body {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        display: grid;
+        grid-template-columns: 80px 1fr 120px 100px 80px;
+        align-items: center;
+        padding: 12px 8px;
+        border-bottom: 1px solid #eee;
+        font-size: 15px;
+
+        span {
+          text-align: center;
+          white-space: nowrap;
+          font-variant-numeric: tabular-nums;
+          overflow: hidden;
+          text-overflow: clip;
+
+          &.col-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding-left: 0;
+            min-width: 0;
+            overflow: visible;
+
+            a {
+              flex: 0 1 auto;
+              min-width: 0;
+              max-width: 100%;
+              display: block;
+              color: #1e2a2f;
+              font-weight: 500;
+              text-decoration: none;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              text-align: center;
+
+              &:hover { text-decoration: underline; }
+            }
+          }
+        }
+
+        &.no-result {
+          grid-template-columns: 1fr;
+          text-align: center;
+          color: #777;
+          padding: 20px 0;
+        }
+      }
     }
   }
 
@@ -175,62 +225,65 @@
       border-radius: 4px;
       cursor: pointer;
 
-      &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
+      &:disabled { opacity: 0.5; cursor: not-allowed; }
+      &.active   { background: #1e2a2f; color: #fff; font-weight: bold; }
+    }
+  }
 
-      &.active {
-        background: #1e2a2f;
-        color: #fff;
-        font-weight: bold;
+
+
+  @media all and (max-width: 780px) {
+    .search-bar {
+      .search-form {
+        input { width: 220px; }
       }
     }
   }
 
-  @media all and (max-width: 600px) {
-    h2 {
-      font-size: 46px;
-    }
-
-    .breadcrumb {
-      font-size: 12px;
-      padding-left: 10px;
-      flex-wrap: wrap;
-    }
-
+  @media all and (max-width: 660px) {
     .search-bar {
-      display: grid;
-      grid-template-columns: 1fr 92px;
-      grid-template-areas:
-        "input btn"
-        "admin admin";
-      gap: 6px;
-      align-items: center;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
 
-      input {
-        grid-area: input;
-        width: 100%;
-        height: 36px;
-        line-height: 36px;
-        font-size: 13px;
+      .search-form {
+        display: grid;
+        grid-template-columns: 120px 1fr 92px;
+        grid-template-areas: "select input btn";
+        gap: 6px;
 
-        &::placeholder {
+        .select { grid-area: select; }
+
+        input {
+          grid-area: input;
+          width: 100%;
+          height: 36px;
           line-height: 36px;
+          font-size: 13px;
+
+          &::placeholder { line-height: 36px; }
+        }
+
+        button {
+          grid-area: btn;
+          width: 92px;
+          height: 36px;
+          line-height: 36px;
+          font-size: 13px;
+        }
+
+        .select {
+          select {
+            height: 36px;
+            line-height: 36px;
+            font-size: 13px;
+            min-width: unset;
+          }
         }
       }
 
-      button {
-        grid-area: btn;
-        width: 92px;
-        height: 36px;
-        line-height: 36px;
-        font-size: 13px;
-      }
-
       .admin-btn {
-        grid-area: admin;
-        justify-self: end;
+        align-self: end;
         height: 36px;
         line-height: 36px;
         font-size: 13px;
@@ -238,161 +291,114 @@
       }
     }
 
-    table {
-      table-layout: fixed;
-
-      thead th,
-      tbody td {
-        padding: 10px 12px;
+    .notice-list {
+      .list-header {
+        grid-template-columns: 60px 1fr 96px 72px 64px;
+        padding: 12px 12px;
         font-size: 13px;
-        line-height: 1.25;
       }
 
-      thead th {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+      .list-body {
+        li {
+          grid-template-columns: 60px 1fr 96px 72px 64px;
+          padding: 10px 12px;
+          font-size: 13px;
 
-      tbody td {
-        white-space: nowrap;
-      }
-
-      thead th:nth-child(1),
-      tbody td:nth-child(1) {
-        width: 56px;
-      }
-
-      thead th:nth-child(3),
-      tbody td:nth-child(3) {
-        width: 96px;
-      }
-
-      thead th:nth-child(4),
-      tbody td:nth-child(4) {
-        width: 72px;
-        font-size: 12px;
-      }
-
-      thead th:nth-child(5),
-      tbody td:nth-child(5) {
-        width: 64px;
-      }
-
-      thead th:nth-child(2),
-      tbody td:nth-child(2) {
-        max-width: 100%;
-      }
-
-      .title a {
-        width: 100%;
+          .col-writer { font-size: 12px; }
+        }
       }
     }
   }
 
   @media all and (max-width: 540px) {
-    table {
-      thead th:nth-child(4),
-      tbody td:nth-child(4) {
-        display: none;
+    .notice-list {
+      .list-header {
+        grid-template-columns: 60px 1fr 100px 68px;
+
+        .col-writer { display: none; }
       }
 
-      thead th:nth-child(1),
-      tbody td:nth-child(1) {
-        width: 56px;
-      }
+      .list-body {
+        li {
+          grid-template-columns: 60px 1fr 100px 68px;
 
-      thead th:nth-child(3),
-      tbody td:nth-child(3) {
-        width: 100px;
-      }
-
-      thead th:nth-child(5),
-      tbody td:nth-child(5) {
-        width: 68px;
-      }
-
-      thead th:nth-child(2),
-      tbody td:nth-child(2) {
-        width: auto;
-        max-width: 100%;
+          .col-writer { display: none; }
+        }
       }
     }
   }
 
   @media all and (max-width: 400px) {
-    h2 {
-      font-size: 30px;
-    }
+  h2 { font-size: 30px; }
 
-    .search-bar {
-      grid-template-columns: 1fr;
-      grid-template-areas:
-        "input"
-        "btn"
-        "admin";
+  .search-bar {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "form"
+      "admin";
+    gap: 10px;
+    align-items: stretch;
 
-      input {
-        height: 32px;
-        line-height: 32px;
-        font-size: 12px;
+    .search-form {
+      grid-area: form;
+      display: grid;
+      grid-template-columns: 1fr 1.6fr 84px;
+      grid-template-areas: "select input btn";
+      gap: 6px;
 
-        &::placeholder {
-          line-height: 32px;
+      .select {
+        grid-area: select;
+
+        select {
+          height: 34px;
+          line-height: 34px;
+          font-size: 12px;
+          width: 100%;
         }
       }
 
-      button {
+      input {
+        grid-area: input;
+        height: 34px;
+        line-height: 34px;
+        font-size: 12px;
         width: 100%;
-        height: 32px;
-        line-height: 32px;
-        font-size: 12px;
       }
 
-      .admin-btn {
-        justify-self: end;
-        width: auto;
-        height: 32px;
-        line-height: 32px;
-        font-size: 12px;
-        min-width: 110px;
-      }
-    }
-
-    table {
-      thead th:nth-child(1),
-      tbody td:nth-child(1) {
-        width: 58px;
-      }
-
-      thead th:nth-child(3),
-      tbody td:nth-child(3) {
-        width: 94px;
-      }
-
-      thead th:nth-child(5),
-      tbody td:nth-child(5) {
-        width: 70px;
-      }
-
-      thead th:nth-child(2),
-      tbody td:nth-child(2) {
-        width: auto;
-        max-width: 100%;
-      }
-
-      .badge-new {
-        font-size: 10px;
-        padding: 2px 6px;
-      }
-    }
-
-    .pagination {
       button {
-        padding: 5px 8px;
-        font-size: 11px;
+        grid-area: btn;
+        width: 84px;
+        height: 34px;
+        line-height: 34px;
+        font-size: 12px;
       }
     }
+
+    .admin-btn {
+      grid-area: admin;
+      width: 100%;
+      height: 34px;
+      line-height: 34px;
+      font-size: 12px;
+      justify-self: flex-end;
+    }
+  }
+
+  .notice-list {
+    .list-header { font-size: 12px; }
+
+    .list-body {
+      li { font-size: 13px; }
+    }
+  }
+
+  .pagination {
+    button {
+      padding: 5px 8px;
+      font-size: 11px;
+    }
+  }
   }
 
   @media all and (max-width: 360px) {
@@ -403,50 +409,32 @@
       box-sizing: border-box;
     }
 
-    table {
-      table-layout: fixed;
-      width: 100%;
+    .notice-list {
+      .list-header { grid-template-columns: 60px 1fr 88px 74px; }
 
-      thead th:nth-child(1),
-      tbody td:nth-child(1) {
-        width: 60px;
-      }
-
-      thead th:nth-child(5),
-      tbody td:nth-child(5) {
-        width: 74px;
-      }
-
-      thead th:nth-child(3),
-      tbody td:nth-child(3) {
-        width: 88px;
-      }
-
-      thead th:nth-child(2),
-      tbody td:nth-child(2) {
-        width: auto;
-        max-width: 100%;
+      .list-body {
+        li { grid-template-columns: 60px 1fr 88px 74px; }
       }
     }
   }
 
   @media all and (max-width: 340px) {
-    table {
-      thead th:nth-child(5),
-      tbody td:nth-child(5) {
-        display: none;
+    .notice-list {
+      .list-header {
+        grid-template-columns: 60px 1fr 96px;
+
+        .col-views { display: none; }
       }
 
-      thead th:nth-child(3),
-      tbody td:nth-child(3) {
-        width: 96px;
-      }
+      .list-body {
+        li {
+          grid-template-columns: 60px 1fr 96px;
 
-      thead th:nth-child(2),
-      tbody td:nth-child(2) {
-        width: auto;
-        max-width: 100%;
+          .col-views { display: none; }
+        }
       }
     }
   }
+
+
 }
