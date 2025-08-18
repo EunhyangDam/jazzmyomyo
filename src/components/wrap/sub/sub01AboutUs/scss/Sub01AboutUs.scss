@@ -1,0 +1,277 @@
+@use "../.././../../scss/variables" as *;
+@use "../../../../scss/mixin" as *;
+
+#sub01AboutUs {
+  .section {
+    background: $sub-color3;
+    &#section1 {
+      padding-bottom: 20vh;
+      .inner {
+        text-align: center;
+        h2 {
+          font-family: $font2;
+          font-size: 200px;
+          @media all and (max-width: 1590px) {
+            font-size: 190px;
+          }
+          @media all and (max-width: 1505px) {
+            font-size: 180px;
+          }
+          @media all and (max-width: 1425px) {
+            font-size: 170px;
+          }
+          @media all and (max-width: 1350px) {
+            font-size: 160px;
+          }
+          @media all and (max-width: 1300px) {
+            font-size: 150px;
+          }
+          @media all and (max-width: 1190px) {
+            font-size: 140px;
+          }
+          @media all and (max-width: 1110px) {
+            font-size: 130px;
+          }
+          @media all and (max-width: 1030px) {
+            font-size: 110px;
+          }
+          @media all and (max-width: 875px) {
+            font-size: 90px;
+          }
+          @media all and (max-width: 720px) {
+            font-size: 70px;
+          }
+          @media all and (max-width: 555px) {
+            font-size: 50px;
+          }
+          @media all and (max-width: 400px) {
+            font-size: 30px;
+          }
+
+          margin-bottom: 42px;
+          overflow: hidden;
+          span {
+            display: inline-block;
+          }
+        }
+        .text-container {
+          p {
+            max-width: 745px;
+            text-align: justify;
+            @media all and (max-width: 1190px) {
+              max-width: 50vw;
+            }
+            @media all and (max-width: 720px) {
+              max-width: 80vw;
+            }
+            margin: 0 auto;
+            line-height: 1.5;
+            &:first-child {
+              font-family: $font2;
+              text-align: center;
+              font-size: $small;
+              margin-bottom: 1rem;
+            }
+          }
+        }
+      }
+    }
+    &#section2 {
+      position: relative;
+      .img-container {
+        display: none;
+        pointer-events: none;
+      }
+      .row {
+        border-top: 1px solid $grey1;
+        cursor: pointer;
+        transition: 0.3s;
+        .inner {
+          display: flex;
+          justify-content: space-between;
+          p {
+            padding-block: 25px;
+            font-size: $size1;
+            &:first-child {
+              font-family: $font2;
+            }
+          }
+          @media all and (max-width: 1500px) {
+            p {
+              font-size: $size2;
+            }
+          }
+          @media all and (max-width: 1080px) {
+            p {
+              font-size: $size3;
+            }
+          }
+          @media all and (max-width: 690px) {
+            p {
+              font-size: $size4;
+            }
+          }
+          @media all and (max-width: 415px) {
+            p {
+              font-size: 1.3rem;
+            }
+          }
+        }
+        @media all and (max-width: 1780px) {
+          .inner {
+            padding-inline: 3vw;
+          }
+        }
+        &.row1 {
+        }
+        &.row2 {
+        }
+        &.row3 {
+          border-bottom: 1px solid $grey1;
+        }
+        &:hover {
+          background: $grey1;
+          color: $sub-color3;
+        }
+      }
+      &.active {
+        .img-container {
+          display: block;
+          position: fixed;
+          transform: translate(-50%, -50%);
+          @keyframes size {
+            from {
+              transform: scale(0);
+            }
+            to {
+              transform: scale(1);
+            }
+          }
+          animation: size 0.3s forwards;
+        }
+      }
+    }
+    &#section3 {
+      position: relative;
+      .inner {
+        height: 100%;
+        width: 100%;
+        .img-container {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 1;
+          border-radius: $border-radius;
+          overflow: hidden;
+        }
+        .sec-container {
+          display: flex;
+          width: 325%;
+          height: 100vh;
+          align-items: center;
+          .sec {
+            width: calc(325% / 5);
+            .col1 {
+              font-size: $size4;
+              font-weight: 600;
+            }
+            .col2 {
+              font-size: $size3;
+              font-weight: 600;
+            }
+            .col3 {
+              p {
+                text-align: justify;
+                max-width: 25vw;
+              }
+            }
+            &.sec1 {
+              p {
+                font-size: $size2;
+                font-weight: 900;
+              }
+            }
+          }
+        }
+      }
+    }
+    &#section4 {
+      background: url(../../../../../../public/img/sub01/background.jpg);
+      background-attachment: fixed;
+      img {
+        width: 100%;
+      }
+    }
+    &#section5 {
+      background: url(../../../../../../public/img/sub01/background.jpg);
+      background-attachment: fixed;
+      padding-bottom: 30vh;
+      .inner {
+        .title {
+          p {
+            text-align: center;
+            font-size: $size1;
+            color: $sub-color3;
+            font-weight: 600;
+            &.myo {
+              font-family: $font2;
+              font-size: 100px;
+              transform: translate(60px, -60%) rotate(-10deg);
+              text-shadow: 8px 5px 0 #000;
+              line-height: 0.8;
+            }
+          }
+        }
+        .content {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          padding-right: 10vw;
+          p {
+            max-width: 25vw;
+            width: 100%;
+            text-align: justify;
+            color: $sub-color3;
+            line-height: 1.5;
+            &:not(:last-child) {
+              margin-bottom: 15px;
+            }
+            a {
+              font-family: $font2;
+              margin-top: 5px;
+            }
+          }
+        }
+      }
+    }
+    &#section6 {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .container {
+        p {
+          text-align: center;
+          &:first-child {
+            font-size: $size1;
+            font-family: $font2;
+            margin-bottom: 30px;
+          }
+          &:last-child {
+            font-size: $size4 * 0.9;
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+    &#section7 {
+      .inner {
+        img {
+          width: 100%;
+          margin-bottom: -100px;
+        }
+      }
+    }
+  }
+}
