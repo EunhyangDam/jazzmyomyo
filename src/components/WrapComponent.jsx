@@ -38,6 +38,7 @@ import Sub05NtcAdmin from "./wrap/sub/sub05Community/Sub05NtcAdmin";
 import Sub05NtcAdminWrite from "./wrap/sub/sub05Community/Sub05NtcAdminWrite";
 
 import Sub05Rev from "./wrap/sub/sub05Community/Sub05Rev";
+import Sub05RevWrite from "./wrap/sub/sub05Community/Sub05RevWrite";
 import Sub05Sns from "./wrap/sub/sub05Community/Sub05Sns";
 import Sub06Lg from "./wrap/sub/sub06Lg/Sub06Lg";
 import Sub06SearchId from "./wrap/sub/sub06Lg/Sub06SearchId";
@@ -141,6 +142,7 @@ export default function WrapComponent(props) {
           <Route path="/Gall" element={<Sub05Gall />} />
           <Route path="/Ntc" element={<Sub05Ntc />} />
           <Route path="/Rev" element={<Sub05Rev />} />
+          <Route path="/RevWrite" element={<Sub05RevWrite />} />
           <Route path="/Sns" element={<Sub05Sns />} />
 
           <Route path="/NtcV/:id" element={<Sub05NtcView />} />

@@ -3,7 +3,8 @@ import "./scss/Sub07EditProfile.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { confirmModalAction } from "../../../../store/confirmModal";
-
+import Sub07MpSideMenu from "./Sub07MpSideMenu";
+import SiteMapComponent from "../../custom/SiteMapComponent";
 function Sub07EditProfile(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -44,73 +45,19 @@ function Sub07EditProfile(props) {
   return (
     <div id="sub07EditProfile">
       <div className="container">
-        <div className="site">
-          <Link to="/">
-            <i className="bi bi-house-fill"></i>
-          </Link>
-          <i>&gt;</i>
-          <Link to="/Mp">마이페이지</Link>
-          <i>&gt;</i>
-          <Link to="./" className="now">
-            회원정보 수정
-          </Link>
-        </div>
+        <SiteMapComponent
+          firstLink="/Mp"
+          firstName="마이페이지"
+          secondLink="./"
+          secondName="회원정보 수정"
+        />
         <div className="title">
           <Link to="/Mp">
             <h2>My Page</h2>
           </Link>
         </div>
         <div className="content">
-          <div className="menu">
-            <ul>
-              <li>
-                <h2>메뉴</h2>
-              </li>
-              <li className="sub-title">
-                <h3>계정관리</h3>
-              </li>
-              <li>
-                <Link to="/MyProfile">회원정보 확인</Link>
-              </li>
-              <li>
-                <Link to="/EditProfile">회원정보 수정</Link>
-              </li>
-              <li>
-                <Link to="/AddressList">배송지 관리</Link>
-              </li>
-              <li>
-                <Link to="/DeleteAccount">회원 탈퇴</Link>
-              </li>
-
-              <li className="sub-title">
-                <h3>이용내역</h3>
-              </li>
-              <li>
-                <Link to="/MyOrder">티켓예매 내역</Link>
-              </li>
-              <li>
-                <Link to="/MyOrder">사전주문 내역</Link>
-              </li>
-              <li>
-                <Link to="/MyOrder">주문/ 배송조회</Link>
-              </li>
-              <li>
-                <Link to="/MyOrder">대관신청 내역</Link>
-              </li>
-              <li className="sub-title">
-                <h3>게시판</h3>
-              </li>
-              <li>
-                <Link to="/Ntc">공지사항</Link>
-              </li>
-              <li>
-                <Link to="/Faq">FAQ</Link>
-              </li>
-              <li>
-                <Link to="/Rev">작성 후기</Link>
-              </li>
-            </ul>
-          </div>
+          <Sub07MpSideMenu />
           <div className="user-info">
             <div className="head">
               <h3>회원 정보 수정</h3>

@@ -1,5 +1,4 @@
 @use "../../../../scss/variables" as *;
-@use "../../../../scss/mixin" as *;
 
 #sub07MyOrder {
   width: 100%;
@@ -11,7 +10,7 @@
 
     .title {
       width: 100%;
-      padding: 3% 0;
+      padding: 2% 0;
       width: 100%;
       display: flex;
       justify-content: center;
@@ -28,7 +27,6 @@
         }
       }
     }
-    @include site();
     .site {
       width: 100%;
       max-width: 1550px;
@@ -41,117 +39,36 @@
       background: #fff;
       padding: 3% 0;
       display: flex;
-      .menu {
-        width: 200px;
-        height: auto;
-        margin: 0 5%;
 
-        ul {
-          width: 100%;
-          li {
-            width: 100%;
-            padding: 4% 0;
-            display: block;
-            &.sub-title {
-              border-top: 1px solid #ccc;
-            }
-
-            h2 {
-              font-size: $size4;
-              font-weight: 600;
-              text-indent: 10px;
-            }
-            h3 {
-              font-size: $size4;
-              padding-top: 20px;
-              font-weight: 600;
-              text-indent: 10px;
-            }
-            a {
-              width: 100%;
-              display: block;
-              font-size: 18px;
-              padding: 5px 0;
-              text-indent: 10px;
-            }
-          }
-        }
-      }
       .order {
         width: calc(100% - 200px);
-        div {
-          &.md-order {
-          }
-          &.reservation {
-            padding: 5% 0;
-          }
-          &.rent {
-          }
-          .sub-title {
-            h3 {
-              font-size: $size4;
-              font-weight: 600;
-              border-bottom: 1px solid #ccc;
-              padding-bottom: 10px;
-            }
-          }
-          .table {
-            .head-box {
-              width: 100%;
-              height: 40px;
-              display: flex;
-              align-items: center;
+        max-width: 1400px;
 
-              ul.column-box {
+        > ul {
+          width: 100%;
+          > li {
+            width: 100%;
+            padding: 20px 0;
+            > div {
+              .sub-title {
                 width: 100%;
-                display: flex;
-                justify-content: space-between;
-
-                li.col {
-                  padding: 0 20px;
-
-                  h3 {
-                    font-size: 14px;
-                    text-transform: capitalize;
-                    font-weight: 500;
-                    color: #232323;
-                    height: 22px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                  }
-
-                  &.col1 {
-                    width: 15%;
-                  }
-                  &.col2 {
-                    width: 50%;
-                  }
-                  &.col3 {
-                    width: 15%;
-                  }
-                  &.col4 {
-                    width: 25%;
-                  }
+                > h3 {
+                  font-size: $size4;
+                  font-weight: 600;
+                  border-bottom: 1px solid #ccc;
+                  padding-bottom: 20px;
+                  padding-left: 15px;
                 }
               }
-            }
-            .list-box {
-              width: 100%;
-              max-width: 1140px;
-              margin: 0 auto;
-              border-top: 1px solid #aaa;
-              border-bottom: 1px solid #aaa;
-              > ul {
+              .table {
                 width: 100%;
-                > li {
+                font-family: $font1;
+                .head-box {
+                  background-color: #efefef;
                   width: 100%;
-                  padding: 20px 0;
-                  border-bottom: 1px solid #eee;
-
-                  &:last-child {
-                    border-bottom: 0;
-                  }
+                  height: 40px;
+                  display: flex;
+                  align-items: center;
 
                   ul.column-box {
                     width: 100%;
@@ -160,9 +77,17 @@
 
                     li.col {
                       padding: 0 20px;
-                      display: flex;
-                      justify-content: center;
-                      align-items: center;
+
+                      h3 {
+                        font-size: 14px;
+                        text-transform: capitalize;
+                        font-weight: 600;
+                        color: $grey1;
+                        height: 22px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                      }
 
                       &.col1 {
                         width: 15%;
@@ -177,66 +102,94 @@
                         width: 25%;
                       }
                     }
-                    a {
-                      img {
-                        width: 84px;
-                      }
-                    }
+                  }
+                }
+                .list-box {
+                  width: 100%;
+                  border-top: 1px solid #aaa;
+                  border-bottom: 1px solid #ccc;
+                  > ul {
+                    width: 100%;
+                    > li {
+                      width: 100%;
+                      padding: 20px 0;
+                      border-bottom: 1px solid #eee;
 
-                    h4 {
-                      font-size: 14px;
-                      text-transform: capitalize;
-                      height: 22px;
-                      display: flex;
-                      align-items: center;
-                      transition: all 0.3s;
-                      a {
-                        color: #808080;
+                      p {
+                        padding: 30px 0;
+                        text-align: center;
                       }
-                      &:hover {
-                        color: rgb(245, 114, 80);
+                      &:last-child {
+                        border-bottom: 0;
                       }
-                    }
 
-                    em {
-                      font-size: 14px;
-                      text-transform: capitalize;
-                      color: #808080;
-                      height: 22px;
-                      display: flex;
-                      align-items: center;
-                      cursor: text;
-                    }
-                    strong {
-                      padding: 6px 20px;
-                      color: rgb(119, 164, 100);
-                      border: 1px solid rgb(119, 164, 100);
-                      font-weight: 500;
-                      font-size: 12px;
-                      cursor: text;
-                    }
-                    button {
-                      width: 135px;
-                      height: 30px;
-                      background: #000;
-                      color: #fff;
-                      text-transform: uppercase;
-                      border-radius: 3px;
-                      font-size: 11px;
-                      border: 2px solid #000;
-                      font-weight: 600;
-                      cursor: pointer;
-                      transition: all 0.3s;
+                      ul.column-box {
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
 
-                      &:hover {
-                        background: #fff;
-                        color: #000;
-                      }
-                    }
-                    a {
-                      &.product-del-btn {
-                        i {
-                          font-size: 20px;
+                        li.col {
+                          padding: 0 20px;
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+
+                          &.col1 {
+                            width: 15%;
+                          }
+                          &.col2 {
+                            width: 50%;
+                          }
+                          &.col3 {
+                            width: 15%;
+                          }
+                          &.col4 {
+                            width: 25%;
+                          }
+                          h3 {
+                            font-size: 14px;
+                            text-transform: capitalize;
+                            display: flex;
+                            align-items: center;
+                          }
+                          a {
+                            h3 {
+                              font-size: 14px;
+                              text-transform: capitalize;
+                              display: flex;
+                              align-items: center;
+                              transition: all 0.3s;
+                              &:hover {
+                                color: $primary-color;
+                              }
+                            }
+                          }
+                          em {
+                            font-size: 14px;
+                            text-transform: capitalize;
+                            color: #808080;
+                            height: 22px;
+                            display: flex;
+                            align-items: center;
+                            cursor: text;
+                          }
+                          button {
+                            width: 135px;
+                            height: 30px;
+                            background: $primary-color;
+                            color: #fff;
+                            text-transform: uppercase;
+                            border-radius: 3px;
+                            font-size: 11px;
+                            border: 2px solid $primary-color;
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: all 0.3s;
+
+                            &:hover {
+                              opacity: 0.7;
+                            }
+                          }
                         }
                       }
                     }

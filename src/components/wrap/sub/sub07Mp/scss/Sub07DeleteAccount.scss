@@ -1,15 +1,14 @@
 @use "../../../../scss/variables" as *;
-@use "../../../../scss/mixin" as *;
 #sub07DeleteAccount {
   width: 100%;
   margin-top: 100px;
-  padding-bottom: 200px;
-  height: auto;
+  margin-bottom: 200px;
+
   .container {
     width: 100%;
     max-width: 1500px;
     margin: 0 auto;
-    @include site();
+
     .title {
       padding: 3% 0 5% 2%;
       width: 100%;
@@ -30,46 +29,11 @@
       max-width: 1500px;
       margin: 0 auto;
       display: flex;
-      .menu {
-        width: 200px;
-        height: auto;
-        margin: 0 5%;
-
-        ul {
-          width: 100%;
-          li {
-            width: 100%;
-            padding: 4% 0;
-            display: block;
-            &.sub-title {
-              border-top: 1px solid #ccc;
-            }
-
-            h2 {
-              font-size: $size4;
-              font-weight: 600;
-              text-indent: 10px;
-            }
-            h3 {
-              font-size: $size4;
-              padding-top: 20px;
-              font-weight: 600;
-              text-indent: 10px;
-            }
-            a {
-              width: 100%;
-              display: block;
-              font-size: 18px;
-              padding: 5px 0;
-              text-indent: 10px;
-            }
-          }
-        }
-      }
 
       .right {
         width: calc(100% - 200px);
         position: relative;
+        margin-bottom: 200px;
         .bg-img {
           width: 100%;
           height: auto;
@@ -86,34 +50,105 @@
           left: 0;
           z-index: 2;
           ul {
+            position: relative;
             border: 1px solid $primary-color;
+            width: 100%;
             max-width: 1000px;
-            padding: 0 4%;
+            aspect-ratio: 4 / 2;
+            padding: 4% 8%;
+            background: none;
+            overflow: hidden;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            &::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: url("../../../../../../public/img/sub07/tape.jpg")
+                no-repeat 50% 65%;
+              background-size: cover;
+              z-index: 1;
+            }
+
             li {
+              position: relative;
+              z-index: 2;
+              width: 100%;
+              background: rgba(255, 255, 255, 0.7);
               display: flex;
               justify-content: center;
               flex-flow: row wrap;
-              padding: 2% 0;
+              padding: 2.5% 0;
+
               &:nth-child(3) {
-                padding-top: 0;
+                padding-bottom: 4%;
               }
               h3 {
-                font-size: 2.5rem;
+                padding: 4% 0 5px 0;
+                font-size: 2rem;
+                font-weight: 600;
                 display: inline-block;
                 color: $primary-color;
                 border-bottom: 2px solid $primary-color;
               }
 
+              // p태그
+
               p {
                 width: 100%;
-                line-height: 180%;
-                font-size: $size4;
+                line-height: 200%;
+                margin-bottom: 1%;
+                font-size: 18px;
                 white-space: wrap;
-              }
+                text-align: center;
+                font-weight: 600;
 
+                display: inline-block;
+                white-space: nowrap;
+                overflow: hidden;
+
+                &:nth-child(1) {
+                  --chars: 57;
+                  border-right: none;
+                  width: calc(var(--chars) * 1ch); /* 고정폭 */
+                  animation: typing 3s steps(var(--chars)) forwards;
+                }
+                &:nth-child(2) {
+                  --chars: 60;
+                  width: calc(var(--chars) * 1ch);
+                  border-right: 0.12em solid #999;
+                  opacity: 0;
+                  animation: show 0s linear 3.2s forwards,
+                    /* 3.2s 후 표시 */ typing 2s steps(var(--chars)) 3.2s
+                      forwards,
+                    /* 타이핑 시작 */ blink 0.7s steps(1) infinite 5.2s; /* 타이핑 끝난 뒤 깜빡임 */
+                }
+              }
+              @keyframes typing {
+                from {
+                  clip-path: inset(0 100% 0 0);
+                } /* 오른쪽 전부 가림 */
+                to {
+                  clip-path: inset(0 0 0 0);
+                } /* 전부 표시 */
+              }
+              @keyframes blink {
+                50% {
+                  border-color: transparent;
+                }
+              }
+              @keyframes show {
+                to {
+                  opacity: 1;
+                }
+              }
               button {
-                width: 300px;
-                height: 70px;
+                width: 200px;
+                height: 50px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -121,6 +156,8 @@
                 transition: all 0.3s;
                 background: none;
                 border: 0;
+                cursor: pointer;
+                font-family: $font1;
 
                 &:first-child {
                   margin-right: 30px;
@@ -184,22 +221,6 @@
         }
       }
       .content {
-        .menu {
-          width: 160px;
-          ul {
-            li {
-              h2 {
-                font-size: 1.3rem;
-              }
-              h3 {
-                font-size: 1.3rem;
-              }
-              a {
-                font-size: 14px;
-              }
-            }
-          }
-        }
         .delete-notice {
           width: 70%;
           ul {
@@ -233,42 +254,6 @@
         }
       }
       .content {
-        .menu {
-          width: 120px;
-          height: auto;
-          margin: 0 4%;
-
-          ul {
-            width: 100%;
-            li {
-              width: 100%;
-              padding: 4% 0;
-              display: block;
-              &.sub-title {
-                border-top: 1px solid #ccc;
-              }
-
-              h2 {
-                font-size: 1.3rem;
-                font-weight: 600;
-                text-indent: 10px;
-              }
-              h3 {
-                font-size: 1.3rem;
-                padding-top: 20px;
-                font-weight: 600;
-                text-indent: 10px;
-              }
-              a {
-                width: 100%;
-                display: block;
-                font-size: 14px;
-                padding: 5px 0;
-                text-indent: 10px;
-              }
-            }
-          }
-        }
         .delete-notice {
           width: 70%;
           ul {
@@ -302,9 +287,6 @@
         }
       }
       .content {
-        .menu {
-          display: none;
-        }
         .delete-notice {
           width: 100%;
           ul {

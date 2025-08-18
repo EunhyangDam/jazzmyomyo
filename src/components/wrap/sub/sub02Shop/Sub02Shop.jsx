@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./scss/Sub02Shop.scss";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, NavLink, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { wishAction } from "../../../../store/wishlist";
 
@@ -13,15 +13,6 @@ function Sub02Shop(props) {
   const [필터상품, set필터상품] = useState([]);
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
-
-  const 필터링 = (카테고리) => {
-    if (카테고리 === "전체") {
-      set필터상품(state.product); // 전체 보기
-    } else {
-      const 결과 = state.product.filter((item) => item.상품분류 === 카테고리);
-      set필터상품(결과); // 해당 카테고리만 보기
-    }
-  };
 
   useEffect(() => {
     if (state.product.length > 0) {
@@ -64,22 +55,22 @@ function Sub02Shop(props) {
     <div id="sub02Shop">
       <div id="wrap">
         <div className="title">
-          <a href="/Shop">
+          <Link to="/Shop">
             <h2>shop</h2>
-          </a>
+          </Link>
         </div>
         <div className="content">
           <div className="category-name">
             <ul>
               <li>
-                <button onClick={() => 필터링("굿즈")}>
+                <NavLink to="/Shop?category=굿즈">
                   <span>굿즈</span>
-                </button>
+                </NavLink>
               </li>
               <li>
-                <button onClick={() => 필터링("음반")}>
+                <NavLink to="/Shop?category=음반">
                   <span>음반/LP</span>
-                </button>
+                </NavLink>
               </li>
             </ul>
           </div>

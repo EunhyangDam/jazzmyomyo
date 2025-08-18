@@ -44,9 +44,7 @@
           padding: 2% 0 3% 0;
           li {
             margin: 0 20px;
-            button {
-              border: 0;
-              background: none;
+            a.active {
               transition: all 0.3s;
               span {
                 font-size: $size4;
@@ -327,6 +325,9 @@
             &:nth-child(3n) {
               border-right: 0;
             }
+            &:nth-child(6n) {
+              border-right: 1px solid $sub-color1;
+            }
             .caption-box {
               height: 90px;
               a {
@@ -362,7 +363,7 @@
         .category-name {
           ul {
             li {
-              button {
+              a.active {
                 span {
                   font-size: 1.5rem;
                 }

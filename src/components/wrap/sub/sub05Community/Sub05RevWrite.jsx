@@ -8,22 +8,20 @@ function Sub05RevWrite(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  //업로드 버튼 클릭이벤트
-  const onClickUploadReview = (e) => {
-    e.preventDefault();
-
-    let obj = {
-      heading: "후기를\n 올리시겠습니까?",
-      explain: "",
-      isON: true,
-      isConfirm: true,
-      //여기 추가
-      message1: "아니오",
-      message2: "예",
-      isYes: true, // 응답이 예스/노
-    };
-    dispatch(confirmModalAction(obj));
+const onSubmitWriteReview = (e)=>{
+  e.preventDefault();
+  let obj = {
+    heading: "후기를\n 올리시겠습니까?",
+    explain: "",
+    isON: true,
+    isConfirm: true,
+    //여기 추가
+    message1: "아니오",
+    message2: "예",
+    isYes: true, // 응답이 예스/노
   };
+  dispatch(confirmModalAction(obj));
+}
 
   //목록 버튼 클릭이벤트
   const onClickListBtn = (e) => {
@@ -34,13 +32,13 @@ function Sub05RevWrite(props) {
     <div id="sub05RevWrite">
       <div className="container">
         <div className="site">
-          <Link to="./">
+          <Link to="/">
             <i className="bi bi-house-fill"></i>
           </Link>
           <i>&gt;</i>
-          <Link to="./">마이페이지</Link>
+          <Link to="/Mp">마이페이지</Link>
           <i>&gt;</i>
-          <Link to="/Wishilist" className="now">
+          <Link to="./" className="now">
             후기 작성하기
           </Link>
         </div>
@@ -50,6 +48,7 @@ function Sub05RevWrite(props) {
           </Link>
         </div>
         <div className="content">
+        <form onSubmit={onSubmitWriteReview}>
           <div className="write-box">
             <ul>
               <li>
@@ -65,14 +64,16 @@ function Sub05RevWrite(props) {
                   placeholder="후기를 남겨보세요"
                 ></textarea>
               </li>
-            </ul>
+            </ul>    
           </div>
           <div className="button-box">
-            <button type="submit" onClick={onClickUploadReview}>
-              업로드
+            <button type="submit">
+              작성하기
             </button>
-            <button onClick={onClickListBtn}>목록</button>
+            <button onClick={onClickListBtn}
+            >목록</button>
           </div>
+          </form>
         </div>
       </div>
     </div>

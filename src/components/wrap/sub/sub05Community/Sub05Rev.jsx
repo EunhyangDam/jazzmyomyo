@@ -38,13 +38,13 @@ function Sub05Rev(props) {
     <div id="sub05Rev">
       <div className="container">
         <div className="site">
-          <Link to="./">
+          <Link to="/">
             <i className="bi bi-house-fill"></i>
           </Link>
           <i>&gt;</i>
-          <Link to="./">마이페이지</Link>
+          <Link to="/Mp">마이페이지</Link>
           <i>&gt;</i>
-          <Link to="/Wishilist" className="now">
+          <Link to="./" className="now">
             공연 후기
           </Link>
         </div>

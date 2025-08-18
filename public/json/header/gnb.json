@@ -16,8 +16,8 @@
       "main": "Shop",
       "link": "Shop",
       "sub": [
-        { "name": "굿즈", "link": "Disc" },
-        { "name": "LP/CD", "link": "Merch" }
+        { "name": "굿즈", "link": "Shop?category=굿즈" },
+        { "name": "LP/CD", "link": "Shop?category=음반" }
       ]
     },
     {
@@ -52,7 +52,7 @@
         { "name": "공지사항", "link": "Ntc" },
         { "name": "FAQ", "link": "Faq" },
         { "name": "갤러리", "link": "Gall" },
-        { "name": "공연 후기", "link": "Sns" },
+        { "name": "공연 후기", "link": "Rev" },
         { "name": "이벤트", "link": "" }
       ],
       "sub link": ["Ntc", "Faq", "Gall", "Sns"]

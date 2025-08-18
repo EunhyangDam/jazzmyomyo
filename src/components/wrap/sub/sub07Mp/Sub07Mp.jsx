@@ -15,7 +15,13 @@ function Sub07Mp(props) {
   return (
     <div id="sub07Mp">
       <div className="container">
-        <SiteMapComponent firstLink="/Mp" fisrtName="마이페이지" />
+        <SiteMapComponent
+          firstLink="/Mp"
+          firstName="마이페이지"
+          secondLink=""
+          secondName=""
+        />
+
         <div className="title">
           <Link to="/Mp">
             <h2>My Page</h2>
@@ -78,9 +84,9 @@ function Sub07Mp(props) {
               </li>
               <li>
                 <h3>이용내역</h3>
-                <Link to="/MyOrder">티켓예매 내역</Link>
-                <Link to="/MyOrder">사전주문 내역</Link>
                 <Link to="/MyOrder">주문/ 배송조회</Link>
+                <Link to="/MyOrder">예매 내역</Link>
+                <Link to="/MyOrder">사전주문 내역</Link>
                 <Link to="/MyOrder">대관신청 내역</Link>
               </li>
               <li>

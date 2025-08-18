@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./scss/SiteMapComponent.scss";
 export default function SiteMapComponent({
   firstLink,
-  fisrtName,
+  firstName,
   secondLink,
   secondName,
 }) {
@@ -12,13 +12,13 @@ export default function SiteMapComponent({
       <Link to="/mainComponent">
         <i className="bi bi-house-fill"></i>
       </Link>
-      <i class="fa-solid fa-angle-right"></i>
+      <i className="fa-solid fa-angle-right"></i>
       <Link to={firstLink} className={secondLink || "now"}>
-        {fisrtName}
+        {firstName}
       </Link>
       {secondLink && (
         <>
-          <i class="fa-solid fa-angle-right"></i>
+          <i className="fa-solid fa-angle-right"></i>
           <Link to={secondLink} className="now">
             {secondName}
           </Link>

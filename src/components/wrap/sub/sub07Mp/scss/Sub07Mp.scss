@@ -1,5 +1,5 @@
 @use "../../../../scss/variables" as *;
-@use "../../../../scss/mixin" as *;
+
 #sub07Mp {
   width: 100%;
   margin-top: 100px;
@@ -9,7 +9,6 @@
     width: 100%;
     max-width: 1500px;
     margin: 0 auto;
-    @include site();
     .title {
       padding: 3% 0 5.5% 20px;
       width: 100%;

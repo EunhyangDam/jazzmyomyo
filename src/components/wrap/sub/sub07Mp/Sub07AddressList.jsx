@@ -1,76 +1,93 @@
 import React from "react";
 import "./scss/Sub07AddressList.scss";
 import { Link, useNavigate } from "react-router-dom";
+import Sub07MpSideMenu from "./Sub07MpSideMenu";
+import SiteMapComponent from "../../custom/SiteMapComponent";
 function Sub07AddressList(props) {
   return (
     <div id="sub07AddressList">
       <div className="container">
-        <div className="site">
-          <Link to="./">
-            <i className="bi bi-house-fill"></i>
-          </Link>
-          <i>&gt;</i>
-          <Link to="./">마이페이지</Link>
-          <i>&gt;</i>
-          <Link to="/Wishilist" className="now">
-            찜리스트
-          </Link>
-        </div>
+        <SiteMapComponent
+          firstLink="/Mp"
+          firstName="마이페이지"
+          secondLink="./"
+          secondName="배송지 관리"
+        />
         <div className="title">
           <Link to="/Mp">
-            <h2>배송지 관리</h2>
+            <h2>My Page</h2>
           </Link>
         </div>
         <div className="content">
-          <div className="menu">
-            <ul>
-              <li>
-                <h2>메뉴</h2>
-              </li>
-              <li className="sub-title">
-                <h3>계정관리</h3>
-              </li>
-              <li>
-                <Link to="/MyProfile">회원정보 확인</Link>
-              </li>
-              <li>
-                <Link to="/EditProfile">회원정보 수정</Link>
-              </li>
-              <li>
-                <Link to="/AddressList">배송지 관리</Link>
-              </li>
-              <li>
-                <Link to="/DeleteAccount">회원 탈퇴</Link>
-              </li>
-
-              <li className="sub-title">
-                <h3>이용내역</h3>
-              </li>
-              <li>
-                <Link to="/MyOrder">티켓예매 내역</Link>
-              </li>
-              <li>
-                <Link to="/MyOrder">사전주문 내역</Link>
-              </li>
-              <li>
-                <Link to="/MyOrder">주문/ 배송조회</Link>
-              </li>
-              <li>
-                <Link to="/MyOrder">대관신청 내역</Link>
-              </li>
-              <li className="sub-title">
-                <h3>게시판</h3>
-              </li>
-              <li>
-                <Link to="/Ntc">공지사항</Link>
-              </li>
-              <li>
-                <Link to="/Faq">FAQ</Link>
-              </li>
-              <li>
-                <Link to="/Rev">작성 후기</Link>
-              </li>
-            </ul>
+          <Sub07MpSideMenu />
+          <div className="address-box">
+            <div className="head">
+              <h3>배송지 관리</h3>
+              <h4>
+                <i className="bi bi-bell-fill"></i>
+                <span>배송지는 3개까지 등록할 수 있습니다.</span>
+              </h4>
+            </div>
+            <div className="main">
+              <ul>
+                <li>
+                  <div className="gap">
+                    <div className="row1">
+                      <span>기본배송지</span>
+                    </div>
+                    <div className="row2">
+                      <em>우리집</em>
+                      <button>수정</button>
+                    </div>
+                    <div className="row3">
+                      <p>
+                        김묘묘 <i>|</i> 010-1234-5678
+                      </p>
+                    </div>
+                    <div className="row4">
+                      <em>서울시 영등포구 주소 (우편번호)</em>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div className="gap">
+                    <div className="row1"></div>
+                    <div className="row2">
+                      <em>회사</em>
+                      <button>수정</button>
+                    </div>
+                    <div className="row3">
+                      <p>
+                        김묘묘 <i>|</i> 010-1234-5678
+                      </p>
+                    </div>
+                    <div className="row4">
+                      <em>서울시 구로구 주소 (우편번호)</em>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div className="gap">
+                    <div className="row1"></div>
+                    <div className="row2">
+                      <em>회사</em>
+                      <button>수정</button>
+                    </div>
+                    <div className="row3">
+                      <p>
+                        김묘묘 <i>|</i> 010-1234-5678
+                      </p>
+                    </div>
+                    <div className="row4">
+                      <em>서울시 구로구 주소 (우편번호)</em>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div className="foot">
+              <Link to="./">배송지 추가</Link>
+            </div>
           </div>
         </div>
       </div>

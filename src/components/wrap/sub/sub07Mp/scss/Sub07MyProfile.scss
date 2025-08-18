@@ -1,5 +1,4 @@
 @use "../../../../scss/variables" as *;
-@use "../../../../scss/mixin" as *;
 #sub07MyProfile {
   width: 100%;
   margin-top: 100px;
@@ -9,7 +8,6 @@
     width: 100%;
     max-width: 1500px;
     margin: 0 auto;
-    @include site();
     .title {
       padding: 3% 0 5% 2%;
       width: 100%;
@@ -29,42 +27,7 @@
       width: 100%;
       margin: 0 auto;
       display: flex;
-      .menu {
-        width: 200px;
-        height: auto;
-        margin: 0 5%;
 
-        ul {
-          width: 100%;
-          li {
-            width: 100%;
-            padding: 4% 0;
-            display: block;
-            &.sub-title {
-              border-top: 1px solid #ccc;
-            }
-
-            h2 {
-              font-size: $size4;
-              font-weight: 600;
-              text-indent: 10px;
-            }
-            h3 {
-              font-size: $size4;
-              padding-top: 20px;
-              font-weight: 600;
-              text-indent: 10px;
-            }
-            a {
-              width: 100%;
-              display: block;
-              font-size: 18px;
-              padding: 5px 0;
-              text-indent: 10px;
-            }
-          }
-        }
-      }
       .user-info {
         width: 70%;
         max-width: 900px;
@@ -221,42 +184,7 @@
         width: 100%;
         margin: 0 auto;
         display: flex;
-        .menu {
-          width: 200px;
-          height: auto;
-          margin: 0 5%;
 
-          ul {
-            width: 100%;
-            li {
-              width: 100%;
-              padding: 4% 0;
-              display: block;
-              &.sub-title {
-                border-top: 1px solid #ccc;
-              }
-
-              h2 {
-                font-size: $size4;
-                font-weight: 600;
-                text-indent: 10px;
-              }
-              h3 {
-                font-size: $size4;
-                padding-top: 20px;
-                font-weight: 600;
-                text-indent: 10px;
-              }
-              a {
-                width: 100%;
-                display: block;
-                font-size: 18px;
-                padding: 5px 0;
-                text-indent: 10px;
-              }
-            }
-          }
-        }
         .user-info {
           width: 70%;
           max-width: 900px;
@@ -368,42 +296,7 @@
         width: 100%;
         margin: 0 auto;
         display: flex;
-        .menu {
-          width: 160px;
-          height: auto;
-          margin: 0 5%;
 
-          ul {
-            width: 100%;
-            li {
-              width: 100%;
-              padding: 4% 0;
-              display: block;
-              &.sub-title {
-                border-top: 1px solid #ccc;
-              }
-
-              h2 {
-                font-size: $size4;
-                font-weight: 600;
-                text-indent: 10px;
-              }
-              h3 {
-                font-size: $size4;
-                padding-top: 20px;
-                font-weight: 600;
-                text-indent: 10px;
-              }
-              a {
-                width: 100%;
-                display: block;
-                font-size: 18px;
-                padding: 5px 0;
-                text-indent: 10px;
-              }
-            }
-          }
-        }
         .user-info {
           width: 70%;
           max-width: 900px;
@@ -493,42 +386,7 @@
         width: 100%;
         margin: 0 auto;
         display: flex;
-        .menu {
-          width: 140px;
-          height: auto;
-          margin: 0 4%;
 
-          ul {
-            width: 100%;
-            li {
-              width: 100%;
-              padding: 4% 0;
-              display: block;
-              &.sub-title {
-                border-top: 1px solid #ccc;
-              }
-
-              h2 {
-                font-size: 1.5rem;
-                font-weight: 600;
-                text-indent: 10px;
-              }
-              h3 {
-                font-size: 1.5rem;
-                padding-top: 20px;
-                font-weight: 600;
-                text-indent: 10px;
-              }
-              a {
-                width: 100%;
-                display: block;
-                font-size: 16px;
-                padding: 5px 0;
-                text-indent: 10px;
-              }
-            }
-          }
-        }
         .user-info {
           width: 70%;
           max-width: 900px;
@@ -614,42 +472,7 @@
         width: 100%;
         margin: 0 auto;
         display: flex;
-        .menu {
-          width: 140px;
-          height: auto;
-          margin: 0 4%;
 
-          ul {
-            width: 100%;
-            li {
-              width: 100%;
-              padding: 4% 0;
-              display: block;
-              &.sub-title {
-                border-top: 1px solid #ccc;
-              }
-
-              h2 {
-                font-size: 1.5rem;
-                font-weight: 600;
-                text-indent: 10px;
-              }
-              h3 {
-                font-size: 1.5rem;
-                padding-top: 20px;
-                font-weight: 600;
-                text-indent: 10px;
-              }
-              a {
-                width: 100%;
-                display: block;
-                font-size: 16px;
-                padding: 5px 0;
-                text-indent: 10px;
-              }
-            }
-          }
-        }
         .user-info {
           width: 70%;
           max-width: 900px;
@@ -735,42 +558,7 @@
         width: 100%;
         margin: 0 auto;
         display: flex;
-        .menu {
-          width: 120px;
-          height: auto;
-          margin: 0 4%;
 
-          ul {
-            width: 100%;
-            li {
-              width: 100%;
-              padding: 4% 0;
-              display: block;
-              &.sub-title {
-                border-top: 1px solid #ccc;
-              }
-
-              h2 {
-                font-size: 1.3rem;
-                font-weight: 600;
-                text-indent: 10px;
-              }
-              h3 {
-                font-size: 1.3rem;
-                padding-top: 20px;
-                font-weight: 600;
-                text-indent: 10px;
-              }
-              a {
-                width: 100%;
-                display: block;
-                font-size: 14px;
-                padding: 5px 0;
-                text-indent: 10px;
-              }
-            }
-          }
-        }
         .user-info {
           width: 70%;
           max-width: 900px;
@@ -841,9 +629,7 @@
       .content {
         display: flex;
         justify-content: center;
-        .menu {
-          display: none;
-        }
+
         .user-info {
           width: 90%;
         }

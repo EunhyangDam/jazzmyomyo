@@ -1,0 +1,98 @@
+@use "../../../../scss/variables" as *;
+.menu {
+  width: 200px;
+  height: auto;
+  margin: 0 5%;
+
+  ul {
+    width: 100%;
+    li {
+      width: 100%;
+      padding: 4% 0;
+      display: block;
+      &.sub-title {
+        border-top: 1px solid #ccc;
+      }
+
+      h2 {
+        font-size: $size4;
+        font-weight: 600;
+        text-indent: 10px;
+      }
+      h3 {
+        font-size: $size4;
+        padding-top: 20px;
+        font-weight: 600;
+        text-indent: 10px;
+      }
+      a {
+        width: 100%;
+        display: block;
+        font-size: 18px;
+        padding: 5px 0;
+        text-indent: 10px;
+      }
+    }
+  }
+}
+@media all and (max-width: 853px) {
+  .menu {
+    width: 160px;
+    ul {
+      li {
+        h2 {
+          font-size: 1.3rem;
+        }
+        h3 {
+          font-size: 1.3rem;
+        }
+        a {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+@media all and (max-width: 665px) {
+  .menu {
+    width: 120px;
+    height: auto;
+    margin: 0 4%;
+
+    ul {
+      width: 100%;
+      li {
+        width: 100%;
+        padding: 4% 0;
+        display: block;
+        &.sub-title {
+          border-top: 1px solid #ccc;
+        }
+
+        h2 {
+          font-size: 1.3rem;
+          font-weight: 600;
+          text-indent: 10px;
+        }
+        h3 {
+          font-size: 1.3rem;
+          padding-top: 20px;
+          font-weight: 600;
+          text-indent: 10px;
+        }
+        a {
+          width: 100%;
+          display: block;
+          font-size: 14px;
+          padding: 5px 0;
+          text-indent: 10px;
+        }
+      }
+    }
+  }
+}
+@media all and (max-width: 539px) {
+  .menu {
+    display: none;
+  }
+}
