@@ -55,6 +55,20 @@
         { "name": "이벤트", "link": "" }
       ],
       "sub link": ["Ntc", "Faq", "Gall", "Sns"]
+    },
+    {
+      "id": "login",
+      "main": "로그인",
+      "link": "Lg",
+      "sub": [],
+      "sub link": []
+    },
+    {
+      "id": "signIn",
+      "main": "회원가입",
+      "link": "SignUp",
+      "sub": [],
+      "sub link": []
     }
   ]
 }

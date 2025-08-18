@@ -63,6 +63,7 @@ import { wishAction } from "../store/wishlist";
 import { headerAction } from "../store/header";
 import { cartAction } from "../store/cart";
 import ConfirmModalComponent from "./wrap/ConfirmModalComponent";
+import Sub06SignUp from "./wrap/sub/sub06Lg/Sub06SignUp";
 export default function WrapComponent(props) {
   /**인스턴스 생성 */
   const dispatch = useDispatch();
@@ -143,6 +144,7 @@ export default function WrapComponent(props) {
           <Route path="/Lg" element={<Sub06Lg />} />
           <Route path="/SearchId" element={<Sub06SearchId />} />
           <Route path="/SearchRs" element={<Sub06SearchRs />} />
+          <Route path="/SignUp" element={<Sub06SignUp />} />
           {/* 배송지 관리 컴포넌트 추가 */}
           <Route path="/AddressList" element={<Sub07AddressList />} />
           <Route path="/DeleteAccount" element={<Sub07DeleteAccount />} />
