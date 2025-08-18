@@ -40,7 +40,7 @@ export default function Sub10Wishilist(props) {
       <div className="inner">
         <SiteMapComponent
           firstLink="/Mp"
-          fisrtName="마이페이지"
+          firstName="마이페이지"
           secondLink="/Wishilist"
           secondName="찜리스트"
         />

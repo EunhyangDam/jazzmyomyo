@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./scss/Sub05Faq.scss";
-
+import SiteMapComponent from "../../custom/SiteMapComponent";
 
 // 키워드 텍스트 포인트 주기
 function formatAnswer(raw) {
@@ -12,16 +12,15 @@ function formatAnswer(raw) {
 }
 
 export default function Sub05Faq(props) {
-
   const [items, setItems] = useState([]);
   const [openId, setOpenId] = useState(null);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const perPage = 6;
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch("/json/sub05/faq.json")
-    .then((res) => {
+      .then((res) => {
         if (!res.ok) throw new Error("네트워크 오류");
         return res.json();
       })
@@ -58,15 +57,13 @@ export default function Sub05Faq(props) {
 
   return (
     <div id="sub05Faq">
-
       {/* 상단 페이지 경로 */}
-      <div className="breadcrumb">
-        <i className="bi bi-house-door-fill" aria-hidden />
-        <i className="bi bi-chevron-right" aria-hidden />
-        <span className="crumb">커뮤니티</span>
-        <i className="bi bi-chevron-right" aria-hidden />
-        <span className="crumb current">FAQ</span>
-      </div>
+      <SiteMapComponent
+        firstLink="/Ntc"
+        firstName="커뮤니티"
+        secondLink="/Faq"
+        secondName="FAQ"
+      />
 
       <section className="head">
         <h2 className="title">FAQ</h2>
@@ -101,7 +98,9 @@ export default function Sub05Faq(props) {
                   <span className="q-text">{item.question}</span>
                 </div>
                 <i
-                  className={`bi ${isOpen ? "bi-chevron-up" : "bi-chevron-down"}`}
+                  className={`bi ${
+                    isOpen ? "bi-chevron-up" : "bi-chevron-down"
+                  }`}
                   aria-hidden
                 />
               </button>
@@ -115,7 +114,9 @@ export default function Sub05Faq(props) {
                   <span className="a-badge">A.</span>
                   <p
                     className="a-text"
-                    dangerouslySetInnerHTML={{ __html: formatAnswer(item.answer) }}
+                    dangerouslySetInnerHTML={{
+                      __html: formatAnswer(item.answer),
+                    }}
                   />
                 </div>
               </div>
@@ -129,8 +130,12 @@ export default function Sub05Faq(props) {
 
       {/* pagination */}
       <div className="pagination">
-        <button onClick={goFirst} disabled={page === 1} aria-label="첫 페이지">«</button>
-        <button onClick={goPrev} disabled={page === 1} aria-label="이전 페이지">‹</button>
+        <button onClick={goFirst} disabled={page === 1} aria-label="첫 페이지">
+          «
+        </button>
+        <button onClick={goPrev} disabled={page === 1} aria-label="이전 페이지">
+          ‹
+        </button>
         {Array.from({ length: totalPages }).map((_, i) => {
           const p = i + 1;
           return (
@@ -143,8 +148,20 @@ export default function Sub05Faq(props) {
             </button>
           );
         })}
-        <button onClick={goNext} disabled={page === totalPages} aria-label="다음 페이지">›</button>
-        <button onClick={goLast} disabled={page === totalPages} aria-label="마지막 페이지">»</button>
+        <button
+          onClick={goNext}
+          disabled={page === totalPages}
+          aria-label="다음 페이지"
+        >
+          ›
+        </button>
+        <button
+          onClick={goLast}
+          disabled={page === totalPages}
+          aria-label="마지막 페이지"
+        >
+          »
+        </button>
       </div>
     </div>
   );

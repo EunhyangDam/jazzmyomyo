@@ -2,49 +2,24 @@
 
 #sub05Faq {
   max-width: 1750px;
-  margin-top: $section-top;
+  margin-top: 100px;
   margin-bottom: $section-top;
   margin-left: auto;
   margin-right: auto;
   padding: 0 20px;
   box-sizing: border-box;
 
-  /* 상단 페이지 경로 breadcrumb */
-  .breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin: 30px 0 50px;
-    font-size: $small;
-
-    i {
-      font-size: $small;
-      font-weight: 600;
-      line-height: 1;
-      color: $grey2;
-    }
-
-    .crumb {
-      color: $grey2;
-      font-weight: 500;
-      &.current {
-        color: $sub-color1;   /* FAQ 큰 텍스트 */
-        font-weight: 800;
-      }
-    }
-  }
-
   /* head */
   .head {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 50px;
+    margin-block: 40px 50px;
 
     .title {
       font-size: 30px;
       font-weight: 800;
-      color: $sub-color1;  
+      color: $sub-color1;
     }
 
     .search {
@@ -72,7 +47,7 @@
 
       button {
         padding: 9px 16px;
-        background: $sub-color1;  
+        background: $sub-color1;
         color: $white;
         font-size: 14px;
         border: none;
@@ -206,7 +181,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+      transition: background 0.25s ease, border-color 0.25s ease,
+        color 0.25s ease;
 
       &.active {
         background: $sub-color1;
@@ -216,9 +192,9 @@
       }
 
       &:hover:not(:disabled):not(.active) {
-        background: lighten($sub-color1, 70%); 
-        border-color: $sub-color1; 
-        color: $sub-color1;        
+        background: lighten($sub-color1, 70%);
+        border-color: $sub-color1;
+        color: $sub-color1;
       }
 
       &:disabled {
@@ -247,7 +223,6 @@
     }
   }
 }
-
 
 /* 반응형 */
 @media (max-width: 1200px) {

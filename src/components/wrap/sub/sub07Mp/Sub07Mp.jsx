@@ -15,12 +15,7 @@ function Sub07Mp(props) {
   return (
     <div id="sub07Mp">
       <div className="container">
-        <SiteMapComponent
-          firstLink="/Mp"
-          firstName="마이페이지"
-          secondLink=""
-          secondName=""
-        />
+        <SiteMapComponent firstLink="/Mp" firstName="마이페이지" />
 
         <div className="title">
           <Link to="/Mp">
@@ -55,13 +50,13 @@ function Sub07Mp(props) {
                 <li className="col2">
                   <h2>위시리스트</h2>
                   <Link to="/Wishlist">
-                    <p>{wishAsset.lenght}</p>
+                    <p>{wishAsset.length}</p>
                   </Link>
                 </li>
                 <li className="col3">
                   <h2>장바구니</h2>
                   <Link to="/Cart">
-                    <p>{cartAsset.lenght || "0"}</p>
+                    <p>{cartAsset.length || "0"}</p>
                   </Link>
                 </li>
                 <li className="col4">

@@ -68,7 +68,7 @@ function Sub05Ntc() {
 
   return (
     <div id="sub05Ntc" className="container">
-      <SiteMapComponent firstLink="/Ntc" fisrtName="공지사항" />
+      <SiteMapComponent firstLink="/Ntc" firstName="공지사항" />
       <h2>공지사항</h2>
 
       <div className="search-bar">
