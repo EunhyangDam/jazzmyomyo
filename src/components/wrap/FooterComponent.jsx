@@ -1,12 +1,17 @@
-import React from 'react';
-import './scss/FooterComponent.scss';
-import { Link } from 'react-router-dom';
+import React from "react";
+import "./scss/FooterComponent.scss";
+import { Link } from "react-router-dom";
 
-export default function FooterComponent({ footerClass = 'footer--default' }) {
+export default function FooterComponent({ footerClass = "footer--default" }) {
   return (
     <footer id="footer" className={footerClass} aria-label="사이트 푸터">
       {/* 상단 물결 */}
-      <svg className="wave-svg first" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
+      <svg
+        className="wave-svg first"
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
         <path fill="currentColor">
           <animate
             attributeName="d"
@@ -47,7 +52,12 @@ export default function FooterComponent({ footerClass = 'footer--default' }) {
       </div>
 
       {/* 하단 물결 */}
-      <svg className="wave-svg second" viewBox="0 0 1440 280" preserveAspectRatio="none" aria-hidden="true">
+      <svg
+        className="wave-svg second"
+        viewBox="0 0 1440 280"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
         <path>
           <animate
             attributeName="d"
@@ -110,21 +120,25 @@ export default function FooterComponent({ footerClass = 'footer--default' }) {
         <div className="footer-bottom-inner">
           <div className="footer-info">
             <div className="categories">
-              <a href="#">About us</a> /
-              <a href="#"> Shop</a> /
+              <a href="#">About us</a> /<a href="#"> Shop</a> /
               <a href="#"> Menu</a> / <span className="mobile-br"></span>
-              <a href="#"> Schedule</a> /
-              <a href="#"> Community</a>
+              <a href="#"> Schedule</a> /<a href="#"> Community</a>
               <Link to="/Mm"> / 회원관리 관리자페이지</Link>
             </div>
 
             <div className="address">
-              주소 : 서울 마포구 동교로<span className="nowrap">23길&nbsp;14</span> 복합빌딩 B1층 재즈묘묘<br />
-              운영시간 : 수~일 6PM~2AM (휴무일 대관 가능)<br />
+              주소 : 서울 마포구 동교로
+              <span className="nowrap">23길&nbsp;14</span> 복합빌딩 B1층
+              재즈묘묘
+              <br />
+              운영시간 : 수~일 6PM~2AM (휴무일 대관 가능)
+              <br />
               전화번호 : 02 - 500 - 5200
             </div>
 
-            <div className="copy">© 2025 JazzMyomyo. All That Jazz, All That Meow.</div>
+            <div className="copy">
+              © 2025 JazzMyomyo. All That Jazz, All That Meow.
+            </div>
           </div>
 
           <div className="footer-logo">

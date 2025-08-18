@@ -198,6 +198,7 @@
         width: 150px;
         height: auto;
         display: block;
+        filter: brightness(0) invert(1);
       }
     }
   }
@@ -240,14 +241,22 @@
       .footer-links {
         ul {
           li {
-            h5 { font-size: 17px; }
-            a  { font-size: 13.5px; }
+            h5 {
+              font-size: 17px;
+            }
+            a {
+              font-size: 13.5px;
+            }
           }
         }
       }
 
-      .footer-bottom-inner { gap: 18px; }
-      .footer-info        { max-width: 100%; }
+      .footer-bottom-inner {
+        gap: 18px;
+      }
+      .footer-info {
+        max-width: 100%;
+      }
     }
   }
 
@@ -261,14 +270,22 @@
           column-gap: 36px;
 
           li {
-            h5 { font-size: 16px; }
-            a  { font-size: 13px; }
+            h5 {
+              font-size: 16px;
+            }
+            a {
+              font-size: 13px;
+            }
           }
         }
       }
 
-      .footer-bottom-inner { padding: 0 40px 0 20px; }
-      .footer-info         { font-size: 13px; }
+      .footer-bottom-inner {
+        padding: 0 40px 0 20px;
+      }
+      .footer-info {
+        font-size: 13px;
+      }
     }
   }
 
@@ -278,8 +295,12 @@
 
       .footer-columns {
         li {
-          h4 { font-size: 30px; }
-          p  { font-size: 14px; }
+          h4 {
+            font-size: 30px;
+          }
+          p {
+            font-size: 14px;
+          }
         }
       }
     }
@@ -299,8 +320,12 @@
           text-align: center;
 
           li {
-            h5 { font-size: 16px; }
-            a  { font-size: 12.5px; }
+            h5 {
+              font-size: 16px;
+            }
+            a {
+              font-size: 12.5px;
+            }
           }
         }
       }
@@ -355,8 +380,12 @@
         max-width: 500px;
 
         li {
-          h4 { font-size: 26px; }
-          p  { font-size: 13px; }
+          h4 {
+            font-size: 26px;
+          }
+          p {
+            font-size: 13px;
+          }
         }
       }
     }
@@ -365,14 +394,20 @@
       .footer-links {
         ul {
           li {
-            h5 { font-size: 14px; }
-            a  { font-size: 12px; }
+            h5 {
+              font-size: 14px;
+            }
+            a {
+              font-size: 12px;
+            }
           }
         }
       }
 
       .footer-info {
-        .address { font-size: 12.5px; }
+        .address {
+          font-size: 12.5px;
+        }
       }
     }
   }
@@ -381,7 +416,9 @@
     .footer-middle {
       .footer-columns {
         li {
-          h4 { font-size: 24px; }
+          h4 {
+            font-size: 24px;
+          }
         }
       }
     }
@@ -392,8 +429,12 @@
       .footer-links {
         ul {
           li {
-            h5 { font-size: 13.5px; }
-            a  { font-size: 11.5px; }
+            h5 {
+              font-size: 13.5px;
+            }
+            a {
+              font-size: 11.5px;
+            }
           }
         }
       }
@@ -414,10 +455,6 @@
   }
 }
 
-
-
-
-
 /* =========================
    페이지별 테마 오버라이드
    ========================= */
@@ -427,122 +464,202 @@
 #footer.footer--main {
   background: $sub-color4;
 
-  .footer-middle { background: $sub-color1; }
+  .footer-middle {
+    background: $sub-color1;
+  }
 
   .wave-svg.first path,
-  .wave-svg.second path { fill: $sub-color1 !important; }
+  .wave-svg.second path {
+    fill: $sub-color1 !important;
+  }
 
-  .wave-svg.second { background-color: $primary-color; }
-  .footer-bottom   { background: $primary-color; }
+  .wave-svg.second {
+    background-color: $primary-color;
+  }
+  .footer-bottom {
+    background: $primary-color;
+  }
 }
 
 /* About */
 #footer.footer--about {
   background: transparent;
 
-  .footer-middle { background: $sub-color1; }
+  .footer-middle {
+    background: $sub-color1;
+  }
 
   .wave-svg.first path,
-  .wave-svg.second path { fill: $sub-color1 !important; }
+  .wave-svg.second path {
+    fill: $sub-color1 !important;
+  }
 
-  .wave-svg.second { background-color: $primary-color; }
-  .footer-bottom   { background: $primary-color; }
+  .wave-svg.second {
+    background-color: $primary-color;
+  }
+  .footer-bottom {
+    background: $primary-color;
+  }
 }
 
 /* Shop */
 #footer.footer--shop {
   background: transparent;
 
-  .footer-middle { background: $sub-color1; }
+  .footer-middle {
+    background: $sub-color1;
+  }
 
   .wave-svg.first path,
-  .wave-svg.second path { fill: $sub-color1 !important; }
+  .wave-svg.second path {
+    fill: $sub-color1 !important;
+  }
 
-  .wave-svg.second { background-color: $primary-color; }
-  .footer-bottom   { background: $primary-color; }
+  .wave-svg.second {
+    background-color: $primary-color;
+  }
+  .footer-bottom {
+    background: $primary-color;
+  }
 }
 
 /* Menu */
 #footer.footer--menu-pre {
   background: $sub-color3;
-  .footer-middle { background: $sub-color1; }
+  .footer-middle {
+    background: $sub-color1;
+  }
   .wave-svg.first path,
-  .wave-svg.second path { fill: $sub-color1 !important; }
-  .wave-svg.second { background-color: $primary-color; }
-  .footer-bottom { background: $primary-color; }
+  .wave-svg.second path {
+    fill: $sub-color1 !important;
+  }
+  .wave-svg.second {
+    background-color: $primary-color;
+  }
+  .footer-bottom {
+    background: $primary-color;
+  }
 }
 
 /* 나머지 (와인, 드링크, 푸드, 세트) */
 #footer.footer--menu-etc {
   background: transparent;
-  .footer-middle { background: $sub-color1; }
+  .footer-middle {
+    background: $sub-color1;
+  }
   .wave-svg.first path,
-  .wave-svg.second path { fill: $sub-color1 !important; }
-  .wave-svg.second { background-color: $primary-color; }
-  .footer-bottom { background: $primary-color; }
+  .wave-svg.second path {
+    fill: $sub-color1 !important;
+  }
+  .wave-svg.second {
+    background-color: $primary-color;
+  }
+  .footer-bottom {
+    background: $primary-color;
+  }
 }
 
 /* Schedule */
 #footer.footer--schedule {
   background: transparent;
 
-  .footer-middle { background: $sub-color1; }
+  .footer-middle {
+    background: $sub-color1;
+  }
 
   .wave-svg.first path,
-  .wave-svg.second path { fill: $sub-color1 !important; }
+  .wave-svg.second path {
+    fill: $sub-color1 !important;
+  }
 
-  .wave-svg.second { background-color: $primary-color; }
-  .footer-bottom { background: $primary-color; }
+  .wave-svg.second {
+    background-color: $primary-color;
+  }
+  .footer-bottom {
+    background: $primary-color;
+  }
 }
 
 /* Community */
 #footer.footer--community {
   background: transparent;
 
-  .footer-middle { background: $sub-color1; }
+  .footer-middle {
+    background: $sub-color1;
+  }
 
   .wave-svg.first path,
-  .wave-svg.second path { fill: $sub-color1 !important; }
+  .wave-svg.second path {
+    fill: $sub-color1 !important;
+  }
 
-  .wave-svg.second { background-color: $primary-color; }
-  .footer-bottom   { background: $primary-color; }
+  .wave-svg.second {
+    background-color: $primary-color;
+  }
+  .footer-bottom {
+    background: $primary-color;
+  }
 }
 
 /* My Page / Login */
 #footer.footer--mypage {
   background: transparent;
 
-  .footer-middle { background: $sub-color1; }
+  .footer-middle {
+    background: $sub-color1;
+  }
 
   .wave-svg.first path,
-  .wave-svg.second path { fill: $sub-color1 !important; }
+  .wave-svg.second path {
+    fill: $sub-color1 !important;
+  }
 
-  .wave-svg.second { background-color: $primary-color; }
-  .footer-bottom   { background: $primary-color; }
+  .wave-svg.second {
+    background-color: $primary-color;
+  }
+  .footer-bottom {
+    background: $primary-color;
+  }
 }
 
 /* Member Management */
 #footer.footer--mm {
   background: $primary-color;
 
-  .footer-middle { background: $sub-color1; }
+  .footer-middle {
+    background: $sub-color1;
+  }
 
   .wave-svg.first path,
-  .wave-svg.second path { fill: $sub-color1 !important; }
+  .wave-svg.second path {
+    fill: $sub-color1 !important;
+  }
 
-  .wave-svg.second { background-color: $primary-color; }
-  .footer-bottom { background: $primary-color; }
+  .wave-svg.second {
+    background-color: $primary-color;
+  }
+  .footer-bottom {
+    background: $primary-color;
+  }
 }
 
 /* Cart / Wishlist */
 #footer.footer--cart {
   background: transparent;
 
-  .footer-middle { background: $sub-color1; }
+  .footer-middle {
+    background: $sub-color1;
+  }
 
   .wave-svg.first path,
-  .wave-svg.second path { fill: $sub-color1 !important; }
+  .wave-svg.second path {
+    fill: $sub-color1 !important;
+  }
 
-  .wave-svg.second { background-color: $primary-color; }
-  .footer-bottom   { background: $primary-color; }
+  .wave-svg.second {
+    background-color: $primary-color;
+  }
+  .footer-bottom {
+    background: $primary-color;
+  }
 }
