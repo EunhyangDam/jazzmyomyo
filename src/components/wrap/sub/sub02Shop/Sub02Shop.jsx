@@ -9,8 +9,10 @@ function Sub02Shop(props) {
   const wishlistAsset = useSelector((state) => state.wishlist.위시리스트);
   const [state, setState] = useState({
     product: [],
+    검색: "",
   });
-  const [필터상품, set필터상품] = useState([]);
+  let [필터상품, set필터상품] = useState([]);
+  let [필터상품2, set필터상품2] = useState([]); // 신상품, 품절 정렬용
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
 
@@ -33,6 +35,7 @@ function Sub02Shop(props) {
           product: data.product,
         });
         set필터상품(data.product);
+        set필터상품2(data.product);
       })
       .catch((err) => {
         console.log(err);
@@ -48,6 +51,74 @@ function Sub02Shop(props) {
       arr = [data, ...arr];
     }
     dispatch(wishAction(arr));
+  };
+
+  // 검색버튼
+  // 폼제출 이벤트
+  const onSubmitSearch = (e) => {
+    e.preventDefault(); // 화면 이동 방지
+
+    if (state.검색 === "") {
+      set필터상품(state.product);
+      setState({
+        ...state,
+        검색: "",
+      });
+    } else if (state.검색 !== "") {
+      let 검색상품 = state.product;
+
+      검색상품 = [
+        ...검색상품.filter(
+          (item) =>
+            item.설명.includes(state.검색) ||
+            item.상품명.includes(state.검색) ||
+            item.상품분류.includes(state.검색)
+        ),
+      ];
+
+      set필터상품(검색상품);
+    }
+  };
+
+  const onChangeSearchText = (e) => {
+    setState({
+      ...state,
+      검색: e.target.value,
+    });
+  };
+
+  // 상품 정렬
+
+  // 신상품 & 품절
+  const onClickNewItem = (e) => {
+    e.preventDefault();
+
+    필터상품 = [...필터상품2.filter((item) => item.신상품 === true)];
+
+    set필터상품(필터상품);
+  };
+
+  const onClickSoldOut = (e) => {
+    e.preventDefault();
+
+    필터상품 = [...필터상품2.filter((item) => item.품절 === true)];
+
+    set필터상품(필터상품);
+  };
+
+  // 가격 정렬
+  const onClickHighPrice = (e) => {
+    e.preventDefault();
+
+    필터상품 = [...필터상품].sort((a, b) => b.정가 - a.정가);
+
+    set필터상품(필터상품);
+  };
+  const onClickLowPrice = (e) => {
+    e.preventDefault();
+    필터상품 = [...필터상품].sort((a, b) => a.정가 - b.정가);
+
+    set필터상품(필터상품);
   };
 
   if (!state.product || state.product.length < 24) return <div>Loading…</div>;
@@ -73,6 +144,28 @@ function Sub02Shop(props) {
                 </NavLink>
               </li>
             </ul>
+          </div>
+          <div className="search-box">
+            <form onSubmit={onSubmitSearch}>
+              <input
+                type="text"
+                name="search"
+                id="search"
+                value={state.검색}
+                placeholder="검색어를 입력하세요"
+                onChange={onChangeSearchText}
+              />
+              <button type="submit">검색</button>
+            </form>
+          </div>
+          <div className="filtering">
+            <button onClick={onClickNewItem}>신상품</button>
+            <i>|</i>
+            <button onClick={onClickHighPrice}>높은 가격순</button>
+            <i>|</i>
+            <button onClick={onClickLowPrice}>낮은 가격순</button>
+            <i>|</i>
+            <button onClick={onClickSoldOut}>품절상품</button>
           </div>
           <ul className="item">
             {필터상품.map((item, idx) => (

@@ -41,22 +41,96 @@
 #sub02Shop #wrap .content .category-name ul {
   display: flex;
   justify-content: center;
-  padding: 2% 0 3% 0;
+  padding: 2% 0 1% 0;
 }
 #sub02Shop #wrap .content .category-name ul li {
   margin: 0 20px;
 }
-#sub02Shop #wrap .content .category-name ul li button {
-  border: 0;
-  background: none;
+#sub02Shop #wrap .content .category-name ul li a.active {
   transition: all 0.3s;
 }
-#sub02Shop #wrap .content .category-name ul li button span {
+#sub02Shop #wrap .content .category-name ul li a.active span {
   font-size: 1.8rem;
   font-family: "MaruBuri";
 }
-#sub02Shop #wrap .content .category-name ul li button span:hover {
+#sub02Shop #wrap .content .category-name ul li a.active span:hover {
   border-bottom: 1px solid #000;
+}
+#sub02Shop #wrap .content .search-box {
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+#sub02Shop #wrap .content .search-box form {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+#sub02Shop #wrap .content .search-box form input[type=text] {
+  padding: 0 20px;
+  height: 40px;
+  width: 100%;
+  max-width: 330px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 16px;
+  color: #444;
+  outline-offset: -1px;
+  outline: 1px solid transparent;
+  transition: all 0.3s;
+  border-radius: 3px;
+}
+#sub02Shop #wrap .content .search-box form input[type=text]::-moz-placeholder {
+  color: #aaa;
+}
+#sub02Shop #wrap .content .search-box form input[type=text]::placeholder {
+  color: #aaa;
+}
+#sub02Shop #wrap .content .search-box form input[type=text]:focus {
+  outline-color: #777;
+}
+#sub02Shop #wrap .content .search-box form button {
+  border: 1px solid #777;
+  border-radius: 3px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #777;
+  height: 40px;
+  width: 56px;
+  margin-left: 4px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+#sub02Shop #wrap .content .search-box form button:hover {
+  background-color: #23363f;
+  border-color: #23363f;
+}
+#sub02Shop #wrap .content .filtering {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-family: "MaruBuri";
+  padding: 0.5% 0 2% 0;
+}
+#sub02Shop #wrap .content .filtering button {
+  font-size: 12px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: #565050;
+  transition: all 0.3s;
+}
+#sub02Shop #wrap .content .filtering button:hover {
+  color: #23363f;
+}
+#sub02Shop #wrap .content .filtering button:first-child {
+  color: #5d3136;
+  font-weight: 600;
+}
+#sub02Shop #wrap .content .filtering i {
+  font-size: 12px;
+  margin: 0 10px;
+  color: #c6bdbd;
 }
 #sub02Shop #wrap .content > ul.item {
   width: 100%;
@@ -265,6 +339,9 @@
   #sub02Shop #wrap .content > ul.item li:nth-child(3n) {
     border-right: 0;
   }
+  #sub02Shop #wrap .content > ul.item li:nth-child(6n) {
+    border-right: 1px solid #23363f;
+  }
   #sub02Shop #wrap .content > ul.item li .caption-box {
     height: 90px;
   }
@@ -286,7 +363,7 @@
     width: auto;
     padding: 0 5%;
   }
-  #sub02Shop #wrap .content .category-name ul li button span {
+  #sub02Shop #wrap .content .category-name ul li a.active span {
     font-size: 1.5rem;
   }
   #sub02Shop #wrap .content > ul.item li .caption-box {

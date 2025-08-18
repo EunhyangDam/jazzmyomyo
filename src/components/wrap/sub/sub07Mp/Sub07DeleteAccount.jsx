@@ -49,27 +49,28 @@ function Sub07DeleteAccount(props) {
         <div className="content">
           <Sub07MpSideMenu />
           <div className="right">
-            <div className="bg-img"></div>
-            <div className="notice">
-              <ul>
-                <li>
-                  <h3>회원탈퇴 안내사항</h3>
-                </li>
-                <li>
-                  <p>
-                    탈퇴일로부터 14일간 재가입이 불가능하며, 동일 아이디로의
-                    재가입은 불가능합니다.
-                  </p>
-                  <p>
-                    회원 정보는 삭제되나 1:1문의, 상품 문의, 상품 리뷰, 게시물과
-                    댓글은 삭제되지 않습니다.
-                  </p>
-                </li>
-                <li>
-                  <button onClick={onClickGoBack}>돌아가기</button>
-                  <button onClick={onClickDeleteAccount}>탈퇴하기</button>
-                </li>
-              </ul>
+            <div className="bg-img">
+              <div className="notice">
+                <ul>
+                  <li>
+                    <h3>회원탈퇴 안내사항</h3>
+                  </li>
+                  <li>
+                    <p>
+                      탈퇴일로부터 14일간 재가입이 불가능하며, 동일 아이디로의
+                      재가입은 불가능합니다.
+                    </p>
+                    <p>
+                      회원 정보는 삭제되나 1:1문의, 상품 문의, 상품 리뷰,
+                      게시물과 댓글은 삭제되지 않습니다.
+                    </p>
+                  </li>
+                  <li>
+                    <button onClick={onClickGoBack}>돌아가기</button>
+                    <button onClick={onClickDeleteAccount}>탈퇴하기</button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

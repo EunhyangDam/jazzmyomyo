@@ -9,6 +9,11 @@ function Sub05Rev(props) {
   const navigate = useNavigate();
   const reviews = useSelector((state) => state.review.review);
 
+  const [state, setState] = useState({
+    isOpen: false,
+    selectedId: null,
+  });
+
   useEffect(() => {
     if (reviews.length === 0) {
       fetch("/json/sub05/rev.json")
@@ -34,6 +39,46 @@ function Sub05Rev(props) {
     navigate("/RevWrite");
   };
 
+  //모달 이벤트
+  const selectedReview = reviews.find((r) => r.id === state.selectedId);
+
+  const onClickGap = (id) => {
+    setState({
+      isOpen: true,
+      selectedId: id,
+    });
+  };
+
+  const onClickModalClose = (e) => {
+    e.stopPropagation();
+    setState({
+      isOpen: false,
+      selectedId: null,
+    });
+  };
+
+  //모달 이동 이벤트
+  const currentIndex = reviews.findIndex((r) => r.id === state.selectedId);
+
+  const onClickPrev = (e) => {
+    e.stopPropagation();
+    if (currentIndex > 0) {
+      setState({
+        ...state,
+        selectedId: reviews[currentIndex - 1].id,
+      });
+    }
+  };
+
+  const onClickNext = (e) => {
+    e.stopPropagation();
+    if (currentIndex < reviews.length - 1) {
+      setState({
+        ...state,
+        selectedId: reviews[currentIndex + 1].id,
+      });
+    }
+  };
   return (
     <div id="sub05Rev">
       <div className="container">
@@ -66,9 +111,9 @@ function Sub05Rev(props) {
           </div>
           <div className="review-box">
             <ul>
-              {reviews.map((item) => (
+              {reviews.slice(0, 9).map((item) => (
                 <li key={item.id} data-key={item.id}>
-                  <div className="gap">
+                  <div className="gap" onClick={() => onClickGap(item.id)}>
                     <div className="row1">
                       <p>{item.작성내용}</p>
                     </div>
@@ -77,7 +122,12 @@ function Sub05Rev(props) {
                     <div className="row4">
                       <em> {item.작성분류}</em>
                       <span>
-                        <button onClick={() => onClickRevHeart(item.id)}>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onClickRevHeart(item.id);
+                          }}
+                        >
                           <i className="bi bi-suit-heart-fill"></i>
                         </button>
                         <b>{item.하트}</b>
@@ -90,6 +140,54 @@ function Sub05Rev(props) {
           </div>
         </div>
       </div>
+      {selectedReview && state.isOpen && (
+        <div
+          className={`modal ${state.isOpen ? " on" : ""}`}
+          onClick={onClickModalClose}
+        >
+          <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+            <div className="nav prev">
+              {currentIndex > 0 && (
+                <i className="bi bi-chevron-left" onClick={onClickPrev}></i>
+              )}
+            </div>
+            <div className="center-box">
+              <div className="title">
+                <h2>묘원의 공연 후기</h2>
+              </div>
+              <div className="content">
+                <div className="gap">
+                  <div className="row1">
+                    <p>{selectedReview.작성내용}</p>
+                  </div>
+                  <div className="row2">{selectedReview.작성자명}</div>
+                  <div className="row3">{selectedReview.작성일자}</div>
+                  <div className="row4">
+                    <em>{selectedReview.작성분류}</em>
+                    <span>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onClickRevHeart(selectedReview.id);
+                        }}
+                      >
+                        <i className="bi bi-suit-heart-fill"></i>
+                      </button>
+                      <b>{selectedReview.하트}</b>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="nav next">
+              {currentIndex < reviews.length - 1 && (
+                <i className="bi bi-chevron-right" onClick={onClickNext}></i>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

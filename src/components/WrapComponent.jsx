@@ -6,9 +6,6 @@ import Sub01AboutUs from "./wrap/sub/sub01AboutUs/Sub01AboutUs";
 import Sub01Interior from "./wrap/sub/sub01AboutUs/Sub01Interior";
 import Sub01MyoMyo from "./wrap/sub/sub01AboutUs/Sub01MyoMyo";
 import Sub01Story from "./wrap/sub/sub01AboutUs/Sub01Story";
-// Sub02Disc, Sub02Merch => 삭제!!
-// import Sub02Disc from "./wrap/sub/sub02Shop/Sub02Disc";
-// import Sub02Merch from "./wrap/sub/sub02Shop/Sub02Merch";
 import Sub02ShopDetail from "./wrap/sub/sub02Shop/Sub02ShopDetail";
 import Sub02Shop from "./wrap/sub/sub02Shop/Sub02Shop";
 import Sub030Menu from "./wrap/sub/sub03Menu/Sub030Menu";
@@ -43,7 +40,6 @@ import Sub06Lg from "./wrap/sub/sub06Lg/Sub06Lg";
 import Sub06SearchId from "./wrap/sub/sub06Lg/Sub06SearchId";
 import Sub06SearchRs from "./wrap/sub/sub06Lg/Sub06SearchRs";
 
-// 배송지 관리 컴포넌트 추가
 import Sub07AddressList from "./wrap/sub/sub07Mp/Sub07AddressList";
 import Sub07DeleteAccount from "./wrap/sub/sub07Mp/Sub07DeleteAccount";
 import Sub07EditProfile from "./wrap/sub/sub07Mp/Sub07EditProfile";
@@ -102,84 +98,6 @@ export default function WrapComponent(props) {
     }
   }, [location]);
 
-  /** 경로 → 푸터 클래스 매핑 */
-  const getFooterClassByPath = (path) => {
-    if (path === "/" || path.startsWith("/mainComponent"))
-      return "footer--main";
-
-    // About
-    if (
-      path.startsWith("/About") ||
-      path.startsWith("/AboutUs") ||
-      path.startsWith("/Interior") ||
-      path.startsWith("/MyoMyo") ||
-      path.startsWith("/Story")
-    )
-      return "footer--about";
-
-    // Shop
-    if (path.startsWith("/Shop") || path.startsWith("/ShopDetail"))
-      return "footer--shop";
-
-    // Menu
-    if (path.startsWith("/Menu") || path.startsWith("/Pre"))
-      return "footer--menu-pre";
-
-    // Wine, Drinks, Food, Set
-    if (
-      path.startsWith("/Wine") ||
-      path.startsWith("/Drinks") ||
-      path.startsWith("/Food") ||
-      path.startsWith("/Set")
-    )
-      return "footer--menu-etc";
-
-    // Schedule
-    if (
-      path.startsWith("/AboutLive") ||
-      path.startsWith("/Artist") ||
-      path.startsWith("/BuyTicket") ||
-      path.startsWith("/Lental") ||
-      path.startsWith("/Monthly")
-    )
-      return "footer--schedule";
-
-    // Community
-    if (
-      path.startsWith("/Faq") ||
-      path.startsWith("/Gall") ||
-      path.startsWith("/Ntc") ||
-      path.startsWith("/Rev") ||
-      path.startsWith("/Sns")
-    )
-      return "footer--community";
-
-    // Login / My page
-    if (
-      path.startsWith("/Lg") ||
-      path.startsWith("/SearchId") ||
-      path.startsWith("/SearchRs") ||
-      path.startsWith("/AddressList") ||
-      path.startsWith("/DeleteAccount") ||
-      path.startsWith("/EditProfile") ||
-      path.startsWith("/Mp") ||
-      path.startsWith("/MyOrder") ||
-      path.startsWith("/MyProfile")
-    )
-      return "footer--mypage";
-
-    // Member Management
-    if (path.startsWith("/Mm")) return "footer--mm";
-
-    // Cart / Wishlist
-    if (path.startsWith("/Cart") || path.startsWith("/Wishlist"))
-      return "footer--cart";
-
-    return "footer--default";
-  };
-
-  const footerClass = getFooterClassByPath(location.pathname);
-
   return (
     <div id="wrap">
       <Routes>
@@ -191,10 +109,6 @@ export default function WrapComponent(props) {
           <Route path="/Interior" element={<Sub01Interior />} />
           <Route path="/MyoMyo" element={<Sub01MyoMyo />} />
           <Route path="/Story" element={<Sub01Story />} />
-          {/* Sub02Disc, Sub02Merch => 삭제!!
-          <Route path="/Disc" element={<Sub02Disc />} />
-          <Route path="/Merch" element={<Sub02Merch />} />  */}
-          {/* 상세페이지컴포넌트이름수정 */}
           <Route path="/ShopDetail" element={<Sub02ShopDetail />} />
           <Route path="/Shop" element={<Sub02Shop />} />
           <Route path="/Menu" element={<Sub030Menu />} />
@@ -248,8 +162,7 @@ export default function WrapComponent(props) {
           <Route path="/*" element={<Page404Component />} />
         </Route>
       </Routes>
-      {/* 푸터에 클래스 전달 */}
-      <FooterComponent footerClass={footerClass} />
+      <FooterComponent />
       {confirmIsOn && <ConfirmModalComponent />}
     </div>
   );

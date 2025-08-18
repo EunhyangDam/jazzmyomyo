@@ -11,17 +11,6 @@
   max-width: 1500px;
   margin: 0 auto;
 }
-#sub07Mp .container .site {
-  padding-top: 40px;
-  display: flex;
-  -moz-column-gap: 11px;
-       column-gap: 11px;
-  color: #565050;
-}
-#sub07Mp .container .site a.now {
-  color: #23363f;
-  font-weight: 600;
-}
 #sub07Mp .container .title {
   padding: 3% 0 5.5% 20px;
   width: 100%;

@@ -1,24 +1,13 @@
+@charset "UTF-8";
 #sub07DeleteAccount {
   width: 100%;
   margin-top: 100px;
-  padding-bottom: 200px;
-  height: auto;
+  margin-bottom: 200px;
 }
 #sub07DeleteAccount .container {
   width: 100%;
   max-width: 1500px;
   margin: 0 auto;
-}
-#sub07DeleteAccount .container .site {
-  padding-top: 40px;
-  display: flex;
-  -moz-column-gap: 11px;
-       column-gap: 11px;
-  color: #565050;
-}
-#sub07DeleteAccount .container .site a.now {
-  color: #23363f;
-  font-weight: 600;
 }
 #sub07DeleteAccount .container .title {
   padding: 3% 0 5% 2%;
@@ -37,47 +26,13 @@
 }
 #sub07DeleteAccount .container .content {
   width: 100%;
-  max-width: 1500px;
-  margin: 0 auto;
   display: flex;
-}
-#sub07DeleteAccount .container .content .menu {
-  width: 200px;
-  height: auto;
-  margin: 0 5%;
-}
-#sub07DeleteAccount .container .content .menu ul {
-  width: 100%;
-}
-#sub07DeleteAccount .container .content .menu ul li {
-  width: 100%;
-  padding: 4% 0;
-  display: block;
-}
-#sub07DeleteAccount .container .content .menu ul li.sub-title {
-  border-top: 1px solid #ccc;
-}
-#sub07DeleteAccount .container .content .menu ul li h2 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  text-indent: 10px;
-}
-#sub07DeleteAccount .container .content .menu ul li h3 {
-  font-size: 1.8rem;
-  padding-top: 20px;
-  font-weight: 600;
-  text-indent: 10px;
-}
-#sub07DeleteAccount .container .content .menu ul li a {
-  width: 100%;
-  display: block;
-  font-size: 18px;
-  padding: 5px 0;
-  text-indent: 10px;
+  justify-content: space-between;
 }
 #sub07DeleteAccount .container .content .right {
   width: calc(100% - 200px);
   position: relative;
+  margin-bottom: 200px;
 }
 #sub07DeleteAccount .container .content .right .bg-img {
   width: 100%;
@@ -94,34 +49,95 @@
   z-index: 2;
 }
 #sub07DeleteAccount .container .content .right .notice ul {
+  position: relative;
   border: 1px solid #5d3136;
+  width: 100%;
   max-width: 1000px;
-  padding: 0 4%;
+  aspect-ratio: 4/2;
+  padding: 4% 8%;
+  background: none;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+#sub07DeleteAccount .container .content .right .notice ul::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../../../../../../public/img/sub07/tape.jpg") no-repeat 50% 65%;
+  background-size: cover;
+  z-index: 1;
 }
 #sub07DeleteAccount .container .content .right .notice ul li {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.7);
   display: flex;
   justify-content: center;
   flex-flow: row wrap;
-  padding: 2% 0;
+  padding: 2.5% 0;
 }
 #sub07DeleteAccount .container .content .right .notice ul li:nth-child(3) {
-  padding-top: 0;
+  padding-bottom: 4%;
 }
 #sub07DeleteAccount .container .content .right .notice ul li h3 {
-  font-size: 2.5rem;
+  padding: 4% 0 5px 0;
+  font-size: 2rem;
+  font-weight: 600;
   display: inline-block;
   color: #5d3136;
   border-bottom: 2px solid #5d3136;
 }
 #sub07DeleteAccount .container .content .right .notice ul li p {
   width: 100%;
-  line-height: 180%;
-  font-size: 1.8rem;
-  white-space: wrap;
+  line-height: 200%;
+  margin-bottom: 1%;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 600;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#sub07DeleteAccount .container .content .right .notice ul li p:nth-child(1) {
+  --chars: 57;
+  border-right: none;
+  width: calc(var(--chars) * 1ch); /* 고정폭 */
+  animation: typing 3s steps(var(--chars)) forwards;
+}
+#sub07DeleteAccount .container .content .right .notice ul li p:nth-child(2) {
+  --chars: 60;
+  width: calc(var(--chars) * 1ch);
+  border-right: 0.12em solid #999;
+  opacity: 0;
+  animation: show 0s linear 3.2s forwards, typing 2s steps(var(--chars)) 3.2s forwards, blink 0.7s steps(1) infinite 5.2s; /* 타이핑 끝난 뒤 깜빡임 */
+}
+@keyframes typing {
+  from {
+    clip-path: inset(0 100% 0 0);
+  } /* 오른쪽 전부 가림 */
+  to {
+    clip-path: inset(0 0 0 0);
+  } /* 전부 표시 */
+}
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+@keyframes show {
+  to {
+    opacity: 1;
+  }
 }
 #sub07DeleteAccount .container .content .right .notice ul li button {
-  width: 300px;
-  height: 70px;
+  width: 200px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,6 +145,8 @@
   transition: all 0.3s;
   background: none;
   border: 0;
+  cursor: pointer;
+  font-family: "MaruBuri";
 }
 #sub07DeleteAccount .container .content .right .notice ul li button:first-child {
   margin-right: 30px;
@@ -145,148 +163,156 @@
   background-color: #c6bdbd;
   color: #5d3136;
 }
-@media all and (max-width: 1320px) {
+@media all and (max-width: 1540px) {
   #sub07DeleteAccount .container {
     padding: 0 20px;
   }
 }
-@media all and (max-width: 1035px) {
+@media all and (max-width: 1200px) {
   #sub07DeleteAccount .container {
     padding: 0 20px;
   }
-  #sub07DeleteAccount .container .content .delete-notice ul li h3 {
-    font-size: 2.2rem;
-  }
-  #sub07DeleteAccount .container .content .delete-notice ul li p {
-    font-size: 1.5rem;
-  }
-  #sub07DeleteAccount .container .content .delete-notice ul li button {
-    font-size: 1.5rem;
-    width: 200px;
-    height: 50px;
-  }
-}
-@media all and (max-width: 853px) {
-  #sub07DeleteAccount .container {
-    padding: 0 20px;
-  }
-  #sub07DeleteAccount .container .title a h2 {
-    font-size: 2.5rem;
-  }
-  #sub07DeleteAccount .container .content .menu {
-    width: 160px;
-  }
-  #sub07DeleteAccount .container .content .menu ul li h2 {
-    font-size: 1.3rem;
-  }
-  #sub07DeleteAccount .container .content .menu ul li h3 {
-    font-size: 1.3rem;
-  }
-  #sub07DeleteAccount .container .content .menu ul li a {
-    font-size: 14px;
-  }
-  #sub07DeleteAccount .container .content .delete-notice {
-    width: 70%;
-  }
-  #sub07DeleteAccount .container .content .delete-notice ul li {
-    padding: 3% 0;
-  }
-  #sub07DeleteAccount .container .content .delete-notice ul li h3 {
-    font-size: 1.8rem;
-  }
-  #sub07DeleteAccount .container .content .delete-notice ul li p {
-    font-size: 1.1rem;
-  }
-  #sub07DeleteAccount .container .content .delete-notice ul li button {
-    font-size: 1.1rem;
-    width: 170px;
-    height: 44.8px;
-  }
-}
-@media all and (max-width: 665px) {
-  #sub07DeleteAccount .container {
-    padding: 0 20px;
-  }
-  #sub07DeleteAccount .container .title a h2 {
-    font-size: 2.2rem;
-  }
-  #sub07DeleteAccount .container .content .menu {
-    width: 120px;
-    height: auto;
-    margin: 0 4%;
-  }
-  #sub07DeleteAccount .container .content .menu ul {
+  #sub07DeleteAccount .container .content {
     width: 100%;
-  }
-  #sub07DeleteAccount .container .content .menu ul li {
-    width: 100%;
-    padding: 4% 0;
-    display: block;
-  }
-  #sub07DeleteAccount .container .content .menu ul li.sub-title {
-    border-top: 1px solid #ccc;
-  }
-  #sub07DeleteAccount .container .content .menu ul li h2 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    text-indent: 10px;
-  }
-  #sub07DeleteAccount .container .content .menu ul li h3 {
-    font-size: 1.3rem;
-    padding-top: 20px;
-    font-weight: 600;
-    text-indent: 10px;
-  }
-  #sub07DeleteAccount .container .content .menu ul li a {
-    width: 100%;
-    display: block;
-    font-size: 14px;
-    padding: 5px 0;
-    text-indent: 10px;
-  }
-  #sub07DeleteAccount .container .content .delete-notice {
-    width: 70%;
-  }
-  #sub07DeleteAccount .container .content .delete-notice ul li {
-    padding: 3% 0;
-  }
-  #sub07DeleteAccount .container .content .delete-notice ul li h3 {
-    font-size: 1.8rem;
-  }
-  #sub07DeleteAccount .container .content .delete-notice ul li p {
-    font-size: 1.1rem;
-  }
-  #sub07DeleteAccount .container .content .delete-notice ul li button {
-    font-size: 1.1rem;
-    width: 120px;
-    height: 40px;
-  }
-}
-@media all and (max-width: 539px) {
-  #sub07DeleteAccount .container {
-    padding: 0 20px;
-  }
-  #sub07DeleteAccount .container .title a h2 {
-    font-size: 2.2rem;
+    height: 500px;
+    display: flex;
   }
   #sub07DeleteAccount .container .content .menu {
     display: none;
   }
-  #sub07DeleteAccount .container .content .delete-notice {
+  #sub07DeleteAccount .container .content .right {
     width: 100%;
+    height: auto;
+    margin: 0 auto;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 0 5%;
   }
-  #sub07DeleteAccount .container .content .delete-notice ul li {
-    padding: 3% 0;
+}
+@media all and (max-width: 960px) {
+  #sub07DeleteAccount .container {
+    padding: 0 20px;
   }
-  #sub07DeleteAccount .container .content .delete-notice ul li h3 {
-    font-size: 1.8rem;
+  #sub07DeleteAccount .container .title a h2 {
+    font-size: 30px;
   }
-  #sub07DeleteAccount .container .content .delete-notice ul li p {
-    font-size: 1.1rem;
+  #sub07DeleteAccount .container .content {
+    width: 100%;
+    height: 500px;
+    display: flex;
   }
-  #sub07DeleteAccount .container .content .delete-notice ul li button {
-    font-size: 1.1rem;
-    width: 120px;
+  #sub07DeleteAccount .container .content .menu {
+    display: none;
+  }
+  #sub07DeleteAccount .container .content .right {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 0 5%;
+  }
+  #sub07DeleteAccount .container .content .right .notice ul li h3 {
+    font-size: 18px;
+  }
+  #sub07DeleteAccount .container .content .right .notice ul li p {
+    font-size: 14px;
+    line-height: 160%;
+  }
+  #sub07DeleteAccount .container .content .right .notice ul li button {
+    font-size: 18px;
+    width: 180px;
     height: 40px;
+  }
+}
+@media all and (max-width: 780px) {
+  #sub07DeleteAccount .container {
+    padding: 0 20px;
+  }
+  #sub07DeleteAccount .container .title a h2 {
+    font-size: 30px;
+  }
+  #sub07DeleteAccount .container .content {
+    width: 100%;
+    height: 500px;
+    display: flex;
+  }
+  #sub07DeleteAccount .container .content .menu {
+    display: none;
+  }
+  #sub07DeleteAccount .container .content .right {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 0 5%;
+  }
+  #sub07DeleteAccount .container .content .right .notice ul li h3 {
+    font-size: 18px;
+  }
+  #sub07DeleteAccount .container .content .right .notice ul li p {
+    font-size: 14px;
+    line-height: 160%;
+    animation: none !important;
+    border-right: none !important;
+    opacity: 1 !important;
+    width: auto !important;
+    white-space: wrap;
+  }
+  #sub07DeleteAccount .container .content .right .notice ul li button {
+    font-size: 16px;
+    width: 150px;
+    height: 32px;
+  }
+  #sub07DeleteAccount .container .content .right .notice ul li button:first-child {
+    margin-right: 16px;
+  }
+}
+@media all and (max-width: 530px) {
+  #sub07DeleteAccount .container {
+    padding: 0 20px;
+  }
+  #sub07DeleteAccount .container .title a h2 {
+    font-size: 24px;
+  }
+  #sub07DeleteAccount .container .content {
+    width: 100%;
+    height: 500px;
+    display: flex;
+  }
+  #sub07DeleteAccount .container .content .menu {
+    display: none;
+  }
+  #sub07DeleteAccount .container .content .right {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 0 5%;
+  }
+  #sub07DeleteAccount .container .content .right .notice ul {
+    aspect-ratio: 4/3;
+  }
+  #sub07DeleteAccount .container .content .right .notice ul li h3 {
+    font-size: 18px;
+  }
+  #sub07DeleteAccount .container .content .right .notice ul li p {
+    font-size: 14px;
+    line-height: 160%;
+    animation: none !important;
+    border-right: none !important;
+    opacity: 1 !important;
+    width: auto !important;
+    white-space: wrap;
+  }
+  #sub07DeleteAccount .container .content .right .notice ul li button {
+    font-size: 14px;
+    width: 140px;
+    height: 28px;
+  }
+  #sub07DeleteAccount .container .content .right .notice ul li button:first-child {
+    margin-right: 8px;
   }
 }
