@@ -64,6 +64,8 @@ import { headerAction } from "../store/header";
 import { cartAction } from "../store/cart";
 import ConfirmModalComponent from "./wrap/ConfirmModalComponent";
 import Sub06SignUp from "./wrap/sub/sub06Lg/Sub06SignUp";
+import CSButton from "./wrap/custom/CSButton";
+import CSModal from "./wrap/custom/CSModal";
 export default function WrapComponent(props) {
   /**인스턴스 생성 */
   const dispatch = useDispatch();
@@ -88,7 +90,7 @@ export default function WrapComponent(props) {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [dispatch]);
 
   /**페이지 추적 */
   useEffect(() => {
@@ -97,6 +99,7 @@ export default function WrapComponent(props) {
     } else {
       dispatch(headerAction(true));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
   const getFooterClassByPath = (path) => {
     if (path === "/" || path.startsWith("/mainComponent"))

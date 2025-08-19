@@ -343,6 +343,7 @@
           .top-left {
             width: 35%;
             height: auto;
+            flex-shrink: 0;
 
             img.modal-image {
               width: 90%;

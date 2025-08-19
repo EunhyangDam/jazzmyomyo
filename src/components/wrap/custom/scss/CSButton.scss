@@ -1,0 +1,108 @@
+
+
+/* 고정 위치 래퍼 */
+#csButtonWrap {
+  position: fixed;
+  right: calc(0px + env(safe-area-inset-right));
+  bottom: max(25px, env(safe-area-inset-bottom));
+  z-index: 300;
+  pointer-events: none; /* 내부 요소만 클릭됨 */
+
+  /* 버튼 */
+  #csButton {
+    pointer-events: auto;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    line-height: 0;
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.15));
+
+    img {
+      display: block;
+      width: 250px;
+      height: auto;
+      user-select: none;
+      -webkit-user-drag: none;
+      transition: transform .2s ease, filter .2s ease;
+    }
+
+    &:hover img {
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    &:active img {
+      transform: translateY(0) scale(.98);
+      filter: brightness(.98);
+    }
+  }
+}
+
+#csButtonWrap {
+  animation: cs-fade-in .18s ease-out;
+}
+@keyframes cs-fade-in { 
+  from {
+    transform: translateY(6px); 
+    opacity: 0; }
+  to   { 
+    transform: translateY(0);
+    opacity: 1; }
+}
+
+
+/* 미디어쿼리 반응형 */
+@media (max-width: 1200px) {
+  #csButtonWrap {
+    right: calc(8px + env(safe-area-inset-right));
+    bottom: max(22px, env(safe-area-inset-bottom));
+    #csButton img { 
+      width: 220px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #csButtonWrap {
+    right: calc(10px + env(safe-area-inset-right));
+    bottom: max(20px, env(safe-area-inset-bottom));
+    #csButton img { 
+      width: 180px; 
+    }
+
+    /* 호버, 액션 완화 */
+    #csButton:hover img { transform: translateY(-1px) scale(1.02); }
+    #csButton:active img { transform: translateY(0) scale(.985); }
+  }
+}
+
+@media (max-width: 480px) {
+  #csButtonWrap {
+    right: calc(6px + env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    #csButton img { width: 140px; }
+
+    /* 버튼 터치영역 살짝 넓힘 */
+    #csButton { 
+      padding: 4px; 
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  #csButtonWrap {
+    right: calc(4px + env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    #csButton img { width: 120px; }
+    #csButton { padding: 6px; } /* 터치 영역 유지 */
+  }
+
+  /* 혹시 큰 제목 있을 경우만 살짝 줄임 */
+  #csWrite .head .title h1 { font-size: 1.5rem; }
+}
+
+/* 모션 민감 사용자 배려 */
+@media (prefers-reduced-motion: reduce) {
+  #csButtonWrap #csButton img { transition: none; }
+}
+

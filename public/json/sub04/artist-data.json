@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "name": "재즈몽키",
+    "instrument": "saxophone",
+    "image": "./img/공연일정_포스터_섬광.jpg",
+    "createdAt": "2025-08-01",
+    "description": "재즈의 정석을 깔끔하게 재해석한 3인조 밴드.\\n드럼, 피아노, 베이스가 중심이 되어 탄탄한 앙상블을 만들어냅니다.\\n고전적인 감성 위에 세련된 사운드를 얹어,\\n듣는 순간 분위기를 반전시키는 매력이 있습니다.\\n잔잔하지만 지루하지 않은 무대,\\n오래도록 귀에 남는 여운.",
+    "instruments": ["드럼", "피아노", "베이스"],
+    "members": ["김색소", "이클라", "박비트"],
+    "social": ["jazzmyomyo_monmon", "재즈몽키"],
+    "videos": [
+      "https://www.youtube.com/watch?v=8ZmMIlLl58M&list=RD8ZmMIlLl58M&start_radio=1",
+      "https://www.youtube.com/watch?v=9_ddQoK9lHA&list=RD9_ddQoK9lHA&start_radio=1"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "그루브캣",
+    "instrument": "drums",
+    "image": "./img/공연일정_포스터_섬광.jpg",
+    "createdAt": "2025-07-28",
+    "description": "재즈에 시티팝 감성을 더한 4인조 크루.\\n화려한 리듬과 여유 있는 템포로 공간을 감싸듯 연주합니다.\\n각 멤버가 독립적인 스타일을 가지고 있으면서도\\n함께할 때 더욱 빛나는 팀워크가 인상적입니다.\\n트렌디한 무드를 좋아한다면,\\n이들의 무대를 추천합니다.",
+    "instruments": ["드럼", "퍼커션", "피아노", "베이스"],
+    "members": ["고양훈", "펀치냥", "냥냥냥", "고영희"],
+    "social": ["jazzmyomyo_cat", "그루브캣"],
+    "videos": ["https://www.youtube.com/watch?v=knBSirap4sY"]
+  },
+  {
+    "id": 3,
+    "name": "블루베이스",
+    "instrument": "bass",
+    "image": "./img/공연일정_포스터_섬광.jpg",
+    "createdAt": "2025-07-21",
+    "description": "정제된 연주와 깔끔한 구성으로 주목받고 있는 트리오.\\n무대 위에서는 말보다 음악으로 자신들을 표현합니다.\\n절제된 사운드 속에서도 깊은 감정을 전달하는 팀.\\n차분하면서도 집중도 높은 공연을 기대할 수 있습니다.\\n어쿠스틱한 분위기를 선호한다면\\n눈여겨보세요.",
+    "instruments": ["베이스", "더블베이스", "드럼"],
+    "members": ["김블루", "최하현", "김이박"],
+    "social": ["jazzmyomyo_base", "블루베이스"],
+    "videos": []
+  },
+  {
+    "id": 4,
+    "name": "Luna",
+    "instrument": "piano",
+    "image": "./img/공연일정_포스터_섬광.jpg",
+    "createdAt": "2025-07-15",
+    "description": "깔끔하고 세련된 연주 스타일로 주목받고 있는 기타리스트.\\n복잡하지 않지만, 듣는 순간 귀를 사로잡는 선율이 특징입니다.\\n재즈를 기반으로 다양한 장르를 유연하게 녹여내며\\n감각적인 리듬 플레이로 밴드 사운드의 중심을 잡아줍니다.\\n무대마다 색다른 연주를 기대해도 좋습니다.",
+    "instruments": ["보컬"],
+    "members": ["Luna"],
+    "social": ["jazzmyomyo_moon", "Luna"],
+    "videos": [
+      "https://www.youtube.com/watch?v=jD_3aa2jGQw",
+      "https://www.youtube.com/watch?v=9_ddQoK9lHA"
+    ]
+  }
+]

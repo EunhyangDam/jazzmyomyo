@@ -12,7 +12,7 @@ function Sub04Artist(props) {
   const itemsPerPage = 12;
 
   useEffect(() => {
-    fetch("./json/sub04/Section4.json")
+    fetch("./json/sub04/artist-data.json")
       .then((res) => res.json())
       .then((data) => {
         setArtists(data);
@@ -194,7 +194,10 @@ function Sub04Artist(props) {
                     <p
                       className="modal-desc"
                       dangerouslySetInnerHTML={{
-                        __html: selected.description.replace(/\n/g, "<br />"),
+                        __html: String(selected.description || "").replace(
+                          /\n/g,
+                          "<br />"
+                        ),
                       }}
                     ></p>
                     <p className="modal-social">

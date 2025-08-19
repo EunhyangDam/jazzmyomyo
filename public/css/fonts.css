@@ -6,27 +6,31 @@
   font-style: normal;
 }
 @font-face {
-  font-family: "GangwonEdu Modu";
-  font-weight: 300;
+  font-family: "Gyeonggi Batang";
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
-  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/GangwonEduModu/GangwonEduModu-Light.woff2")
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Regular.woff2")
       format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/fonts-archive/GangwonEduModu/GangwonEduModu-Light.woff")
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Regular.woff")
       format("woff"),
-    url("https://cdn.jsdelivr.net/gh/fonts-archive/GangwonEduModu/GangwonEduModu-Light.ttf")
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Regular.otf")
+      format("opentype"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Regular.ttf")
       format("truetype");
 }
 @font-face {
-  font-family: "GangwonEdu Modu";
+  font-family: "Gyeonggi Batang";
   font-weight: 700;
   font-style: normal;
   font-display: swap;
-  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/GangwonEduModu/GangwonEduModu-Bold.woff2")
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Bold.woff2")
       format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/fonts-archive/GangwonEduModu/GangwonEduModu-Bold.woff")
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Bold.woff")
       format("woff"),
-    url("https://cdn.jsdelivr.net/gh/fonts-archive/GangwonEduModu/GangwonEduModu-Bold.ttf")
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Bold.otf")
+      format("opentype"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Bold.ttf")
       format("truetype");
 }
 @font-face {

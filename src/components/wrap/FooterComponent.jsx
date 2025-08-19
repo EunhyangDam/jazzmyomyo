@@ -80,39 +80,39 @@ export default function FooterComponent({ footerClass = "footer--default" }) {
           <ul>
             <li>
               <h5>About us</h5>
-              <a href="#">재즈묘묘</a>
-              <a href="#">어바웃 묘묘</a>
-              <a href="#">인테리어</a>
-              <a href="#">스토리</a>
+              <a href="!#">재즈묘묘</a>
+              <a href="!#">어바웃 묘묘</a>
+              <a href="!#">인테리어</a>
+              <a href="!#">스토리</a>
             </li>
             <li>
               <h5>Shop</h5>
-              <a href="#">묘묘굿즈</a>
-              <a href="#">LP/CD</a>
+              <a href="!#">묘묘굿즈</a>
+              <a href="!#">LP/CD</a>
             </li>
             <li>
               <h5>Menu</h5>
-              <a href="#">와인</a>
-              <a href="#">주류&음료</a>
-              <a href="#">플래터&핑거푸드</a>
-              <a href="#">묘한세트</a>
-              <a href="#">사전주문</a>
+              <a href="!#">와인</a>
+              <a href="!#">주류&음료</a>
+              <a href="!#">플래터&핑거푸드</a>
+              <a href="!#">묘한세트</a>
+              <a href="!#">사전주문</a>
             </li>
             <li>
               <h5>Schedule</h5>
-              <a href="#">월간 공연 캘린더</a>
-              <a href="#">공연 상세 안내</a>
-              <a href="#">아티스트, 게스트 소개</a>
-              <a href="#">티켓 예매</a>
-              <a href="#">대관 신청</a>
+              <a href="!#">월간 공연 캘린더</a>
+              <a href="!#">공연 상세 안내</a>
+              <a href="!#">아티스트, 게스트 소개</a>
+              <a href="!#">티켓 예매</a>
+              <a href="!#">대관 신청</a>
             </li>
             <li>
               <h5>Community</h5>
-              <a href="#">공지사항</a>
-              <a href="#">FAQ</a>
-              <a href="#">SNS/뉴스레터 구독</a>
-              <a href="#">지난 공연 갤러리</a>
-              <a href="#">한줄후기</a>
+              <a href="!#">공지사항</a>
+              <a href="!#">FAQ</a>
+              <a href="!#">SNS/뉴스레터 구독</a>
+              <a href="!#">지난 공연 갤러리</a>
+              <a href="!#">한줄후기</a>
             </li>
           </ul>
         </div>
@@ -120,10 +120,10 @@ export default function FooterComponent({ footerClass = "footer--default" }) {
         <div className="footer-bottom-inner">
           <div className="footer-info">
             <div className="categories">
-              <a href="#">About us</a> /<a href="#"> Shop</a> /
-              <a href="#"> Menu</a> / <span className="mobile-br"></span>
-              <a href="#"> Schedule</a> /<a href="#"> Community</a>
-              <Link to="/Mm"> / 회원관리 관리자페이지</Link>
+              <a href="!#">About us</a> |<a href="!#"> Shop</a> |
+              <a href="!#"> Menu</a> | <span className="mobile-br"></span>
+              <a href="!#"> Schedule</a> |<a href="!#"> Community</a>
+              <Link to="/Mm"> | 회원관리 관리자페이지</Link>
             </div>
 
             <div className="address">

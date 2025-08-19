@@ -13,6 +13,7 @@ import Section10Component from "./main/Section10Component";
 import Section11Component from "./main/Section11Component";
 import Section12Component from "./main/Section12Component";
 import Section13Component from "./main/Section13Component";
+import CSButton from "./custom/CSButton";
 
 export default function MainComponent() {
   return (
@@ -30,6 +31,7 @@ export default function MainComponent() {
       <Section11Component />
       <Section12Component />
       <Section13Component />
+      <CSButton />
     </main>
   );
 }
