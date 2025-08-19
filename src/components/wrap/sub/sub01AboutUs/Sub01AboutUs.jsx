@@ -82,13 +82,18 @@ export default function Sub01AboutUs(props) {
     });
   }, []);
   /**#section 6 */
-  const section6 = useRef();
-  useGSAP(
-    () => {
-      gsap.from(".container", {});
-    },
-    { scope: section6 }
-  );
+  const section6Content = useRef();
+  useGSAP(() => {
+    ScrollTrigger.create({
+      trigger: section6Content.current,
+      pin: true,
+      scrub: true,
+      start: "top top",
+      end: `+=${
+        document.querySelector("#section6 .img-container").scrollHeight
+      }`,
+    });
+  });
   /**--------------------------------------------------------------------------------- */
   const mouseEnterRow = (e, idx) => {
     setState({ ...state, rowIdx: idx });
@@ -257,23 +262,42 @@ export default function Sub01AboutUs(props) {
           </div>
         </div>
       </section>
-      <section id="section6" className="section" ref={section6}>
-        <div className="container">
-          <p>
-            오픈 첫날 밤 이후
-            <br />
-            처음 맞는 이런 설렘
-          </p>
-          <p>
-            그리고 우리는 하나가 됩니다.
-            <br /> 여기는 재즈묘묘—음악이 골목과 마음속에서 살아 숨 쉬는 곳.
-            <br /> 따뜻한 불빛 아래 작은 바 테이블부터, 골목 끝 숨은 무대까지.
-            <br /> 우리는 재즈에 미친 도시처럼, 당신을 위해 준비되어 있습니다.
-            <br />
-            유명한 연주와 비밀스러운 잼세션이 공존하는 이곳에서,
-            <br /> 우리의 문화와 골목, 그리고 재즈를 향한 순수한 사랑을 전
-            세계와 나눕니다.
-          </p>
+      <section id="section6" className="section">
+        <div className="container" ref={section6Content}>
+          <div className="content">
+            <p>
+              오픈 첫날 밤 이후
+              <br />
+              처음 맞는 이런 설렘
+            </p>
+            <p>
+              그리고 우리는 하나가 됩니다.
+              <br /> 여기는 재즈묘묘—음악이 골목과 마음속에서 살아 숨 쉬는 곳.
+              <br /> 따뜻한 불빛 아래 작은 바 테이블부터, 골목 끝 숨은 무대까지.
+              <br /> 우리는 재즈에 미친 도시처럼, 당신을 위해 준비되어 있습니다.
+              <br />
+              유명한 연주와 비밀스러운 잼세션이 공존하는 이곳에서,
+              <br /> 우리의 문화와 골목, 그리고 재즈를 향한 순수한 사랑을 전
+              세계와 나눕니다.
+            </p>
+          </div>
+        </div>
+        <div className="img-container">
+          <div className="pic pic1">
+            <img src="./img/sub01/last-pic1.jpg" alt="" />
+          </div>
+          <div className="pic pic2">
+            <img src="./img/sub01/last-pic2.jpg" alt="" />
+          </div>
+          <div className="pic pic3">
+            <img src="./img/sub01/last-pic3.jpg" alt="" />
+          </div>
+          <div className="pic pic4">
+            <img src="./img/sub01/last-pic4.jpg" alt="" />
+          </div>
+          <div className="pic pic5">
+            <img src="./img/sub01/last-pic5.jpg" alt="" />
+          </div>
         </div>
       </section>
       <section id="section7" className="section">

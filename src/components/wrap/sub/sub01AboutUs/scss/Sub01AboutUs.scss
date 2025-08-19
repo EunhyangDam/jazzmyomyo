@@ -165,14 +165,18 @@
           z-index: 1;
           border-radius: $border-radius;
           overflow: hidden;
+          max-width: 33vw;
+          img {
+            width: 100%;
+          }
         }
         .sec-container {
           display: flex;
-          width: 325%;
+          width: 325vw;
           height: 100vh;
           align-items: center;
           .sec {
-            width: calc(325% / 5);
+            width: calc(325vw / 5);
             .col1 {
               font-size: $size4;
               font-weight: 600;
@@ -180,6 +184,15 @@
             .col2 {
               font-size: $size3;
               font-weight: 600;
+              margin-bottom: 15px;
+            }
+            @media all and (max-width: 780px) {
+              .col1 {
+                font-size: $size4 * 0.8;
+              }
+              .col2 {
+                font-size: $size4;
+              }
             }
             .col3 {
               p {
@@ -192,6 +205,14 @@
                 font-size: $size2;
                 font-weight: 900;
               }
+            }
+          }
+        }
+        @media all and (max-width: 530px) {
+          .sec-container {
+            width: 400vw;
+            .sec {
+              width: calc(400vw / 5);
             }
           }
         }
@@ -213,11 +234,17 @@
           p {
             text-align: center;
             font-size: $size1;
+            @media all and (max-width: 630px) {
+              font-size: $size2;
+            }
             color: $sub-color3;
             font-weight: 600;
             &.myo {
               font-family: $font2;
               font-size: 100px;
+              @media all and (max-width: 630px) {
+                font-size: 80px;
+              }
               transform: translate(60px, -60%) rotate(-10deg);
               text-shadow: 8px 5px 0 #000;
               line-height: 0.8;
@@ -231,6 +258,18 @@
           padding-right: 10vw;
           p {
             max-width: 25vw;
+            @media all and (max-width: 840px) {
+              max-width: 40vw;
+            }
+            @media all and (max-width: 595px) {
+              max-width: 50vw;
+            }
+            @media all and (max-width: 455px) {
+              max-width: 60vw;
+            }
+            @media all and (max-width: 455px) {
+              max-width: 80vw;
+            }
             width: 100%;
             text-align: justify;
             color: $sub-color3;
@@ -247,21 +286,84 @@
       }
     }
     &#section6 {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
       .container {
-        p {
-          text-align: center;
-          &:first-child {
-            font-size: $size1;
-            font-family: $font2;
-            margin-bottom: 30px;
+        position: relative;
+        z-index: 1;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .content {
+          p {
+            text-align: center;
+            &:first-child {
+              font-size: $size1;
+              @media all and (max-width: 875px) {
+                font-size: $size2;
+              }
+              @media all and (max-width: 630px) {
+                font-size: $size3;
+              }
+              @media all and (max-width: 630px) {
+                font-size: $size4;
+              }
+              font-family: $font2;
+              margin-bottom: 30px;
+            }
+            &:last-child {
+              font-size: $size4 * 0.9;
+              line-height: 1.5;
+              @media all and (max-width: 790px) {
+                font-size: 1.3rem;
+              }
+              @media all and (max-width: 630px) {
+                font-size: 1.2rem;
+              }
+              @media all and (max-width: 480px) {
+                font-size: 1.1rem;
+              }
+              @media all and (max-width: 415px) {
+                font-size: 1rem;
+              }
+              @media all and (max-width: 370px) {
+                font-size: $small;
+              }
+            }
           }
-          &:last-child {
-            font-size: $size4 * 0.9;
-            line-height: 1.5;
+        }
+      }
+      .img-container {
+        position: absolute;
+        padding-top: 50vh;
+        top: 0;
+        left: 0;
+        .pic {
+          position: relative;
+          margin-top: 10vh;
+          img {
+            width: 350px;
+            @media all and (max-width: 700px) {
+              width: 250px;
+            }
+            @media all and (max-width: 700px) {
+              width: 150px;
+            }
+          }
+          &.pic1 {
+            left: 10vw;
+          }
+          &.pic2 {
+            left: 80vw;
+          }
+          &.pic3 {
+            left: 50vw;
+          }
+          &.pic4 {
+            left: 73vw;
+          }
+          &.pic5 {
+            left: 5vw;
           }
         }
       }
