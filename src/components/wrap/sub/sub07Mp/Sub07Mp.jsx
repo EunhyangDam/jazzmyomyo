@@ -43,8 +43,8 @@ function Sub07Mp(props) {
               <ul>
                 <li className="col1">
                   <h2>예매 내역</h2>
-                  <Link to="/MyOrder">
-                    <p>3</p>
+                  <Link to="/MyOrderTk">
+                    <p>1</p>
                   </Link>
                 </li>
                 <li className="col2">
@@ -61,8 +61,8 @@ function Sub07Mp(props) {
                 </li>
                 <li className="col4">
                   <h2>주문/배송</h2>
-                  <Link to="/MyOrder">
-                    <p>1</p>
+                  <Link to="/MyOrderMd">
+                    <p>3</p>
                   </Link>
                 </li>
               </ul>
@@ -79,10 +79,10 @@ function Sub07Mp(props) {
               </li>
               <li>
                 <h3>이용내역</h3>
-                <Link to="/MyOrder">주문/ 배송조회</Link>
-                <Link to="/MyOrder">예매 내역</Link>
-                <Link to="/MyOrder">사전주문 내역</Link>
-                <Link to="/MyOrder">대관신청 내역</Link>
+                <Link to="/MyOrderMd">주문/ 배송조회</Link>
+                <Link to="/MyOrderTk">예매 내역</Link>
+                <Link to="/MyOrderMenu">사전주문 내역</Link>
+                <Link to="/MyOrderRental">대관신청 내역</Link>
               </li>
               <li>
                 <h3>게시판</h3>

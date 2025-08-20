@@ -18,9 +18,12 @@ import header from "./store/header";
 import cart from "./store/cart";
 import confirmModal from "./store/confirmModal";
 import review from "./store/review";
+import signIn from "./store/signIn"
+import daumPostcode from "./store/daumPostcode"
+
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin, SplitText);
 let store = configureStore({
-  reducer: { wishlist, header, cart, confirmModal, review },
+  reducer: { wishlist, header, cart, confirmModal, review, signIn, daumPostcode },
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

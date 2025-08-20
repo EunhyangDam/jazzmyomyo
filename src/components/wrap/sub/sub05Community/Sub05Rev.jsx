@@ -3,7 +3,7 @@ import "./scss/Sub05Rev.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { reviewAction } from "../../../../store/review";
-
+import SiteMapComponent from "../../custom/SiteMapComponent";
 function Sub05Rev(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -82,20 +82,15 @@ function Sub05Rev(props) {
   return (
     <div id="sub05Rev">
       <div className="container">
-        <div className="site">
-          <Link to="/">
-            <i className="bi bi-house-fill"></i>
-          </Link>
-          <i>&gt;</i>
-          <Link to="/Mp">마이페이지</Link>
-          <i>&gt;</i>
-          <Link to="./" className="now">
-            공연 후기
-          </Link>
-        </div>
+        <SiteMapComponent
+          firstLink=""
+          firstName="커뮤니티"
+          secondLink="./"
+          secondName="공연 후기"
+        />
         <div className="title">
           <Link to="./">
-            <h2>한줄 후기</h2>
+            <h2>공연 후기</h2>
           </Link>
           <h3>
             재즈묘묘의 밤을 기억하는 한 줄의 마음들이 이곳에 포근히 쌓여갑니다.

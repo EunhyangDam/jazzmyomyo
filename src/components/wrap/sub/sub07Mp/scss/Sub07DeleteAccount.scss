@@ -2,12 +2,12 @@
 #sub07DeleteAccount {
   width: 100%;
   margin-top: 100px;
-  margin-bottom: 200px;
 
   .container {
     width: 100%;
     max-width: 1500px;
     margin: 0 auto;
+    padding-bottom: 50px;
 
     .title {
       padding: 3% 0 5% 2%;
@@ -55,7 +55,7 @@
             aspect-ratio: 4 / 2;
             padding: 4% 8%;
             background: none;
-            overflow: hidden;
+            overflow: visible;
             display: flex;
             flex-flow: column nowrap;
             justify-content: center;
@@ -97,33 +97,26 @@
               // p태그
 
               p {
-                width: 100%;
                 line-height: 200%;
                 margin-bottom: 1%;
-                font-size: 18px;
+                font-size: 16px;
 
                 text-align: center;
                 font-weight: 600;
 
                 display: inline-block;
                 white-space: nowrap;
-                overflow: hidden;
+                overflow: visible;
 
                 &:nth-child(1) {
-                  --chars: 57;
-                  border-right: none;
-                  width: calc(var(--chars) * 1ch); /* 고정폭 */
-                  animation: typing 3s steps(var(--chars)) forwards;
+                  animation: typing 3s steps(57) forwards;
                 }
                 &:nth-child(2) {
-                  --chars: 60;
-                  width: calc(var(--chars) * 1ch);
                   border-right: 0.12em solid #999;
                   opacity: 0;
                   animation: show 0s linear 3.2s forwards,
-                    /* 3.2s 후 표시 */ typing 2s steps(var(--chars)) 3.2s
-                      forwards,
-                    /* 타이핑 시작 */ blink 0.7s steps(1) infinite 5.2s; /* 타이핑 끝난 뒤 깜빡임 */
+                    typing 2s steps(60) 3.2s forwards,
+                    blink 0.7s steps(1) infinite 5.2s;
                 }
               }
               @keyframes typing {
@@ -260,7 +253,6 @@
   @media all and (max-width: 780px) {
     .container {
       padding: 0 20px;
-
       .title {
         a {
           h2 {
@@ -270,7 +262,7 @@
       }
       .content {
         width: 100%;
-        height: 500px;
+        height: 400px;
 
         display: flex;
 
@@ -279,7 +271,6 @@
         }
         .right {
           width: 100%;
-          height: auto;
           margin: 0 auto;
           margin-bottom: 0;
           text-align: center;
@@ -297,7 +288,7 @@
                   border-right: none !important;
                   opacity: 1 !important; // 두 번째 p도 보이게
                   width: auto !important;
-                  white-space: wrap;
+                  white-space: normal;
                 }
                 button {
                   font-size: 16px;
@@ -328,8 +319,7 @@
       }
       .content {
         width: 100%;
-        height: 500px;
-
+        height: 360px;
         display: flex;
 
         .menu {
@@ -350,7 +340,7 @@
                   font-size: 18px;
                 }
                 p {
-                  font-size: 14px;
+                  font-size: 13px;
                   line-height: 160%;
                   animation: none !important;
                   border-right: none !important;
@@ -360,7 +350,7 @@
                 }
                 button {
                   font-size: 14px;
-                  width: 140px;
+                  width: 100px;
                   height: 28px;
 
                   &:first-child {

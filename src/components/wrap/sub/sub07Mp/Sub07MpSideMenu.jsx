@@ -29,16 +29,16 @@ function Sub07MpSideMenu(props) {
           <h3>이용내역</h3>
         </li>
         <li>
-          <Link to="/MyOrder">주문/ 배송조회</Link>
+          <Link to="/MyOrderMd">주문/ 배송조회</Link>
         </li>
         <li>
-          <Link to="/MyOrder"> 예매 내역</Link>
+          <Link to="/MyOrderTk"> 예매 내역</Link>
         </li>
         <li>
-          <Link to="/MyOrder">사전주문 내역</Link>
+          <Link to="/MyOrderMenu">사전주문 내역</Link>
         </li>
         <li>
-          <Link to="/MyOrder">대관신청 내역</Link>
+          <Link to="/MyOrderRental">대관신청 내역</Link>
         </li>
         <li className="sub-title">
           <h3>게시판</h3>

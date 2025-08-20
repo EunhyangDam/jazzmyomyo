@@ -88,7 +88,7 @@ export default function Sub01AboutUs(props) {
       trigger: section6Content.current,
       pin: true,
       scrub: true,
-      start: "top center",
+      start: "top top",
       end: `+=${
         document.querySelector("#section6 .img-container").scrollHeight
       }`,

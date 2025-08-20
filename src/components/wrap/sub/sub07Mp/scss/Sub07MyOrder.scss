@@ -1,6 +1,10 @@
 @use "../../../../scss/variables" as *;
 
-#sub07MyOrder {
+#sub07MyOrder,
+#sub07MyOrderMd,
+#sub07MyOrderTk,
+#sub07MyOrderMenu,
+#sub07MyOrderRental {
   width: 100%;
   margin-top: 100px;
   padding-bottom: 100px;
@@ -197,6 +201,309 @@
                 }
               }
             }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 1770px) {
+    .container {
+      .site {
+        padding: 40px 20px 0 20px;
+      }
+
+      .content {
+        padding: 3% 20px;
+      }
+    }
+  }
+
+  @media all and (max-width: 1200px) {
+    .container {
+      .site {
+        padding: 40px 20px 0 20px;
+      }
+      .menu {
+        display: none;
+      }
+      .content {
+        padding: 3% 4%;
+        .order {
+          width: 100%;
+        }
+      }
+    }
+  }
+  @media all and (max-width: 900px) {
+    .container {
+      .site {
+        padding: 40px 20px 0 20px;
+      }
+      .menu {
+        display: none;
+      }
+      .content {
+        padding: 3% 4%;
+        .order {
+          width: 100%;
+          > ul {
+            > li {
+              div {
+                .sub-title {
+                  > h3 {
+                    font-size: 1.5rem;
+                  }
+                }
+                .table {
+                  .head-box {
+                    ul.column-box {
+                      li.col {
+                        &.col1 {
+                          width: 20%;
+                        }
+                        &.col2 {
+                          width: 60%;
+                        }
+                        &.col3 {
+                          display: none;
+                        }
+                        &.col4 {
+                          width: 20%;
+                        }
+                      }
+                    }
+                  }
+                  .list-box {
+                    > ul {
+                      > li {
+                        ul.column-box {
+                          li.col {
+                            h3 {
+                              overflow: hidden;
+                              text-overflow: ellipsis;
+                              white-space: nowrap;
+                            }
+                            &.col1 {
+                              width: 20%;
+                            }
+                            &.col2 {
+                              width: 60%;
+                            }
+                            &.col3 {
+                              display: none;
+                            }
+                            &.col4 {
+                              width: 20%;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 700px) {
+    .container {
+      .title {
+        padding: 1.6% 0;
+        a {
+          h2 {
+            font-size: 1.5rem;
+          }
+        }
+      }
+      .site {
+        padding: 40px 20px 0 20px;
+      }
+      .menu {
+        display: none;
+      }
+      .content {
+        padding: 3% 3%;
+        .order {
+          width: 100%;
+          > ul {
+            > li {
+              div {
+                .sub-title {
+                  > h3 {
+                    font-size: 1.2rem;
+                  }
+                }
+                .table {
+                  .head-box {
+                    ul.column-box {
+                      li.col {
+                        h3 {
+                          font-size: 12px;
+                        }
+                        &.col1 {
+                          width: 20%;
+                        }
+                        &.col2 {
+                          width: 60%;
+                        }
+                        &.col3 {
+                          display: none;
+                        }
+                        &.col4 {
+                          width: 20%;
+                        }
+                      }
+                    }
+                  }
+                  .list-box {
+                    > ul {
+                      > li {
+                        ul.column-box {
+                          li.col {
+                            padding: 0 16px;
+                            h3 {
+                              white-space: normal;
+                              font-size: 12px;
+                              line-height: 180%;
+                            }
+
+                            &.col1 {
+                              width: 20%;
+                            }
+                            &.col2 {
+                              width: 60%;
+                            }
+                            &.col3 {
+                              display: none;
+                            }
+                            &.col4 {
+                              width: 20%;
+                            }
+                            button {
+                              width: 80px;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 531px) {
+    .container {
+      .title {
+        padding: 1.6% 0;
+        a {
+          h2 {
+            font-size: 1.5rem;
+          }
+        }
+      }
+      .site {
+        padding: 40px 20px 0 20px;
+      }
+      .menu {
+        display: none;
+      }
+      .content {
+        padding: 3%;
+        .order {
+          width: 100%;
+          > ul {
+            > li {
+              div {
+                .sub-title {
+                  > h3 {
+                    font-size: 1.2rem;
+                  }
+                }
+                .table {
+                  .head-box {
+                    ul.column-box {
+                      li.col {
+                        padding: 0 10px;
+                        h3 {
+                          font-size: 12px;
+                        }
+                        &.col1 {
+                          width: 20%;
+                        }
+                        &.col2 {
+                          width: 60%;
+                        }
+                        &.col3 {
+                          display: none;
+                        }
+                        &.col4 {
+                          width: 20%;
+                        }
+                      }
+                    }
+                  }
+                  .list-box {
+                    > ul {
+                      > li {
+                        ul.column-box {
+                          li.col {
+                            padding: 0 10px;
+                            h3 {
+                              white-space: normal;
+                              font-size: 12px;
+                              line-height: 180%;
+                              letter-spacing: -0.5px;
+                            }
+
+                            &.col1 {
+                              width: 20%;
+                            }
+                            &.col2 {
+                              width: 60%;
+                            }
+                            &.col3 {
+                              display: none;
+                            }
+                            &.col4 {
+                              width: 20%;
+                            }
+                            button {
+                              width: 80px;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media all and (max-width: 1025px) {
+  #sub07MyOrder,
+  #sub07MyOrderMd,
+  #sub07MyOrderTk,
+  #sub07MyOrderMenu,
+  #sub07MyOrderRental {
+    margin-top: 70px;
+    .container {
+      .title {
+        padding: 1.6% 0;
+        a {
+          h2 {
+            font-size: 2rem;
           }
         }
       }

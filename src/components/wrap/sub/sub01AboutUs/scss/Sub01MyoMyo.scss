@@ -1,3 +1,157 @@
+@use "../.././../../scss/variables" as *;
+@use "../../../../scss/mixin" as *;
 main#sub01MyoMyo {
   margin-top: 100px;
+  .inner {
+    max-width: 1750px;
+    margin: 0 auto;
+    position: relative;
+    @media all and (max-width: 1770px) {
+      padding-inline: 5vw;
+    }
+    .title {
+      padding-block: 50px;
+      p {
+        margin-bottom: 15px;
+      }
+      h2 {
+        font-size: $size3;
+        @media all and (max-width: 555px) {
+          font-size: $size4;
+        }
+        font-weight: 600;
+      }
+    }
+    .content {
+      display: flex;
+      column-gap: 150px;
+      @media all and (max-width: 1615px) {
+        column-gap: 110px;
+      }
+      @media all and (max-width: 1580px) {
+        column-gap: 90px;
+      }
+      @media all and (max-width: 1550px) {
+        column-gap: 60px;
+      }
+      .myomyo {
+        img {
+          @media all and (max-width: 1505px) {
+            width: 270px;
+          }
+          @media all and (max-width: 555px) {
+            width: auto;
+            max-height: 30vh;
+          }
+        }
+      }
+      .right {
+        .row {
+          &.row1 {
+            margin-bottom: 50px;
+            p {
+              &.heading {
+                font-size: $size4;
+                font-family: $font2;
+                margin-bottom: 10px;
+              }
+              line-height: 1.5;
+            }
+          }
+          &.row2 {
+            p {
+              font-size: 18px;
+              font-weight: 600;
+            }
+            .img-container {
+              margin-top: 40px;
+              display: flex;
+              .col {
+                overflow: hidden;
+                border-radius: $border-radius;
+                transition: 0.3s;
+                .container {
+                  width: 250px;
+                  @media all and (max-width: 1430px) {
+                    width: 200px;
+                  }
+                  aspect-ratio: 1/1;
+                  padding: 10px;
+                  img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                  }
+                }
+                &.col1 {
+                  background: $primary-color;
+                  transform: rotate(-16.07deg);
+                  &:hover {
+                    transform: translateY(-5%) rotate(-16.07deg);
+                  }
+                }
+                &.col2 {
+                  background: $sub-color1;
+                  transform: rotate(6.89deg);
+                  &:hover {
+                    transform: translateY(-5%) rotate(6.89deg);
+                  }
+                }
+                &.col3 {
+                  background: $primary-color;
+                  transform: rotate(-7.38deg);
+                  &:hover {
+                    transform: translateY(-5%) rotate(-7.38deg);
+                  }
+                }
+                &.col4 {
+                  background: $sub-color2;
+                  transform: rotate(14.27deg);
+                  &:hover {
+                    transform: translateY(-5%) rotate(14.27deg);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    @media all and (max-width: 1230px) {
+      .title {
+        text-align: center;
+      }
+      .content {
+        flex-direction: column;
+        .myomyo {
+          text-align: center;
+        }
+        .right {
+          .row {
+            text-align: center;
+            &.row2 {
+              .img-container {
+                width: 100%;
+                .col {
+                  width: 25%;
+                  .container {
+                    width: auto;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .text {
+      position: absolute;
+      bottom: -5vh;
+      right: 0;
+      font-size: 20vw;
+      opacity: 0.3;
+      z-index: -1;
+      font-weight: 600;
+    }
+  }
 }

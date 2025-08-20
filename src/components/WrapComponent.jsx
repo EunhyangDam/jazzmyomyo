@@ -64,12 +64,19 @@ import { headerAction } from "../store/header";
 import { cartAction } from "../store/cart";
 import ConfirmModalComponent from "./wrap/ConfirmModalComponent";
 import Sub06SignUp from "./wrap/sub/sub06Lg/Sub06SignUp";
-import CSButton from "./wrap/custom/CSButton";
-import CSModal from "./wrap/custom/CSModal";
+
+import { daumPostcodeAction } from "../store/daumPostcode.js";
+import ReactDaumPostcode from "./wrap/ReactDaumPostcode";
+
+
 export default function WrapComponent(props) {
   /**인스턴스 생성 */
   const dispatch = useDispatch();
   const location = useLocation();
+
+  // 주소
+  const isOpen = useSelector((state)=>state.daumPostcode.isOpen );
+
 
   /**스테이트 불러오기 */
   const confirmIsOn = useSelector((state) => state.confirmModal.isON);
@@ -90,7 +97,7 @@ export default function WrapComponent(props) {
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch]);
+  }, []);
 
   /**페이지 추적 */
   useEffect(() => {
@@ -99,84 +106,8 @@ export default function WrapComponent(props) {
     } else {
       dispatch(headerAction(true));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
-  const getFooterClassByPath = (path) => {
-    if (path === "/" || path.startsWith("/mainComponent"))
-      return "footer--main";
 
-    // About
-    if (
-      path.startsWith("/About") ||
-      path.startsWith("/AboutUs") ||
-      path.startsWith("/Interior") ||
-      path.startsWith("/MyoMyo") ||
-      path.startsWith("/Story")
-    )
-      return "footer--about";
-
-    // Shop
-    if (path.startsWith("/Shop") || path.startsWith("/ShopDetail"))
-      return "footer--shop";
-
-    // Menu
-    if (path.startsWith("/Menu") || path.startsWith("/Pre"))
-      return "footer--menu-pre";
-
-    // Wine, Drinks, Food, Set
-    if (
-      path.startsWith("/Wine") ||
-      path.startsWith("/Drinks") ||
-      path.startsWith("/Food") ||
-      path.startsWith("/Set")
-    )
-      return "footer--menu-etc";
-
-    // Schedule
-    if (
-      path.startsWith("/AboutLive") ||
-      path.startsWith("/Artist") ||
-      path.startsWith("/BuyTicket") ||
-      path.startsWith("/Lental") ||
-      path.startsWith("/Monthly")
-    )
-      return "footer--schedule";
-
-    // Community
-    if (
-      path.startsWith("/Faq") ||
-      path.startsWith("/Gall") ||
-      path.startsWith("/Ntc") ||
-      path.startsWith("/Rev") ||
-      path.startsWith("/Sns")
-    )
-      return "footer--community";
-
-    // Login / My page
-    if (
-      path.startsWith("/Lg") ||
-      path.startsWith("/SearchId") ||
-      path.startsWith("/SearchRs") ||
-      path.startsWith("/AddressList") ||
-      path.startsWith("/DeleteAccount") ||
-      path.startsWith("/EditProfile") ||
-      path.startsWith("/Mp") ||
-      path.startsWith("/MyOrder") ||
-      path.startsWith("/MyProfile")
-    )
-      return "footer--mypage";
-
-    // Member Management
-    if (path.startsWith("/Mm")) return "footer--mm";
-
-    // Cart / Wishlist
-    if (path.startsWith("/Cart") || path.startsWith("/Wishlist"))
-      return "footer--cart";
-
-    return "footer--default";
-  };
-
-  const footerClass = getFooterClassByPath(location.pathname);
   return (
     <div id="wrap">
       <Routes>
@@ -240,10 +171,19 @@ export default function WrapComponent(props) {
           <Route path="/Cart" element={<Sub09Cart />} />
           <Route path="/Wishlist" element={<Sub10Wishlist />} />
           <Route path="/*" element={<Page404Component />} />
+
+
+
         </Route>
       </Routes>
-      <FooterComponent footerClass={footerClass} />
+      <FooterComponent />
       {confirmIsOn && <ConfirmModalComponent />}
+
+      {/* 카카오주속검색 API */}
+      {
+          isOpen && <ReactDaumPostcode />
+      }
+
     </div>
   );
 }

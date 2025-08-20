@@ -1,0 +1,227 @@
+@use "../.././../../scss/variables" as *;
+@use "../../../../scss/mixin" as *;
+#sub01Interior {
+  margin-top: 100px;
+  section {
+    &:not(:last-child) {
+      padding-bottom: 20vh;
+    }
+    @mixin padding() {
+      @media all and (max-width: 1750px) {
+        padding-inline: 5vw;
+        margin-inline: 0;
+      }
+    }
+    .inner {
+      @include padding();
+      max-width: 1750px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    &#section1 {
+      margin-top: 15vh;
+      .inner {
+        position: relative;
+        .img-container {
+          img {
+            width: 100%;
+          }
+        }
+        .text-container {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: $sub-color3;
+          text-align: center;
+          h2 {
+            font-size: $size3;
+            margin-bottom: 10px;
+            @media all and (max-width: 835px) {
+              font-size: $size4;
+            }
+          }
+          p {
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+    &#section2 {
+      .inner {
+        .img-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 50px;
+          .col {
+            img {
+              width: 100%;
+            }
+            &.col4 {
+              transform: translateY(50px);
+            }
+          }
+        }
+        .text-container {
+          text-align: center;
+          h3 {
+            font-size: $size3;
+            font-weight: 600;
+          }
+          p {
+          }
+        }
+      }
+    }
+    h3.heading {
+      font-size: $size3;
+      @media all and (max-width: 715px) {
+        font-size: $size4;
+      }
+      font-weight: 600;
+    }
+    p.text {
+      line-height: 1.5;
+    }
+    &#section3 {
+      .container {
+        @include padding();
+        margin-left: calc((100% - 1750px) / 2);
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @media all and (max-width: 1700px) {
+          column-gap: 10vw;
+        }
+        @media all and (max-width: 575px) {
+          flex-direction: column-reverse;
+        }
+        .col {
+          &.col1 {
+            h3 {
+              margin-bottom: 15px;
+            }
+          }
+          &.col2 {
+            height: fit-content;
+            .image {
+              &.image2 {
+                transform: translate(15%, -30%);
+              }
+            }
+            @media all and (max-width: 905px) {
+              .image {
+                width: 80%;
+                img {
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+        @media all and (max-width: 1330px) {
+          .col {
+            &.col1 {
+              flex-shrink: 0;
+              width: 250px;
+            }
+            &.col2 {
+              flex-shrink: 1;
+            }
+          }
+        }
+      }
+    }
+    &#section4 {
+      .container {
+        @include padding();
+        display: flex;
+        align-items: center;
+        column-gap: 150px;
+        width: 100%;
+        margin-right: calc((100% - 1750px) / 2);
+        @media all and (max-width: 1040px) {
+          column-gap: 5vw;
+        }
+        @media all and (max-width: 520px) {
+          flex-direction: column;
+          row-gap: 5vh;
+        }
+        .col {
+          &.col1 {
+            display: flex;
+            column-gap: 10px;
+            @media all and (max-width: 855px) {
+              flex-shrink: 1;
+              .image {
+                img {
+                  width: 100%;
+                }
+              }
+            }
+          }
+          &.col2 {
+            h3 {
+              margin-bottom: 15px;
+            }
+          }
+        }
+      }
+    }
+    &#section5 {
+      .inner {
+        .row1 {
+          width: 100%;
+          margin-bottom: 30px;
+          img {
+            width: 100%;
+          }
+        }
+        .row2 {
+          display: flex;
+          justify-content: space-between;
+          @media all and (max-width: 990px) {
+            flex-direction: column;
+            row-gap: 1vh;
+          }
+        }
+      }
+    }
+    &#section6 {
+      .inner {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        .col {
+          &.col1 {
+            flex-shrink: 0;
+          }
+          &.col2 {
+            width: 75%;
+            .row {
+              &.row1 {
+                margin-bottom: 15px;
+                img {
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      @media all and (max-width: 1020px) {
+        .inner {
+          flex-direction: column;
+          .col {
+            &.col2 {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

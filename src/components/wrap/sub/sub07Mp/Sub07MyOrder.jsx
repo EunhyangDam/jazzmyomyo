@@ -9,7 +9,7 @@ function Sub07MyOrder(props) {
     <div id="sub07MyOrder">
       <div className="container">
         <div className="title">
-          <Link to="/Mp">
+          <Link to="/MyOrder">
             <h2>My Order</h2>
           </Link>
         </div>
@@ -68,13 +68,13 @@ function Sub07MyOrder(props) {
                         <li>
                           <ul className="column-box">
                             <li className="col col1">
-                              <h3>2025-08-01</h3>
+                              <h3>2025-07-30</h3>
                             </li>
                             <li className="col col2">
-                              <h3>블랙묘묘 인형(30cm)</h3>
+                              <h3>Lauv(라우브) - 2집 All 4 Nothing</h3>
                             </li>
                             <li className="col col3">
-                              <em>38,000원</em>
+                              <em>59,100원</em>
                             </li>
                             <li className="col col4">
                               <button>상세보기</button>
@@ -84,15 +84,15 @@ function Sub07MyOrder(props) {
                         <li>
                           <ul className="column-box">
                             <li className="col col1">
-                              <h3>2025-08-01</h3>
+                              <h3>2025-06-18</h3>
                             </li>
                             <li className="col col2">
-                              <a href="!#">
-                                <h3>블랙묘묘 인형(30cm)</h3>
-                              </a>
+                              <h3>
+                                Carpenters(카펜터스) - The Singles 1969-1973
+                              </h3>
                             </li>
                             <li className="col col3">
-                              <em>38,000원</em>
+                              <em>74,300원</em>
                             </li>
                             <li className="col col4">
                               <button>상세보기</button>
@@ -166,7 +166,7 @@ function Sub07MyOrder(props) {
                           <h3>예약내용</h3>
                         </li>
                         <li className="col col3">
-                          <h3>예약 확정 여부</h3>
+                          <h3>확정 여부</h3>
                         </li>
                         <li className="col col4">
                           <h3>상세보기</h3>
