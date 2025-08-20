@@ -9,9 +9,9 @@ export default function Section5Component(props) {
 
   // 아티스트 사진
   const artistData = [
-    { name: "Parade", image: "./img/공연일정_포스터_섬광.jpg" },
-    { name: "회색지대", image: "./img/공연일정_포스터_회색지대.jpg" },
-    { name: "Oyster", image: "./img/공연일정_포스터_oyster.jpg" },
+    { name: "Parade", image: "./img/artist_poster_right.jpg" },
+    { name: "회색지대", image: "./img/artist_poster_grayarea.jpg" },
+    { name: "Oyster", image: "./img/artist_poster_oyster.jpg" },
   ];
 
   const isMobile = window.innerWidth <= 440;

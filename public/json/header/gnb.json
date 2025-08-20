@@ -34,10 +34,9 @@
     {
       "id": "AboutLive",
       "main": "Schedule",
-      "link": "AboutLive",
+      "link": "Monthly",
       "sub": [
         { "name": "캘린더", "link": "Monthly" },
-        { "name": "공연 정보", "link": "AboutLive" },
         { "name": "아티스트 정보", "link": "Artist" },
         { "name": "티켓 예매", "link": "BuyTicket" },
         { "name": "대관 신청", "link": "Lental" }

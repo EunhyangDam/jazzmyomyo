@@ -1,0 +1,574 @@
+#artist.artist-section {
+  width: 100%;
+  margin-top: 200px;
+  padding: 80px 20px;
+  @media (max-width: 440px) {
+    margin-top: 100px;
+    padding-top: 40px;
+  }
+
+  // 상단 영역
+  .artist-header {
+    border-bottom: 1px solid #bbb;
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      .breadcrumb {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 30px;
+        span {
+          margin-right: 4px;
+        }
+        strong {
+          color: #000;
+        }
+      }
+      .section-title {
+        font-size: 2.6rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      // 440
+      @media (max-width: 440px) {
+        .breadcrumb {
+          font-size: 0.8rem;
+          span {
+            font-size: 0.7rem;
+            i {
+              font-size: 0.8rem;
+            }
+          }
+          strong {
+            font-size: 0.7rem;
+          }
+        }
+        .section-title {
+          font-size: 1.8rem;
+        }
+      }
+    }
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    // 정렬 + 검색
+    .sort-search-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 80px 0;
+      position: relative;
+
+      //  검색창 - 가운데 정렬
+      .search-box {
+        display: flex;
+        align-items: center;
+        border: 2px solid #5d3136;
+        border-radius: 50px;
+        padding: 6px 16px;
+        width: 67%;
+        margin-left: 15px;
+
+        input {
+          border: none;
+          outline: none;
+          font-size: 14px;
+          color: #333;
+          background: none;
+          width: 100%;
+          padding: 4px 8px;
+        }
+
+        .btn-search {
+          background: none;
+          border: none;
+          font-size: 18px;
+          cursor: pointer;
+          margin-left: 8px;
+          color: #5d3136;
+        }
+      }
+
+      // 정렬 버튼 (오른쪽으로)
+      .sort-options {
+        width: 15%;
+        margin-right: 50px;
+        display: flex;
+        justify-content: space-between;
+
+        .sort-btn {
+          font-size: 15px;
+          color: #999;
+          background: none;
+          border: none;
+          cursor: pointer;
+
+          &.active {
+            font-weight: bold;
+            color: #000;
+          }
+        }
+      }
+    }
+    @media (max-width: 440px) {
+      .sort-search-area {
+        margin: 40px 0;
+
+        //  검색창
+        .search-box {
+          width: 60%;
+
+          input {
+            font-size: 0.7rem;
+            padding: 5px;
+          }
+          .btn-search {
+            font-size: 1rem;
+          }
+        }
+
+        // 정렬 버튼 - 오른쪽
+        .sort-options {
+          width: 20%;
+          margin: 0;
+          margin-right: 20px;
+
+          .sort-btn {
+            font-size: 0.8rem;
+            font-weight: 400;
+
+            &.active {
+              font-weight: bold;
+              color: #000;
+            }
+          }
+        }
+      }
+    }
+    // 아티스트 카드 리스트
+    .artist-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px 20px;
+      margin-bottom: 60px;
+
+      #artistCardTemplate {
+        display: none;
+      }
+      .artist-card {
+        text-align: center;
+        position: relative;
+        .card-inner {
+          width: 100%;
+          .img-box {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+
+            img {
+              width: 90%;
+              max-width: 260px;
+              object-fit: contain;
+            }
+            button {
+              position: absolute;
+              width: 2.5rem;
+              height: 2.5rem;
+              padding: 5px;
+              top: 5%;
+              right: 10%;
+              border: 0;
+              background: none;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+              &.on{
+                background: #fff;
+                border-radius: 50%;
+              }
+              i {
+                font-size: 1.8rem;
+                background: none;
+                color: #fff;
+                &.bi-heart-fill{
+                  margin-top: 5px;
+                  font-size: 1.6rem;
+                  color: #e74c3c; // 클릭되었을 때 빨간색 하트
+                }
+              }
+
+              
+            }
+          }
+        }
+        .title-contents {
+          width: 100%;
+          padding: 0 10px;
+          padding-top: 10px;
+          max-width: 260px;
+          position: relative;
+
+          a {
+            display: flex;
+            justify-content: right;
+            position: absolute;
+            width: 100%;
+            padding: 10px;
+            top: 00;
+            right: 20px;
+            i {
+              font-size: 1.6rem;
+              transform: rotate(-45deg);
+              color: #5d3136;
+              transition: all 0.3s;
+              opacity: 0.6;
+            }
+          }
+          &:hover {
+            a {
+              i {
+                font-size: 2rem;
+                opacity: 1;
+              }
+            }
+          }
+
+          span.instrument {
+            display: flex;
+            width: 100%;
+            padding-left: 15px;
+            font-size: 1rem;
+            color: #777;
+          }
+
+          h3.name {
+            margin-top: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+          }
+        }
+        @media (max-width: 440px) {
+          .card-inner {
+            .img-box {
+              button {
+                i {
+                  font-size: 0.9rem;
+                }
+              }
+            }
+          }
+          .title-contents {
+            a {
+              i {
+                display: none;
+              }
+            }
+            span.instrument {
+              font-size: 0.5rem;
+              padding: 0;
+            }
+            h3.name {
+              font-size: 0.8rem;
+              margin-top: 5px;
+            }
+          }
+        }
+      }
+    }
+
+    //  페이지네이션
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+
+      button {
+        background: none;
+        border: none;
+        font-size: 1.4rem;
+        color: #333;
+        cursor: pointer;
+        @media (max-width: 440px) {
+          font-size: 0.8rem;
+        }
+
+        &.active {
+          font-weight: bold;
+          text-decoration: underline;
+        }
+
+        &:disabled {
+          color: #ccc;
+          cursor: default;
+        }
+      }
+
+      .page-numbers {
+        display: flex;
+        gap: 6px;
+      }
+    }
+  }
+
+  // 모달
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+
+    &.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #fff;
+      width: 90%;
+      max-width: 1000px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 10px;
+      padding: 30px;
+      position: relative;
+
+      .modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 24px;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      .modal-body {
+        width: 100%;
+        .top {
+          display: flex;
+          margin-bottom: 50px;
+          width: 100%;
+          .top-left {
+            width: 35%;
+            height: auto;
+            flex-shrink: 0;
+
+            img.modal-image {
+              width: 90%;
+              height: auto;
+              border-radius: 8px;
+            }
+
+            .instrument-tags {
+              margin-top: 10px;
+
+              span {
+                display: inline-block;
+                background: #5d3136;
+                color: #fff;
+                padding: 6px 15px;
+                margin-right: 5px;
+                border-radius: 10px;
+                font-size: 0.9rem;
+              }
+            }
+          }
+
+          .top-right {
+            margin-top: 20px;
+            padding-left: 20px;
+            .modal-name {
+              font-size: 2.2rem;
+              font-weight: 700;
+              margin-bottom: 20px;
+            }
+            .modal-desc {
+              margin-bottom: 30px;
+              font-size: 1.2rem;
+              line-height: 160%;
+            }
+
+            .modal-social {
+              font-size: 1rem;
+              color: #777;
+              margin-bottom: 10px;
+            }
+          }
+        }
+
+        h3 {
+          font-size: 2.2rem;
+          font-weight: 700;
+          padding-bottom: 5px;
+          margin-bottom: 20px;
+          padding-left: 10px;
+          border-bottom: 2px solid #333;
+        }
+        .bottom {
+          display: flex;
+          width: 100%;
+          .bottom-left {
+            width: 34%;
+            .modal-members {
+              width: auto;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .member-list button {
+                margin-right: 20px;
+                height: 70px;
+                width: 70px;
+                font-size: 1rem;
+                border-radius: 50%;
+                background: #5d3136;
+                color: #fff;
+                border: none;
+                cursor: default;
+                &:last-child {
+                  margin: 0;
+                }
+              }
+            }
+          }
+          .bottom-right {
+            width: 60%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .modal-videos {
+              width: 100%;
+              height: auto;
+              .video-list {
+                width: 100%;
+                display: flex;
+                iframe {
+                  width: 100%;
+                  object-fit: cover;
+                  margin-right: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    @media (max-width: 440px) {
+      .modal-content {
+        width: 80%;
+        max-width: 350px;
+        max-height: 90vh;
+        padding: 20px;
+
+        .modal-close {
+          font-size: 1.2rem;
+        }
+
+        .modal-body {
+          width: 100%;
+          .top {
+            margin-bottom: 30px;
+            .top-left {
+              width: 40%;
+
+              img.modal-image {
+                width: 90%;
+                height: auto;
+                border-radius: 8px;
+              }
+              .instrument-tags {
+                margin-top: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-flow: wrap;
+                span {
+                  width: 80%;
+                  text-align: center;
+                  margin-bottom: 10px;
+                  font-size: 0.7rem;
+                }
+              }
+            }
+
+            .top-right {
+              margin-top: 10px;
+              padding-left: 15px;
+              width: 60%;
+              .modal-name {
+                font-size: 1.4rem;
+                font-weight: 700;
+                margin-bottom: 20px;
+              }
+              .modal-desc {
+                margin-bottom: 20px;
+                font-size: 0.7rem;
+              }
+              .modal-social {
+                font-size: 0.7rem;
+                color: #777;
+                margin-bottom: 0;
+              }
+            }
+          }
+
+          h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+          }
+          .bottom {
+            display: flex;
+            flex-flow: wrap;
+            width: 100%;
+            .bottom-left {
+              width: 100%;
+              .modal-members {
+                display: block;
+                .member-list button {
+                  margin: 0;
+                  margin-left: 10px;
+                  margin-bottom: 10px;
+                  height: 45px;
+                  width: 45px;
+                  font-size: 0.8rem;
+                  &:last-child {
+                    margin-left: 10px;
+                    margin-bottom: 10px;
+                  }
+                }
+              }
+            }
+            .bottom-right {
+              display: none;
+              // width: 100%;
+              // max-width: 350px;
+              // display: flex;
+              // align-items: center;
+              // justify-content: center;
+              // .modal-videos {
+              //   width: auto;
+              //   .video-list{
+              //     width: 100%;
+              //     max-width: 350px;
+              //     display: flex;
+              //     iframe{
+              //       width: 100%;
+              //       object-fit: cover;
+              //       margin-right: 20px;
+              //     }
+              //   }
+              // }
+            }
+          }
+        }
+      }
+    }
+  }
+}

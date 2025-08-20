@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "../scss/sub.scss";
 import "./scss/Sub10Wishlist.scss";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { wishAction } from "../../../../store/wishlist";
-import { cartAction } from "../../../../store/cart";
 import SiteMapComponent from "../../custom/SiteMapComponent";
 export default function Sub10Wishilist(props) {
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const list = useSelector((state) => state.wishlist);
-  const cart = useSelector((state) => state.cart.cart);
   const [state, setState] = useState({
     위시리스트: [],
   });
   useEffect(() => {
-    setState({
-      ...state,
+    setState((prev) => ({
+      ...prev,
       위시리스트: list.위시리스트,
-    });
+    }));
   }, [list]);
   const clickWishDel = (e, data) => {
     let del = state.위시리스트.filter((el) => el.id !== data.id);

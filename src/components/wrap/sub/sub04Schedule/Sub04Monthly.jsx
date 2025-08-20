@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Link} from "react-router-dom";
+
 import "./scss/Sub04Monthly.scss";
 
 export default function Sub04Monthly() {
@@ -38,7 +40,7 @@ export default function Sub04Monthly() {
 
   // 데이터 불러오기
   useEffect(() => {
-    fetch("./json/section4/schedule.json")
+    fetch("./json/sub04/schedule.json")
       .then((res) => res.json())
       .then((data) => setScheduleData(data))
       .catch((err) => console.error("공연 데이터 로딩 실패:", err));
@@ -182,13 +184,13 @@ export default function Sub04Monthly() {
                         <h3>{item.artist}</h3>
                         <p>{item.time}</p>
                       </div>
-                      <a
-                        href={item.link || "#"}
+                      <Link 
+                        to = {`/Artist?artist=${encodeURIComponent(item.artist)}`}
                         className="arrow"
                         aria-label="공연 상세 보기"
                       >
                         ↗
-                      </a>
+                      </Link>
                     </div>
                   ))
                 )}

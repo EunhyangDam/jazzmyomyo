@@ -1,5 +1,5 @@
 import React from "react";
-import './cscc/Sub06Lg.scss'
+import './scss/Sub06Lg.scss'
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { signInAction } from "../../../../store/signIn";
@@ -122,24 +122,24 @@ function Sub06Lg(props) {
     })
 }
 
-
+;
 
 
 
 
   return (
     <div id="sub06Lg">
-        <section id="login" class="section login">
-          <div class="container">
-            <div class="content">
+        <section id="login" className="section login">
+          <div className="container">
+            <div className="content">
 
               {/* <!-- Left: 로그인 폼 --> */}
-              <div class="login-left">
-                <h1 class="page-title">Login</h1>
+              <div className="login-left">
+                <h1 className="page-title">Login</h1>
 
-                <form class="login-form" onSubmit={onSubmitLoginForm}>
-                  <div class="login-box">
-                    <label for="uid" class="sr-only">아이디</label>
+                <form className="login-form" onSubmit={onSubmitLoginForm}>
+                  <div className="login-box">
+                    <label for="uid" className="sr-only">아이디</label>
                     <input 
                       type="text" 
                       name="userId"
@@ -149,8 +149,8 @@ function Sub06Lg(props) {
                     />
                   </div>
 
-                  <div class="login-box">
-                    <label for="upw" class="sr-only">비밀번호</label>
+                  <div className="login-box">
+                    <label for="upw" className="sr-only">비밀번호</label>
                     <input 
                       type="text" 
                       name="userPw"
@@ -160,8 +160,8 @@ function Sub06Lg(props) {
                     />                  
                   </div>
 
-                  <div class="form-utils">
-                    <label class="check">
+                  <div className="form-utils">
+                    <label className="check">
                       <input 
                         type="checkbox" 
                         name="rememberMe"
@@ -169,26 +169,26 @@ function Sub06Lg(props) {
                         value={state.자동로그인}
                         onChange={onChangeRememberMe}
                       />
-                      <span class="box" aria-hidden="true"></span>
+                      <span className="box" aria-hidden="true"></span>
                       로그인상태유지
                     </label>
 
-                    <div class="find">
+                    <div className="find">
                       <a href="/find-id">아이디</a>
-                      <span class="bar">|</span>
+                      <span className="bar">|</span>
                       <a href="/find-password">비밀번호 찾기</a>
                     </div>
                   </div>
 
-                  <button type="submit" class="btn-login"><span>로그인</span></button>
+                  <button type="submit" className="btn-login"><span>로그인</span></button>
                 </form>
               </div>
 
               {/* <!-- Right: 회원가입 CTA 일러스트 --> */}
-              <div class="login-right">
-                <Link to="/SignUp"  class="signup-cat">
-                  <div class="gap">
-                    <img src="img/로그인_회원가입_이미지.png" alt="레코드 위 고양이 일러스트" />
+              <div className="login-right">
+                <Link to="/SignUp"  className="signup-cat">
+                  <div className="gap">
+                    <img src="img/login_cat.png" alt="레코드 위 고양이 일러스트" />
                   </div>
                 </Link>
               </div>

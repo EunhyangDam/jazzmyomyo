@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import "./scss/Sub04BuyTicket.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { confirmModalAction } from "../../../../store/confirmModal";
@@ -334,7 +335,9 @@ function Sub04BuyTicket(props) {
               </div>
               <div className="cat-area">
                 <div className="gap">
-                  <img src="./img/회원가입_말풍선_포함.png" alt="고양이" />
+                  <Link to="/SignUp">
+                    <img src="./img/resavation_cat.png" alt="고양이" />
+                  </Link>
                 </div>
               </div>
             </div>

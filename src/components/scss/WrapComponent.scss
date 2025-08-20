@@ -1,4 +1,10 @@
+@use "./variables" as *;
+
 #wrap {
   width: 100%;
   overflow-x: hidden;
+  &::selection {
+    color: #fff;
+    background: $primary-color;
+  }
 }

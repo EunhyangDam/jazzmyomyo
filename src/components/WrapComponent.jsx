@@ -65,9 +65,7 @@ import { cartAction } from "../store/cart";
 import ConfirmModalComponent from "./wrap/ConfirmModalComponent";
 import Sub06SignUp from "./wrap/sub/sub06Lg/Sub06SignUp";
 
-import { daumPostcodeAction } from "../store/daumPostcode.js";
-import ReactDaumPostcode from "./wrap/ReactDaumPostcode";
-
+import ReactDaumPostcode from "./wrap/ReactDaumPostcode.jsx";
 
 export default function WrapComponent(props) {
   /**인스턴스 생성 */
@@ -75,8 +73,7 @@ export default function WrapComponent(props) {
   const location = useLocation();
 
   // 주소
-  const isOpen = useSelector((state)=>state.daumPostcode.isOpen );
-
+  const isOpen = useSelector((state) => state.daumPostcode.isOpen);
 
   /**스테이트 불러오기 */
   const confirmIsOn = useSelector((state) => state.confirmModal.isON);
@@ -97,7 +94,7 @@ export default function WrapComponent(props) {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [dispatch]);
 
   /**페이지 추적 */
   useEffect(() => {
@@ -106,7 +103,11 @@ export default function WrapComponent(props) {
     } else {
       dispatch(headerAction(true));
     }
-  }, [location]);
+  }, [location, dispatch]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location.pathname, location.key]);
 
   return (
     <div id="wrap">
@@ -171,19 +172,13 @@ export default function WrapComponent(props) {
           <Route path="/Cart" element={<Sub09Cart />} />
           <Route path="/Wishlist" element={<Sub10Wishlist />} />
           <Route path="/*" element={<Page404Component />} />
-
-
-
         </Route>
       </Routes>
       <FooterComponent />
       {confirmIsOn && <ConfirmModalComponent />}
 
       {/* 카카오주속검색 API */}
-      {
-          isOpen && <ReactDaumPostcode />
-      }
-
+      {isOpen && <ReactDaumPostcode />}
     </div>
   );
 }
