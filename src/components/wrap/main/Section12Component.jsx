@@ -7,7 +7,7 @@ export default function Section12Component(props) {
   });
 
   useEffect(() => {
-    fetch("/json/section12/section12.json", { method: "GET" })
+    fetch("./json/section12/section12.json", { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         setState({

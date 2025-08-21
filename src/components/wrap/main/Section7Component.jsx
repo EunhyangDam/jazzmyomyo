@@ -10,7 +10,7 @@ export default function Section7Component(props) {
   });
   const dispatch = useDispatch();
   useEffect(() => {
-    fetch("/json/product.json", { method: "GET" })
+    fetch("./json/product.json", { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         setState({

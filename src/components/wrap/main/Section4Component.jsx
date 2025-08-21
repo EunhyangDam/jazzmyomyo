@@ -23,7 +23,7 @@ export default function Section4Component(props) {
 
   //  fetch slides
   useEffect(() => {
-    fetch("/json/Section4/Section4.json")
+    fetch("./json/Section4/Section4.json")
       .then((res) => res.json())
       .then((data) => setSlides(data))
       .catch((err) => console.error("데이터 로드 실패:", err));
@@ -193,7 +193,8 @@ export default function Section4Component(props) {
                   <div
                     key={i}
                     className="day"
-                    onClick={() => setCurrentIndex(i)}>
+                    onClick={() => setCurrentIndex(i)}
+                  >
                     {isToday && <div className="today-label">Today</div>}
                     <div className="weekday">{day}</div>
                     <div className="date">
@@ -211,7 +212,8 @@ export default function Section4Component(props) {
             <button
               ref={prevBtnRef}
               className="btn prev"
-              onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}>
+              onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
+            >
               &lt;
             </button>
             <div className="slide-wrapper" ref={wrapperRef}>
@@ -221,7 +223,8 @@ export default function Section4Component(props) {
                     key={i}
                     className={`slide ${
                       i === todayWeekday ? "today-slide" : ""
-                    } ${i === currentIndex ? "center" : ""}`}>
+                    } ${i === currentIndex ? "center" : ""}`}
+                  >
                     <a href="!#">
                       <img src={item.image} alt={`slide-${i}`} />
                     </a>
@@ -232,7 +235,8 @@ export default function Section4Component(props) {
             <button
               ref={nextBtnRef}
               className="btn next"
-              onClick={() => setCurrentIndex((prev) => Math.min(6, prev + 1))}>
+              onClick={() => setCurrentIndex((prev) => Math.min(6, prev + 1))}
+            >
               &gt;
             </button>
           </div>

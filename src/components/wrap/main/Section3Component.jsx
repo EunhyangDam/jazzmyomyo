@@ -2,15 +2,12 @@ import React from "react";
 import "./scss/Section3Component.scss";
 import ArtistModalComponent from "./ArtistModalComponent";
 
-
-
 export default function Section3Component() {
-
   const [artists, setArtists] = React.useState([]);
   const [selectedArtist, setSelectedArtist] = React.useState(null);
 
   React.useEffect(() => {
-    fetch("/json/section3/section3.json")
+    fetch("./json/section3/section3.json")
       .then((res) => {
         if (!res.ok) throw new Error("네트워크 오류");
         return res.json();
@@ -23,8 +20,7 @@ export default function Section3Component() {
       });
   }, []);
 
-
- return (
+  return (
     <div id="section3Component" className="section">
       <div className="con-info">
         <div className="con-head">

@@ -7,6 +7,7 @@ import SiteMapComponent from "../../custom/SiteMapComponent";
 function Sub07Mp(props) {
   const cartAsset = useSelector((state) => state.cart.cart);
   const wishAsset = useSelector((state) => state.wishlist.위시리스트);
+  const userID = useSelector((state) => state.로그인.아이디);
   const [isOn, setIsOn] = useState(false);
   const onClickProfile = (e) => {
     setIsOn((prev) => !prev);

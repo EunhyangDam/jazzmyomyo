@@ -207,13 +207,13 @@ export default function HeaderComponent(props) {
                 ))}
               </ul>
               <div className="aside">
-                <Link to="/Cart" className="icon">
+                <Link to="/cart" className="icon">
                   <i className="bi bi-cart2"></i>
                 </Link>
-                <Link to="/Mp" className="icon">
+                <Link to="/mp" className="icon">
                   <i className="fa-regular fa-user"></i>
                 </Link>
-                <Link to="/Wishlist" className="icon">
+                <Link to="/wishlist" className="icon">
                   <i className="fa-regular fa-heart"></i>
                 </Link>
                 <a href="!#" className="toggle" onClick={clickToggle}>
