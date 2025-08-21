@@ -9,6 +9,8 @@ export default function Sub10Wishilist(props) {
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const list = useSelector((state) => state.wishlist);
+  const userID = useSelector((state) => state.signIn);
+
   const [state, setState] = useState({
     위시리스트: [],
   });
@@ -46,7 +48,7 @@ export default function Sub10Wishilist(props) {
           <ul>
             <li className="col col1">
               <h2 className="name">
-                <span>묘묘</span> 님
+                <span>{userID.이름}</span> 님
               </h2>
               <p className="email">myomyocat@gmail.com</p>
               <p>일반회원</p>

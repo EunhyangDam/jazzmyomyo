@@ -74,6 +74,28 @@
               }
               .right {
                 width: 70%;
+                padding-right: 5%;
+                input {
+                  font-size: inherit;
+                  font-family: $font1;
+                  border: none;
+                  padding-block: 2px;
+                  width: 100%;
+                }
+              }
+              &.birthday {
+                .right {
+                  display: flex;
+                  align-items: center;
+                  input {
+                    text-align: center;
+                    width: 80px;
+                    &#inputMonth,
+                    &#inputDay {
+                      width: 40px;
+                    }
+                  }
+                }
               }
               &.user-email-agree {
                 .right {
@@ -85,7 +107,7 @@
                     align-items: center;
                     margin-right: 20px;
 
-                    input[type="checkbox"] {
+                    input[type="radio"] {
                       appearance: none;
                       color: transparent;
                       background: transparent;
