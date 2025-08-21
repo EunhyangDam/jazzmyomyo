@@ -1,10 +1,11 @@
 import { React, useEffect, useRef, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./scss/HeaderComponent.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logOutAction } from "../../store/signIn";
 export default function HeaderComponent(props) {
   const navigation = useNavigate();
-
+  const dispatch = useDispatch();
   const userAsset = useSelector((state) => state.signIn);
 
   const [toggle, setToggle] = useState(false);
@@ -132,6 +133,10 @@ export default function HeaderComponent(props) {
       setIndex(null);
     }
   };
+  const clickLogOut = (e) => {
+    e.preventDefault();
+    dispatch(logOutAction(null));
+  };
   return (
     <>
       <header
@@ -233,7 +238,7 @@ export default function HeaderComponent(props) {
                 <Link to="/wishlist" className="icon">
                   <i className="fa-regular fa-heart"></i>
                 </Link>
-                <a href="!#" className="icon log-out">
+                <a href="!#" className="icon log-out" onClick={clickLogOut}>
                   로그아웃
                 </a>
                 <a href="!#" className="toggle" onClick={clickToggle}>
