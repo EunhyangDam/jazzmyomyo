@@ -9,12 +9,12 @@ function Sub07MyOrderTk(props) {
     <div id="sub07MyOrderTk">
       <div className="container">
         <div className="title">
-          <Link to="/MyOrder">
+          <Link to="/myOrder">
             <h2>My Order</h2>
           </Link>
         </div>
         <SiteMapComponent
-          firstLink="/Mp"
+          firstLink="/mp"
           firstName="마이페이지"
           secondLink="./"
           secondName="예매내역"

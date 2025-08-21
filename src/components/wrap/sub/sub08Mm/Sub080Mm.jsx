@@ -5,10 +5,12 @@ import "./scss/Sub080Mm.scss";
 import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
+import {
+  confirmModalAction,
+  confirmModalYesNoAction,
+} from "../../../../store/confirmModal";
 
 function Sub080Mm() {
-
   const [members, setMembers] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [sortKey, setSortKey] = useState("joinDesc");
@@ -24,23 +26,28 @@ function Sub080Mm() {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.confirmModal);
 
-
   useEffect(() => {
-    const url = `${process.env.PUBLIC_URL || ""}/json/sub08/members.json?v=${Date.now()}`;
+    const url = `${
+      process.env.PUBLIC_URL || ""
+    }/json/sub08/members.json?v=${Date.now()}`;
     setLoading(true);
     setErr(null);
 
     axios
       .get(url, { headers: { "Cache-Control": "no-cache" } })
       .then((res) => {
-        const arr =
-          Array.isArray(res.data?.회원정보) ? res.data.회원정보 :
-          Array.isArray(res.data?.members) ? res.data.members :
-          Array.isArray(res.data?.data)    ? res.data.data :
-          Array.isArray(res.data)          ? res.data :
-          [];
+        const arr = Array.isArray(res.data?.회원정보)
+          ? res.data.회원정보
+          : Array.isArray(res.data?.members)
+          ? res.data.members
+          : Array.isArray(res.data?.data)
+          ? res.data.data
+          : Array.isArray(res.data)
+          ? res.data
+          : [];
 
-        if (!arr.length) throw new Error("JSON은 로드됐지만 배열이 비었어요. (회원정보 확인)");
+        if (!arr.length)
+          throw new Error("JSON은 로드됐지만 배열이 비었어요. (회원정보 확인)");
 
         setMembers(arr);
         setPage(1);
@@ -48,13 +55,12 @@ function Sub080Mm() {
       .catch((e) => {
         const msg = e?.response
           ? `HTTP ${e.response.status} ${e.response.statusText}`
-          : (e?.message || "데이터 로드 실패");
+          : e?.message || "데이터 로드 실패";
         setErr(msg);
         console.error("[Members] fetch error:", msg, "url:", url);
       })
       .finally(() => setLoading(false));
   }, []);
-
 
   useEffect(() => {
     const fromState = location.state?.updatedMember;
@@ -71,13 +77,14 @@ function Sub080Mm() {
     if (!m) return;
 
     setMembers((prev) =>
-      prev.some((x) => x.id === m.id) ? prev.map((x) => (x.id === m.id ? m : x)) : [m, ...prev]
+      prev.some((x) => x.id === m.id)
+        ? prev.map((x) => (x.id === m.id ? m : x))
+        : [m, ...prev]
     );
 
     sessionStorage.removeItem("updatedMember");
     navigate(location.pathname, { replace: true, state: null });
   }, [location.state, location.pathname, navigate]);
-
 
   const allSelected = useMemo(
     () => members.length > 0 && selected.size === members.length,
@@ -86,7 +93,9 @@ function Sub080Mm() {
 
   const onToggleAll = () => {
     setSelected((prev) =>
-      prev.size === members.length ? new Set() : new Set(members.map((m) => m.id))
+      prev.size === members.length
+        ? new Set()
+        : new Set(members.map((m) => m.id))
     );
   };
 
@@ -142,14 +151,14 @@ function Sub080Mm() {
     }
   }, [modal.isYes, modal.isConfirm, dispatch, selected]);
 
-
   const toTime = (s) => new Date(String(s)).getTime() || 0;
 
   const filteredSorted = useMemo(() => {
     const k = keyword.trim().toLowerCase();
 
     const filtered = members.filter((m) => {
-      const text = `${m.id} ${m.userId} ${m.name} ${m.gender} ${m.birth} ${m.phone} ${m.email} ${m.addr} ${m.consent} ${m.grade} ${m.status} ${m.joinedAt}`.toLowerCase();
+      const text =
+        `${m.id} ${m.userId} ${m.name} ${m.gender} ${m.birth} ${m.phone} ${m.email} ${m.addr} ${m.consent} ${m.grade} ${m.status} ${m.joinedAt}`.toLowerCase();
       return text.includes(k);
     });
 
@@ -158,7 +167,7 @@ function Sub080Mm() {
       if (sortKey === "grade") return a.grade.localeCompare(b.grade, "ko");
       if (sortKey === "userId") return a.userId.localeCompare(b.userId, "ko");
       if (sortKey === "joinAsc") return toTime(a.joinedAt) - toTime(b.joinedAt);
-      return toTime(b.joinedAt) - toTime(a.joinedAt); 
+      return toTime(b.joinedAt) - toTime(a.joinedAt);
     });
 
     return sorted;
@@ -167,19 +176,20 @@ function Sub080Mm() {
   const totalPages = Math.max(1, Math.ceil(filteredSorted.length / pageSize));
   const paged = useMemo(() => {
     const start = (page - 1) * pageSize;
-    return filteredSorted.slice(start, start + pageSize); 
+    return filteredSorted.slice(start, start + pageSize);
   }, [filteredSorted, page]);
 
   useEffect(() => {
     setPage(1);
   }, [keyword, sortKey, members.length]);
 
-  
   if (loading) {
     return (
       <div id="sub080Mm">
         <div className="admin-wrap">
-          <main className="main" style={{ padding: 40, textAlign: "center" }}>불러오는 중…</main>
+          <main className="main" style={{ padding: 40, textAlign: "center" }}>
+            불러오는 중…
+          </main>
         </div>
       </div>
     );
@@ -189,7 +199,10 @@ function Sub080Mm() {
     return (
       <div id="sub080Mm">
         <div className="admin-wrap">
-          <main className="main" style={{ padding: 40, textAlign: "center", color: "#c00" }}>
+          <main
+            className="main"
+            style={{ padding: 40, textAlign: "center", color: "#c00" }}
+          >
             데이터를 불러오지 못했어요. ({err})
           </main>
         </div>
@@ -203,9 +216,15 @@ function Sub080Mm() {
         <aside className="sidebar">
           <h2>회원관리</h2>
           <ul>
-            <li className="active"><a href="#!">회원리스트</a></li>
-            <li><Link to="/MmGrade">회원등급설정</Link></li>
-            <li><a href="/MmSign">회원가입설정</a></li>
+            <li className="active">
+              <a href="#!">회원리스트</a>
+            </li>
+            <li>
+              <Link to="/mmGrade">회원등급설정</Link>
+            </li>
+            <li>
+              <a href="/mmSign">회원가입설정</a>
+            </li>
           </ul>
         </aside>
 
@@ -236,7 +255,7 @@ function Sub080Mm() {
               onChange={(e) => setSortKey(e.target.value)}
               id="sortSelect"
             >
-              <option value="joinDesc">가입일(최신순)</option> 
+              <option value="joinDesc">가입일(최신순)</option>
               <option value="joinAsc">가입일(오래된순)</option>
               <option value="name">이름순</option>
               <option value="grade">등급순</option>
@@ -287,23 +306,47 @@ function Sub080Mm() {
                       {(page - 1) * pageSize + idx + 1}
                     </div>
 
-                    <div className="col col-userId" data-label="아이디">{m.userId}</div>
+                    <div className="col col-userId" data-label="아이디">
+                      {m.userId}
+                    </div>
 
                     <div className="col col-name" data-label="이름">
-                      <Link to={`/MmView/${m.id}`} className="name-link" state={{ member: m }}>
+                      <Link
+                        to={`/mmView/${m.id}`}
+                        className="name-link"
+                        state={{ member: m }}
+                      >
                         {m.name}
                       </Link>
                     </div>
 
-                    <div className="col col-gender" data-label="성별">{m.gender}</div>
-                    <div className="col col-birth" data-label="생년월일">{m.birth}</div>
-                    <div className="col col-phone" data-label="연락처">{m.phone}</div>
-                    <div className="col col-email" data-label="이메일">{m.email}</div>
-                    <div className="col col-addr" data-label="주소">{m.addr}</div>
-                    <div className="col col-consent" data-label="수신동의">{m.agree}</div>
-                    <div className="col col-grade" data-label="등급">{m.grade}</div>
-                    <div className="col col-status" data-label="상태">{m.status}</div>
-                    <div className="col col-joinedAt" data-label="가입일">{m.joinedAt}</div>
+                    <div className="col col-gender" data-label="성별">
+                      {m.gender}
+                    </div>
+                    <div className="col col-birth" data-label="생년월일">
+                      {m.birth}
+                    </div>
+                    <div className="col col-phone" data-label="연락처">
+                      {m.phone}
+                    </div>
+                    <div className="col col-email" data-label="이메일">
+                      {m.email}
+                    </div>
+                    <div className="col col-addr" data-label="주소">
+                      {m.addr}
+                    </div>
+                    <div className="col col-consent" data-label="수신동의">
+                      {m.agree}
+                    </div>
+                    <div className="col col-grade" data-label="등급">
+                      {m.grade}
+                    </div>
+                    <div className="col col-status" data-label="상태">
+                      {m.status}
+                    </div>
+                    <div className="col col-joinedAt" data-label="가입일">
+                      {m.joinedAt}
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -311,8 +354,15 @@ function Sub080Mm() {
           </div>
 
           <nav className="pagination">
-            <button onClick={() => setPage(1)} disabled={page === 1}>« 처음</button>
-            <button onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1}>‹ 이전</button>
+            <button onClick={() => setPage(1)} disabled={page === 1}>
+              « 처음
+            </button>
+            <button
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1}
+            >
+              ‹ 이전
+            </button>
 
             {Array.from({ length: totalPages }, (_, i) => {
               const n = i + 1;
@@ -327,8 +377,18 @@ function Sub080Mm() {
               );
             })}
 
-            <button onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={page === totalPages}>다음 ›</button>
-            <button onClick={() => setPage(totalPages)} disabled={page === totalPages}>끝 »</button>
+            <button
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+            >
+              다음 ›
+            </button>
+            <button
+              onClick={() => setPage(totalPages)}
+              disabled={page === totalPages}
+            >
+              끝 »
+            </button>
           </nav>
         </main>
       </div>

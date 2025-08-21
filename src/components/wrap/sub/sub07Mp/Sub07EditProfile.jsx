@@ -52,7 +52,7 @@ function Sub07EditProfile(props) {
           secondName="회원정보 수정"
         />
         <div className="title">
-          <Link to="/Mp">
+          <Link to="/mp">
             <h2>My Page</h2>
           </Link>
         </div>

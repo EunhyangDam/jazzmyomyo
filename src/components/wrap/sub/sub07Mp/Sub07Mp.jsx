@@ -18,7 +18,7 @@ function Sub07Mp(props) {
         <SiteMapComponent firstLink="/Mp" firstName="마이페이지" />
 
         <div className="title">
-          <Link to="/Mp">
+          <Link to="/mp">
             <h2>My Page</h2>
           </Link>
         </div>

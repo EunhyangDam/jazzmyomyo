@@ -11,13 +11,13 @@ function Sub07MyProfile(props) {
     <div id="sub07MyProfile">
       <div className="container">
         <SiteMapComponent
-          firstLink="/Mp"
+          firstLink="/mp"
           firstName="마이페이지"
           secondLink="./"
           secondName="회원정보 확인"
         />
         <div className="title">
-          <Link to="/Mp">
+          <Link to="/mp">
             <h2>My Page</h2>
           </Link>
         </div>
@@ -111,8 +111,8 @@ function Sub07MyProfile(props) {
               </ul>
             </div>
             <div className="foot">
-              <Link to="/EditProfile">정보수정</Link>
-              <Link to="/DeleteAccount">탈퇴하기</Link>
+              <Link to="/editProfile">정보수정</Link>
+              <Link to="/deleteAccount">탈퇴하기</Link>
             </div>
           </div>
         </div>

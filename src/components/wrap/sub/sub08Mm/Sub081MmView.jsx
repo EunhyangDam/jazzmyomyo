@@ -5,7 +5,10 @@ import "./scss/Sub081MmView.scss";
 import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
+import {
+  confirmModalAction,
+  confirmModalYesNoAction,
+} from "../../../../store/confirmModal";
 
 function Sub081MmView() {
   const { id } = useParams();
@@ -19,7 +22,6 @@ function Sub081MmView() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
 
-
   useEffect(() => {
     const fromState = location.state?.member || location.state?.updatedMember;
     if (fromState && String(fromState.id) === String(id)) {
@@ -29,19 +31,23 @@ function Sub081MmView() {
   }, [id, location.state]);
 
   useEffect(() => {
-    const url = `${process.env.PUBLIC_URL || ""}/json/sub08/members.json?v=${Date.now()}`;
+    const url = `${
+      process.env.PUBLIC_URL || ""
+    }/json/sub08/members.json?v=${Date.now()}`;
 
-
-    setLoading((prev) => prev === true ? true : true);
+    setLoading((prev) => (prev === true ? true : true));
     setErr(null);
 
     axios
       .get(url, { headers: { "Cache-Control": "no-cache" } })
       .then((res) => {
-        const list =
-          Array.isArray(res.data?.회원정보) ? res.data.회원정보 :
-          Array.isArray(res.data?.members) ? res.data.members :
-          Array.isArray(res.data)          ? res.data : [];
+        const list = Array.isArray(res.data?.회원정보)
+          ? res.data.회원정보
+          : Array.isArray(res.data?.members)
+          ? res.data.members
+          : Array.isArray(res.data)
+          ? res.data
+          : [];
 
         const found = list.find((m) => String(m.id) === String(id));
         if (!found) {
@@ -49,28 +55,25 @@ function Sub081MmView() {
           return;
         }
 
-
         const normalized = {
           ...found,
-          consent: found.agree ?? found.consent ?? "", 
+          consent: found.agree ?? found.consent ?? "",
         };
         setMember(normalized);
       })
       .catch((e) => {
         const msg = e?.response
           ? `HTTP ${e.response.status} ${e.response.statusText}`
-          : (e?.message || "데이터 로드 실패");
+          : e?.message || "데이터 로드 실패";
         setErr(msg);
         console.error("[MmView] fetch error:", msg, "url:", url);
       })
       .finally(() => setLoading(false));
   }, [id]);
 
-
   const goList = () => {
     navigate("/Mm", { state: member ? { updatedMember: member } : undefined });
   };
-
 
   const onAskDelete = () => {
     dispatch(
@@ -85,20 +88,20 @@ function Sub081MmView() {
     );
   };
 
-
   useEffect(() => {
     if (modal.isYes === true) {
       dispatch(confirmModalYesNoAction(false));
-      navigate("/Mm"); 
+      navigate("/Mm");
     }
   }, [modal.isYes, dispatch, navigate]);
-
 
   if (loading) {
     return (
       <div id="sub081MmView">
         <div className="admin-wrap">
-          <main className="main" style={{ padding: 40, textAlign: "center" }}>불러오는 중…</main>
+          <main className="main" style={{ padding: 40, textAlign: "center" }}>
+            불러오는 중…
+          </main>
         </div>
       </div>
     );
@@ -108,7 +111,10 @@ function Sub081MmView() {
     return (
       <div id="sub081MmView">
         <div className="admin-wrap">
-          <main className="main" style={{ padding: 40, textAlign: "center", color: "#c00" }}>
+          <main
+            className="main"
+            style={{ padding: 40, textAlign: "center", color: "#c00" }}
+          >
             데이터를 불러오지 못했어요. ({err})
           </main>
         </div>
@@ -124,15 +130,21 @@ function Sub081MmView() {
           <ul>
             <li>
               <Link
-                to="/Mm"
+                to="/mm"
                 state={member ? { updatedMember: member } : undefined}
               >
                 회원리스트
               </Link>
             </li>
-            <li><Link to="/MmGrade">회원등급설정</Link></li>
-            <li><Link to="/MmSign">회원가입설정</Link></li>
-            <li className="active"><Link to={`/MmView/${id}`}>회원상세</Link></li>
+            <li>
+              <Link to="/mmGrade">회원등급설정</Link>
+            </li>
+            <li>
+              <Link to="/mmSign">회원가입설정</Link>
+            </li>
+            <li className="active">
+              <Link to={`/mmView/${id}`}>회원상세</Link>
+            </li>
           </ul>
         </aside>
 
@@ -143,30 +155,63 @@ function Sub081MmView() {
 
           {!member ? (
             <div className="member-detail">
-              <p style={{ textAlign: "center" }}>해당 회원 정보를 찾을 수 없습니다.</p>
+              <p style={{ textAlign: "center" }}>
+                해당 회원 정보를 찾을 수 없습니다.
+              </p>
               <div className="btn-group">
-                <button className="btn back" onClick={goList}>목록으로</button>
+                <button className="btn back" onClick={goList}>
+                  목록으로
+                </button>
               </div>
             </div>
           ) : (
             <div className="member-detail">
               <ul>
-                <li><strong>아이디</strong> {member.userId}</li>
-                <li><strong>이름</strong> {member.name}</li>
-                <li><strong>성별</strong> {member.gender}</li>
-                <li><strong>생년월일</strong> {member.birth}</li>
-                <li><strong>연락처</strong> {member.phone}</li>
-                <li><strong>이메일</strong> {member.email}</li>
-                <li><strong>주소</strong> {member.addr}</li>
-                <li><strong>이메일 수신동의</strong> {member.consent ?? member.agree ?? "-"}</li>
-                <li><strong>등급</strong> {member.grade}</li>
-                <li><strong>상태</strong> {member.status}</li>
-                <li><strong>가입일</strong> {member.joinedAt}</li>
+                <li>
+                  <strong>아이디</strong> {member.userId}
+                </li>
+                <li>
+                  <strong>이름</strong> {member.name}
+                </li>
+                <li>
+                  <strong>성별</strong> {member.gender}
+                </li>
+                <li>
+                  <strong>생년월일</strong> {member.birth}
+                </li>
+                <li>
+                  <strong>연락처</strong> {member.phone}
+                </li>
+                <li>
+                  <strong>이메일</strong> {member.email}
+                </li>
+                <li>
+                  <strong>주소</strong> {member.addr}
+                </li>
+                <li>
+                  <strong>이메일 수신동의</strong>{" "}
+                  {member.consent ?? member.agree ?? "-"}
+                </li>
+                <li>
+                  <strong>등급</strong> {member.grade}
+                </li>
+                <li>
+                  <strong>상태</strong> {member.status}
+                </li>
+                <li>
+                  <strong>가입일</strong> {member.joinedAt}
+                </li>
               </ul>
 
               <div className="btn-group">
-                <button className="btn back" onClick={goList}>목록으로</button>
-                <Link to={`/MmEdit/${member.id}`} className="btn" state={{ member }}>
+                <button className="btn back" onClick={goList}>
+                  목록으로
+                </button>
+                <Link
+                  to={`/mmEdit/${member.id}`}
+                  className="btn"
+                  state={{ member }}
+                >
                   수정하기
                 </Link>
                 <button className="btn delete" onClick={onAskDelete}>

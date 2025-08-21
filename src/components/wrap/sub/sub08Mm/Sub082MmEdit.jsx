@@ -5,7 +5,10 @@ import "./scss/Sub082MmEdit.scss";
 import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
+import {
+  confirmModalAction,
+  confirmModalYesNoAction,
+} from "../../../../store/confirmModal";
 
 function Sub082MmEdit() {
   const { id } = useParams();
@@ -19,8 +22,7 @@ function Sub082MmEdit() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
 
-
-  const normalizeStatus = (s) => (s === "휴먼" ? "휴면" : (s || "정상"));
+  const normalizeStatus = (s) => (s === "휴먼" ? "휴면" : s || "정상");
   const toForm = (m) => ({
     id: m.id ?? Number(id),
     userId: m.userId ?? "",
@@ -31,9 +33,9 @@ function Sub082MmEdit() {
     email: m.email ?? "",
     addr: m.addr ?? "",
 
-    consent: (m.consent ?? m.agree ?? "Y"),
+    consent: m.consent ?? m.agree ?? "Y",
 
-    grade: m.grade === "VIP회원" ? "일반회원" : (m.grade ?? "일반회원"),
+    grade: m.grade === "VIP회원" ? "일반회원" : m.grade ?? "일반회원",
     status: normalizeStatus(m.status),
     joinedAt: m.joinedAt ?? "",
   });
@@ -49,17 +51,22 @@ function Sub082MmEdit() {
 
   // 2) JSON에서 해당 회원 로드 (최상위 키: 회원정보)
   useEffect(() => {
-    const url = `${process.env.PUBLIC_URL || ""}/json/sub08/members.json?v=${Date.now()}`;
+    const url = `${
+      process.env.PUBLIC_URL || ""
+    }/json/sub08/members.json?v=${Date.now()}`;
     setLoading(true);
     setErr(null);
 
     axios
       .get(url, { headers: { "Cache-Control": "no-cache" } })
       .then((res) => {
-        const list =
-          Array.isArray(res.data?.회원정보) ? res.data.회원정보 :
-          Array.isArray(res.data?.members) ? res.data.members :
-          Array.isArray(res.data)          ? res.data : [];
+        const list = Array.isArray(res.data?.회원정보)
+          ? res.data.회원정보
+          : Array.isArray(res.data?.members)
+          ? res.data.members
+          : Array.isArray(res.data)
+          ? res.data
+          : [];
         const found = list.find((m) => String(m.id) === String(id));
         if (!found) {
           setForm(null);
@@ -70,7 +77,7 @@ function Sub082MmEdit() {
       .catch((e) => {
         const msg = e?.response
           ? `HTTP ${e.response.status} ${e.response.statusText}`
-          : (e?.message || "데이터 로드 실패");
+          : e?.message || "데이터 로드 실패";
         setErr(msg);
         console.error("[MmEdit] fetch error:", msg, "url:", url);
       })
@@ -99,18 +106,21 @@ function Sub082MmEdit() {
   useEffect(() => {
     if (modal.heading === "수정되었습니다." && modal.isON) {
       dispatch(confirmModalYesNoAction(false));
-      navigate(`/MmView/${form.id}`, { state: { member: form, updatedMember: form } });
+      navigate(`/MmView/${form.id}`, {
+        state: { member: form, updatedMember: form },
+      });
     }
   }, [modal.heading, modal.isON, navigate, form, dispatch]);
 
   const onCancel = () => navigate(`/MmView/${form?.id ?? id}`);
 
-
   if (loading) {
     return (
       <div id="Sub082MmEdit">
         <div className="admin-wrap">
-          <main className="main" style={{ padding: 40, textAlign: "center" }}>불러오는 중…</main>
+          <main className="main" style={{ padding: 40, textAlign: "center" }}>
+            불러오는 중…
+          </main>
         </div>
       </div>
     );
@@ -119,7 +129,10 @@ function Sub082MmEdit() {
     return (
       <div id="Sub082MmEdit">
         <div className="admin-wrap">
-          <main className="main" style={{ padding: 40, textAlign: "center", color: "#c00" }}>
+          <main
+            className="main"
+            style={{ padding: 40, textAlign: "center", color: "#c00" }}
+          >
             데이터를 불러오지 못했어요. ({err})
           </main>
         </div>
@@ -133,7 +146,9 @@ function Sub082MmEdit() {
           <main className="main" style={{ padding: 40, textAlign: "center" }}>
             해당 회원 정보를 찾을 수 없습니다.
             <div style={{ marginTop: 16 }}>
-              <button className="btn back" onClick={() => navigate("/Mm")}>목록으로</button>
+              <button className="btn back" onClick={() => navigate("/Mm")}>
+                목록으로
+              </button>
             </div>
           </main>
         </div>
@@ -144,14 +159,21 @@ function Sub082MmEdit() {
   return (
     <div id="Sub082MmEdit">
       <div className="admin-wrap">
-
         <aside className="sidebar">
           <h2>회원관리</h2>
           <ul>
-            <li><Link to="/Mm">회원리스트</Link></li>
-            <li><Link to="/MmGrade">회원등급설정</Link></li>
-            <li><Link to="/MmSign">회원가입설정</Link></li>
-            <li className="active"><Link to={`/MmEdit/${form.id}`}>회원수정</Link></li>
+            <li>
+              <Link to="/mm">회원리스트</Link>
+            </li>
+            <li>
+              <Link to="/mmGrade">회원등급설정</Link>
+            </li>
+            <li>
+              <Link to="/mmSign">회원가입설정</Link>
+            </li>
+            <li className="active">
+              <Link to={`/mmEdit/${form.id}`}>회원수정</Link>
+            </li>
           </ul>
         </aside>
 
@@ -164,17 +186,32 @@ function Sub082MmEdit() {
             <div className="grid">
               <div className="form-group">
                 <label htmlFor="userId">아이디</label>
-                <input id="userId" name="userId" value={form.userId} onChange={onChange} />
+                <input
+                  id="userId"
+                  name="userId"
+                  value={form.userId}
+                  onChange={onChange}
+                />
               </div>
 
               <div className="form-group">
                 <label htmlFor="name">이름</label>
-                <input id="name" name="name" value={form.name} onChange={onChange} />
+                <input
+                  id="name"
+                  name="name"
+                  value={form.name}
+                  onChange={onChange}
+                />
               </div>
 
               <div className="form-group">
                 <label htmlFor="gender">성별</label>
-                <select id="gender" name="gender" value={form.gender} onChange={onChange}>
+                <select
+                  id="gender"
+                  name="gender"
+                  value={form.gender}
+                  onChange={onChange}
+                >
                   <option value="여">여</option>
                   <option value="남">남</option>
                 </select>
@@ -182,24 +219,46 @@ function Sub082MmEdit() {
 
               <div className="form-group">
                 <label htmlFor="birth">생년월일</label>
-                <input id="birth" name="birth" value={form.birth} onChange={onChange} placeholder="YYYY-MM-DD" />
+                <input
+                  id="birth"
+                  name="birth"
+                  value={form.birth}
+                  onChange={onChange}
+                  placeholder="YYYY-MM-DD"
+                />
               </div>
 
               <div className="form-group">
                 <label htmlFor="phone">연락처</label>
-                <input id="phone" name="phone" value={form.phone} onChange={onChange} placeholder="010-0000-0000" />
+                <input
+                  id="phone"
+                  name="phone"
+                  value={form.phone}
+                  onChange={onChange}
+                  placeholder="010-0000-0000"
+                />
               </div>
 
               <div className="form-group">
                 <label htmlFor="email">이메일</label>
-                <input id="email" name="email" value={form.email} onChange={onChange} type="email" />
+                <input
+                  id="email"
+                  name="email"
+                  value={form.email}
+                  onChange={onChange}
+                  type="email"
+                />
               </div>
 
               <div className="form-group full">
                 <label htmlFor="addr">주소</label>
-                <input id="addr" name="addr" value={form.addr} onChange={onChange} />
+                <input
+                  id="addr"
+                  name="addr"
+                  value={form.addr}
+                  onChange={onChange}
+                />
               </div>
-
 
               <div className="form-group radio-group">
                 <label>이메일 수신동의</label>
@@ -227,7 +286,6 @@ function Sub082MmEdit() {
                 </div>
               </div>
 
-
               <div className="form-group">
                 <label>등급</label>
                 <div className="form-inline">
@@ -253,7 +311,6 @@ function Sub082MmEdit() {
                   </label>
                 </div>
               </div>
-
 
               <div className="form-group">
                 <label>상태</label>
@@ -293,13 +350,23 @@ function Sub082MmEdit() {
 
               <div className="form-group">
                 <label htmlFor="joinedAt">가입일</label>
-                <input id="joinedAt" name="joinedAt" value={form.joinedAt} onChange={onChange} disabled />
+                <input
+                  id="joinedAt"
+                  name="joinedAt"
+                  value={form.joinedAt}
+                  onChange={onChange}
+                  disabled
+                />
               </div>
             </div>
 
             <div className="btn-group">
-              <button className="btn back" onClick={onCancel}>취소</button>
-              <button className="btn" onClick={onSave}>저장</button>
+              <button className="btn back" onClick={onCancel}>
+                취소
+              </button>
+              <button className="btn" onClick={onSave}>
+                저장
+              </button>
             </div>
           </div>
         </main>

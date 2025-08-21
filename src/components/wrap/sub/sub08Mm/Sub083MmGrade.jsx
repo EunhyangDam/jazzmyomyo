@@ -3,12 +3,23 @@ import { Link } from "react-router-dom";
 import "./scss/Sub083MmGrade.scss";
 
 import { useDispatch, useSelector } from "react-redux";
-import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
+import {
+  confirmModalAction,
+  confirmModalYesNoAction,
+} from "../../../../store/confirmModal";
 
 const STORAGE_KEY = "mm_grades";
 const DEFAULT_GRADES = [
-  { name: "일반회원", condition: "누구나 가입 즉시", benefit: "기본 혜택 제공" },
-  { name: "단골회원", condition: "총 주문금액 10만원 이상", benefit: "10% 할인 쿠폰 제공" },
+  {
+    name: "일반회원",
+    condition: "누구나 가입 즉시",
+    benefit: "기본 혜택 제공",
+  },
+  {
+    name: "단골회원",
+    condition: "총 주문금액 10만원 이상",
+    benefit: "10% 할인 쿠폰 제공",
+  },
 ];
 
 function Sub083MmGrade() {
@@ -62,7 +73,6 @@ function Sub083MmGrade() {
         })
       );
     } catch (e) {
-
       dispatch(
         confirmModalAction({
           heading: "저장 중 오류가 발생했습니다.",
@@ -92,23 +102,22 @@ function Sub083MmGrade() {
   return (
     <div id="sub083MmGrade">
       <div className="admin-wrap">
-
         <aside className="sidebar">
           <h2>회원관리</h2>
           <ul>
             <li>
-              <Link to="/Mm">회원리스트</Link>
+              <Link to="/mm">회원리스트</Link>
             </li>
             <li className="active">
-              <Link to="/MmGrade">회원등급설정</Link>
+              <Link to="/mmGrade">회원등급설정</Link>
             </li>
             <li>
-              <Link to="/MmSign">회원가입설정</Link>
+              <Link to="/mmSign">회원가입설정</Link>
             </li>
           </ul>
         </aside>
 
-      <main className="main">
+        <main className="main">
           <div className="page-header">
             <h1>회원등급 설정</h1>
           </div>
@@ -135,7 +144,9 @@ function Sub083MmGrade() {
                     <input
                       type="text"
                       value={g.condition}
-                      onChange={(e) => updateField(i, "condition", e.target.value)}
+                      onChange={(e) =>
+                        updateField(i, "condition", e.target.value)
+                      }
                     />
                   </div>
 
@@ -143,7 +154,9 @@ function Sub083MmGrade() {
                     <input
                       type="text"
                       value={g.benefit}
-                      onChange={(e) => updateField(i, "benefit", e.target.value)}
+                      onChange={(e) =>
+                        updateField(i, "benefit", e.target.value)
+                      }
                     />
                   </div>
                 </li>

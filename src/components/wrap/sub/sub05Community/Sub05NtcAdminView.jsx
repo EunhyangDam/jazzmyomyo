@@ -2,7 +2,10 @@ import React from "react";
 import axios from "axios";
 import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
+import {
+  confirmModalAction,
+  confirmModalYesNoAction,
+} from "../../../../store/confirmModal";
 import "./scss/Sub05NtcAdminView.scss";
 
 function Sub05NtcAdminView() {
@@ -107,12 +110,18 @@ function Sub05NtcAdminView() {
     <div id="Sub05NtcAdminView">
       <div className="container">
         <div className="sangdan">
-          <Link to="/"><i className="bi bi-house-door-fill" /></Link>
-          <span className="sep"><i className="bi bi-chevron-right" /></span>
+          <Link to="/">
+            <i className="bi bi-house-door-fill" />
+          </Link>
+          <span className="sep">
+            <i className="bi bi-chevron-right" />
+          </span>
           <span className="admin">관리자페이지</span>
         </div>
 
-        <h2 className="page-title"><i class="bi bi-gear"></i> 공지사항 관리자</h2>
+        <h2 className="page-title">
+          <i class="bi bi-gear"></i> 공지사항 관리자
+        </h2>
 
         {!notice ? (
           <div className="content-box empty">존재하지 않는 글입니다.</div>
@@ -127,8 +136,12 @@ function Sub05NtcAdminView() {
                   <span className="file">파일첨부</span>
                 </div>
                 <div className="meta-right">
-                  <button className="btn delete" onClick={onClickDeleteBtn}>삭제</button>
-                  <Link to={`/NtcAdminE/${notice.id}`} className="btn edit">수정</Link>
+                  <button className="btn delete" onClick={onClickDeleteBtn}>
+                    삭제
+                  </button>
+                  <Link to={`/ntcAdminE/${notice.id}`} className="btn edit">
+                    수정
+                  </Link>
                   {/* <button className="btn upload">업로드</button> */}
                 </div>
               </div>
@@ -147,7 +160,12 @@ function Sub05NtcAdminView() {
             </div>
 
             <div className="foot">
-              <button className="btn list" onClick={() => navigate("/NtcAdmin")}>목록</button>
+              <button
+                className="btn list"
+                onClick={() => navigate("/NtcAdmin")}
+              >
+                목록
+              </button>
             </div>
           </div>
         )}

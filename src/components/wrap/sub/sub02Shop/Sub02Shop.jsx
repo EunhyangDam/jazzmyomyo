@@ -126,7 +126,7 @@ function Sub02Shop(props) {
     <div id="sub02Shop">
       <div id="wrap">
         <div className="title">
-          <Link to="/Shop">
+          <Link to="/shop">
             <h2>shop</h2>
           </Link>
         </div>
@@ -134,12 +134,12 @@ function Sub02Shop(props) {
           <div className="category-name">
             <ul>
               <li>
-                <NavLink to="/Shop?category=굿즈">
+                <NavLink to="/shop?category=굿즈">
                   <span>굿즈</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/Shop?category=음반">
+                <NavLink to="/shop?category=음반">
                   <span>음반/LP</span>
                 </NavLink>
               </li>
@@ -175,7 +175,7 @@ function Sub02Shop(props) {
                 data-key={item.상품명}
               >
                 <div className="gap">
-                  <Link to="/ShopDetail" state={item}>
+                  <Link to="/shopDetail" state={item}>
                     <img
                       src={
                         item.이미지.length > 1 ? item.이미지[0] : item.이미지
@@ -200,7 +200,7 @@ function Sub02Shop(props) {
                   </div>
                 </div>
                 <div className="caption-box">
-                  <Link to="/ShopDetail" state={item}>
+                  <Link to="/shopDetail" state={item}>
                     {item.상품명.includes("-") ? (
                       <>
                         <span>{item.상품명.split("-")[1]}</span>

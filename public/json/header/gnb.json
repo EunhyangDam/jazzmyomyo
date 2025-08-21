@@ -3,69 +3,67 @@
     {
       "id": "sub01AboutUs",
       "main": "About us",
-      "link": "AboutUs",
+      "link": "aboutUs",
       "sub": [
-        { "name": "재즈묘묘", "link": "AboutUs" },
-        { "name": "어바웃 묘묘", "link": "MyoMyo" },
-        { "name": "인테리어", "link": "Interior" }
+        { "name": "재즈묘묘", "link": "aboutUs" },
+        { "name": "어바웃 묘묘", "link": "myoMyo" },
+        { "name": "인테리어", "link": "interior" }
       ]
     },
     {
       "id": "sub02Shop",
       "main": "Shop",
-      "link": "Shop",
+      "link": "shop",
       "sub": [
-        { "name": "굿즈", "link": "Shop?category=굿즈" },
-        { "name": "LP/CD", "link": "Shop?category=음반" }
+        { "name": "굿즈", "link": "shop?category=굿즈" },
+        { "name": "LP/CD", "link": "shop?category=음반" }
       ]
     },
     {
       "id": "sub030Menu",
       "main": "Menu",
-      "link": "Menu",
+      "link": "menu",
       "sub": [
-        { "name": "와인", "link": "Wine" },
-        { "name": "주류&음료", "link": "Drinks" },
-        { "name": "플래터 & 핑거푸드", "link": "Food" },
-        { "name": "묘한 세트", "link": "Set" },
-        { "name": "사전주문", "link": "Pre" }
+        { "name": "와인", "link": "wine" },
+        { "name": "주류&음료", "link": "drinks" },
+        { "name": "플래터 & 핑거푸드", "link": "food" },
+        { "name": "묘한 세트", "link": "set" },
+        { "name": "사전주문", "link": "pre" }
       ]
     },
     {
       "id": "AboutLive",
       "main": "Schedule",
-      "link": "Monthly",
+      "link": "monthly",
       "sub": [
-        { "name": "캘린더", "link": "Monthly" },
-        { "name": "아티스트 정보", "link": "Artist" },
-        { "name": "티켓 예매", "link": "BuyTicket" },
-        { "name": "대관 신청", "link": "Lental" }
+        { "name": "캘린더", "link": "monthly" },
+        { "name": "아티스트 정보", "link": "artist" },
+        { "name": "티켓 예매", "link": "buyTicket" },
+        { "name": "대관 신청", "link": "lental" }
       ]
     },
     {
       "id": "Faq",
       "main": "Community",
-      "link": "Faq",
+      "link": "faq",
       "sub": [
-        { "name": "공지사항", "link": "Ntc" },
-        { "name": "FAQ", "link": "Faq" },
-        { "name": "갤러리", "link": "Gall" },
-        { "name": "공연 후기", "link": "Rev" },
-        { "name": "이벤트", "link": "" }
-      ],
-      "sub link": ["Ntc", "Faq", "Gall", "Sns"]
+        { "name": "공지사항", "link": "ntc" },
+        { "name": "FAQ", "link": "faq" },
+        { "name": "갤러리", "link": "gall" },
+        { "name": "공연 후기", "link": "rev" }
+      ]
     },
     {
       "id": "login",
       "main": "로그인",
-      "link": "Lg",
+      "link": "lg",
       "sub": [],
       "sub link": []
     },
     {
       "id": "signIn",
       "main": "회원가입",
-      "link": "SignUp",
+      "link": "signUp",
       "sub": [],
       "sub link": []
     }

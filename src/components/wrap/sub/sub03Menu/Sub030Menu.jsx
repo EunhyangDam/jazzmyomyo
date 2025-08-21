@@ -1,5 +1,5 @@
 import React from "react";
-import './scss/Sub030Menu.scss';
+import "./scss/Sub030Menu.scss";
 import { Link } from "react-router-dom";
 
 function Sub030Menu() {
@@ -10,7 +10,7 @@ function Sub030Menu() {
         { name: "Chablis", price: "₩35,000" },
         { name: "Argento Malbec", price: "₩42,000" },
         { name: "Shiraz Whisper", price: "₩46,000" },
-      ]
+      ],
     },
     {
       group: "화이트 와인 (White)",
@@ -18,7 +18,7 @@ function Sub030Menu() {
         { name: "Riesling Touch", price: "₩39,000" },
         { name: "Brut Rosé", price: "₩45,000" },
         { name: "Petit Chablis", price: "₩41,000" },
-      ]
+      ],
     },
     {
       group: "스파클링 와인 (Sparkling)",
@@ -26,7 +26,7 @@ function Sub030Menu() {
         { name: "Moscato Dream", price: "₩48,000" },
         { name: "Crémant Rosé", price: "₩52,000" },
         { name: "Cava Estrella", price: "₩40,000" },
-      ]
+      ],
     },
   ];
 
@@ -38,7 +38,7 @@ function Sub030Menu() {
         { name: "스텔라 아르투아 330ml", price: "₩9,000" },
         { name: "허니문배 Draft 330ml", price: "₩8,500" },
         { name: "흑맥주", price: "₩9,000" },
-      ]
+      ],
     },
     {
       group: "칵테일 (Cocktail)",
@@ -47,7 +47,7 @@ function Sub030Menu() {
         { name: "모스카토 선셋", price: "₩11,000" },
         { name: "클래식 네그로니", price: "₩12,000" },
         { name: "마티니 드라이", price: "₩12,000" },
-      ]
+      ],
     },
     {
       group: "위스키 (Whisky)",
@@ -56,7 +56,7 @@ function Sub030Menu() {
         { name: "제임슨", price: "₩13,000" },
         { name: "잭다니엘", price: "₩13,000" },
         { name: "시바스대갈", price: "₩14,000" },
-      ]
+      ],
     },
     {
       group: "무알콜 / 음료 (Non-Alcoholic)",
@@ -65,7 +65,7 @@ function Sub030Menu() {
         { name: "자몽에이드", price: "₩7,000" },
         { name: "탄산음료", price: "₩3,000" },
         { name: "에비앙", price: "₩4,000" },
-      ]
+      ],
     },
   ];
 
@@ -101,25 +101,36 @@ function Sub030Menu() {
           <p className="subtitle">Jazz와 어울리는 한 잔, 그리고 한 입</p>
 
           <nav className="menu-nav">
-              <Link to="/Wine"><span>WINE</span></Link>
-              <Link to="/Drinks"><span>DRINKS</span></Link>
-              <Link to="/Food"><span>FOOD</span></Link>
-              <Link to="/Set"><span>MYOHAN SET</span></Link>
-              <Link to="/Pre"><span>PRE-OREDER</span></Link>
+            <Link to="/wine">
+              <span>WINE</span>
+            </Link>
+            <Link to="/drinks">
+              <span>DRINKS</span>
+            </Link>
+            <Link to="/food">
+              <span>FOOD</span>
+            </Link>
+            <Link to="/set">
+              <span>MYOHAN SET</span>
+            </Link>
+            <Link to="/pre">
+              <span>PRE-OREDER</span>
+            </Link>
           </nav>
 
           <div className="paper-sections">
             <div className="section" id="wine">
               <h2>
-                <Link to='/Wine'>와인</Link>
-                </h2>
+                <Link to="/Wine">와인</Link>
+              </h2>
               {wineData.map((group, idx) => (
                 <div className="subgroup" key={idx}>
                   <h3>{group.group}</h3>
                   <ul className="menu-ul">
                     {group.items.map((item, i) => (
                       <li className="menu-title" key={i}>
-                        <span>{item.name}</span><span>{item.price}</span>
+                        <span>{item.name}</span>
+                        <span>{item.price}</span>
                       </li>
                     ))}
                   </ul>
@@ -128,8 +139,8 @@ function Sub030Menu() {
             </div>
 
             <div className="section" id="drink">
-              <h2> 
-              <Link to='/Drinks'>주류 & 음료</Link>
+              <h2>
+                <Link to="/drinks">주류 & 음료</Link>
               </h2>
               {drinkData.map((group, idx) => (
                 <div className="subgroup" key={idx}>
@@ -137,7 +148,8 @@ function Sub030Menu() {
                   <ul className="menu-ul">
                     {group.items.map((item, i) => (
                       <li className="menu-title" key={i}>
-                        <span>{item.name}</span><span>{item.price}</span>
+                        <span>{item.name}</span>
+                        <span>{item.price}</span>
                       </li>
                     ))}
                   </ul>
@@ -147,12 +159,13 @@ function Sub030Menu() {
 
             <div className="section" id="platter">
               <h2>
-              <Link to='/Food'>플래터 & 핑거푸드</Link>
+                <Link to="/food">플래터 & 핑거푸드</Link>
               </h2>
               <ul className="menu-ul">
                 {platterItems.map((item, idx) => (
                   <li className="menu-title" key={idx}>
-                    <span>{item.name}</span><span>{item.price}</span>
+                    <span>{item.name}</span>
+                    <span>{item.price}</span>
                   </li>
                 ))}
               </ul>
@@ -160,12 +173,13 @@ function Sub030Menu() {
 
             <div className="section" id="set">
               <h2>
-              <Link to='/Set'>묘한세트</Link>  
+                <Link to="/set">묘한세트</Link>
               </h2>
               <ul className="menu-ul">
                 {setItems.map((item, idx) => (
                   <li className="menu-title" key={idx}>
-                    <span>{item.name}</span><span>{item.price}</span>
+                    <span>{item.name}</span>
+                    <span>{item.price}</span>
                   </li>
                 ))}
               </ul>
@@ -173,9 +187,12 @@ function Sub030Menu() {
 
             <div className="section" id="preorder">
               <h2>
-                <Link to='/Pre'>사전주문</Link>
+                <Link to="/pre">사전주문</Link>
               </h2>
-              <p>공연 전 미리 음식을 준비해서<br/> 여유롭게 즐기세요!</p>
+              <p>
+                공연 전 미리 음식을 준비해서
+                <br /> 여유롭게 즐기세요!
+              </p>
             </div>
 
             <div className="section logo-section">

@@ -121,13 +121,15 @@ function Sub04BuyTicket(props) {
         className={`calendar-cell ${isToday ? "today" : ""} ${
           isSelected ? "selected" : ""
         }`}
-        onClick={() => setSelectedDate(dateObj)}>
+        onClick={() => setSelectedDate(dateObj)}
+      >
         <span
           className="date-circle"
           style={{
             color:
               weekday === 0 ? "#dd0000" : weekday === 6 ? "#003cff" : undefined,
-          }}>
+          }}
+        >
           {d}
         </span>
         <div className="dots">
@@ -292,12 +294,14 @@ function Sub04BuyTicket(props) {
           <div className="type-tabs">
             <button
               className={`tab ${isGuest ? "active" : ""}`}
-              onClick={handleGuestClick}>
+              onClick={handleGuestClick}
+            >
               <span className="checkbox" /> 비회원 예약
             </button>
             <button
               className={`tab ${!isGuest ? "active" : ""}`}
-              onClick={handleMemberClick}>
+              onClick={handleMemberClick}
+            >
               <span className="checkbox" /> 회원예약
             </button>
           </div>
@@ -335,7 +339,7 @@ function Sub04BuyTicket(props) {
               </div>
               <div className="cat-area">
                 <div className="gap">
-                  <Link to="/SignUp">
+                  <Link to="/signUp">
                     <img src="./img/resavation_cat.png" alt="고양이" />
                   </Link>
                 </div>
@@ -356,7 +360,8 @@ function Sub04BuyTicket(props) {
               <button
                 key={item}
                 className={`person-btn ${peopleCount === item ? "active" : ""}`}
-                onClick={handlePeopleClick(item)}>
+                onClick={handlePeopleClick(item)}
+              >
                 {item} 명
               </button>
             ))}
@@ -427,7 +432,8 @@ function Sub04BuyTicket(props) {
                             ? "selected"
                             : ""
                         }`}
-                        onClick={handleChoosePerformance(item)}>
+                        onClick={handleChoosePerformance(item)}
+                      >
                         선택
                       </button>
                     </div>
@@ -455,12 +461,14 @@ function Sub04BuyTicket(props) {
                 className={`confirm-btn ${
                   selected === "yes" ? "selected" : ""
                 }`}
-                onClick={handleConfirmYes}>
+                onClick={handleConfirmYes}
+              >
                 예
               </button>
               <button
                 className={`confirm-btn ${selected === "no" ? "selected" : ""}`}
-                onClick={handleConfirmNo}>
+                onClick={handleConfirmNo}
+              >
                 아니오
               </button>
             </div>

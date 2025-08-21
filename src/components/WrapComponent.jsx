@@ -46,6 +46,10 @@ import Sub07EditProfile from "./wrap/sub/sub07Mp/Sub07EditProfile";
 import Sub07Mp from "./wrap/sub/sub07Mp/Sub07Mp";
 import Sub07MyOrder from "./wrap/sub/sub07Mp/Sub07MyOrder";
 import Sub07MyProfile from "./wrap/sub/sub07Mp/Sub07MyProfile";
+import Sub07MyOrderMd from "./wrap/sub/sub07Mp/Sub07MyOrderMd";
+import Sub07MyOrderMenu from "./wrap/sub/sub07Mp/Sub07MyOrderMenu";
+import Sub07MyOrderTk from "./wrap/sub/sub07Mp/Sub07MyOrderTk";
+import Sub07MyOrderRental from "./wrap/sub/sub07Mp/Sub07MyOrderRental";
 
 import Sub080Mm from "./wrap/sub/sub08Mm/Sub080Mm";
 import Sub081MmView from "./wrap/sub/sub08Mm/Sub081MmView";
@@ -114,72 +118,72 @@ export default function WrapComponent(props) {
 
     // About
 
-    if (path.startsWith("/AboutUs")) return "footer--aboutus";
+    if (path.startsWith("/aboutUs")) return "footer--aboutus";
 
     if (
-      path.startsWith("/About") ||
-      path.startsWith("/Interior") ||
-      path.startsWith("/MyoMyo") ||
-      path.startsWith("/Story")
+      path.startsWith("/about") ||
+      path.startsWith("/interior") ||
+      path.startsWith("/myoMyo") ||
+      path.startsWith("/story")
     )
       return "footer--about";
 
     // Shop
-    if (path.startsWith("/Shop") || path.startsWith("/ShopDetail"))
+    if (path.startsWith("/shop") || path.startsWith("/shopDetail"))
       return "footer--shop";
 
     // Menu
-    if (path.startsWith("/Menu") || path.startsWith("/Pre"))
+    if (path.startsWith("/menu") || path.startsWith("/pre"))
       return "footer--menu-pre";
 
     // Wine, Drinks, Food, Set
     if (
-      path.startsWith("/Wine") ||
-      path.startsWith("/Drinks") ||
-      path.startsWith("/Food") ||
-      path.startsWith("/Set")
+      path.startsWith("/wine") ||
+      path.startsWith("/drinks") ||
+      path.startsWith("/food") ||
+      path.startsWith("/set")
     )
       return "footer--menu-etc";
 
     // Schedule
     if (
-      path.startsWith("/AboutLive") ||
-      path.startsWith("/Artist") ||
-      path.startsWith("/BuyTicket") ||
-      path.startsWith("/Lental") ||
-      path.startsWith("/Monthly")
+      path.startsWith("/aboutLive") ||
+      path.startsWith("/artist") ||
+      path.startsWith("/buyTicket") ||
+      path.startsWith("/lental") ||
+      path.startsWith("/monthly")
     )
       return "footer--schedule";
 
     // Community
     if (
-      path.startsWith("/Faq") ||
-      path.startsWith("/Gall") ||
-      path.startsWith("/Ntc") ||
-      path.startsWith("/Rev") ||
-      path.startsWith("/Sns")
+      path.startsWith("/faq") ||
+      path.startsWith("/gall") ||
+      path.startsWith("/ntc") ||
+      path.startsWith("/rev") ||
+      path.startsWith("/sns")
     )
       return "footer--community";
 
     // Login / My page
     if (
-      path.startsWith("/Lg") ||
-      path.startsWith("/SearchId") ||
-      path.startsWith("/SearchRs") ||
-      path.startsWith("/AddressList") ||
-      path.startsWith("/DeleteAccount") ||
-      path.startsWith("/EditProfile") ||
-      path.startsWith("/Mp") ||
-      path.startsWith("/MyOrder") ||
-      path.startsWith("/MyProfile")
+      path.startsWith("/lg") ||
+      path.startsWith("/searchId") ||
+      path.startsWith("/searchRs") ||
+      path.startsWith("/addressList") ||
+      path.startsWith("/deleteAccount") ||
+      path.startsWith("/editProfile") ||
+      path.startsWith("/mp") ||
+      path.startsWith("/myOrder") ||
+      path.startsWith("/myProfile")
     )
       return "footer--mypage";
 
     // Member Management
-    if (path.startsWith("/Mm")) return "footer--mm";
+    if (path.startsWith("/mm")) return "footer--mm";
 
     // Cart / Wishlist
-    if (path.startsWith("/Cart") || path.startsWith("/Wishlist"))
+    if (path.startsWith("/cart") || path.startsWith("/wishlist"))
       return "footer--cart";
 
     return "footer--default";
@@ -193,61 +197,65 @@ export default function WrapComponent(props) {
           <Route index element={<MainComponent />} />
           {/* 서브페이지 */}
           <Route path="/mainComponent" element={<MainComponent />} />
-          <Route path="/AboutUs" element={<Sub01AboutUs />} />
-          <Route path="/Interior" element={<Sub01Interior />} />
-          <Route path="/MyoMyo" element={<Sub01MyoMyo />} />
-          <Route path="/Story" element={<Sub01Story />} />
-          <Route path="/ShopDetail" element={<Sub02ShopDetail />} />
-          <Route path="/Shop" element={<Sub02Shop />} />
-          <Route path="/Menu" element={<Sub030Menu />} />
-          <Route path="/Wine" element={<Sub031Wine />} />
-          <Route path="/Drinks" element={<Sub032Drinks />} />
-          <Route path="/Food" element={<Sub033Food />} />
-          <Route path="/Set" element={<Sub034Set />} />
-          <Route path="/Pre" element={<Sub035Pre />} />
-          <Route path="/PreV/view/:id" element={<Sub035PreView />} />
-          <Route path="/PreW" element={<Sub035PreWrite />} />
-          <Route path="/PreE/edit/:id" element={<Sub035PreEdit />} />
+          <Route path="/aboutUs" element={<Sub01AboutUs />} />
+          <Route path="/interior" element={<Sub01Interior />} />
+          <Route path="/myoMyo" element={<Sub01MyoMyo />} />
+          <Route path="/story" element={<Sub01Story />} />
+          <Route path="/shopDetail" element={<Sub02ShopDetail />} />
+          <Route path="/shop" element={<Sub02Shop />} />
+          <Route path="/menu" element={<Sub030Menu />} />
+          <Route path="/wine" element={<Sub031Wine />} />
+          <Route path="/drinks" element={<Sub032Drinks />} />
+          <Route path="/food" element={<Sub033Food />} />
+          <Route path="/set" element={<Sub034Set />} />
+          <Route path="/pre" element={<Sub035Pre />} />
+          <Route path="/preV/view/:id" element={<Sub035PreView />} />
+          <Route path="/preW" element={<Sub035PreWrite />} />
+          <Route path="/preE/edit/:id" element={<Sub035PreEdit />} />
 
-          <Route path="/AboutLive" element={<Sub04AboutLive />} />
-          <Route path="/Artist" element={<Sub04Artist />} />
-          <Route path="/BuyTicket" element={<Sub04BuyTicket />} />
-          <Route path="/Lental" element={<Sub04Lental />} />
-          <Route path="/Monthly" element={<Sub04Monthly />} />
+          <Route path="/aboutLive" element={<Sub04AboutLive />} />
+          <Route path="/artist" element={<Sub04Artist />} />
+          <Route path="/buyTicket" element={<Sub04BuyTicket />} />
+          <Route path="/lental" element={<Sub04Lental />} />
+          <Route path="/monthly" element={<Sub04Monthly />} />
 
-          <Route path="/Faq" element={<Sub05Faq />} />
-          <Route path="/Gall" element={<Sub05Gall />} />
-          <Route path="/Ntc" element={<Sub05Ntc />} />
-          <Route path="/Rev" element={<Sub05Rev />} />
-          <Route path="/RevWrite" element={<Sub05RevWrite />} />
-          <Route path="/Sns" element={<Sub05Sns />} />
+          <Route path="/faq" element={<Sub05Faq />} />
+          <Route path="/gall" element={<Sub05Gall />} />
+          <Route path="/ntc" element={<Sub05Ntc />} />
+          <Route path="/rev" element={<Sub05Rev />} />
+          <Route path="/revWrite" element={<Sub05RevWrite />} />
+          <Route path="/sns" element={<Sub05Sns />} />
 
-          <Route path="/NtcV/:id" element={<Sub05NtcView />} />
-          <Route path="/NtcAdminV/:id" element={<Sub05NtcAdminView />} />
-          <Route path="/NtcAdminE/:id" element={<Sub05NtcAdminEdit />} />
-          <Route path="/NtcAdmin" element={<Sub05NtcAdmin />} />
-          <Route path="/NtcAdminW" element={<Sub05NtcAdminWrite />} />
+          <Route path="/ntcV/:id" element={<Sub05NtcView />} />
+          <Route path="/ntcAdminV/:id" element={<Sub05NtcAdminView />} />
+          <Route path="/ntcAdminE/:id" element={<Sub05NtcAdminEdit />} />
+          <Route path="/ntcAdmin" element={<Sub05NtcAdmin />} />
+          <Route path="/ntcAdminW" element={<Sub05NtcAdminWrite />} />
 
-          <Route path="/Lg" element={<Sub06Lg />} />
-          <Route path="/SearchId" element={<Sub06SearchId />} />
-          <Route path="/SearchRs" element={<Sub06SearchRs />} />
-          <Route path="/SignUp" element={<Sub06SignUp />} />
+          <Route path="/lg" element={<Sub06Lg />} />
+          <Route path="/searchId" element={<Sub06SearchId />} />
+          <Route path="/searchRs" element={<Sub06SearchRs />} />
+          <Route path="/signUp" element={<Sub06SignUp />} />
           {/* 배송지 관리 컴포넌트 추가 */}
-          <Route path="/AddressList" element={<Sub07AddressList />} />
-          <Route path="/DeleteAccount" element={<Sub07DeleteAccount />} />
-          <Route path="/EditProfile" element={<Sub07EditProfile />} />
-          <Route path="/Mp" element={<Sub07Mp />} />
-          <Route path="/MyOrder" element={<Sub07MyOrder />} />
-          <Route path="/MyProfile" element={<Sub07MyProfile />} />
+          <Route path="/addressList" element={<Sub07AddressList />} />
+          <Route path="/deleteAccount" element={<Sub07DeleteAccount />} />
+          <Route path="/editProfile" element={<Sub07EditProfile />} />
+          <Route path="/mp" element={<Sub07Mp />} />
+          <Route path="/myOrder" element={<Sub07MyOrder />} />
+          <Route path="/myProfile" element={<Sub07MyProfile />} />
+          <Route path="/myOrderMd" element={<Sub07MyOrderMd />} />
+          <Route path="/myOrderMenu" element={<Sub07MyOrderMenu />} />
+          <Route path="/myOrderTk" element={<Sub07MyOrderTk />} />
+          <Route path="/myOrderRental" element={<Sub07MyOrderRental />} />
 
-          <Route path="/Mm" element={<Sub080Mm />} />
-          <Route path="/MmView/:id" element={<Sub081MmView />} />
-          <Route path="/MmEdit/:id" element={<Sub082MmEdit />} />
-          <Route path="/MmGrade" element={<Sub083MmGrade />} />
-          <Route path="/MmSign" element={<Sub084MmSign />} />
+          <Route path="/mm" element={<Sub080Mm />} />
+          <Route path="/mmView/:id" element={<Sub081MmView />} />
+          <Route path="/mmEdit/:id" element={<Sub082MmEdit />} />
+          <Route path="/mmGrade" element={<Sub083MmGrade />} />
+          <Route path="/mmSign" element={<Sub084MmSign />} />
 
-          <Route path="/Cart" element={<Sub09Cart />} />
-          <Route path="/Wishlist" element={<Sub10Wishlist />} />
+          <Route path="/cart" element={<Sub09Cart />} />
+          <Route path="/wishlist" element={<Sub10Wishlist />} />
           <Route path="/*" element={<Page404Component />} />
         </Route>
       </Routes>

@@ -56,9 +56,13 @@ function Sub05NtcAdmin() {
     }
     const filtered = state.공지사항.filter((item) => {
       if (state.검색조건 === "subject") {
-        return String(item.subject ?? "").toLowerCase().includes(q);
+        return String(item.subject ?? "")
+          .toLowerCase()
+          .includes(q);
       } else if (state.검색조건 === "date") {
-        return String(item.date ?? "").toLowerCase().includes(q);
+        return String(item.date ?? "")
+          .toLowerCase()
+          .includes(q);
       }
       return false;
     });
@@ -83,14 +87,22 @@ function Sub05NtcAdmin() {
           <Link to="/mainComponent" aria-label="홈으로">
             <i className="bi bi-house-door-fill" />
           </Link>
-          <span className="sep"><i className="bi bi-chevron-right"></i></span>
+          <span className="sep">
+            <i className="bi bi-chevron-right"></i>
+          </span>
           <span className="admin">관리자페이지</span>
         </div>
 
         <div className="title-row">
-          <h2><i class="bi bi-gear"></i> 공지사항 관리자</h2>
+          <h2>
+            <i class="bi bi-gear"></i> 공지사항 관리자
+          </h2>
           <form className="search-form" onSubmit={onSubmitSearch}>
-            <select value={state.검색조건} onChange={onChangeFilter} aria-label="검색조건 선택">
+            <select
+              value={state.검색조건}
+              onChange={onChangeFilter}
+              aria-label="검색조건 선택"
+            >
               <option value="">검색조건</option>
               <option value="subject">제목</option>
               <option value="date">날짜</option>
@@ -124,7 +136,7 @@ function Sub05NtcAdmin() {
                   <li key={item._rowId} className="row">
                     <span className="col-num">{runningNumber}</span>
                     <span className="col-title">
-                      <Link to={`/NtcAdminV/${item.idx}`} state={item}>
+                      <Link to={`/ntcAdminV/${item.idx}`} state={item}>
                         {item.subject}
                       </Link>
                     </span>
@@ -141,11 +153,17 @@ function Sub05NtcAdmin() {
         </div>
 
         <div className="list-actions">
-          <Link to="/NtcAdminW" className="write-btn">글쓰기</Link>
+          <Link to="/ntcAdminW" className="write-btn">
+            글쓰기
+          </Link>
         </div>
 
         {totalPages > 1 && (
-          <div className="pagenation" role="navigation" aria-label="페이지네이션">
+          <div
+            className="pagenation"
+            role="navigation"
+            aria-label="페이지네이션"
+          >
             <button
               onClick={() => setCurrentPage(1)}
               disabled={currentPage === 1}

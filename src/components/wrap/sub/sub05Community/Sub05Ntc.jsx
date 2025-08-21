@@ -57,9 +57,13 @@ function Sub05Ntc() {
 
     const filtered = state.공지사항.filter((item) => {
       if (state.검색조건 === "subject") {
-        return String(item.subject ?? "").toLowerCase().includes(q);
+        return String(item.subject ?? "")
+          .toLowerCase()
+          .includes(q);
       } else if (state.검색조건 === "date") {
-        return String(item.date ?? "").toLowerCase().includes(q);
+        return String(item.date ?? "")
+          .toLowerCase()
+          .includes(q);
       }
       return false;
     });
@@ -85,12 +89,14 @@ function Sub05Ntc() {
           <Link to="/mainComponent" aria-label="홈으로">
             <i className="bi bi-house-door-fill" />
           </Link>
-          <span className="sep"><i className="bi bi-chevron-right" /></span>
-          <span>커뮤니티</span>
-          <span className="sep"><i className="bi bi-chevron-right" /></span>
-          <span className="notice">
-            공지사항
+          <span className="sep">
+            <i className="bi bi-chevron-right" />
           </span>
+          <span>커뮤니티</span>
+          <span className="sep">
+            <i className="bi bi-chevron-right" />
+          </span>
+          <span className="notice">공지사항</span>
         </div>
 
         <div className="title-row">
@@ -136,7 +142,7 @@ function Sub05Ntc() {
                   <li key={item._rowId} className="row">
                     <span className="col-num">{runningNumber}</span>
                     <span className="col-title">
-                      <Link to={`/NtcV/${item.idx}`} state={item}>
+                      <Link to={`/ntcV/${item.idx}`} state={item}>
                         {item.subject}
                       </Link>
                     </span>
@@ -154,11 +160,17 @@ function Sub05Ntc() {
 
         {/* ⬇️ 리스트 바로 아래, 페이지네이션 위, 오른쪽 하단 */}
         <div className="admin-btn-wrap">
-          <Link to="/NtcAdmin" className="admin-btn">관리자페이지</Link>
+          <Link to="/ntcAdmin" className="admin-btn">
+            관리자페이지
+          </Link>
         </div>
 
         {totalPages > 1 && (
-          <div className="pagenation" role="navigation" aria-label="페이지네이션">
+          <div
+            className="pagenation"
+            role="navigation"
+            aria-label="페이지네이션"
+          >
             <button
               onClick={() => setCurrentPage(1)}
               disabled={currentPage === 1}

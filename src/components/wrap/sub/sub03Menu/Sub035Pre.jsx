@@ -12,7 +12,6 @@ export default function Sub03Pre() {
   const [err, setErr] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-
   const parseDate = (s) => {
     if (!s) return new Date(0);
     return new Date(String(s).replace(/\./g, "-"));
@@ -29,9 +28,9 @@ export default function Sub03Pre() {
           id: it.idx ?? i + 1,
           title: it.title ?? "",
           author: it.author ?? "",
-          date: it.reserveDate ?? "", 
-          created: it.writeDate ?? "",  
-          type: it.status ?? "",    
+          date: it.reserveDate ?? "",
+          created: it.writeDate ?? "",
+          type: it.status ?? "",
         }));
 
         const sorted = mapped.sort((a, b) => {
@@ -53,7 +52,8 @@ export default function Sub03Pre() {
   const currentPosts = posts.slice(indexOfFirst, indexOfLast);
 
   const goToPrev = () => currentPage > 1 && setCurrentPage((p) => p - 1);
-  const goToNext = () => currentPage < totalPages && setCurrentPage((p) => p + 1);
+  const goToNext = () =>
+    currentPage < totalPages && setCurrentPage((p) => p + 1);
 
   if (loading) {
     return (
@@ -62,7 +62,9 @@ export default function Sub03Pre() {
           <div className="clip" />
           <div className="paper">
             <h1>사전 예약 게시판</h1>
-            <p style={{ textAlign: "center", padding: "40px 0" }}>불러오는 중…</p>
+            <p style={{ textAlign: "center", padding: "40px 0" }}>
+              불러오는 중…
+            </p>
           </div>
         </div>
       </section>
@@ -76,7 +78,9 @@ export default function Sub03Pre() {
           <div className="clip" />
           <div className="paper">
             <h1>사전 예약 게시판</h1>
-            <p style={{ color: "#c00", textAlign: "center", padding: "40px 0" }}>
+            <p
+              style={{ color: "#c00", textAlign: "center", padding: "40px 0" }}
+            >
               데이터를 불러오지 못했어요. ({err})
             </p>
           </div>
@@ -92,23 +96,26 @@ export default function Sub03Pre() {
         <div className="paper">
           <h1>사전 예약 게시판</h1>
 
-          <Link to="/PreW" className="write-button">
+          <Link to="/preW" className="write-button">
             사전주문신청
           </Link>
 
-          <Link to="/PreAdmin" className="admin-link right">
+          <Link to="/preAdmin" className="admin-link right">
             관리자 페이지로 이동
           </Link>
 
           {currentPosts.length === 0 && (
-            <div className="card" style={{ textAlign: "center", color: "#666" }}>
+            <div
+              className="card"
+              style={{ textAlign: "center", color: "#666" }}
+            >
               등록된 예약이 없습니다.
             </div>
           )}
 
           {currentPosts.map((post) => (
             <div key={post.id} className="card">
-              <Link to={`/PreV/view/${post.id}`} className="card-title">
+              <Link to={`/preV/view/${post.id}`} className="card-title">
                 {post.title || "(제목 없음)"}
               </Link>
 
@@ -126,9 +133,15 @@ export default function Sub03Pre() {
                 </span>
               </p>
 
-              <p><strong>작성자:</strong> {post.author || "-"}</p>
-              <p><strong>예약일:</strong> {post.date || "-"}</p>
-              <p><strong>작성일:</strong> {post.created || "-"}</p>
+              <p>
+                <strong>작성자:</strong> {post.author || "-"}
+              </p>
+              <p>
+                <strong>예약일:</strong> {post.date || "-"}
+              </p>
+              <p>
+                <strong>작성일:</strong> {post.created || "-"}
+              </p>
             </div>
           ))}
 
@@ -136,7 +149,9 @@ export default function Sub03Pre() {
             <button onClick={goToPrev} disabled={currentPage === 1}>
               이전
             </button>
-            <span>{currentPage} / {totalPages}</span>
+            <span>
+              {currentPage} / {totalPages}
+            </span>
             <button onClick={goToNext} disabled={currentPage === totalPages}>
               다음
             </button>

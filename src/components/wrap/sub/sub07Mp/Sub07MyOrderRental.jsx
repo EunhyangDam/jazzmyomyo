@@ -9,12 +9,12 @@ function Sub07MyOrderRental(props) {
     <div id="sub07MyOrderRental">
       <div className="container">
         <div className="title">
-          <Link to="/MyOrder">
+          <Link to="/myOrder">
             <h2>My Order</h2>
           </Link>
         </div>
         <SiteMapComponent
-          firstLink="/Mp"
+          firstLink="/mp"
           firstName="마이페이지"
           secondLink="./"
           secondName="대관신청 내역"

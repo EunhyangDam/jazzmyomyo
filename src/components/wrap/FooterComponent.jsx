@@ -123,7 +123,7 @@ export default function FooterComponent({ footerClass = "footer--default" }) {
               <a href="!#">About us</a> |<a href="!#"> Shop</a> |
               <a href="!#"> Menu</a> | <span className="mobile-br"></span>
               <a href="!#"> Schedule</a> |<a href="!#"> Community</a>
-              <Link to="/Mm"> | 회원관리 관리자페이지</Link>
+              <Link to="/mm"> | 회원관리 관리자페이지</Link>
             </div>
 
             <div className="address">

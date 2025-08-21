@@ -9,12 +9,12 @@ function Sub07MyOrderMenu(props) {
     <div id="sub07MyOrderMenu">
       <div className="container">
         <div className="title">
-          <Link to="/Mp">
+          <Link to="/mp">
             <h2>My Order</h2>
           </Link>
         </div>
         <SiteMapComponent
-          firstLink="/Mp"
+          firstLink="/mp"
           firstName="마이페이지"
           secondLink="./"
           secondName="사전주문 내역"

@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import "./scss/Sub084MmSign.scss";
 
 import { useDispatch, useSelector } from "react-redux";
-import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
+import {
+  confirmModalAction,
+  confirmModalYesNoAction,
+} from "../../../../store/confirmModal";
 
 const STORAGE_KEY = "mm_signup_settings";
 const DEFAULT_SETTING = {
@@ -14,7 +17,9 @@ const DEFAULT_SETTING = {
 
 function Sub084MmSign() {
   const [approval, setApproval] = useState(DEFAULT_SETTING.approval);
-  const [defaultGrade, setDefaultGrade] = useState(DEFAULT_SETTING.defaultGrade);
+  const [defaultGrade, setDefaultGrade] = useState(
+    DEFAULT_SETTING.defaultGrade
+  );
   const [emailAgree, setEmailAgree] = useState(DEFAULT_SETTING.emailAgree);
 
   const dispatch = useDispatch();
@@ -96,13 +101,13 @@ function Sub084MmSign() {
           <h2>회원관리</h2>
           <ul>
             <li>
-              <Link to="/Mm">회원리스트</Link>
+              <Link to="/mm">회원리스트</Link>
             </li>
             <li>
-              <Link to="/MmGrade">회원등급설정</Link>
+              <Link to="/mmGrade">회원등급설정</Link>
             </li>
             <li className="active">
-              <Link to="/MmSign">회원가입설정</Link>
+              <Link to="/mmSign">회원가입설정</Link>
             </li>
           </ul>
         </aside>
@@ -113,7 +118,6 @@ function Sub084MmSign() {
           </div>
 
           <div className="join-settings">
- 
             <div className="form-group">
               <label>가입 승인 방식</label>
               <div className="form-check">
@@ -138,7 +142,6 @@ function Sub084MmSign() {
               </div>
             </div>
 
-
             <div className="form-group">
               <label>기본 회원 등급</label>
               <div className="form-check">
@@ -162,7 +165,6 @@ function Sub084MmSign() {
                 <label htmlFor="gradeRegular">단골회원</label>
               </div>
             </div>
-
 
             <div className="form-group">
               <label>이메일 수신 여부 기본값</label>

@@ -131,7 +131,10 @@ export default function HeaderComponent(props) {
   };
   return (
     <>
-      <header id="header" className={`${active && "sub"} ${scr && "scrUp"}`}>
+      <header
+        id="header"
+        className={`${active ? "sub" : ""} ${scr ? "scrUp" : ""}`}
+      >
         <div className="container">
           <h1>
             <Link to="/mainComponent">
@@ -146,14 +149,14 @@ export default function HeaderComponent(props) {
                 </li>
               ))}
             </ul>
-            <aside id="aside" className={toggle && "toggle"}>
-              <Link to="/Cart" className="icon">
+            <aside id="aside" className={toggle ? "toggle" : ""}>
+              <Link to="/cart" className="icon">
                 <i className="bi bi-cart2"></i>
               </Link>
-              <Link to="/Mp" className="icon">
+              <Link to="/mp" className="icon">
                 <i className="fa-regular fa-user"></i>
               </Link>
-              <Link to="/Wishlist" className="icon">
+              <Link to="/wishlist" className="icon">
                 <i className="fa-regular fa-heart"></i>
               </Link>
               <a href="!#" onClick={clickToggle}>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./scss/Sub04Monthly.scss";
 
@@ -184,8 +184,8 @@ export default function Sub04Monthly() {
                         <h3>{item.artist}</h3>
                         <p>{item.time}</p>
                       </div>
-                      <Link 
-                        to = {`/Artist?artist=${encodeURIComponent(item.artist)}`}
+                      <Link
+                        to={`/artist?artist=${encodeURIComponent(item.artist)}`}
                         className="arrow"
                         aria-label="공연 상세 보기"
                       >

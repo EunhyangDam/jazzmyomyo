@@ -37,7 +37,7 @@ export default function Sub10Wishilist(props) {
     <div id="sub10Wishilist" className="sub-page">
       <div className="inner">
         <SiteMapComponent
-          firstLink="/Mp"
+          firstLink="/mp"
           firstName="마이페이지"
           secondLink="/Wishilist"
           secondName="찜리스트"
