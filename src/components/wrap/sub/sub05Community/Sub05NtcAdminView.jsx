@@ -51,7 +51,6 @@ function Sub05NtcAdminView() {
         const found = list.find((it) => String(it.idx) === String(id));
         setNotice(mapToView(found));
       } catch (e) {
-        console.error(e);
         setNotice(null);
       } finally {
         setLoading(false);
@@ -99,38 +98,44 @@ function Sub05NtcAdminView() {
   if (loading) {
     return (
       <div id="Sub05NtcAdminView">
-        <div className="container" style={{ padding: "100px", textAlign: "center" }}>
-          로딩 중…
-        </div>
+        <div className="container loading">로딩 중…</div>
       </div>
     );
   }
 
   return (
     <div id="Sub05NtcAdminView">
-      <div className="breadcrumb">
-        <Link to="/"><i className="bi bi-house"></i></Link> &gt; <Link to="/NtcAdmin">공지사항</Link>
-      </div>
-
       <div className="container">
-        <h2>공지사항</h2>
+        <div className="sangdan">
+          <Link to="/"><i className="bi bi-house-door-fill" /></Link>
+          <span className="sep"><i className="bi bi-chevron-right" /></span>
+          <span className="admin">관리자페이지</span>
+        </div>
+
+        <h2 className="page-title"><i class="bi bi-gear"></i> 공지사항 관리자</h2>
 
         {!notice ? (
-          <div className="content-box" style={{ padding: "80px", textAlign: "center" }}>
-            존재하지 않는 글입니다.
-          </div>
+          <div className="content-box empty">존재하지 않는 글입니다.</div>
         ) : (
           <div className="content-box">
-            <div className="notice-header">
+            <div className="headbar">
               <div className="title">{notice.title}</div>
-              <div className="notice-meta">
-                <span>작성자 : {notice.writer}</span>
-                <span>등록일 : {notice.date}</span>
-                <span>조회수 : {notice.views}</span>
+              <div className="meta-row">
+                <div className="meta-left">
+                  <span>작성자: {notice.writer}</span>
+                  <span>등록일: {notice.date}</span>
+                  <span className="file">파일첨부</span>
+                </div>
+                <div className="meta-right">
+                  <button className="btn delete" onClick={onClickDeleteBtn}>삭제</button>
+                  <Link to={`/NtcAdminE/${notice.id}`} className="btn edit">수정</Link>
+                  {/* <button className="btn upload">업로드</button> */}
+                </div>
               </div>
             </div>
 
-            <div className="notice-body">
+            <div className="body">
+              <div className="image">재즈묘묘 관련 이미지</div>
               <p>
                 {(notice.content || "").split("\n").map((line, idx) => (
                   <span key={idx}>
@@ -141,14 +146,8 @@ function Sub05NtcAdminView() {
               </p>
             </div>
 
-            <div className="btn-wrap">
-              <div className="left-actions">
-                <Link to={`/NtcAdminE/${notice.id}`} className="edit-btn">수정</Link>
-                <button onClick={onClickDeleteBtn} className="delete-btn">삭제</button>
-              </div>
-              <div className="right-actions">
-                <button className="list-btn" onClick={() => navigate("/NtcAdmin")}>목록</button>
-              </div>
+            <div className="foot">
+              <button className="btn list" onClick={() => navigate("/NtcAdmin")}>목록</button>
             </div>
           </div>
         )}

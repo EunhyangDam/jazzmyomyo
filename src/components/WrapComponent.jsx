@@ -108,7 +108,84 @@ export default function WrapComponent(props) {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [location.pathname, location.key]);
+  const getFooterClassByPath = (path) => {
+    if (path === "/" || path.startsWith("/mainComponent"))
+      return "footer--main";
 
+    // About
+
+    if (path.startsWith("/AboutUs")) return "footer--aboutus";
+
+    if (
+      path.startsWith("/About") ||
+      path.startsWith("/Interior") ||
+      path.startsWith("/MyoMyo") ||
+      path.startsWith("/Story")
+    )
+      return "footer--about";
+
+    // Shop
+    if (path.startsWith("/Shop") || path.startsWith("/ShopDetail"))
+      return "footer--shop";
+
+    // Menu
+    if (path.startsWith("/Menu") || path.startsWith("/Pre"))
+      return "footer--menu-pre";
+
+    // Wine, Drinks, Food, Set
+    if (
+      path.startsWith("/Wine") ||
+      path.startsWith("/Drinks") ||
+      path.startsWith("/Food") ||
+      path.startsWith("/Set")
+    )
+      return "footer--menu-etc";
+
+    // Schedule
+    if (
+      path.startsWith("/AboutLive") ||
+      path.startsWith("/Artist") ||
+      path.startsWith("/BuyTicket") ||
+      path.startsWith("/Lental") ||
+      path.startsWith("/Monthly")
+    )
+      return "footer--schedule";
+
+    // Community
+    if (
+      path.startsWith("/Faq") ||
+      path.startsWith("/Gall") ||
+      path.startsWith("/Ntc") ||
+      path.startsWith("/Rev") ||
+      path.startsWith("/Sns")
+    )
+      return "footer--community";
+
+    // Login / My page
+    if (
+      path.startsWith("/Lg") ||
+      path.startsWith("/SearchId") ||
+      path.startsWith("/SearchRs") ||
+      path.startsWith("/AddressList") ||
+      path.startsWith("/DeleteAccount") ||
+      path.startsWith("/EditProfile") ||
+      path.startsWith("/Mp") ||
+      path.startsWith("/MyOrder") ||
+      path.startsWith("/MyProfile")
+    )
+      return "footer--mypage";
+
+    // Member Management
+    if (path.startsWith("/Mm")) return "footer--mm";
+
+    // Cart / Wishlist
+    if (path.startsWith("/Cart") || path.startsWith("/Wishlist"))
+      return "footer--cart";
+
+    return "footer--default";
+  };
+
+  const footerClass = getFooterClassByPath(location.pathname);
   return (
     <div id="wrap">
       <Routes>
@@ -174,7 +251,7 @@ export default function WrapComponent(props) {
           <Route path="/*" element={<Page404Component />} />
         </Route>
       </Routes>
-      <FooterComponent />
+      <FooterComponent footerClass={footerClass} />
       {confirmIsOn && <ConfirmModalComponent />}
 
       {/* 카카오주속검색 API */}

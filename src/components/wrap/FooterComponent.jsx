@@ -83,12 +83,11 @@ export default function FooterComponent({ footerClass = "footer--default" }) {
               <a href="!#">재즈묘묘</a>
               <a href="!#">어바웃 묘묘</a>
               <a href="!#">인테리어</a>
-              <a href="!#">스토리</a>
             </li>
             <li>
               <h5>Shop</h5>
-              <a href="!#">묘묘굿즈</a>
-              <a href="!#">LP/CD</a>
+              <a href="/Shop?category=굿즈">묘묘굿즈</a>
+              <a href="/Shop?category=음반">LP/CD</a>
             </li>
             <li>
               <h5>Menu</h5>
@@ -110,7 +109,6 @@ export default function FooterComponent({ footerClass = "footer--default" }) {
               <h5>Community</h5>
               <a href="!#">공지사항</a>
               <a href="!#">FAQ</a>
-              <a href="!#">SNS/뉴스레터 구독</a>
               <a href="!#">지난 공연 갤러리</a>
               <a href="!#">한줄후기</a>
             </li>
@@ -120,6 +118,8 @@ export default function FooterComponent({ footerClass = "footer--default" }) {
         <div className="footer-bottom-inner">
           <div className="footer-info">
             <div className="categories">
+              <span className="CT">Categories</span>
+              <br />
               <a href="!#">About us</a> |<a href="!#"> Shop</a> |
               <a href="!#"> Menu</a> | <span className="mobile-br"></span>
               <a href="!#"> Schedule</a> |<a href="!#"> Community</a>

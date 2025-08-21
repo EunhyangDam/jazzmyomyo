@@ -12,14 +12,12 @@ function Sub05NtcView() {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    // 1) 목록에서 state로 온 경우 바로 사용 (추가 요청 X)
     if (location.state && location.state.idx) {
       setNotice(location.state);
       setLoading(false);
       return;
     }
 
-    // 2) 직접 접근: JSON에서 찾아오기 (리스트와 동일한 axios 패턴)
     axios({
       url: "./json/sub05/notice.json",
       method: "GET",
@@ -38,29 +36,40 @@ function Sub05NtcView() {
       .finally(() => setLoading(false));
   }, [id, location.state]);
 
-  if (loading) return <div style={{ padding: "100px", textAlign: "center" }}>로딩 중…</div>;
-  if (!notice) return <div style={{ padding: "100px", textAlign: "center" }}>존재하지 않는 글입니다.</div>;
+  if (loading)
+    return <div style={{ padding: "100px", textAlign: "center" }}>로딩 중…</div>;
+  if (!notice)
+    return <div style={{ padding: "100px", textAlign: "center" }}>존재하지 않는 글입니다.</div>;
 
   return (
     <div id="noticeView">
-      <div className="breadcrumb">
-        <Link to="/"><i className="bi bi-house"></i></Link> &gt; <Link to="/Ntc">공지사항</Link> 
-      </div>
-
       <div className="container">
-        <h2>공지사항</h2>
 
-        <div className="content-box">
-          <div className="notice-header">
-            <div className="title">{notice.subject}</div>
-            <div className="notice-meta">
+        <div className="sangdan">
+          <Link to="/mainComponent">
+            <i className="bi bi-house-door-fill" />
+          </Link>
+          <span className="sep"><i class="bi bi-chevron-right"></i></span>
+          <span>커뮤니티</span>
+          <span className="sep"><i class="bi bi-chevron-right"></i></span>
+          <span className="notice">공지사항</span>
+        </div>
+
+        <h2 className="page-title">공지사항</h2>
+
+        <div className="notice-box">
+          <div className="notice-title">{notice.subject}</div>
+
+          <div className="notice-meta">
+            <div className="left">
               <span>작성자 : {notice.name}</span>
               <span>등록일 : {notice.date}</span>
-              <span>조회수 : {notice.hit}</span>
             </div>
+            <div className="right">조회수 : {notice.hit}</div>
           </div>
 
           <div className="notice-body">
+            <div className="notice-image">재즈묘묘 외부 or 내부등 관련 이미지</div>
             <p>
               {(notice.content || "").split("\n").map((line, idx) => (
                 <span key={idx}>

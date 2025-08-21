@@ -1,84 +1,104 @@
 import React, { useEffect, useState } from "react";
 import "./scss/Sub05Rev.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { reviewAction } from "../../../../store/review";
 import SiteMapComponent from "../../custom/SiteMapComponent";
+import axios from "axios";
+
 function Sub05Rev(props) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const reviews = useSelector((state) => state.review.review);
 
   const [state, setState] = useState({
     isOpen: false,
     selectedId: null,
+    후기: [],
   });
 
+  // 후기 불러오기
   useEffect(() => {
-    if (reviews.length === 0) {
-      fetch("/json/sub05/rev.json")
-        .then((res) => res.json())
-        .then((data) => {
-          dispatch(reviewAction(data.review));
-        })
-        .catch(console.error);
-    }
-  }, [dispatch, reviews.length]);
+    axios({
+      url: "/jazzmyomyo/review_table_select.php",
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.status === 200 && res.data !== 0) {
+          let 후기 = res.data;
+          후기 = [...후기.sort((a, b) => b.idx - a.idx)]; // 최신순
+          setState((prev) => ({
+            ...prev,
+            후기,
+          }));
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-  // 로그인 없이 무한 증가 클릭 이벤트
-  const onClickRevHeart = (id, idx) => {
-    const updated = reviews.map((review) =>
-      review.id === id ? { ...review, 하트: (review.하트 || 0) + 1 } : review
-    );
-
-    dispatch(reviewAction(updated));
+  // 하트 클릭 (DB 수정 작업 필요)
+  const onClickRevHeart = (idx) => {
+    // const updated = state.후기.map((review) =>
+    //   review.idx === idx
+    //     ? { ...review, Heart: (review.Heart || 0) + 1 }
+    //     : review
+    // );
+    // setState((prev) => ({
+    //   ...prev,
+    //   후기: updated,
+    // }));
   };
 
+  // 글쓰기 이동
   const onClickRevWriteBtn = (e) => {
     e.preventDefault();
     navigate("/RevWrite");
   };
 
-  //모달 이벤트
-  const selectedReview = reviews.find((r) => r.id === state.selectedId);
-
+  // 모달 열기
   const onClickGap = (id) => {
-    setState({
+    setState((prev) => ({
+      ...prev,
       isOpen: true,
       selectedId: id,
-    });
+    }));
   };
 
+  // 모달 닫기
   const onClickModalClose = (e) => {
     e.stopPropagation();
-    setState({
+    setState((prev) => ({
+      ...prev,
       isOpen: false,
       selectedId: null,
-    });
+    }));
   };
 
-  //모달 이동 이벤트
-  const currentIndex = reviews.findIndex((r) => r.id === state.selectedId);
+  // 선택된 후기 & 현재 index
+  const selectedReview =
+    state.후기.find((r) => r.idx === state.selectedId) || null;
+  const currentIndex =
+    state.selectedId !== null
+      ? state.후기.findIndex((r) => r.idx === state.selectedId)
+      : -1;
 
+  // Prev, Next
   const onClickPrev = (e) => {
     e.stopPropagation();
     if (currentIndex > 0) {
-      setState({
-        ...state,
-        selectedId: reviews[currentIndex - 1].id,
-      });
+      setState((prev) => ({
+        ...prev,
+        selectedId: state.후기[currentIndex - 1].idx,
+      }));
     }
   };
 
   const onClickNext = (e) => {
     e.stopPropagation();
-    if (currentIndex < reviews.length - 1) {
-      setState({
-        ...state,
-        selectedId: reviews[currentIndex + 1].id,
-      });
+    if (currentIndex !== -1 && currentIndex < state.후기.length - 1) {
+      setState((prev) => ({
+        ...prev,
+        selectedId: state.후기[currentIndex + 1].idx,
+      }));
     }
   };
+
   return (
     <div id="sub05Rev">
       <div className="container">
@@ -96,6 +116,7 @@ function Sub05Rev(props) {
             재즈묘묘의 밤을 기억하는 한 줄의 마음들이 이곳에 포근히 쌓여갑니다.
           </h3>
         </div>
+
         <div className="content">
           <div className="top">
             <button onClick={onClickRevWriteBtn}>나도 한줄 후기 남기기</button>
@@ -104,28 +125,29 @@ function Sub05Rev(props) {
               <span>후기는 가장 최근 순으로 최대 9개까지만 노출됩니다.</span>
             </h4>
           </div>
+
           <div className="review-box">
             <ul>
-              {reviews.slice(0, 9).map((item) => (
-                <li key={item.id} data-key={item.id}>
-                  <div className="gap" onClick={() => onClickGap(item.id)}>
+              {state.후기.slice(0, 9).map((item) => (
+                <li key={item.idx}>
+                  <div className="gap" onClick={() => onClickGap(item.idx)}>
                     <div className="row1">
-                      <p>{item.작성내용}</p>
+                      <p>{item.wContent}</p>
                     </div>
-                    <div className="row2">{item.작성자명}</div>
-                    <div className="row3">{item.작성일자}</div>
+                    <div className="row2">{item.wName}</div>
+                    <div className="row3">{item.wDate}</div>
                     <div className="row4">
-                      <em> {item.작성분류}</em>
+                      <em>{item.wSubject}</em>
                       <span>
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            onClickRevHeart(item.id);
+                            onClickRevHeart(item.idx);
                           }}
                         >
                           <i className="bi bi-suit-heart-fill"></i>
                         </button>
-                        <b>{item.하트}</b>
+                        <b>{item.Heart}</b>
                       </span>
                     </div>
                   </div>
@@ -135,7 +157,9 @@ function Sub05Rev(props) {
           </div>
         </div>
       </div>
-      {selectedReview && state.isOpen && (
+
+      {/* 모달 */}
+      {state.isOpen && selectedReview && (
         <div
           className={`modal ${state.isOpen ? " on" : ""}`}
           onClick={onClickModalClose}
@@ -146,6 +170,7 @@ function Sub05Rev(props) {
                 <i className="bi bi-chevron-left" onClick={onClickPrev}></i>
               )}
             </div>
+
             <div className="center-box">
               <div className="title">
                 <h2>묘원의 공연 후기</h2>
@@ -153,22 +178,24 @@ function Sub05Rev(props) {
               <div className="content">
                 <div className="gap">
                   <div className="row1">
-                    <p>{selectedReview.작성내용}</p>
+                    <p>{selectedReview?.wContent}</p>
                   </div>
-                  <div className="row2">{selectedReview.작성자명}</div>
-                  <div className="row3">{selectedReview.작성일자}</div>
+                  <div className="row2">{selectedReview?.wName}</div>
+                  <div className="row3">{selectedReview?.wDate}</div>
                   <div className="row4">
-                    <em>{selectedReview.작성분류}</em>
+                    <em>{selectedReview?.wSubject}</em>
                     <span>
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          onClickRevHeart(selectedReview.id);
+                          if (selectedReview) {
+                            onClickRevHeart(selectedReview.idx);
+                          }
                         }}
                       >
                         <i className="bi bi-suit-heart-fill"></i>
                       </button>
-                      <b>{selectedReview.하트}</b>
+                      <b>{selectedReview?.Heart}</b>
                     </span>
                   </div>
                 </div>
@@ -176,7 +203,7 @@ function Sub05Rev(props) {
             </div>
 
             <div className="nav next">
-              {currentIndex < reviews.length - 1 && (
+              {currentIndex !== -1 && currentIndex < state.후기.length - 1 && (
                 <i className="bi bi-chevron-right" onClick={onClickNext}></i>
               )}
             </div>

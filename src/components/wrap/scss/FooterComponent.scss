@@ -48,7 +48,7 @@
       display: grid;
       grid-template-columns: repeat(4, minmax(180px, 1fr));
       gap: 32px 120px;
-      max-width: 1200px;
+      max-width: 1600px;
       width: 100%;
       margin: 0 auto;
       align-items: center;
@@ -60,16 +60,15 @@
 
         h4 {
           font-family: $font2;
-          font-size: 40px;
+          font-size:50px;
           font-weight: 800;
           color: #fff;
           margin-bottom: 28px;
         }
 
         p {
-          font-size: 15px;
+          font-size: 17px;
           line-height: 1.7;
-          max-width: 260px;
         }
       }
     }
@@ -89,7 +88,7 @@
 
   .footer-bottom {
     background: $primary-color;
-    padding: 80px 40px 60px;
+    padding: 40px 40px 60px;
     text-align: center;
     font-size: 14px;
     color: #f7efea;
@@ -98,9 +97,9 @@
     margin-top: -2px;
 
     .footer-links {
-      margin: 0 auto 72px;
+      margin: 0 auto 40px;
       max-width: 1750px;
-      padding: 0 60px 0 40px;
+      //padding: 0 60px 0 40px;
 
       ul {
         display: grid;
@@ -120,7 +119,7 @@
             font-weight: 700;
             color: #fff;
             margin-bottom: 6px;
-            font-size: 18px;
+            font-size: 20px;
             white-space: nowrap;
           }
 
@@ -148,23 +147,27 @@
       gap: 20px;
       flex-wrap: wrap;
       text-align: left;
-      padding: 0 60px 0 40px;
+      //padding: 60px 60px 0 40px;
       box-sizing: border-box;
     }
 
     .footer-info {
-      font-size: 14px;
+      font-size: 15px;
       color: #fff;
       line-height: 1.8;
       max-width: 70%;
 
       .categories {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
+        .CT {
+          font-size: 18px;
+          font-weight: 700;
+        }
 
         a {
-          font-size: 14px;
-          color: $sub-color4;
-          opacity: 0.95;
+          font-size: 15px;
+          color: #fff;
+          font-weight: 700;
           text-decoration: none;
         }
 
@@ -174,7 +177,7 @@
       }
 
       .address {
-        margin-bottom: 12px;
+        margin-bottom: 40px;
         color: $sub-color4;
         font-size: 13px;
         word-break: keep-all;
@@ -219,7 +222,7 @@
     }
   }
 
-  @media all and (max-width: 1140px) {
+  @media all and (max-width: 1200px) {
     .footer-middle {
       .footer-columns {
         grid-template-columns: repeat(2, minmax(240px, 1fr));
@@ -405,8 +408,15 @@
       }
 
       .footer-info {
+        .categories{
+          .CT {font-size: 15px;}
+          a {
+            font-size: 13px;
+          }
+        }
+        
         .address {
-          font-size: 12.5px;
+          font-size: 12px;
         }
       }
     }
@@ -438,6 +448,17 @@
           }
         }
       }
+      .footer-info {
+        .categories{
+          .CT {font-size: 14px;}
+          a {
+            font-size: 12px;
+          }
+        }
+        .address {
+          font-size: 10px;
+        }
+      }
     }
   }
 
@@ -446,7 +467,6 @@
       .footer-info {
         .address {
           text-align: center;
-          font-size: 12px;
           line-height: 1.6;
           text-wrap: balance;
         }
@@ -482,6 +502,15 @@
 }
 
 /* About */
+#footer.footer--aboutus {
+  background:$sub-color3;   // 원하는 배경색으로
+  .footer-middle { background: $sub-color1; }
+  .wave-svg.first path,
+  .wave-svg.second path { fill: $sub-color1 !important; }
+  .wave-svg.second { background-color: $primary-color; }
+  .footer-bottom { background: $primary-color; }
+}
+
 #footer.footer--about {
   background: transparent;
 

@@ -64,7 +64,8 @@
               display: inline-flex;
               span {
                 line-height: 180%;
-                font-family: Arial;
+                font-family: $font3;
+                color: $grey1;
                 font-size: $size3;
                 font-weight: 600;
                 display: inline-block;
