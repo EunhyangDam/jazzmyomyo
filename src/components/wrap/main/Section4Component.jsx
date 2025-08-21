@@ -23,10 +23,11 @@ export default function Section4Component(props) {
 
   //  fetch slides
   useEffect(() => {
-    fetch("./json/Section4/Section4.json")
+    fetch("./json/section4/section4.json")
       .then((res) => res.json())
       .then((data) => setSlides(data))
       .catch((err) => console.error("데이터 로드 실패:", err));
+    // eslint-disable-next-line
   }, []);
 
   //  날짜 렌더링용: 현재 주차 계산

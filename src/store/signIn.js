@@ -14,7 +14,6 @@ const signIn = createSlice({
       state.아이디 = action.payload.아이디;
       state.이름 = action.payload.이름;
       state.자동로그인 = action.payload.자동로그인;
-
       // 자동로그인 true 이면 아니면 세션에 저장
       if (action.payload.자동로그인) {
         localStorage.setItem(

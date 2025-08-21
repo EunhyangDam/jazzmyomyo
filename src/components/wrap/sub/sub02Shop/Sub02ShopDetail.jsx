@@ -25,6 +25,7 @@ function Sub02ShopDetail(props) {
     setProduct({
       data: location.state,
     });
+    // eslint-disable-next-line
   }, []);
   // 배송안내 관련
   const [delivery, setDelivery] = useState({
@@ -66,7 +67,7 @@ function Sub02ShopDetail(props) {
   const onChangeNumber = () => {};
 
   useEffect(() => {
-    fetch("/json/product.json", { method: "GET" })
+    fetch("./json/product.json", { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         setState((prev) => ({
@@ -265,6 +266,7 @@ function Sub02ShopDetail(props) {
                         onClick={() => isToggleSection && handleToggle(idx)}
                       >
                         <h3>[{title}]</h3>
+                        {/* eslint-disable-next-line */}
                         {isToggleSection && (
                           <a
                             href="#"

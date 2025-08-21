@@ -70,6 +70,7 @@ import ConfirmModalComponent from "./wrap/ConfirmModalComponent";
 import Sub06SignUp from "./wrap/sub/sub06Lg/Sub06SignUp";
 
 import ReactDaumPostcode from "./wrap/ReactDaumPostcode.jsx";
+import { signInAction } from "../store/signIn.js";
 
 export default function WrapComponent(props) {
   /**인스턴스 생성 */
@@ -87,6 +88,7 @@ export default function WrapComponent(props) {
     const localStorage_arr = [
       { key: "위시리스트", action: wishAction },
       { key: "장바구니", action: cartAction },
+      { key: "jazzmyomyo_sign_in", action: signInAction },
     ];
     try {
       localStorage_arr.forEach(({ key, action }) => {
@@ -98,7 +100,20 @@ export default function WrapComponent(props) {
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch]);
+    const sessionStorage_arr = [
+      { key: "jazzmyomyo_sign_in", action: signInAction },
+    ];
+    try {
+      sessionStorage_arr.forEach(({ key, action }) => {
+        const data = sessionStorage.getItem(key);
+        if (data) {
+          dispatch(action(JSON.parse(data)));
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   /**페이지 추적 */
   useEffect(() => {

@@ -52,18 +52,6 @@
         { "name": "1:1 문의", "link": "yiduiyi" },
         { "name": "공연 후기", "link": "rev" }
       ]
-    },
-    {
-      "id": "login",
-      "main": "로그인",
-      "link": "lg",
-      "sub": []
-    },
-    {
-      "id": "signIn",
-      "main": "회원가입",
-      "link": "signUp",
-      "sub": []
     }
   ]
 }

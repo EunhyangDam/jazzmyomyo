@@ -1,8 +1,13 @@
 import React from "react";
 import "./scss/FooterComponent.scss";
-import { Link } from "react-router-dom";
+import useCustomA from "./custom/useCustomA";
+
 
 export default function FooterComponent({ footerClass = "footer--default" }) {
+  
+const{onClickA} = useCustomA();
+
+
   return (
     <footer id="footer" className={footerClass} aria-label="사이트 푸터">
       {/* 상단 물결 */}
@@ -80,37 +85,36 @@ export default function FooterComponent({ footerClass = "footer--default" }) {
           <ul>
             <li>
               <h5>About us</h5>
-              <a href="!#">재즈묘묘</a>
-              <a href="!#">어바웃 묘묘</a>
-              <a href="!#">인테리어</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/aboutUs' )}>재즈묘묘</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/myoMyo' )}>어바웃 묘묘</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/interior' )}>인테리어</a>
             </li>
             <li>
               <h5>Shop</h5>
-              <a href="/Shop?category=굿즈">묘묘굿즈</a>
-              <a href="/Shop?category=음반">LP/CD</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/shop' )}>묘묘굿즈</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/shop' )}>LP/CD</a>
             </li>
             <li>
               <h5>Menu</h5>
-              <a href="!#">와인</a>
-              <a href="!#">주류&음료</a>
-              <a href="!#">플래터&핑거푸드</a>
-              <a href="!#">묘한세트</a>
-              <a href="!#">사전주문</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/wine' )}>와인</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/drinks' )}>주류&음료</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/food' )}>플래터&핑거푸드</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/set' )}>묘한세트</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/pre' )}>사전주문</a>
             </li>
             <li>
               <h5>Schedule</h5>
-              <a href="!#">월간 공연 캘린더</a>
-              <a href="!#">공연 상세 안내</a>
-              <a href="!#">아티스트, 게스트 소개</a>
-              <a href="!#">티켓 예매</a>
-              <a href="!#">대관 신청</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/monthly' )}>캘린더</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/artist' )}>아티스트 정보</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/buyTicket' )}>티켓 예매</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/lental' )}>대관 신청</a>
             </li>
             <li>
               <h5>Community</h5>
-              <a href="!#">공지사항</a>
-              <a href="!#">FAQ</a>
-              <a href="!#">지난 공연 갤러리</a>
-              <a href="!#">한줄후기</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/ntc' )}>공지사항</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/faq' )}>FAQ</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/faq' )}>1:1문의</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/rev' )}>공연후기</a>
             </li>
           </ul>
         </div>
@@ -118,12 +122,11 @@ export default function FooterComponent({ footerClass = "footer--default" }) {
         <div className="footer-bottom-inner">
           <div className="footer-info">
             <div className="categories">
-              <span className="CT">Categories</span>
-              <br />
-              <a href="!#">About us</a> |<a href="!#"> Shop</a> |
-              <a href="!#"> Menu</a> | <span className="mobile-br"></span>
-              <a href="!#"> Schedule</a> |<a href="!#"> Community</a>
-              <Link to="/mm"> | 회원관리 관리자페이지</Link>
+              <span className="CT">Categories</span><br />
+              <a href="!#" onClick={(e)=>onClickA(e, '/aboutUs' )}>About us</a> |<a href="!#" onClick={(e)=>onClickA(e, '/Shop' )}> Shop</a> |
+              <a href="!#" onClick={(e)=>onClickA(e, '/menu' )}> Menu</a> | <span className="mobile-br"></span>
+              <a href="!#" onClick={(e)=>onClickA(e, '/monthly' )}> Schedule</a> |<a href="!#" onClick={(e)=>onClickA(e, '/Ntc' )}> Community</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/mm' )}> | 회원관리 관리자페이지</a>
             </div>
 
             <div className="address">

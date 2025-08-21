@@ -28,7 +28,7 @@ function Sub02Shop(props) {
   }, [category, state.product]);
 
   useEffect(() => {
-    fetch("/json/product.json", { method: "GET" })
+    fetch("./json/product.json", { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         setState({

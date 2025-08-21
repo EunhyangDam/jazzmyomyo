@@ -1,3 +1,7 @@
+# 홈페이지
+
+"homepage": "https://jazzmyomyo.dothome.co.kr/jazzmyomyo",
+
 # 약어 가이드
 
 LG => LoGin

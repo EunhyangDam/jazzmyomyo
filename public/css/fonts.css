@@ -6,37 +6,79 @@
   font-style: normal;
 }
 @font-face {
-  font-family: "Gyeonggi Batang";
-  font-weight: 400;
+  font-family: "KOHI Nanum";
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
-  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Regular.woff2")
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/KOHINanum/KOHINanumLight.woff2")
       format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Regular.woff")
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/KOHINanum/KOHINanumLight.woff")
       format("woff"),
-    url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Regular.otf")
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/KOHINanum/KOHINanumLight.otf")
       format("opentype"),
-    url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Regular.ttf")
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/KOHINanum/KOHINanumLight.ttf")
       format("truetype");
 }
 @font-face {
-  font-family: "Gyeonggi Batang";
+  font-family: "KOHI Nanum";
   font-weight: 700;
   font-style: normal;
   font-display: swap;
-  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Bold.woff2")
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/KOHINanum/KOHINanumBold.woff2")
       format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Bold.woff")
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/KOHINanum/KOHINanumBold.woff")
       format("woff"),
-    url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Bold.otf")
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/KOHINanum/KOHINanumBold.otf")
       format("opentype"),
-    url("https://cdn.jsdelivr.net/gh/fonts-archive/GyeonggiBatang/GyeonggiBatang-Bold.ttf")
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/KOHINanum/KOHINanumBold.ttf")
       format("truetype");
 }
 @font-face {
-  font-family: "TTHakgyoansimMulgyeolB";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimMulgyeolB.woff2")
+  font-family: "TTLaundryGothicB";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/TTLaundryGothicB.woff2")
     format("woff2");
   font-weight: 700;
   font-style: normal;
+}
+@font-face {
+  font-family: "Hakgyoansim Allimjang";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/HakgyoansimAllimjang/HakgyoansimAllimjang-R.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/HakgyoansimAllimjang/HakgyoansimAllimjang-R.woff")
+      format("woff"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/HakgyoansimAllimjang/HakgyoansimAllimjang-R.otf")
+      format("opentype"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/HakgyoansimAllimjang/HakgyoansimAllimjang-R.ttf")
+      format("truetype");
+}
+@font-face {
+  font-family: "Hakgyoansim Allimjang";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/HakgyoansimAllimjang/HakgyoansimAllimjang-B.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/HakgyoansimAllimjang/HakgyoansimAllimjang-B.woff")
+      format("woff"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/HakgyoansimAllimjang/HakgyoansimAllimjang-B.otf")
+      format("opentype"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/HakgyoansimAllimjang/HakgyoansimAllimjang-B.ttf")
+      format("truetype");
+}
+@font-face {
+  font-family: "Hakgyoansim Kkwabaegi";
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/HakgyoansimKkwabaegi/HakgyoansimKkwabaegi.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/HakgyoansimKkwabaegi/HakgyoansimKkwabaegi.woff")
+      format("woff"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/HakgyoansimKkwabaegi/HakgyoansimKkwabaegi.otf")
+      format("opentype"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/HakgyoansimKkwabaegi/HakgyoansimKkwabaegi.ttf")
+      format("truetype");
 }

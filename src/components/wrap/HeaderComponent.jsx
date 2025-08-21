@@ -4,6 +4,9 @@ import "./scss/HeaderComponent.scss";
 import { useSelector } from "react-redux";
 export default function HeaderComponent(props) {
   const navigation = useNavigate();
+
+  const userAsset = useSelector((state) => state.signIn);
+
   const [toggle, setToggle] = useState(false);
   const [scr, setScr] = useState(false);
   const [header, setHeader] = useState({
@@ -150,12 +153,19 @@ export default function HeaderComponent(props) {
               ))}
             </ul>
             <aside id="aside" className={toggle ? "toggle" : ""}>
+              <span className="icon">{userAsset.이름}님!</span>
               <Link to="/cart" className="icon">
                 <i className="bi bi-cart2"></i>
               </Link>
-              <Link to="/mp" className="icon">
-                <i className="fa-regular fa-user"></i>
-              </Link>
+              {userAsset.아이디 !== "" ? (
+                <Link to="/mp" className="icon">
+                  <i className="fa-regular fa-user"></i>
+                </Link>
+              ) : (
+                <Link to="/lg" className="icon">
+                  <i className="fa-regular fa-user"></i>
+                </Link>
+              )}
               <Link to="/wishlist" className="icon">
                 <i className="fa-regular fa-heart"></i>
               </Link>
@@ -207,15 +217,25 @@ export default function HeaderComponent(props) {
                 ))}
               </ul>
               <div className="aside">
+                <span className="icon">{userAsset.이름} 님!</span>
                 <Link to="/cart" className="icon">
                   <i className="bi bi-cart2"></i>
                 </Link>
-                <Link to="/mp" className="icon">
-                  <i className="fa-regular fa-user"></i>
-                </Link>
+                {userAsset.id !== null ? (
+                  <Link to="/mp" className="icon">
+                    <i className="fa-regular fa-user"></i>
+                  </Link>
+                ) : (
+                  <Link to="/lg" className="icon">
+                    <i className="fa-regular fa-user"></i>
+                  </Link>
+                )}
                 <Link to="/wishlist" className="icon">
                   <i className="fa-regular fa-heart"></i>
                 </Link>
+                <a href="!#" className="icon log-out">
+                  로그아웃
+                </a>
                 <a href="!#" className="toggle" onClick={clickToggle}>
                   <span></span>
                   <span></span>

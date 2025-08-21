@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./scss/Section9Component.scss";
+import useCustomA from "../custom/useCustomA";
 
 export default function Section9Component() {
+
+  const {onClickA}= useCustomA();
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 6;
 
@@ -117,13 +121,13 @@ export default function Section9Component() {
                     <div className="link-buttons">
                       <ul>
                         <li>
-                          <a href="!#">VIEW MORE</a>
+                          <a href="!#" onClick={(e)=>onClickA(e, '/interior' )}>VIEW MORE</a>
                         </li>
                         <li>
-                          <a href="!#">공연일정</a>
+                          <a href="!#" onClick={(e)=>onClickA(e, '/monthly' )}>공연일정</a>
                         </li>
                         <li>
-                          <a href="!#">대관문의</a>
+                          <a href="!#" onClick={(e)=>onClickA(e, '/lental' )}>대관문의</a>
                         </li>
                       </ul>
                     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./scss/Sub07Mp.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -7,16 +7,16 @@ import SiteMapComponent from "../../custom/SiteMapComponent";
 function Sub07Mp(props) {
   const cartAsset = useSelector((state) => state.cart.cart);
   const wishAsset = useSelector((state) => state.wishlist.위시리스트);
-  const userID = useSelector((state) => state.로그인.아이디);
+  const userID = useSelector((state) => state.signIn.아이디);
   const [isOn, setIsOn] = useState(false);
   const onClickProfile = (e) => {
     setIsOn((prev) => !prev);
   };
-
+  useEffect(() => {}, [userID]);
   return (
     <div id="sub07Mp">
       <div className="container">
-        <SiteMapComponent firstLink="/Mp" firstName="마이페이지" />
+        <SiteMapComponent firstLink="/mp" firstName="마이페이지" />
 
         <div className="title">
           <Link to="/mp">
@@ -32,7 +32,7 @@ function Sub07Mp(props) {
                 title="🐾"
               >
                 <p>MEMBER</p>
-                <p>김묘묘</p>
+                <p>묘묘</p>
               </div>
               <div
                 className={`profile-back${isOn ? " on" : ""}`}
