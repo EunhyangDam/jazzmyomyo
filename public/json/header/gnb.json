@@ -49,7 +49,7 @@
       "sub": [
         { "name": "공지사항", "link": "ntc" },
         { "name": "FAQ", "link": "faq" },
-        { "name": "갤러리", "link": "gall" },
+        { "name": "1:1 문의", "link": "yiduiyi" },
         { "name": "공연 후기", "link": "rev" }
       ]
     },
@@ -57,15 +57,13 @@
       "id": "login",
       "main": "로그인",
       "link": "lg",
-      "sub": [],
-      "sub link": []
+      "sub": []
     },
     {
       "id": "signIn",
       "main": "회원가입",
       "link": "signUp",
-      "sub": [],
-      "sub link": []
+      "sub": []
     }
   ]
 }
