@@ -6,7 +6,6 @@ import { logOutAction } from "../../store/signIn";
 export default function HeaderComponent(props) {
   const navigation = useNavigate();
   const dispatch = useDispatch();
-  const dispatch = useDispatch();
   const userAsset = useSelector((state) => state.signIn);
 
   const [toggle, setToggle] = useState(false);
