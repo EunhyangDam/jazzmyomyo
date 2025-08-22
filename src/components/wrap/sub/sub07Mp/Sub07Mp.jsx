@@ -7,7 +7,7 @@ import SiteMapComponent from "../../custom/SiteMapComponent";
 function Sub07Mp(props) {
   const cartAsset = useSelector((state) => state.cart.cart);
   const wishAsset = useSelector((state) => state.wishlist.위시리스트);
-  const userID = useSelector((state) => state.signIn.아이디);
+  const userID = useSelector((state) => state.signIn);
   const [isOn, setIsOn] = useState(false);
   const onClickProfile = (e) => {
     setIsOn((prev) => !prev);
@@ -32,7 +32,7 @@ function Sub07Mp(props) {
                 title="🐾"
               >
                 <p>MEMBER</p>
-                <p>묘묘</p>
+                <p>{userID.이름}</p>
               </div>
               <div
                 className={`profile-back${isOn ? " on" : ""}`}

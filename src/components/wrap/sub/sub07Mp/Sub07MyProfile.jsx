@@ -1,12 +1,44 @@
 import React, { useState, useEffect } from "react";
 import "./scss/Sub07MyProfile.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Sub07MpSideMenu from "./Sub07MpSideMenu";
 import SiteMapComponent from "../../custom/SiteMapComponent";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 function Sub07MyProfile(props) {
-  const navigate = useNavigate();
+  const userID = useSelector((state) => state.signIn);
 
+  const [state, setState] = useState({
+    ID: null,
+    adress: null,
+    dob: null,
+    email: null,
+    gender: null,
+    name: null,
+    number: null,
+    service: null,
+  });
+  useEffect(() => {
+    const formData = new FormData();
+    formData.append("ID", userID.아이디);
+    axios({ url: "./jazzmyomyo/user_info.php", method: "POST", data: formData })
+      .then((res) => {
+        switch (res.status) {
+          case 200:
+            let email = false;
+            res.data.service &&
+              res.data.service.includes("이메일") &&
+              (email = true);
+            setState(res.data, { emailChk: email });
+            break;
+          default:
+            alert("a");
+            break;
+        }
+      })
+      .catch();
+  }, [userID]);
   return (
     <div id="sub07MyProfile">
       <div className="container">
@@ -34,23 +66,7 @@ function Sub07MyProfile(props) {
                     <span>아이디</span>
                   </div>
                   <div className="right">
-                    <p>myomyo</p>
-                  </div>
-                </li>
-                <li className="user-PW">
-                  <div className="left">
-                    <span>비밀번호</span>
-                  </div>
-                  <div className="right">
-                    <p>1234*</p>
-                  </div>
-                </li>
-                <li className="user-PW2">
-                  <div className="left">
-                    <span>비밀번호 확인</span>
-                  </div>
-                  <div className="right">
-                    <p>1234*</p>
+                    <p>{state.ID}</p>
                   </div>
                 </li>
                 <li className="user-name">
@@ -58,7 +74,7 @@ function Sub07MyProfile(props) {
                     <span>이름</span>
                   </div>
                   <div className="right">
-                    <p>김묘묘</p>
+                    <p>{state.name}</p>
                   </div>
                 </li>
                 <li className="user-mobile-number">
@@ -66,7 +82,14 @@ function Sub07MyProfile(props) {
                     <span>휴대전화번호</span>
                   </div>
                   <div className="right">
-                    <p>010-1234-5678</p>
+                    <p>
+                      {state.number &&
+                        `${state.number.slice(0, 3)}-${state.number.slice(
+                          3,
+                          7
+                        )}-
+                      ${state.number.slice(7, 11)}`}
+                    </p>
                   </div>
                 </li>
                 <li className="user-address">
@@ -74,7 +97,7 @@ function Sub07MyProfile(props) {
                     <span>주소</span>
                   </div>
                   <div className="right">
-                    <p>서울시 영등포구 주소</p>
+                    <p>{state.adress}</p>
                   </div>
                 </li>
                 <li className="user-email">
@@ -82,7 +105,7 @@ function Sub07MyProfile(props) {
                     <span>이메일</span>
                   </div>
                   <div className="right">
-                    <p>myomyo@naver.com</p>
+                    <p>{state.email}</p>
                   </div>
                 </li>
                 <li className="birthday">
@@ -90,7 +113,7 @@ function Sub07MyProfile(props) {
                     <span>생년월일</span>
                   </div>
                   <div className="right">
-                    <p>1997-03-30</p>
+                    <p>{state.dob}</p>
                   </div>
                 </li>
                 <li className="user-email-agree">
@@ -99,11 +122,23 @@ function Sub07MyProfile(props) {
                   </div>
                   <div className="right">
                     <label htmlFor="agree">
-                      <input type="checkbox" name="agree" id="agree" checked />
+                      <input
+                        type="radio"
+                        name="agree"
+                        id="agree"
+                        checked={state.emailChk}
+                        readOnly
+                      />
                       <span>동의</span>
                     </label>
                     <label htmlFor="disagree">
-                      <input type="checkbox" name="disagree" id="disagree" />
+                      <input
+                        type="radio"
+                        name="agree"
+                        id="disagree"
+                        checked={!state.emailChk}
+                        readOnly
+                      />
                       <span>미동의</span>
                     </label>
                   </div>

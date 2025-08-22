@@ -6,6 +6,7 @@ import { logOutAction } from "../../store/signIn";
 export default function HeaderComponent(props) {
   const navigation = useNavigate();
   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const userAsset = useSelector((state) => state.signIn);
 
   const [toggle, setToggle] = useState(false);
@@ -133,6 +134,10 @@ export default function HeaderComponent(props) {
       setIndex(null);
     }
   };
+
+  const logOut = (e) => {
+    dispatch(logOutAction(null));
+  };
   const clickLogOut = (e) => {
     e.preventDefault();
     dispatch(logOutAction(null));
@@ -158,11 +163,11 @@ export default function HeaderComponent(props) {
               ))}
             </ul>
             <aside id="aside" className={toggle ? "toggle" : ""}>
-              <span className="icon">{userAsset.이름}님!</span>
+              <span className="icon">{userAsset.아이디}님!</span>
               <Link to="/cart" className="icon">
                 <i className="bi bi-cart2"></i>
               </Link>
-              {userAsset.아이디 !== "" ? (
+              {userAsset.아이디 ? (
                 <Link to="/mp" className="icon">
                   <i className="fa-regular fa-user"></i>
                 </Link>
@@ -174,6 +179,15 @@ export default function HeaderComponent(props) {
               <Link to="/wishlist" className="icon">
                 <i className="fa-regular fa-heart"></i>
               </Link>
+              {userAsset.아이디 ? (
+                <a href="!#" className="icon log-in-out" onClick={logOut}>
+                  로그아웃
+                </a>
+              ) : (
+                <Link to="/lg" className="icon log-in-out">
+                  로그인
+                </Link>
+              )}
               <a href="!#" onClick={clickToggle}>
                 <span></span>
                 <span></span>
@@ -222,11 +236,13 @@ export default function HeaderComponent(props) {
                 ))}
               </ul>
               <div className="aside">
-                <span className="icon">{userAsset.이름} 님!</span>
+                {userAsset.이름 && (
+                  <span className="icon">{userAsset.이름} 님!</span>
+                )}
                 <Link to="/cart" className="icon">
                   <i className="bi bi-cart2"></i>
                 </Link>
-                {userAsset.id !== null ? (
+                {userAsset.아이디 ? (
                   <Link to="/mp" className="icon">
                     <i className="fa-regular fa-user"></i>
                   </Link>
@@ -238,9 +254,15 @@ export default function HeaderComponent(props) {
                 <Link to="/wishlist" className="icon">
                   <i className="fa-regular fa-heart"></i>
                 </Link>
-                <a href="!#" className="icon log-out" onClick={clickLogOut}>
-                  로그아웃
-                </a>
+                {userAsset.아이디 ? (
+                  <a href="!#" className="icon log-in-out" onClick={logOut}>
+                    로그아웃
+                  </a>
+                ) : (
+                  <Link to="/lg" className="icon log-in-out">
+                    로그인
+                  </Link>
+                )}
                 <a href="!#" className="toggle" onClick={clickToggle}>
                   <span></span>
                   <span></span>
