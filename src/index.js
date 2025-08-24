@@ -19,6 +19,7 @@ import confirmModal from "./store/confirmModal";
 import review from "./store/review";
 import signIn from "./store/signIn";
 import daumPostcode from "./store/daumPostcode";
+import cartLogin from "./store/cartLogin";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin, SplitText);
 let store = configureStore({
@@ -30,6 +31,7 @@ let store = configureStore({
     review,
     signIn,
     daumPostcode,
+    cartLogin,
   },
 });
 

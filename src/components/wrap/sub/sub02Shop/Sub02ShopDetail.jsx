@@ -128,6 +128,9 @@ function Sub02ShopDetail(props) {
     }
     dispatch(cartAction(arr));
   };
+  const selectEvent = (e) => {
+    alert(e.target.value);
+  };
   //카테고리 밑줄 표시
   const isGoods = product.data.상품분류 === "굿즈";
   const isDisc = product.data.상품분류 === "음반";
@@ -195,7 +198,7 @@ function Sub02ShopDetail(props) {
                   </li>
                   {product.data.옵션?.length > 0 && (
                     <li className="select-option">
-                      <select name="option" id="option">
+                      <select name="option" id="option" onChange={selectEvent}>
                         {product.data.옵션.map((item) => (
                           <option value={item} key={item} data-key={item}>
                             {item}
@@ -220,8 +223,7 @@ function Sub02ShopDetail(props) {
                               .includes(product.data.id)
                               ? "-fill"
                               : ""
-                          }`}
-                        ></i>
+                          }`}></i>
                       </a>
                     </div>
                   </li>
@@ -259,20 +261,17 @@ function Sub02ShopDetail(props) {
                   return (
                     <li
                       key={idx}
-                      className={isToggleSection ? "plus" : "delivery"}
-                    >
+                      className={isToggleSection ? "plus" : "delivery"}>
                       <div
                         className="delivery-title"
-                        onClick={() => isToggleSection && handleToggle(idx)}
-                      >
+                        onClick={() => isToggleSection && handleToggle(idx)}>
                         <h3>[{title}]</h3>
                         {/* eslint-disable-next-line */}
                         {isToggleSection && (
                           <a
                             href="#"
                             className="icon"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                            onClick={(e) => e.preventDefault()}>
                             {isOpen ? (
                               <i className="bi bi-dash" />
                             ) : (
@@ -293,8 +292,7 @@ function Sub02ShopDetail(props) {
                                   <a
                                     href="!#"
                                     target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
+                                    rel="noopener noreferrer">
                                     '주문내역'
                                   </a>
                                   &nbsp;에서 확인할 수 있습니다.

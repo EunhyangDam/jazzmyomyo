@@ -20,7 +20,7 @@ function Sub07EditProfile(props) {
     gender: null,
     name: null,
     number: null,
-    service: null,
+    service: [],
   });
   useEffect(() => {
     const formData = new FormData();
@@ -29,11 +29,16 @@ function Sub07EditProfile(props) {
       .then((res) => {
         switch (res.status) {
           case 200:
-            let email = false;
-            res.data.service &&
-              res.data.service.includes("이메일") &&
-              (email = true);
-            setState(res.data, { emailChk: email });
+            setState({
+              ID: res.data.ID,
+              adress: res.data.adress,
+              dob: res.data.dob,
+              email: res.data.email,
+              gender: res.data.gender,
+              name: res.data.name,
+              number: res.data.number,
+              service: res.data.service,
+            });
             break;
           default:
             alert("a");
@@ -60,24 +65,82 @@ function Sub07EditProfile(props) {
     navigate("/MyProfile");
   };
 
-  const onClickFinishEdit = (e) => {};
-
   const changeNumber = (e) => {
     setState({
       ...state,
-      number: e.target.value,
+      number: e.target.value.replace(/[^0-9]/g, ""),
     });
   };
-  const changeEmailChk = (e) => {
-    let value = e.target.value;
+  const changeEmail = (e) => {
     setState({
       ...state,
-      emailChk: value,
+      email: e.target.value,
     });
-    console.log(value);
+  };
+  const changeDob = (e) => {
+    let arr = state.dob;
+    switch (e.target.dataset.name) {
+      case "dob1":
+        arr = arr.split("-")[0];
+        arr = e.target.value;
+        setState({
+          ...state,
+          dob: `${arr}-${state.dob.split("-")[1]}-${state.dob.split("-")[2]}`,
+        });
+        break;
+      case "dob2":
+        arr = arr.split("-")[1];
+        arr = e.target.value;
+        setState({
+          ...state,
+          dob: `${state.dob.split("-")[0]}-${arr}-${state.dob.split("-")[2]}`,
+        });
+        break;
+      case "dob3":
+        arr = arr.split("-")[2];
+        arr = e.target.value;
+        setState({
+          ...state,
+          dob: `${state.dob.split("-")[0]}-${state.dob.split("-")[1]}-${arr}`,
+        });
+        break;
+      default:
+        break;
+    }
+  };
+  const changeEmailChk = (e) => {
+    let arr = Array.isArray(state.service)
+      ? [...state.service]
+      : state.service.split(",");
+
+    if (e.target.value === "true") {
+      if (arr.includes("무료배송, 할인쿠폰 등 혜택/정보 수신 동의(선택)")) {
+        arr = [...arr, "이메일"];
+      } else {
+        arr = [
+          ...arr,
+          "무료배송, 할인쿠폰 등 혜택/정보 수신 동의(선택)",
+          "이메일",
+        ];
+      }
+    } else {
+      if (arr.includes("SNS")) {
+        arr = arr.filter((el) => el !== "이메일");
+      } else {
+        arr = arr.filter((el) => el !== "이메일");
+        arr = arr.filter(
+          (el) => el !== "무료배송, 할인쿠폰 등 혜택/정보 수신 동의(선택)"
+        );
+      }
+    }
+    setState({
+      ...state,
+      service: arr,
+    });
   };
   const submitEvent = (e) => {
     e.preventDefault();
+    const { dob, email, name, number, adress } = state;
     let obj = {
       heading: "",
       explain: "",
@@ -88,6 +151,89 @@ function Sub07EditProfile(props) {
       isYes: false,
     };
 
+    const validation = [
+      {
+        case_: /--|-$/.test(dob) === true,
+        msg: "생년월일을 입력해주세요",
+      },
+      {
+        case_: dob.split("-")[0] > new Date().getFullYear() - 19,
+        msg: "19세 미만 청소년은 가입할 수 없습니다.",
+      },
+      {
+        case_:
+          dob.split("-")[1] < 1 ||
+          dob.split("-")[1] > 12 ||
+          dob.split("-")[2] < 1 ||
+          dob.split("-")[2] >
+            new Date(dob.split("-")[0], dob.split("-")[1], 0).getDate(),
+        msg: "생년월일을 다시 확인해주세요.",
+      },
+      {
+        case_:
+          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email) ===
+            false || email === "",
+        msg: "이메일을 다시 확인해주세요.",
+      },
+      { case_: adress === "", msg: "주소를 다시 확인해주세요." },
+      {
+        case_:
+          /^(01[016789])-?\d{3,4}-?\d{4}$|^(0\d{2})-?\d{3,4}-?\d{4}$/g.test(
+            number === false
+          ) || number === "",
+        msg: "전화번호를 다시 확인해주세요.",
+      },
+      { case_: name === "", msg: "이름을 입력해주세요!" },
+    ];
+
+    for (const { case_, msg } of validation) {
+      if (case_) {
+        obj = { ...obj, heading: msg };
+        dispatch(confirmModalAction(obj));
+        return;
+      }
+    }
+
+    const formData = new FormData();
+    const appendData = [
+      { field: "dob", dataKey: dob },
+      { field: "email", dataKey: email },
+      { field: "name", dataKey: name },
+      { field: "number", dataKey: number },
+      { field: "adress", dataKey: adress },
+      { field: "userID", dataKey: state.ID },
+    ];
+    appendData.forEach(({ field, dataKey }) => {
+      formData.append(field, dataKey);
+    });
+    axios({
+      url: "/jazzmyomyo/user_update.php",
+      method: "POST",
+      data: formData,
+    })
+      .then((res) => {
+        switch (res.status) {
+          case 200:
+            if (res.data === 1) {
+              obj = { ...obj, heading: "회원 정보가 수정되었습니다." };
+              navigate("/myProfile");
+            } else if (res.data === 0) {
+              obj = { ...obj, heading: "정보 수정 오류" };
+              console.log(res.data);
+            }
+            dispatch(confirmModalAction(obj));
+            break;
+          default:
+            obj = { ...obj, heading: "정보 수정 오류" };
+            dispatch(confirmModalAction(obj));
+            console.log(res.data);
+            break;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("폼 전송 ERROR");
+      });
     dispatch(confirmModalAction(obj));
   };
   return (
@@ -153,19 +299,6 @@ function Sub07EditProfile(props) {
                       />
                     </div>
                   </li>
-                  <li className="user-address">
-                    <div className="left">
-                      <span>주소</span>
-                    </div>
-                    <div className="right">
-                      <input
-                        type="text"
-                        name="inputAdr"
-                        id="inputAdr"
-                        defaultValue={state.adress}
-                      />
-                    </div>
-                  </li>
                   <li className="user-email">
                     <div className="left">
                       <span>이메일</span>
@@ -175,7 +308,8 @@ function Sub07EditProfile(props) {
                         type="text"
                         name="inputEmail"
                         id="inputEmail"
-                        defaultValue={state.email}
+                        onChange={changeEmail}
+                        value={state.email}
                       />
                     </div>
                   </li>
@@ -188,21 +322,27 @@ function Sub07EditProfile(props) {
                         type="text"
                         name="inputYear"
                         id="inputYear"
-                        defaultValue={state.dob && state.dob.split("-")[0]}
+                        onChange={changeDob}
+                        data-name="dob1"
+                        value={state.dob && state.dob.split("-")[0]}
                       />
-                      -{" "}
+                      -
                       <input
                         type="text"
                         name="inputMonth"
                         id="inputMonth"
-                        defaultValue={state.dob && state.dob.split("-")[1]}
+                        onChange={changeDob}
+                        data-name="dob2"
+                        value={state.dob && state.dob.split("-")[1]}
                       />
-                      -{" "}
+                      -
                       <input
                         type="text"
                         name="inputDay"
                         id="inputDay"
-                        defaultValue={state.dob && state.dob.split("-")[2]}
+                        onChange={changeDob}
+                        data-name="dob3"
+                        value={state.dob && state.dob.split("-")[2]}
                       />
                     </div>
                   </li>
@@ -216,9 +356,11 @@ function Sub07EditProfile(props) {
                           type="radio"
                           name="agree"
                           id="agree"
-                          value={true}
+                          value={"true"}
                           onChange={changeEmailChk}
-                          checked={state.emailChk === "true"}
+                          checked={
+                            state.service && state.service.includes("이메일")
+                          }
                         />
                         <span>동의</span>
                       </label>
@@ -227,9 +369,11 @@ function Sub07EditProfile(props) {
                           type="radio"
                           name="agree"
                           id="disagree"
-                          value={false}
+                          value={"false"}
                           onChange={changeEmailChk}
-                          checked={state.emailChk === "false"}
+                          checked={
+                            state.service && !state.service.includes("이메일")
+                          }
                         />
                         <span>미동의</span>
                       </label>

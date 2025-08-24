@@ -1,8 +1,132 @@
-import React from "react";
+import React, { useState } from "react";
 import "./scss/Section6Component.scss";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { confirmModalAction } from "../../../store/confirmModal";
 export default function Section6Component(props) {
-  const clickSubscribe = (e) => {
+  const dispatch = useDispatch();
+  const [state, setState] = useState({
+    name: "",
+    email: "",
+    adr: "",
+    chk: false,
+  });
+  const changeEvent = (e) => {
+    setState({
+      ...state,
+      [e.target.dataset.name]: e.target.value,
+    });
+  };
+  const changeChk = (e) => {
+    let val = false;
+    if (e.target.checked) {
+      val = true;
+    } else {
+      val = false;
+    }
+    setState({
+      ...state,
+      chk: val,
+    });
+  };
+  const submitEvent = (e) => {
     e.preventDefault();
+    const condition = [
+      {
+        _case: state.name === "" || state.email === "" || state.adr === "",
+        messege: "필수 항목에 기입해주세요.",
+      },
+      {
+        _case: state.chk === false,
+        messege: "개인정보 수집 및 활용에 동의해주세요.",
+      },
+      {
+        _case:
+          /^(01[016789])-?\d{3,4}-?\d{4}$|^(0\d{2})-?\d{3,4}-?\d{4}$/g.test(
+            state.adr
+          ) === false,
+        messege: "전화번호 형식이 아닙니다.",
+      },
+    ];
+    for (const { _case, messege } of condition) {
+      if (_case) {
+        dispatch(
+          confirmModalAction({
+            heading: messege,
+            isON: true,
+          })
+        );
+        return;
+      }
+    }
+    const idData = new FormData();
+    idData.append("email", state.email);
+    axios({
+      url: "/jazzmyomyo/newsletter_duplicate.php",
+      method: "POST",
+      data: idData,
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          let obj = {
+            heading: "",
+            explain: "",
+            isON: true,
+            isConfirm: false,
+          };
+          if (res.data === 1) {
+            obj = {
+              ...obj,
+              heading: "이미 등록된 이메일입니다.",
+            };
+          } else if (res.data === 0) {
+            const formData = new FormData();
+            const appendData = [
+              { field: "name", _key: state.name },
+              { field: "email", _key: state.email },
+              { field: "adr", _key: state.adr },
+            ];
+            appendData.forEach(({ field, _key }) => {
+              formData.append(field, _key);
+            });
+            axios({
+              url: "/jazzmyomyo/newletter_insert.php",
+              method: "POST",
+              data: formData,
+            })
+              .then((res) => {
+                if (res.status === 200) {
+                  if (res.data === 2) {
+                    obj = {
+                      ...obj,
+                      heading: "구독이 완료되었습니다.",
+                      explain: "매달 15일에 만나묘!",
+                    };
+                  } else if (res.data === 3) {
+                    alert("전송 실패 에러");
+                    console.log("전송 실패 에러 사유:", res.data);
+                  }
+                } else {
+                  alert("전송 실패 에러");
+                  console.log("전송 실패 에러 사유:", res.data);
+                }
+                dispatch(confirmModalAction(obj));
+              })
+              .catch((err) => {
+                console.log(err);
+                alert("SECTION 6 ERROR");
+              });
+          }
+          dispatch(confirmModalAction(obj));
+        } else {
+          alert("중복 검사 실패");
+          console.log("중복 검사 실패 사유:", res.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("SECTION 6 ERROR");
+      });
   };
   return (
     <div id="section6Component" className="section">
@@ -29,27 +153,51 @@ export default function Section6Component(props) {
           </dl>
         </div>
         <div className="right">
-          <form action="POST">
+          <form onSubmit={submitEvent}>
             <ul>
               <li>
                 <p>이름*</p>
-                <input type="text" />
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  data-name="name"
+                  onChange={changeEvent}
+                />
               </li>
               <li>
                 <p>이메일*</p>
-                <input type="text" />
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  data-name="email"
+                  onChange={changeEvent}
+                />
               </li>
               <li>
                 <p>연락처*</p>
-                <input type="text" />
+                <input
+                  type="text"
+                  name="adr"
+                  id="adr"
+                  data-name="adr"
+                  onChange={changeEvent}
+                />
               </li>
             </ul>
-            <button type="submit" onClick={clickSubscribe}>
-              구독하기
-            </button>
+            <button type="submit">구독하기</button>
             <div className="chk">
-              <input type="checkbox" name="chkbox" id="chkbox" />
-              <p>개인정보 수집 및 활용에 동의합니다.</p>
+              <input
+                type="checkbox"
+                name="chkbox"
+                id="chkbox"
+                checked={state.chk}
+                onChange={changeChk}
+              />
+              <label htmlFor="chkbox">
+                개인정보 수집 및 활용에 동의합니다.
+              </label>
             </div>
           </form>
         </div>

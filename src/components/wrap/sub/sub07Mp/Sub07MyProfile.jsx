@@ -92,14 +92,6 @@ function Sub07MyProfile(props) {
                     </p>
                   </div>
                 </li>
-                <li className="user-address">
-                  <div className="left">
-                    <span>주소</span>
-                  </div>
-                  <div className="right">
-                    <p>{state.adress}</p>
-                  </div>
-                </li>
                 <li className="user-email">
                   <div className="left">
                     <span>이메일</span>

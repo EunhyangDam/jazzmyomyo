@@ -4,6 +4,7 @@ const cart = createSlice({
   name: "장바구니",
   initialState: {
     cart: [],
+    checkedProduct: [],
   },
   reducers: {
     cartAction(state, action) {
@@ -13,7 +14,10 @@ const cart = createSlice({
       state.cart = arr;
       localStorage.setItem("장바구니", JSON.stringify(state.cart));
     },
+    cartChkAction(state, action) {
+      state.checkedProduct = action.payload;
+    },
   },
 });
 export default cart.reducer;
-export const { cartAction } = cart.actions;
+export const { cartAction, cartChkAction } = cart.actions;

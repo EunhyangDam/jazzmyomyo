@@ -943,8 +943,7 @@ function Sub06SignUp(props) {
                     <button
                       className={state.인증번호받기 ? "on" : ""}
                       disabled={state.인증번호받기}
-                      onClick={onClickDisabled}
-                    >
+                      onClick={onClickDisabled}>
                       {state.버튼텍스트}
                     </button>
                     {state.휴대폰오류메시지 !== "" && (
@@ -1173,8 +1172,7 @@ function Sub06SignUp(props) {
                               ...(item.includes("본인")
                                 ? { clear: "left" }
                                 : {}),
-                            }}
-                          >
+                            }}>
                             <label>
                               <input
                                 type="checkbox"

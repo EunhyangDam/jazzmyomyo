@@ -3,10 +3,13 @@ import "../scss/sub.scss";
 import "./scss/Sub09Cart.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { cartAction } from "../../../../store/cart";
+import { cartAction, cartChkAction } from "../../../../store/cart";
 import SiteMapComponent from "../../custom/SiteMapComponent";
+import { cartLoginAction } from "../../../../store/cartLogin";
+import axios from "axios";
 function Sub09Cart(props) {
   const cartAsset = useSelector((state) => state.cart.cart);
+  const userID = useSelector((state) => state.signIn.아이디);
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const [state, setState] = useState({
@@ -22,9 +25,27 @@ function Sub09Cart(props) {
     });
   }, [cartAsset]);
 
+  const dispatchCondition = (frontData) => {
+    dispatch(cartAction(frontData));
+    // switch (userID) {
+    //   case "":
+    //     break;
+
+    //   default:
+    //     axios
+    //       .post("/jazzmyomyo/cart_insert.php", { userID, frontData })
+    //       .then((res) => console.log(res.data))
+    //       .catch((err) => {
+    //         alert(err);
+    //         console.log(err);
+    //       });
+    //     dispatch(cartLoginAction(frontData));
+    //     break;
+    // }
+  };
   /**전체 삭제*/
   const clickClean = () => {
-    dispatch(cartAction([]));
+    dispatchCondition([]);
   };
   /**선택 삭제 */
   const clickSelectDel = (e) => {
@@ -46,6 +67,7 @@ function Sub09Cart(props) {
       ...state,
       check: arr,
     });
+    dispatch(cartChkAction(arr));
   };
   /**전체 선택 */
   const changeAll = (e) => {
@@ -72,19 +94,19 @@ function Sub09Cart(props) {
         ? { ...el, 수량: el.수량 - 1 <= 1 ? 1 : el.수량 - 1 }
         : { ...el }
     );
-    dispatch(cartAction(change));
+    dispatchCondition(change);
   };
   const clickPlus = (e, data) => {
     e.preventDefault();
     let change = state.product.map((el) =>
       el.id === data.id ? { ...el, 수량: el.수량 + 1 } : { ...el }
     );
-    dispatch(cartAction(change));
+    dispatchCondition(change);
   };
   return (
     <div id="sub09Cart" className="sub-page">
       <div className="inner">
-        <SiteMapComponent firstLink="/Cart" fisrtName="장바구니" />
+        <SiteMapComponent firstLink="/Cart" firstName="장바구니" />
         <div className="body">
           <dl>
             <dt>
@@ -106,7 +128,7 @@ function Sub09Cart(props) {
               <div className="col col5">주문금액</div>
             </dt>
             {state.product.map((el, idx) => (
-              <dd className={el.품절 && "sold-out"} key={el.id}>
+              <dd className={el.품절 ? "sold-out" : ""} key={el.id}>
                 <div className="col col1">
                   <input
                     type="checkbox"
@@ -134,21 +156,20 @@ function Sub09Cart(props) {
                 <div className="col col3">
                   <div className="container">
                     <button
-                      className={el.수량 > 1 && "active"}
-                      onClick={(e) => clickMinus(e, el)}
-                    >
+                      className={el.수량 > 1 ? "active" : ""}
+                      onClick={(e) => clickMinus(e, el)}>
                       -
                     </button>
                     <input
                       type="number"
-                      name="inputNumber"
-                      id="inputNumber"
+                      name={`inputNumber${el.idx}`}
+                      id={`inputNumber${el.idx}`}
                       value={el.수량}
+                      readOnly
                     />
                     <button
                       className={el.수량 > 0 && "active"}
-                      onClick={(e) => clickPlus(e, el)}
-                    >
+                      onClick={(e) => clickPlus(e, el)}>
                       +
                     </button>
                   </div>

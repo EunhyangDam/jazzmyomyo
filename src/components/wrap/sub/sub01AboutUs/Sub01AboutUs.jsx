@@ -126,8 +126,7 @@ export default function Sub01AboutUs(props) {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         className={`section ${hover ? "active" : ""}`}
-        ref={section2}
-      >
+        ref={section2}>
         <div className="img-container" ref={section2Img}>
           <img src={`./img/sub01/pic${state.rowIdx + 1}.jpg`} alt="" />
         </div>
@@ -135,8 +134,7 @@ export default function Sub01AboutUs(props) {
           <div
             className={`row row${idx + 1}`}
             onMouseEnter={(e) => mouseEnterRow(e, idx)}
-            key={idx}
-          >
+            key={idx}>
             <div className="inner">
               <p>{el.left}</p>
               <p>{el.right}</p>
