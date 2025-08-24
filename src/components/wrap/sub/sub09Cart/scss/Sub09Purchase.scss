@@ -1,0 +1,50 @@
+@use "../.././../../scss/variables" as *;
+@use "../../../../scss/mixin" as *;
+main#sub09Purchase {
+  margin-top: 100px;
+  .inner {
+    max-width: 1750px;
+    margin: 0 auto;
+    .container {
+      max-width: 1280px;
+      margin-inline: auto;
+      .head {
+        margin-block: 50px 70px;
+        ul {
+          display: flex;
+
+          li {
+            &.text {
+              position: relative;
+              color: #747474;
+              img {
+                width: 100%;
+              }
+              span {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+              }
+              &:nth-child(2) {
+                span {
+                  font-weight: 600;
+                  color: $sub-color1;
+                }
+              }
+            }
+          }
+        }
+      }
+      .body {
+        display: flex;
+        .col {
+          &.col1 {
+          }
+          &.col2 {
+          }
+        }
+      }
+    }
+  }
+}

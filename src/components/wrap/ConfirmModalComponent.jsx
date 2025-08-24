@@ -68,7 +68,7 @@ function ConfirmModalComponent(props) {
             )}
           </div>
           <div className="col2 col">
-            <i class="fa-solid fa-paw"></i>
+            <i className="fa-solid fa-paw"></i>
           </div>
         </div>
       </div>

@@ -5,10 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { wishAction } from "../../../../store/wishlist";
 import SiteMapComponent from "../../custom/SiteMapComponent";
+import useCustomA from "../../custom/useCustomA";
+import { cartAction } from "../../../../store/cart";
+import { confirmModalAction } from "../../../../store/confirmModal";
 export default function Sub10Wishilist(props) {
+  const { onClickA } = useCustomA();
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const list = useSelector((state) => state.wishlist);
+  const cartAsset = useSelector((state) => state.cart.cart);
   const userID = useSelector((state) => state.signIn);
 
   const [state, setState] = useState({
@@ -28,12 +33,33 @@ export default function Sub10Wishilist(props) {
     });
     dispatch(wishAction(del));
   };
-  const clickCart = (e, data) => {
+  const clickProduct = (e, data) => {
     e.preventDefault();
     navigation(
       { hash: "", pathname: "/ShopDetail", search: `product=${data.id}` },
       { state: data }
     );
+  };
+  const clickCart = (e, data) => {
+    e.preventDefault();
+    let arr = cartAsset;
+    if (arr.some((el) => el.id === data.id)) {
+      dispatch(
+        confirmModalAction({
+          heading: "이미 추가된 상품입니다.",
+          isON: true,
+        })
+      );
+      return;
+    }
+    arr = [data, ...arr];
+    dispatch(
+      confirmModalAction({
+        heading: "장바구니에 추가되었습니다.",
+        isON: true,
+      })
+    );
+    dispatch(cartAction(arr));
   };
   return (
     <div id="sub10Wishilist" className="sub-page">
@@ -79,7 +105,7 @@ export default function Sub10Wishilist(props) {
                   data-key={el.id}
                   className={el.품절 && "sold-out"}>
                   <div className="img-container">
-                    <a href="!#" onClick={(e) => clickCart(e, el)}>
+                    <a href="!#" onClick={(e) => clickProduct(e, el)}>
                       <img src={el.이미지[0]} alt={el.설명} />
                     </a>
                     <div className="x-box">
@@ -87,9 +113,18 @@ export default function Sub10Wishilist(props) {
                         <i className="bi bi-x"></i>
                       </button>
                     </div>
+                    <a
+                      className="add-to-cart"
+                      href="!#"
+                      onClick={(e) => clickCart(e, el)}>
+                      <p>
+                        <i className="fa-solid fa-cart-arrow-down"></i> Add to
+                        cart
+                      </p>
+                    </a>
                   </div>
                   <h4>
-                    <a href="!#" onClick={(e) => clickCart(e, el)}>
+                    <a href="!#" onClick={(e) => clickProduct(e, el)}>
                       {el.상품명}
                     </a>
                   </h4>

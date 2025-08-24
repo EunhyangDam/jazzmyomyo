@@ -73,6 +73,7 @@ import Sub06SignUp from "./wrap/sub/sub06Lg/Sub06SignUp";
 
 import ReactDaumPostcode from "./wrap/ReactDaumPostcode.jsx";
 import { signInAction } from "../store/signIn.js";
+import Sub09Purchase from "./wrap/sub/sub09Cart/Sub09Purchase.jsx";
 
 export default function WrapComponent(props) {
   /**인스턴스 생성 */
@@ -278,6 +279,7 @@ export default function WrapComponent(props) {
           <Route path="/mmSign" element={<Sub084MmSign />} />
 
           <Route path="/cart" element={<Sub09Cart />} />
+          <Route path="/purchase" element={<Sub09Purchase />} />
           <Route path="/wishlist" element={<Sub10Wishlist />} />
           <Route path="/*" element={<Page404Component />} />
         </Route>

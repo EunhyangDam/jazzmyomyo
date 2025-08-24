@@ -12,6 +12,7 @@ const cart = createSlice({
         el.품절 === true ? { ...el, 수량: 0 } : { ...el }
       );
       state.cart = arr;
+      console.log(state.cart);
       localStorage.setItem("장바구니", JSON.stringify(state.cart));
     },
     cartChkAction(state, action) {

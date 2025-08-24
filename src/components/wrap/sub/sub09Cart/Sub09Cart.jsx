@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartAction, cartChkAction } from "../../../../store/cart";
 import SiteMapComponent from "../../custom/SiteMapComponent";
 import { cartLoginAction } from "../../../../store/cartLogin";
-import axios from "axios";
+import useCustomA from "../../custom/useCustomA";
 function Sub09Cart(props) {
+  const { onClickA } = useCustomA();
   const cartAsset = useSelector((state) => state.cart.cart);
   const userID = useSelector((state) => state.signIn.아이디);
   const dispatch = useDispatch();
@@ -189,7 +190,9 @@ function Sub09Cart(props) {
         <div className="foot">
           <div className="container">
             <button onClick={clickPrev}>이전화면</button>
-            <button>선택 상품 주문하기</button>
+            <button onClick={(e) => onClickA(e, "/purchase")}>
+              선택 상품 주문하기
+            </button>
           </div>
         </div>
       </div>
