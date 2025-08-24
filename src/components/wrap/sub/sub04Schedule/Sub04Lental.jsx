@@ -1,11 +1,28 @@
 import React from "react";
-import { useEffect, useRef } from "react";
 import "./scss/Sub04Lental.scss";
+import { useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { confirmModalAction } from "../../../../store/confirmModal";
+import SiteMapComponent from "../../custom/SiteMapComponent"
+
 
 function Sub04Lental(props) {
+  const dispatch = useDispatch();
+
+  const [state, setState] = React.useState({
+      이름:'',
+      연락처:'',
+      이메일:'', 
+  });
+  const [file, setFile] = React.useState(null);
+  const [isDragOver, setIsDragOver] = React.useState(false);
+
+
   const scrollBtnRef = useRef(null);
   const navRef = useRef(null); // 네비게이션 전체 영역
-
+ 
+  // 해당 영역으로 이동
   useEffect(() => {
     const navLinks = navRef.current?.querySelectorAll("a"); // ref 기반으로 찾기
     const scrollBtn = scrollBtnRef.current;
@@ -51,21 +68,149 @@ function Sub04Lental(props) {
     };
   }, []);
 
+
+  // 폼데이터 제출
+
+
+  const onChangeName =(e) => {
+    setState(s => ({ ...s, 이름: e.target.value }))
+  };
+  const onChangePh =(e) => {
+    setState(s => ({ ...s, 연락처: e.target.value }))
+  };
+  const onChangeEmail=(e) => {
+    setState(s => ({ ...s, 이메일: e.target.value }))
+  };  
+
+  const onChangeFile = (e) => {
+      setFile(e.target.files?.[0] ?? null);
+  };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formEl = e.currentTarget;
+  
+    // 유효성 검사 (순서대로 첫 누락 항목 모달)
+    if (!state.이름.trim()) {
+      dispatch(
+        confirmModalAction({
+          heading: "알림!",
+          explain: "이름을 입력해주세요",
+          isON: true,
+          isConfirm: false,
+          message1: "",
+          message2: "",
+        })
+      );
+      return;
+    }
+
+    if (!state.연락처.trim()) {
+      dispatch(
+        confirmModalAction({
+          heading: "알림!",
+          explain: "연락처를 입력해주세요",
+          isON: true,
+          isConfirm: false,
+          message1: "",
+          message2: "",
+        })
+      );
+      return;
+    }
+
+    if (!state.이메일.trim()) {
+      dispatch(
+        confirmModalAction({
+          heading: "알림!",
+          explain: "이메일을 입력해주세요",
+          isON: true,
+          isConfirm: false,
+          message1: "",
+          message2: "",
+        })
+      );
+      return;
+    }
+    const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!emailRx.test(state.이메일.trim())) {
+      dispatch(
+        confirmModalAction({
+          heading:"알림!", 
+          explain:"올바른 이메일 형식을 입력해주세요.", 
+          isON:true, 
+          isConfirm:false 
+        })
+      );
+      return;
+    }
+
+    if (!file) {
+      dispatch(
+        confirmModalAction({
+          heading: "알림!",
+          explain: "파일을 업로드 해주세요",
+          isON: true,
+          isConfirm: false,
+          message1: "",
+          message2: "",
+        })
+      );
+      return;
+    }  
+      // 전송
+      const formData = new FormData(formEl); 
+
+      axios({
+        url: "/jazzmyomyo/lental_table.php",   
+        method: "POST",
+        data: formData,                         
+      })
+      .then(({ status, data }) => {
+        if (status === 200 && (data?.ok === true || data?.ok === 1)) {
+          formEl.reset();
+          setState({ 이름: '', 연락처: '', 이메일: '' });
+          setFile(null);
+          const obj = {
+            heading: "제출성공!",
+            explain:"신청이 완료되었습니다",
+            isON: true,
+            isConfirm: false,
+          }
+          dispatch(confirmModalAction(obj));            
+        } 
+        else {
+          const obj = {
+            heading: "제출실패",
+            explain:"다시 시도해주세요",
+            isON: true,
+            isConfirm: false,
+          }
+          dispatch(confirmModalAction(obj));            
+        }
+      })
+        .catch((err) => console.loog(err));
+  };
+  
+ 
+
+
+
   return (
     <div id="sub04Lental">
       <header id="header">
         <div className="container">
           <div className="breadcrumb">
-            <span className="home-icon">
-              <i className="material-icons">home</i>
-            </span>
-            <span>&gt;</span>
-            <span>Schedule</span>
-            <span>&gt;</span>
-            <span className="current">Rental</span>
+            <SiteMapComponent
+              firstLink="/monthly"
+              firstName="Schedule"
+              secondLink="./"
+              secondName="대관신청"
+            />
+
           </div>
 
-          <h1 className="page-title">대관</h1>
+          <h1 className="page-title">대관신청</h1>
 
           <nav className="rental-scroll-nav" ref={navRef}>
             <ul>
@@ -274,21 +419,18 @@ function Sub04Lental(props) {
             <ul>
               <li>
                 <p>
-                  {" "}
                   기본 항목외의 기타 장비 사용은 대관료에 포함되지 않으며, 필요
                   시 사전 협의 및 별도 비용 청구됩니다
                 </p>
               </li>
               <li>
                 <p>
-                  {" "}
                   현장 상황에 따라 추가 비용이 발생할 수 있으며, 사전 확인이
                   필수입니다.
                 </p>
               </li>
               <li>
                 <p>
-                  {" "}
                   세부 사항은 내부 대관규정에 따릅니다. 신청 전 반드시
                   대관규정을 확인하여 주시기 바랍니다. (대관규정은 대관신청서와
                   함께 다운로드 할 수 있습니다.)
@@ -296,7 +438,6 @@ function Sub04Lental(props) {
               </li>
               <li>
                 <p>
-                  {" "}
                   행사장 내부 구조변경(책상/의자 등) 시 원상복구를 원칙으로
                   합니다.
                 </p>
@@ -317,8 +458,8 @@ function Sub04Lental(props) {
                     <p>공간도면</p>
                   </dd>
                   <dd>
-                    <a href="#">
-                      공간도면{" "}
+                    <a href="/downLoad/스튜디오 평면도.pdf" download="재즈묘묘_공간도면.pdf">
+                      공간도면
                       <i className="material-icons">insert_drive_file</i>
                     </a>
                   </dd>
@@ -330,9 +471,9 @@ function Sub04Lental(props) {
                     <p>대관 신청서</p>
                   </dd>
                   <dd>
-                    <a href="#">
-                      대관 신청서{" "}
-                      <i className="material-icons">insert_drive_file</i>{" "}
+                    <a href="/downLoad/jazz_Myomyo_rental_hall.docx" download="재즈묘묘_대관신청서.docx">
+                      대관 신청서
+                      <i className="material-icons">insert_drive_file</i>
                     </a>
                   </dd>
                 </dl>
@@ -343,9 +484,9 @@ function Sub04Lental(props) {
                     <p>대관 규약</p>
                   </dd>
                   <dd>
-                    <a href="#">
+                    <a href="/downLoad/jazz_myomyo_rental_regulations.hwp" download="재즈묘묘_대관규약.hwp">
                       대관 규약
-                      <i className="material-icons">insert_drive_file</i>{" "}
+                      <i className="material-icons">insert_drive_file</i>
                     </a>
                   </dd>
                 </dl>
@@ -383,55 +524,89 @@ function Sub04Lental(props) {
             </div>
 
             {/* <!-- 오른쪽 --> */}
-            <form
+            <form 
+              onSubmit={handleSubmit} 
               className="apply-form"
-              action="#"
-              method="POST"
-              enctype="multipart/form-data"
+              encType="multipart/form-data"
             >
               <div className="form-inner">
                 {/* <!-- 왼쪽 필드 영역 --> */}
                 <div className="form-fields">
                   <div className="form-group">
-                    <label for="name">신청자정보</label>
+                    <label>신청자정보</label>
                     <input
                       type="text"
                       id="name"
                       name="name"
                       placeholder="이름 및 단체명"
-                      required
-                    />
+                      value={state.이름}
+                      onChange={onChangeName}
+                      />
                   </div>
                   <div className="form-group">
-                    <label for="phone">전화번호</label>
+                    <label>전화번호</label>
                     <input
                       type="text"
                       id="phone"
                       name="phone"
+                      value={state.연락처}
+                      onChange={onChangePh}
                       placeholder="연락처 입력"
-                      required
-                    />
+                      />
                   </div>
                   <div className="form-group">
-                    <label for="email">이메일</label>
+                    <label>이메일</label>
                     <input
                       type="email"
                       id="email"
                       name="email"
+                      value={state.이메일}
+                      onChange={onChangeEmail}
                       placeholder="이메일 입력"
                     />
                   </div>
                 </div>
 
                 {/* <!-- 오른쪽 업로드 영역 --> */}
-                <div className="form-upload">
-                  <label for="file">대관신청서 첨부</label>
-                  <div className="upload-box">
-                    <input type="file" id="file" name="file" required />
-                    <p>📄 파일을 업로드 해주세요</p>
-                  </div>
+                <div 
+                  className={`upload-box ${isDragOver ? "dragover" : ""}`} 
+                  onClick={() => document.getElementById("file").click()}
+                  onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
+                  onDragLeave={() => setIsDragOver(false)}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setIsDragOver(false);
+                    setFile(e.dataTransfer.files[0]);
+                  }}
+                >
+                  <input 
+                    type="file" 
+                    id="file" 
+                    name="file" 
+                    accept=".pdf"
+                    style={{ display: "none" }}
+                    onChange={onChangeFile} 
+                  />
+                  <p>
+                    <i className="material-icons">insert_drive_file</i>
+                    {file ? file.name : "파일을 업로드 해주세요 (PDF)"}
+                  </p>
+                  {file && (
+                  <button
+                    type="button"
+                    className="delete-btn"
+                    onClick={(e) => {
+                      e.stopPropagation(); 
+                      setFile(null);
+                      const input = document.getElementById("file");
+                      if (input) input.value = ""; 
+                    }}
+                  >
+                    <i>×</i><span>삭제</span>
+                  </button>
+                )}
                 </div>
-              </div>
+              </div>              
               <button type="submit" className="submit-btn">
                 신청서 제출
               </button>

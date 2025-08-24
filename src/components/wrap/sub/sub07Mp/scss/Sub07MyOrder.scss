@@ -114,6 +114,13 @@
                   border-bottom: 1px solid #ccc;
                   > ul {
                     width: 100%;
+
+                    .empty {
+                      padding: 100px 0;
+                      font-size: 1.4rem;
+                      text-align: center;
+                    }
+
                     > li {
                       width: 100%;
                       padding: 20px 0;
@@ -206,6 +213,137 @@
       }
     }
   }
+
+  .modal {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    display: flex;
+    .modal-box {
+      width: 800px;
+      height: auto;
+      background: $white;
+      border-radius: 8px;
+      margin: auto;
+      border: 1px solid $primary-color;
+      padding: 3%;
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      .modal-container {
+        width: 100%;
+        height: 100%;
+        .title {
+          width: 100%;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-bottom: 1px solid $primary-color;
+          h2 {
+            font-family: $font1;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: $primary-color;
+          }
+          button {
+            border: 0;
+            background: 0;
+            i {
+              font-size: 30px;
+              color: $primary-color;
+              &:hover {
+                color: #000;
+              }
+            }
+          }
+        }
+        .content {
+          width: 100%;
+          height: calc(100% - 50px);
+          padding-top: 20px;
+          ul.list-box {
+            width: 100%;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            li {
+              width: 100%;
+              height: 40px;
+              display: flex;
+              align-items: center;
+              p {
+                padding-left: 10px;
+
+                &.sub-name {
+                  font-weight: 500;
+                  font-size: 17px;
+                }
+              }
+
+              &.row1 {
+                font-size: 18px;
+                font-weight: 600;
+
+                p {
+                  font-weight: 600;
+                }
+                em {
+                  margin-left: 10px;
+                }
+              }
+              &.order-status {
+                height: 60px;
+                padding: 10px;
+                em {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 90px;
+                  height: 40px;
+                  height: 100%;
+                  background-color: $sub-color1;
+                  color: #fff;
+                  border-radius: 4px;
+                }
+              }
+
+              &.row2 {
+                font-size: 18px;
+                font-weight: 600;
+              }
+
+              &.price {
+                p {
+                  &:last-child {
+                    font-weight: 600;
+                    span {
+                      font-weight: 400;
+                    }
+                  }
+                }
+              }
+              &.payment {
+                height: 50px;
+                border-bottom: 1px solid #ccc;
+                margin-bottom: 10px;
+              }
+              &.name {
+                p {
+                  font-weight: 600;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   @media all and (max-width: 1770px) {
     .container {
       .site {
@@ -491,6 +629,7 @@
     }
   }
 }
+// 헤더 반응형
 @media all and (max-width: 1025px) {
   #sub07MyOrder,
   #sub07MyOrderMd,
@@ -504,6 +643,64 @@
         a {
           h2 {
             font-size: 2rem;
+          }
+        }
+      }
+    }
+  }
+}
+// 모달 반응형
+@media all and (max-width: 840px) {
+  #sub07MyOrder,
+  #sub07MyOrderMd,
+  #sub07MyOrderTk,
+  #sub07MyOrderMenu,
+  #sub07MyOrderRental {
+    .modal {
+      padding: 0 40px;
+      .modal-box {
+        width: 600px;
+        background-color: #fff;
+      }
+    }
+  }
+}
+@media all and (max-width: 600px) {
+  #sub07MyOrder,
+  #sub07MyOrderMd,
+  #sub07MyOrderTk,
+  #sub07MyOrderMenu,
+  #sub07MyOrderRental {
+    .modal {
+      .modal-box {
+        .modal-container {
+          padding: 20px;
+          .title {
+            h2 {
+              font-size: 1.2rem;
+            }
+            button {
+              i {
+                font-size: 24px;
+              }
+            }
+          }
+          .content {
+            ul.list-box {
+              li {
+                height: auto;
+                em {
+                  font-size: 16px;
+                }
+                p {
+                  line-height: 180%;
+                  font-size: 14px;
+                  &.sub-name {
+                    font-size: 14px;
+                  }
+                }
+              }
+            }
           }
         }
       }

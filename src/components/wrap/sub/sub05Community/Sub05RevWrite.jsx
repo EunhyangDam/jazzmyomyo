@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./scss/Sub05RevWrite.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { confirmModalAction } from "../../../../store/confirmModal";
@@ -13,26 +13,11 @@ function Sub05RevWrite(props) {
   const wNameRef = React.useRef();
 
   const [state, setState] = useState({
-    wSubject: "후기입니다",
+    wSubject: "",
     wContent: "",
     wId: "testId", // 임시 아이디
     wName: "",
   });
-
-  const onSubmitWriteReview = (e) => {
-    e.preventDefault();
-    let obj = {
-      heading: "후기를\n 올리시겠습니까?",
-      explain: "",
-      isON: true,
-      isConfirm: true,
-      //여기 추가
-      message1: "아니오",
-      message2: "예",
-      isYes: true, // 응답이 예스/노
-    };
-    dispatch(confirmModalAction(obj));
-  };
 
   //목록 버튼 클릭이벤트
   const onClickListBtn = (e) => {
@@ -44,6 +29,13 @@ function Sub05RevWrite(props) {
     setState({
       ...state,
       wName: e.target.value,
+    });
+  };
+
+  const onChangeWSubject = (e) => {
+    setState({
+      ...state,
+      wSubject: e.target.value,
     });
   };
 
@@ -87,7 +79,7 @@ function Sub05RevWrite(props) {
               wName: "",
             });
 
-            wNameRef.current.focus();
+            setTimeout(() => navigate(-1), 2000);
           } else {
             dispatch(
               confirmModalAction({
@@ -114,21 +106,38 @@ function Sub05RevWrite(props) {
           secondName="공연 후기"
         />
         <div className="title">
-          <Link to="./">
-            <h2>공연 후기</h2>
-          </Link>
+          <h2>공연 후기</h2>
         </div>
         <div className="content">
           <form id="review" onSubmit={onSubmitReview}>
             <div className="write-box">
               <ul>
-                <li>
+                <li className="row1">
                   <h3>묘원들의 한줄후기를 남겨주세요!</h3>
                 </li>
-                <li className="rev-writer">
-                  <span>작성자</span>
+                <li className="row2">
+                  <label htmlFor="wSubject">
+                    <span>제목</span>
+                  </label>
+
                   <input
                     type="text"
+                    name="wSubject"
+                    id="wSubject"
+                    placeholder="제목을 작성해주세요"
+                    onChange={onChangeWSubject}
+                    value={state.wSubject}
+                    ref={wNameRef}
+                  />
+                </li>
+                <li className="row3">
+                  <label htmlFor="wName">
+                    <span>작성자</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="wName"
+                    id="wName"
                     placeholder="이름을 작성해주세요"
                     onChange={onChangeWName}
                     value={state.wName}
@@ -136,7 +145,7 @@ function Sub05RevWrite(props) {
                   />
                 </li>
 
-                <li className="rev-content">
+                <li className="row4">
                   <textarea
                     type="text"
                     placeholder="후기를 남겨보세요"

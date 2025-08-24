@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
+import SiteMapComponent from "../../custom/SiteMapComponent"
 
 import "./scss/Sub04Monthly.scss";
 
@@ -99,13 +100,13 @@ export default function Sub04Monthly() {
           <div className="page-title">
             <h2>Schedule</h2>
           </div>
-          <div className="site-map">
-            <a href="/" className="home-icon">
-              <i class="material-icons">home</i>
-            </a>
-            <span className="arrow"> &gt; </span>
-            <span className="schedule">Schedule</span>
-          </div>
+          <SiteMapComponent
+            firstLink="/monthly"
+            firstName="Schedule"
+            secondLink="./"
+            secondName="캘린더"
+          />
+
 
           <div className="contents">
             {/* 달력 영역 */}
@@ -184,8 +185,8 @@ export default function Sub04Monthly() {
                         <h3>{item.artist}</h3>
                         <p>{item.time}</p>
                       </div>
-                      <Link
-                        to={`/artist?artist=${encodeURIComponent(item.artist)}`}
+                      <Link 
+                        to = {`/Artist?artist=${encodeURIComponent(item.artist)}`}
                         className="arrow"
                         aria-label="공연 상세 보기"
                       >
@@ -229,7 +230,7 @@ export default function Sub04Monthly() {
                   </p>
                 </li>
                 <div className="img-box">
-                  <img src="./img/발바닥.png" alt="" />
+                  <i className="fa-solid fa-paw"></i>
                 </div>
               </ul>
             </div>

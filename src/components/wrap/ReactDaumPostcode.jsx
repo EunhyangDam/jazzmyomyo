@@ -108,7 +108,7 @@ export default function ReactDaumPostcode(props) {
           <div className="left">
             <h1>
               <img src="./images/favicon.ico" alt="" />
-              <strong>HONGO FASHION</strong>
+              <strong>jazzmyomyo</strong>
             </h1>
           </div>
           <div className="right">

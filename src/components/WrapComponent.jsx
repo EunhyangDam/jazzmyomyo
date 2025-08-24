@@ -41,6 +41,8 @@ import Sub06SearchId from "./wrap/sub/sub06Lg/Sub06SearchId";
 import Sub06SearchRs from "./wrap/sub/sub06Lg/Sub06SearchRs";
 
 import Sub07AddressList from "./wrap/sub/sub07Mp/Sub07AddressList";
+import Sub07AddressListCreate from "./wrap/sub/sub07Mp/Sub07AddressListCreate";
+import Sub07AddressListEdit from "./wrap/sub/sub07Mp/Sub07AddressListEdit";
 import Sub07DeleteAccount from "./wrap/sub/sub07Mp/Sub07DeleteAccount";
 import Sub07EditProfile from "./wrap/sub/sub07Mp/Sub07EditProfile";
 import Sub07Mp from "./wrap/sub/sub07Mp/Sub07Mp";
@@ -252,6 +254,12 @@ export default function WrapComponent(props) {
           <Route path="/searchRs" element={<Sub06SearchRs />} />
           <Route path="/signUp" element={<Sub06SignUp />} />
           {/* 배송지 관리 컴포넌트 추가 */}
+          <Route path="/addressList" element={<Sub07AddressList />} />
+          <Route path="/addressListEdit" element={<Sub07AddressListEdit />} />
+          <Route
+            path="/addressListCreate"
+            element={<Sub07AddressListCreate />}
+          />
           <Route path="/addressList" element={<Sub07AddressList />} />
           <Route path="/deleteAccount" element={<Sub07DeleteAccount />} />
           <Route path="/editProfile" element={<Sub07EditProfile />} />

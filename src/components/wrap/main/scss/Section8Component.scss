@@ -23,17 +23,25 @@
           margin: 0 auto;
           display: flex;
           justify-content: space-between;
-          h2 {
-            font-family: $font2;
-            font-size: $size4;
-            font-weight: 700;
-            line-height: 160%;
-            color: $white;
+          a {
+            h2 {
+              img {
+                height: 32.4px;
+              }
+              em {
+                font-family: $font2;
+                font-size: $size4;
+                font-weight: 700;
+                line-height: 160%;
+                color: $white;
+              }
+            }
           }
+
           h3 {
             color: #fff;
-            font-size: $size4;
-            font-family: $font2;
+            font-size: 1.2rem;
+            font-family: $font1;
             display: flex;
             align-items: center;
           }
@@ -56,39 +64,68 @@
           padding-bottom: 60px;
           ul {
             width: 100%;
-            overflow: hidden;
+            height: 400px;
+            display: flex;
             li {
-              width: auto;
-              white-space: nowrap;
-              animation: review_ani var(--duration) linear infinite;
-              display: inline-flex;
-              span {
-                line-height: 180%;
-                color: $grey1;
-                font-size: $size3;
-                font-weight: 600;
-                display: inline-block;
+              width: 25%;
+              height: 100%;
+              position: relative;
+              display: flex;
+
+              p {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 2;
+                font-size: 24px;
+                width: 50%;
+                line-height: 150%;
+                text-align: center;
+                span {
+                  font-size: 18px;
+                  display: block;
+                  margin-top: 10px;
+                }
               }
 
-              &:nth-child(1) {
-                --duration: 30s;
+              img {
+                width: 100%;
+                position: relative;
+                z-index: 1;
               }
-              &:nth-child(2) {
-                --duration: 25s;
+              &.col1 {
+                transform: rotate(-3deg);
+
+                p {
+                  font-size: $font3;
+                }
               }
-              &:nth-child(3) {
-                --duration: 20s;
+              &.col2 {
+                transform: rotate(3deg);
+                p {
+                  font-family: $font2;
+                  font-weight: 300;
+                }
               }
-              &:nth-child(4) {
-                --duration: 23s;
+              &.col3 {
+                transform: rotate(2deg);
+                img {
+                  transform: translateX(3%);
+                }
+                p {
+                  width: 60%;
+                  font-family: $font3;
+                  transform: translate(-55%, -40%);
+                }
               }
-            }
-            @keyframes review_ani {
-              0% {
-                transform: translateX(0%);
-              }
-              100% {
-                transform: translateX(-50%);
+              &.col4 {
+                transform: rotate(5deg);
+                p {
+                  width: 60%;
+                  font-family: $font2;
+                  color: $grey2;
+                }
               }
             }
           }
@@ -203,32 +240,29 @@
         .title {
           padding: 20px 0;
         }
+      }
+    }
+    @media all and (max-width: 1170px) {
+      .container {
         .content {
           .reviews {
             ul {
+              width: 80%;
+              margin: 0 auto;
+              height: auto;
+              flex-flow: row wrap;
+              justify-content: space-between;
+              text-align: center;
               li {
-                span {
-                  font-size: $size4;
+                width: 45%;
+                p {
+                  font-size: 20px;
                 }
-              }
-            }
-          }
-          .video {
-            .video-container {
-              .slide-container {
-                max-height: 350px;
-                .slide-view {
-                  .slide-wrap {
-                    padding: 0;
-                    width: 250px * 11;
-                    li {
-                      width: 250px;
-                      padding: 0 5px;
-                      iframe {
-                        max-width: 200px;
-                      }
-                    }
-                  }
+                &.col3 {
+                  transform: rotate(-3deg);
+                }
+                &.col4 {
+                  transform: rotate(7deg);
                 }
               }
             }
@@ -236,9 +270,15 @@
         }
       }
     }
+
     @media all and (max-width: 935px) {
       .container {
         .title {
+          .title-container {
+            h3 {
+              font-size: 16px;
+            }
+          }
           .line {
             height: 15px;
             border-top: 6px solid $white;
@@ -261,6 +301,21 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    @media all and (max-width: 840px) {
+      .container {
+        .content {
+          .reviews {
+            ul {
+              li {
+                p {
+                  font-size: 17px;
                 }
               }
             }
@@ -315,9 +370,7 @@
           .reviews {
             ul {
               li {
-                span {
-                  font-size: 1.5rem;
-                }
+                width: 100%;
               }
             }
           }
@@ -350,17 +403,6 @@
           .title-container {
             h2 {
               font-size: 1.3rem;
-            }
-          }
-        }
-        .content {
-          .reviews {
-            ul {
-              li {
-                span {
-                  font-size: 1.3rem;
-                }
-              }
             }
           }
         }

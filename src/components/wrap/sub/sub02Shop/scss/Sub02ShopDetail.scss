@@ -30,6 +30,13 @@
         }
       }
     }
+    .site {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-top: 20px;
+      justify-content: flex-end;
+    }
     .content {
       width: 100%;
       max-width: 1750px;
@@ -110,8 +117,10 @@
                 }
                 &:nth-child(2) {
                   padding-bottom: 30px;
+
                   em {
                     //가격
+                    padding-top: 5px;
                     font-size: $size4;
                     font-weight: 600;
                   }
@@ -585,9 +594,6 @@
                   }
                   &.buy-now {
                     justify-content: center;
-
-                    a {
-                    }
                   }
                 }
               }
@@ -639,5 +645,10 @@
         }
       }
     }
+  }
+}
+@media all and (max-width: 1025px) {
+  #sub02ShopDetail {
+    margin-top: 70px;
   }
 }

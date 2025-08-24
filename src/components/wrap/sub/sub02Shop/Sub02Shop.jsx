@@ -3,8 +3,12 @@ import "./scss/Sub02Shop.scss";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { wishAction } from "../../../../store/wishlist";
+import SiteMapComponent from "../../custom/SiteMapComponent";
+import useCustomA from "../../custom/useCustomA";
 
 function Sub02Shop(props) {
+  const { onClickA } = useCustomA();
+
   const dispatch = useDispatch();
   const wishlistAsset = useSelector((state) => state.wishlist.위시리스트);
   const [state, setState] = useState({
@@ -28,7 +32,7 @@ function Sub02Shop(props) {
   }, [category, state.product]);
 
   useEffect(() => {
-    fetch("./json/product.json", { method: "GET" })
+    fetch("/json/product.json", { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         setState({
@@ -126,10 +130,12 @@ function Sub02Shop(props) {
     <div id="sub02Shop">
       <div id="wrap">
         <div className="title">
-          <Link to="/shop">
+          <a href="!#" onClick={(e) => onClickA(e, "/shop")}>
             <h2>shop</h2>
-          </Link>
+          </a>
         </div>
+        <SiteMapComponent firstLink="/shop" firstName="shop" />
+
         <div className="content">
           <div className="category-name">
             <ul>
@@ -217,6 +223,10 @@ function Sub02Shop(props) {
                       ? `${Math.min(...item.가격).toLocaleString(
                           "ko-KR"
                         )} - ${Math.max(...item.가격).toLocaleString(
+                          "ko-KR"
+                        )}원`
+                      : item.할인율
+                      ? `${(item.가격 * (1 - item.할인율)).toLocaleString(
                           "ko-KR"
                         )}원`
                       : `${item.가격.toLocaleString("ko-KR")}원`}

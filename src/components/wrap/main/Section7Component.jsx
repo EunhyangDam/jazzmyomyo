@@ -3,8 +3,10 @@ import "./scss/Section7Component.scss";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { wishAction } from "../../../store/wishlist";
+import useCustomA from "../custom/useCustomA";
 
 export default function Section7Component(props) {
+  const { onClickA } = useCustomA();
   const [state, setState] = useState({
     product: [],
   });
@@ -38,9 +40,9 @@ export default function Section7Component(props) {
         <div className="container">
           <div className="title">
             <div className="line"></div>
-            <Link to="/Shop">
+            <a href="!#" onClick={(e) => onClickA(e, "/shop")}>
               <h2>shop</h2>
-            </Link>
+            </a>
             <div className="line"></div>
           </div>
           <div className="content">
@@ -61,9 +63,13 @@ export default function Section7Component(props) {
                       />
                     </Link>
                     <div className="wish-list">
-                      <Link to="/Wishlist" title="Wishlist">
+                      <a
+                        href="!#"
+                        title="Wishlist"
+                        onClick={(e) => clickWishlist(e, state.product[3])}
+                      >
                         <i className="bi bi-suit-heart"></i>
-                      </Link>
+                      </a>
                     </div>
                   </div>
                   <div className="caption-box">

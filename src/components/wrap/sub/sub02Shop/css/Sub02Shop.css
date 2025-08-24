@@ -24,9 +24,16 @@
 #sub02Shop #wrap .title a h2 {
   color: #23363f;
   font-size: 3rem;
-  font-family: "TTHakgyoansimMulgyeolB";
+  font-family: "TTLaundryGothicB";
   font-weight: 700;
   color: #ffffff;
+}
+#sub02Shop #wrap .site {
+  width: 100%;
+  max-width: 1750px;
+  margin: 0 auto;
+  padding-top: 30px;
+  justify-content: flex-end;
 }
 #sub02Shop #wrap .content {
   width: 100%;
@@ -51,7 +58,7 @@
 }
 #sub02Shop #wrap .content .category-name ul li a.active span {
   font-size: 1.8rem;
-  font-family: "MaruBuri";
+  font-family: "KOHI Nanum";
 }
 #sub02Shop #wrap .content .category-name ul li a.active span:hover {
   border-bottom: 1px solid #000;
@@ -109,7 +116,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  font-family: "MaruBuri";
+  font-family: "KOHI Nanum";
   padding: 0.5% 0 2% 0;
 }
 #sub02Shop #wrap .content .filtering button {
@@ -256,10 +263,10 @@
     height: 100px;
   }
   #sub02Shop #wrap .content ul.item li .caption-box a span {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   #sub02Shop #wrap .content ul.item li .caption-box a em {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   #sub02Shop #wrap .content ul.item li .caption-box strong {
     font-size: 1rem;
@@ -419,5 +426,14 @@
   }
   #sub02Shop #wrap .content > ul.item li .caption-box strong {
     font-size: 0.7rem;
+  }
+}
+
+@media all and (max-width: 1025px) {
+  #sub02Shop {
+    margin-top: 70px;
+  }
+  #sub02Shop .wrap .title a h2 {
+    font-size: 1.8rem;
   }
 }

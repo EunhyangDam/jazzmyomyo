@@ -1,21 +1,62 @@
 import React from "react";
-import { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
 import "./scss/Sub04BuyTicket.scss";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { confirmModalAction } from "../../../../store/confirmModal";
 import { confirmModalYesNoAction } from "../../../../store/confirmModal";
-import { addReservation } from "../../../../store/resavation";
+import SiteMapComponent from "../../custom/SiteMapComponent"
+
+// import { addReservation } from "../../../../store/resavation";
 
 function Sub04BuyTicket(props) {
   const [state, setstate] = useState();
   const dispatch = useDispatch();
+  const [pending, setPending] = useState(null);
+  const navigate = useNavigate();
+  
+  
+  const signIn = useSelector((state) => state.signIn);  // slice 이름
+  const isLogin = !!signIn.아이디;   // 아이디가 있으면 로그인 상태
+
 
   const isYes = useSelector((state) => state.confirmModal.isYes);
+  
+  
+  // 로그인 상태에 따른 초기 설정 
+  const [isGuest, setIsGuest] = useState(!isLogin);
+  useEffect(() => {
+    // 로그인 상태가 바뀌면 탭 기본값도 즉시 반영
+    setIsGuest(!isLogin); // 로그인이면 회원예약(false), 비로그인이면 비회원예약(true)
+  }, [isLogin]);
+
+  // 회원 탭 클릭: 그대로 비회원 탭으로 전환
+  const handleMemberClick = () => {
+    if (!isLogin) {
+      // 모달의 '예/아니오' 응답을 새로 쓰려하니, 예약확인과 충돌하지 않게 pending을 구분
+      setPending("login");
+      dispatch(confirmModalYesNoAction(false));
+      dispatch(
+        confirmModalAction({
+          heading: "알림",
+          explain: "현재 로그인이 안되어 있습니다.\n로그인 하시겠습니까?",
+          isON: true,
+          isConfirm: true,   // 예/아니오
+          message1: "예",
+          message2: "아니오",
+        })
+      );
+      return; // 탭 전환 중단
+    }
+    setIsGuest(false); // 로그인 상태라면 정상 전환
+  };
+
+
+
 
   // 탭 전환
   const handleGuestClick = () => setIsGuest(true);
-  const handleMemberClick = () => setIsGuest(false);
 
   // 비회원 폼 입력
   const handleGuestNameChange = (e) =>
@@ -89,7 +130,7 @@ function Sub04BuyTicket(props) {
 
   // 데이터 불러오기
   useEffect(() => {
-    fetch("./json/section4/schedule.json")
+    fetch("./json/sub04/schedule.json")
       .then((res) => res.json())
       .then((data) => setScheduleData(data))
       .catch((err) => console.error("공연 데이터 로딩 실패:", err));
@@ -121,15 +162,13 @@ function Sub04BuyTicket(props) {
         className={`calendar-cell ${isToday ? "today" : ""} ${
           isSelected ? "selected" : ""
         }`}
-        onClick={() => setSelectedDate(dateObj)}
-      >
+        onClick={() => setSelectedDate(dateObj)}>
         <span
           className="date-circle"
           style={{
             color:
               weekday === 0 ? "#dd0000" : weekday === 6 ? "#003cff" : undefined,
-          }}
-        >
+          }}>
           {d}
         </span>
         <div className="dots">
@@ -158,9 +197,11 @@ function Sub04BuyTicket(props) {
     setSelected(null);
   }, [selectedPerformance]);
 
+
+
   ////// 예약 전송 //////////////////////////////////////
+
   // 예약 관련 상태 (섹션2/3/4 값 반영)
-  const [isGuest, setIsGuest] = useState(true);
   const [guestForm, setGuestForm] = useState({
     name: "",
     phone: "",
@@ -172,12 +213,15 @@ function Sub04BuyTicket(props) {
   const selectedDateStr = selectedStr; // 기존 selectedStr("YYYY-MM-DD") 재사용
   const selectedTime = selectedPerformance?.time || "";
 
-  // 비회원 폼 유효성 체크 (빈값만 확인하는 버전)
+  // 비회원 폼 유효성 체크 (이메일 형식 포함)
   const isGuestFormFilled = () => {
-    if (!isGuest) return true; // 회원예약이면 패스
+    if (!isGuest) return true;
     const { name, phone, email } = guestForm;
-    return name.trim() !== "" && phone.trim() !== "" && email.trim() !== "";
+    if (!name.trim() || !phone.trim() || !email.trim()) return false;
+    if (!isValidEmail(email.trim())) return false;
+    return true;
   };
+
 
   const handleReserveClick = (e) => {
     e.preventDefault();
@@ -223,6 +267,7 @@ function Sub04BuyTicket(props) {
     const peopleText = `${peopleCount}명`;
 
     // 이전 응답값 초기화 후, 컨펌 모달 오픈
+    setPending("reserve");
     dispatch(confirmModalYesNoAction(false));
     dispatch(
       confirmModalAction({
@@ -236,55 +281,134 @@ function Sub04BuyTicket(props) {
     );
   };
 
+
+
+  // DB저장
+  const isValidEmail = (str) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str);
+  const parseTimeRange = (range) => {
+    // "19:00 ~ 21:00" → {start:"19:00:00", end:"21:00:00"}
+    const [s="", e=""] = (range || "").split("~").map(t => t?.trim() || "");
+    return {
+      start: s ? `${s}:00` : "",
+      end:   e ? `${e}:00` : null
+    };
+  };
+
   useEffect(() => {
     if (isYes === true) {
-      // 저장 페이로드 구성
-      const payload = {
-        id: isGuest ? guestForm.name : "",
-        이름: isGuest ? guestForm.name : "", // 회원예약이면 사용자 프로필에서 채워도 됨
-        전화: isGuest ? guestForm.phone : "",
-        이메일: isGuest ? guestForm.email : "",
-        인원: peopleCount,
-        일정: {
-          날짜: selectedPerformance?.date ?? "",
-          시간: selectedPerformance?.time ?? "",
-        },
-        createdAt: new Date().toISOString(),
-      };
-      // 저장
-      dispatch(addReservation(payload));
-      // isYes 초기화 (다음 컨펌 대비)
-      dispatch(confirmModalYesNoAction(false));
+      if (pending === "login") {
+        // 로그인 유도 모달에서 '예'
+        dispatch(confirmModalYesNoAction(false));
+        setPending(null);
+        navigate("/Lg"); 
+        return;
+      }
+     
+      if (pending === "reserve") {
+        // === 예약 확인 모달에서 '예' → DB 저장 ===
+        const rawTime = selectedPerformance?.time || ""; // 예: "19:00 ~ 21:00"
+        const [s = "", e = ""] = rawTime.split("~").map(t => (t || "").trim());
+        const time_start = s ? `${s}:00` : "";
+        const time_end   = e ? `${e}:00` : null;
+        // 공통 부분
+        const base = {          
+          artistName: selectedPerformance?.artist ?? "",   
+          productName: selectedPerformance?.concertTitle ?? "",
+          
+          poster: selectedPerformance?.poster ?? null,
+          people_count: peopleCount,
+          date: selectedPerformance?.date ?? "",
+          time_start,
+          time_end,
+          price: 0,
+          payMethod: "none",
+        };
 
-      // 완료 안내 모달 (확인 1버튼)
-      dispatch(
-        confirmModalAction({
-          heading: "예약 완료",
-          explain:
-            "예약이 저장되었습니다.\n마이페이지 > 예약내역에서 확인해 주세요.",
-          isON: true,
-          isConfirm: false,
-          message1: "",
-          message2: "",
+        axios({
+          url: "/jazzmyomyo/reservations.php",   // 실제 PHP 경로
+          method: "POST",
+          data: isGuest
+            ? {
+                ...base,
+                type: "guest",
+                userId: null, // or '비회원'
+                name: guestForm.name,
+                email: guestForm.email,
+                phone: guestForm.phone,
+              }
+            : {
+                ...base,
+                type: "member",
+                userId: signIn.아이디,
+              },
+        }
+      )
+        .then(({ status, data }) => {
+          if (status === 200 && data?.ok) {
+            // 성공
+            if (isGuest) setGuestForm({ name: "", phone: "", email: "" });
+            dispatch(
+              confirmModalAction({
+                heading: "예약 완료",
+                explain: "마이페이지 > 예약내역에서 확인해 주세요.",
+                isON: true,
+                isConfirm: false,
+              })
+            );
+          } 
+          else {
+            // 서버가 실패 응답
+            dispatch(
+              confirmModalAction({
+                heading: "오류",
+                explain: data?.msg ?? "예약 저장 실패",
+                isON: true,
+                isConfirm: false,
+              })
+            );
+          }
+          dispatch(confirmModalYesNoAction(false));
+          setPending(null);
         })
-      );
+
+        .catch((err) => {
+          console.log(err);
+          dispatch(
+            confirmModalAction({
+              heading: "오류",
+              explain: `예약 저장 중 문제가 발생했습니다.\n${err.message}`,
+              isON: true,
+              isConfirm: false,
+            })
+          );
+          dispatch(confirmModalYesNoAction(false));
+          setPending(null);
+        });        
+      }
+    } 
+     else if (isYes === false) {
+       // 모달에서 '아니오'
+       setPending(null);
     }
   }, [isYes]); // isYes가 true가 되는 순간에만 실행
+
+
+
 
   return (
     <div id="sub04BuyTicket">
       <section id="section1" className="reservation-header">
-        <div class="reservation-header">
-          <div class="content">
-            <div class="breadcrumb">
-              <span>
-                <i class="material-icons">home</i>
-              </span>{" "}
-              &gt;
-              <span>Schedule</span> &gt;
-              <strong>RESAVATION</strong>
+        <div className="reservation-header">
+          <div className="content">
+            <div className="breadcrumb">
+              <SiteMapComponent
+                firstLink="/monthly"
+                firstName="Schedule"
+                secondLink="./"
+                secondName="티켓 예매"
+              />
             </div>
-            <h2 class="section-title">RESAVATION</h2>
+            <h2 className="section-title">티켓 예매</h2>
           </div>
         </div>
       </section>
@@ -294,14 +418,12 @@ function Sub04BuyTicket(props) {
           <div className="type-tabs">
             <button
               className={`tab ${isGuest ? "active" : ""}`}
-              onClick={handleGuestClick}
-            >
+              onClick={handleGuestClick}>
               <span className="checkbox" /> 비회원 예약
             </button>
             <button
               className={`tab ${!isGuest ? "active" : ""}`}
-              onClick={handleMemberClick}
-            >
+              onClick={handleMemberClick}>
               <span className="checkbox" /> 회원예약
             </button>
           </div>
@@ -339,7 +461,7 @@ function Sub04BuyTicket(props) {
               </div>
               <div className="cat-area">
                 <div className="gap">
-                  <Link to="/signUp">
+                  <Link to="/SignUp">
                     <img src="./img/resavation_cat.png" alt="고양이" />
                   </Link>
                 </div>
@@ -352,7 +474,7 @@ function Sub04BuyTicket(props) {
       <section id="section3" className="reservation-people">
         <div className="container">
           <h3 className="section-title">
-            <i class="bi bi-person-fill"></i>
+            <i className="bi bi-person-fill"></i>
             <span>인원을 선택해주세요</span>
           </h3>
           <div className="people-select">
@@ -360,8 +482,7 @@ function Sub04BuyTicket(props) {
               <button
                 key={item}
                 className={`person-btn ${peopleCount === item ? "active" : ""}`}
-                onClick={handlePeopleClick(item)}
-              >
+                onClick={handlePeopleClick(item)}>
                 {item} 명
               </button>
             ))}
@@ -372,7 +493,7 @@ function Sub04BuyTicket(props) {
       <section id="section4" className="schedule-detail">
         <div className="container">
           <h3 className="section-title">
-            <i class="bi bi-calendar-week"></i>
+            <i className="bi bi-calendar-week"></i>
             <span>날짜 시간을 선택해주세요</span>
           </h3>
           <div className="contents">
@@ -432,8 +553,7 @@ function Sub04BuyTicket(props) {
                             ? "selected"
                             : ""
                         }`}
-                        onClick={handleChoosePerformance(item)}
-                      >
+                        onClick={handleChoosePerformance(item)}>
                         선택
                       </button>
                     </div>
@@ -461,14 +581,12 @@ function Sub04BuyTicket(props) {
                 className={`confirm-btn ${
                   selected === "yes" ? "selected" : ""
                 }`}
-                onClick={handleConfirmYes}
-              >
+                onClick={handleConfirmYes}>
                 예
               </button>
               <button
                 className={`confirm-btn ${selected === "no" ? "selected" : ""}`}
-                onClick={handleConfirmNo}
-              >
+                onClick={handleConfirmNo}>
                 아니오
               </button>
             </div>

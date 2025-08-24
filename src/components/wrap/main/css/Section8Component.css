@@ -1,0 +1,310 @@
+#section8Component {
+  width: 100%;
+}
+#section8Component #section8 {
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 2;
+  background-color: #ead3c1;
+}
+#section8Component #section8 .container {
+  width: 100%;
+  height: 100%;
+  padding: 0 0 100px 0;
+}
+#section8Component #section8 .container .title {
+  width: 100%;
+  padding: 30px 0;
+  height: auto;
+}
+#section8Component #section8 .container .title .title-container {
+  width: 100%;
+  max-width: 1750px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+#section8Component #section8 .container .title .title-container a h2 img {
+  height: 32.4px;
+}
+#section8Component #section8 .container .title .title-container a h2 em {
+  font-family: "TTLaundryGothicB";
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 160%;
+  color: #ffffff;
+}
+#section8Component #section8 .container .title .title-container h3 {
+  color: #fff;
+  font-size: 1.2rem;
+  font-family: "KOHI Nanum";
+  display: flex;
+  align-items: center;
+}
+#section8Component #section8 .container .title .line {
+  width: 100%;
+  height: 18px;
+  border-top: 8px solid #ffffff;
+  border-bottom: 3px solid #ffffff;
+}
+#section8Component #section8 .container .content {
+  width: 100%;
+  max-width: 1750px;
+  margin: 0 auto;
+  height: calc(100% - 100px);
+}
+#section8Component #section8 .container .content .reviews {
+  width: 100%;
+  padding-bottom: 60px;
+}
+#section8Component #section8 .container .content .reviews ul {
+  width: 100%;
+  height: 400px;
+  display: flex;
+}
+#section8Component #section8 .container .content .reviews ul li {
+  width: 25%;
+  height: 100%;
+  position: relative;
+  display: flex;
+}
+#section8Component #section8 .container .content .reviews ul li p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-size: 24px;
+  width: 50%;
+  line-height: 150%;
+  text-align: center;
+}
+#section8Component #section8 .container .content .reviews ul li p span {
+  font-size: 18px;
+  display: block;
+  margin-top: 10px;
+}
+#section8Component #section8 .container .content .reviews ul li img {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+#section8Component #section8 .container .content .reviews ul li.col1 {
+  transform: rotate(-3deg);
+}
+#section8Component #section8 .container .content .reviews ul li.col1 p {
+  font-size: "KyoboHandwriting2020A";
+}
+#section8Component #section8 .container .content .reviews ul li.col2 {
+  transform: rotate(3deg);
+}
+#section8Component #section8 .container .content .reviews ul li.col2 p {
+  font-family: "TTLaundryGothicB";
+  font-weight: 300;
+}
+#section8Component #section8 .container .content .reviews ul li.col3 {
+  transform: rotate(2deg);
+}
+#section8Component #section8 .container .content .reviews ul li.col3 img {
+  transform: translateX(3%);
+}
+#section8Component #section8 .container .content .reviews ul li.col3 p {
+  width: 60%;
+  font-family: "KyoboHandwriting2020A";
+  transform: translate(-55%, -40%);
+}
+#section8Component #section8 .container .content .reviews ul li.col4 {
+  transform: rotate(5deg);
+}
+#section8Component #section8 .container .content .reviews ul li.col4 p {
+  width: 60%;
+  font-family: "TTLaundryGothicB";
+  color: #565050;
+}
+#section8Component #section8 .container .content .video {
+  width: 100%;
+  height: auto;
+}
+#section8Component #section8 .container .content .video .video-container {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  height: auto;
+  aspect-ratio: 1/0.6;
+  background: url(../../../../../public/img/section8/tv_bg_edit.png) no-repeat 50% 50%;
+  background-size: contain;
+  overflow: hidden;
+}
+#section8Component #section8 .container .content .video .video-container .slide-container {
+  position: absolute;
+  top: 48%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 50%;
+  max-height: 607px;
+  overflow: hidden;
+}
+#section8Component #section8 .container .content .video .video-container .slide-container .slide-view {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+#section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap {
+  position: relative;
+  z-index: 3;
+  width: 3300px;
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 90px 0;
+}
+#section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap li {
+  width: 300px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: center;
+}
+#section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap li iframe {
+  border: 0;
+  max-width: 260px;
+  height: auto;
+  aspect-ratio: 280/480;
+  border: none;
+  display: block;
+}
+@media all and (max-width: 1770px) {
+  #section8Component #section8 .container {
+    padding: 0 20px 100px 20px;
+  }
+  #section8Component #section8 .container .content .reviews {
+    padding: 0 0 30px 0;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap li {
+    padding: 0 5px;
+  }
+}
+@media all and (max-width: 1420px) {
+  #section8Component #section8 .container .content .video .video-container .slide-container {
+    max-height: 508px;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap {
+    padding: 40px 0;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap li iframe {
+    max-width: 240px;
+  }
+}
+@media all and (max-width: 1200px) {
+  #section8Component #section8 .container {
+    padding: 0 20px 60px 20px;
+  }
+  #section8Component #section8 .container .title {
+    padding: 20px 0;
+  }
+}
+@media all and (max-width: 1170px) {
+  #section8Component #section8 .container .content .reviews ul {
+    width: 80%;
+    margin: 0 auto;
+    height: auto;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    text-align: center;
+  }
+  #section8Component #section8 .container .content .reviews ul li {
+    width: 45%;
+  }
+  #section8Component #section8 .container .content .reviews ul li p {
+    font-size: 20px;
+  }
+  #section8Component #section8 .container .content .reviews ul li.col3 {
+    transform: rotate(-3deg);
+  }
+  #section8Component #section8 .container .content .reviews ul li.col4 {
+    transform: rotate(7deg);
+  }
+}
+@media all and (max-width: 935px) {
+  #section8Component #section8 .container .title .title-container h3 {
+    font-size: 16px;
+  }
+  #section8Component #section8 .container .title .line {
+    height: 15px;
+    border-top: 6px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container {
+    max-height: 300px;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap {
+    width: 2200px;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap li {
+    width: 200px;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap li iframe {
+    max-width: 180px;
+    aspect-ratio: 280/400;
+  }
+}
+@media all and (max-width: 840px) {
+  #section8Component #section8 .container .content .reviews ul li p {
+    font-size: 17px;
+  }
+}
+@media all and (max-width: 700px) {
+  #section8Component #section8 .container .title {
+    padding: 20px 0;
+  }
+  #section8Component #section8 .container .title .title-container h3 {
+    display: none;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container {
+    max-height: 270px;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap {
+    width: 1650px;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap li {
+    width: 150px;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap li iframe {
+    max-width: 140px;
+    aspect-ratio: 280/380;
+  }
+}
+@media all and (max-width: 600px) {
+  #section8Component #section8 .container .title {
+    padding: 15px 0;
+  }
+  #section8Component #section8 .container .title .title-container h2 {
+    font-size: 1.5rem;
+  }
+  #section8Component #section8 .container .content .reviews ul li {
+    width: 100%;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container {
+    max-height: 200px;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap {
+    width: 1430px;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap li {
+    width: 130px;
+  }
+  #section8Component #section8 .container .content .video .video-container .slide-container .slide-view .slide-wrap li iframe {
+    max-width: 100px;
+    aspect-ratio: 2/2.5;
+  }
+}
+@media all and (max-width: 500px) {
+  #section8Component #section8 .container .title {
+    padding: 15px 0;
+  }
+  #section8Component #section8 .container .title .title-container h2 {
+    font-size: 1.3rem;
+  }
+}

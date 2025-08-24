@@ -13,16 +13,11 @@
     .title {
       width: 100%;
       padding: 3% 0 5% 0;
-
-      a {
+      h2 {
         width: 100%;
-        display: block;
-        h2 {
-          width: 100%;
-          font-size: $size3;
-          font-family: $font1;
-          font-weight: 900;
-        }
+        font-size: $size3;
+        font-family: $font2;
+        font-weight: 900;
       }
     }
     .content {
@@ -36,29 +31,31 @@
           li {
             width: 100%;
             padding-left: 3%;
-            &:nth-child(1) {
+            display: flex;
+            align-items: center;
+            &.row1 {
               height: 75px;
               background: #eaeaea;
-
-              display: flex;
-              align-items: center;
               h3 {
                 font-size: 20px;
                 font-weight: 600;
               }
             }
-            &:nth-child(2) {
-              height: 75px;
+            &.row2,
+            &.row3 {
+              height: 60px;
               border-bottom: 1px solid #ccc;
-              display: flex;
-              align-items: center;
               font-size: 18px;
-              margin-right: 10px;
-              span {
-                width: 5%;
+              label {
+                margin-right: 10px;
+                width: 80px;
+                span {
+                  font-weight: 600;
+                }
               }
+
               input[type="text"] {
-                width: 95%;
+                width: calc(100% - 80px);
                 height: 100%;
                 border: 0;
                 outline: 0;
@@ -70,20 +67,17 @@
                 }
               }
             }
-            &:nth-child(3) {
+            &.row4 {
               height: 300px;
               textarea {
                 width: 100%;
-                min-height: 100px;
-                height: auto;
+                height: 100%;
+                background: transparent;
                 border: 0;
                 outline: 0;
-                font-family: $font1;
-                padding: 20px;
-                font-size: 18px;
-                &:focus {
-                  color: $black;
-                }
+                font-size: 16px;
+                padding: 50px;
+                resize: none;
               }
             }
           }
@@ -96,7 +90,7 @@
           background: $sub-color1;
           color: $white;
           border: 0;
-          font-size: 25px;
+          font-size: 20px;
           font-weight: 600;
           font-family: $font1;
           padding: 10px 20px;
@@ -116,39 +110,21 @@
 
   @media all and (max-width: 1520px) {
     .container {
-      padding: 0 20px;
+      padding: 0 40px;
     }
   }
   @media all and (max-width: 1150px) {
     .container {
       .title {
-        a {
-          h2 {
-            font-size: 2.4rem;
-          }
+        padding-top: 30px;
+        h2 {
+          font-size: 2.4rem;
         }
       }
       .content {
-        .write-box {
-          ul {
-            li {
-              &:nth-child(2) {
-                span {
-                  width: 10%;
-                }
-                input {
-                  width: 90%;
-                }
-              }
-              &:nth-child(3) {
-                height: 240px;
-              }
-            }
-          }
-        }
         .button-box {
           button {
-            font-size: 20px;
+            font-size: 18px;
           }
         }
       }
@@ -157,42 +133,54 @@
   @media all and (max-width: 750px) {
     .container {
       .title {
-        a {
-          h2 {
-            font-size: $size4;
-          }
+        h2 {
+          font-size: $size4;
         }
       }
       .content {
         .write-box {
           ul {
             li {
-              &:nth-child(1) {
+              width: 100%;
+              padding-left: 3%;
+              display: flex;
+              align-items: center;
+              &.row1 {
                 height: 60px;
                 h3 {
                   font-size: 18px;
                 }
               }
-              &:nth-child(2) {
-                height: 60px;
-                span {
-                  width: 15%;
-                  font-size: 16px;
+              &.row2,
+              &.row3 {
+                height: 40px;
+                border-bottom: 1px solid #ccc;
+                font-size: 16px;
+                label {
+                  margin-right: 10px;
+                  width: 50px;
+                  span {
+                    font-weight: 600;
+                  }
                 }
-                input {
-                  width: 85%;
+                input[type="text"] {
+                  width: calc(100% - 50px);
                   font-size: 16px;
                 }
               }
-              &:nth-child(3) {
-                height: 240px;
+              &.row4 {
+                height: 200px;
+                textarea {
+                  font-size: 15px;
+                  padding: 40px;
+                }
               }
             }
           }
         }
         .button-box {
           button {
-            font-size: 20px;
+            font-size: 18px;
             &:last-child {
               margin-left: 10px;
             }
@@ -204,42 +192,54 @@
   @media all and (max-width: 550px) {
     .container {
       .title {
-        a {
-          h2 {
-            font-size: $size4;
-          }
+        h2 {
+          font-size: 1.5rem;
         }
       }
       .content {
         .write-box {
           ul {
             li {
-              &:nth-child(1) {
-                height: 60px;
+              width: 100%;
+              padding-left: 3%;
+              display: flex;
+              align-items: center;
+              &.row1 {
+                height: 50px;
                 h3 {
-                  font-size: 18px;
-                }
-              }
-              &:nth-child(2) {
-                height: 60px;
-                span {
-                  width: 15%;
-                  font-size: 16px;
-                }
-                input {
-                  width: 85%;
                   font-size: 16px;
                 }
               }
-              &:nth-child(3) {
-                height: 190px;
+              &.row2,
+              &.row3 {
+                height: 36px;
+                border-bottom: 1px solid #ccc;
+                font-size: 15px;
+                label {
+                  margin-right: 10px;
+                  width: 50px;
+                  span {
+                    font-weight: 600;
+                  }
+                }
+                input[type="text"] {
+                  width: calc(100% - 50px);
+                  font-size: 15px;
+                }
+              }
+              &.row4 {
+                height: 160px;
+                textarea {
+                  font-size: 15px;
+                  padding: 40px;
+                }
               }
             }
           }
         }
         .button-box {
           button {
-            font-size: 18px;
+            font-size: 15px;
           }
         }
       }

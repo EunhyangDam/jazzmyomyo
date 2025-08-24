@@ -64,6 +64,7 @@
                                         }
                                     }
                                     input[type='text'],
+                                    input[type='email'],
                                     input[type='password'] {
                                         width: 100%;
                                         height: 46px;
@@ -236,12 +237,13 @@
                                                 li {  
                                                     height: 100%;
                                                     display: flex;
-                                                    align-items: center;                                              
+                                                    align-items: center;   
                                                     input[type='text'] {
                                                         height: 100%;
                                                         text-align: center;
                                                         border: 0;
                                                         outline: 0;
+                                                        padding: 0;                                           
                                                         &:focus {
                                                             outline: 0;
                                                         }

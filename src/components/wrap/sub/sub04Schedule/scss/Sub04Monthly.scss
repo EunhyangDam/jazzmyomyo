@@ -1,4 +1,5 @@
 
+
 #schedule-detail {
     width: 100%;
     padding: 60px 20px;
@@ -17,26 +18,19 @@
           font-weight: 600;
         }
       }
-      .site-map{
-        width: 100%;
-        max-width: 1720px;
-        margin: 0 auto;
-        margin-bottom: 30px;
-        a{
-          i{
-            font-size: 24px;
+      .site {
+        padding-top: 40px;
+        display: flex;
+        align-items: center;
+        column-gap: 11px;
+        margin-bottom: 20px;
+        a {
+          &.now {
+            font-weight: 600;
           }
         }
-        span.arrow{
-          font-size: 19px;
-          padding: 0 8px;
-        }
-        span.schedule{
-          font-size: 1.2rem;
-        }
-      }
-  
-      .contents{
+      }  
+          .contents{
         max-width: 1720px;
         margin: 0 auto;
         display: flex;
@@ -81,6 +75,7 @@
             text-align: center;
             font-weight: bold;
             color: #888;
+            margin-bottom: 15px;
             &:first-child{
                 color: #dd0000;
             }
@@ -95,7 +90,6 @@
             padding: 6px 4px;
             border-radius: 6px;
             position: relative;
-
   
             .date-circle {
               display: inline-block;
@@ -103,7 +97,7 @@
               height: 30px;
               line-height: 30px;
               border-radius: 50%;
-              font-size: 1.1rem;
+              font-size: 1.2rem;
               font-weight: 300;
             }
   
@@ -232,7 +226,7 @@
           width: 100%;
           max-width: 1720px;
           h2{
-            font-size: 3rem;
+            font-size: 2.6rem;
             margin-bottom: 20px;
             padding-left: 20px;
           }
@@ -250,19 +244,19 @@
                 padding-bottom: 0;
               }
               p{
-                font-size: 1.5rem;
+                font-size: 1.2rem;
                 color: #fff;
               }
             }
             .img-box{
               position: absolute;
-              bottom: 40px;
-              right: 80px;
+              bottom: 30px;
+              right: 50px;
               width: auto;
               transform: rotate(10deg);
-              img{
-                width: 80px;
-                height: 70px;
+              i{
+                font-size: 40px;
+                color: #fff;
               }
             }
           }
@@ -272,19 +266,84 @@
   }
   
 @media (max-width: 440px) {
-  .contents {
-    display: flex;
-    flex-direction: column;
-    gap: 100px;
-  }
-
-  .calendar-area,
-  .performance-area {
+#schedule-detail {
+  width: 100%;
+  .container{
     width: 100%;
-  }
+    .page-title{
+      h2{
+        font-size: 2.5rem;
+      }
+    }
+    .contents {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      .calendar-area{
+        width: 100%;
+        .calendar-header{
+          width: 100%;
+          margin-bottom: 60px;
+        }
+        .calendar-grid {
+          gap: 1px;
+        }
+      }
+      .performance-area {
+      width: 100%;
+      padding: 0;
+      .performance-header{
+        margin-bottom: 40px;
+      }
+        .performance-list{
+          padding: 0 5px;
+          .performance-card{
+            padding: 5px;
+          }
+        }
+      }
+    
 
-  .info-box {
-    margin-top: 50px;
-  }
+    }
+        .info-box{
+        margin-top: 100px;
+        width: 100%;
+        .infomation{
+          width: 100%;
+          h2{
+            font-size: 2rem;
+            font-weight: 500;
+          }
+          ul{
+            padding: 40px 25px;
+            border-radius: 20px;
+            width: 100%;
+            li{
+              padding-bottom: 25px;
+              &:nth-child(4){
+                padding-bottom: 0;
+              }
+              p{
+                font-size: 0.8rem;
+                line-height: 140%;
+                color: #fff;
+              }
+            }
+            .img-box{
+              position: absolute;
+              bottom: 20px;
+              right: 20px;
+              transform: rotate(10deg);
+              i{
+                font-size: 20px;
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+
+}
+}
 }
   

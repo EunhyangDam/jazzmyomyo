@@ -9,21 +9,19 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    margin-bottom: 200px;
+    padding-bottom: 200px;
     max-width: 1500px;
     margin: 0 auto;
     .title {
       padding: 3% 0 0 0;
       width: 100%;
-      a {
-        display: block;
-        h2 {
-          font-size: $size3;
-          font-family: $font1;
-          font-weight: 900;
-          width: 100%;
-          padding-bottom: 30px;
-        }
+
+      h2 {
+        font-size: $size3;
+        font-family: $font2;
+        font-weight: 900;
+        width: 100%;
+        padding-bottom: 30px;
       }
       h3 {
         font-size: 18px;
@@ -101,7 +99,7 @@
               .row2 {
                 width: 100%;
                 color: #999;
-                padding-top: 30px;
+                padding-top: 20px;
                 padding-bottom: 5px;
               }
               .row3 {
@@ -147,7 +145,7 @@
               }
               &:hover {
                 border-color: $primary-color;
-                transform: scale(1.1);
+                transform: scale(1.03);
               }
             }
           }
@@ -297,7 +295,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 5;
     display: none;
     .modal-box {
       width: 800px;

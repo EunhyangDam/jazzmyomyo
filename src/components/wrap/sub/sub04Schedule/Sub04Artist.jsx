@@ -1,11 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { wishAction } from "../../../../store/wishlist";
 import { confirmModalYesNoAction } from "../../../../store/confirmModal";
 import { confirmModalAction } from "../../../../store/confirmModal";
 import "./scss/Sub04Artist.scss";
+import SiteMapComponent from "../../custom/SiteMapComponent"
+
 
 function Sub04Artist(props) {
 
@@ -89,7 +91,7 @@ function Sub04Artist(props) {
   
   const 로그인정보 = useSelector((state) => state.signIn);
   const isLogin = 로그인정보?.아이디 !== '';
-  
+
   console.log(로그인정보)
   
   // 로그인 여부 판단
@@ -177,14 +179,14 @@ function Sub04Artist(props) {
         <div className="artist-header">
           <div className="content">
             <div className="breadcrumb">
-              <span>
-                <i className="material-icons">home</i>
-              </span>{" "}
-              &gt;
-              <span>Schedule</span> &gt;
-              <strong>ARTIST</strong>
+              <SiteMapComponent
+                firstLink="/monthly"
+                firstName="Schedule"
+                secondLink="./"
+                secondName="아티스트 정보"
+              />
             </div>
-            <h2 className="section-title">ARTIST</h2>
+            <h2 className="section-title">아티스트 정보</h2>
           </div>
         </div>
 

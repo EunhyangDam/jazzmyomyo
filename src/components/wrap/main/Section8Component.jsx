@@ -1,230 +1,212 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./scss/Section8Component.scss";
-import { Link } from "react-router-dom";
+import useCustomA from "../custom/useCustomA";
+import axios from "axios";
 
-export default function Section8Component(props) {
-  const [state, setState] = useState({
-    한줄후기: [],
-    영상소스: [],
-    아이콘: [],
+export default function Section8Component() {
+  const { onClickA } = useCustomA();
+
+  const [state, setState] = useState({ 영상소스: [] });
+
+  const [reviews, setReviews] = React.useState({
+    후기: [],
   });
 
-  useEffect(() => {
-    fetch("./json/section8/section8.json", { method: "GET" })
-      .then((res) => res.json())
-      .then((data) => {
-        setState({
-          아이콘: data.아이콘,
-          한줄후기: data.한줄후기,
-          영상소스: data.영상소스,
-        });
+  React.useEffect(() => {
+    axios({
+      url: "/jazzmyomyo/review_table_select.php",
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.status === 200 && res.data !== 0) {
+          let 후기 = res.data;
+          후기 = [
+            ...후기
+              .sort((a, b) => Number(b.Heart) - Number(a.Heart))
+              .slice(0, 4),
+          ];
+          setReviews({
+            ...reviews,
+            후기: 후기,
+          });
+        }
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   }, []);
 
+  const slideWrap = useRef(null);
+  const iframeRefs = useRef([]);
+  const timerId = useRef(null);
+
+  const [cnt, setCnt] = useState(0);
+
+  // 드래그 관련 상태
+  const mouseDown = useRef(false);
+  const dragStart = useRef(0);
+  const dragEnd = useRef(0);
+
+  // 영상소스 불러오기
   useEffect(() => {
-    // 갤러리 슬라이드
-    let cnt = 0;
-    let setId = 0;
+    fetch("./json/section8/section8.json")
+      .then((res) => res.json())
+      .then((data) => setState({ 영상소스: data.영상소스 }))
+      .catch(console.log);
+  }, []);
 
-    const slideWrap = document.querySelector(
-      "#section8Component #section8 .container .video .video-container .slide-container .slide-wrap"
-    );
-    const iframe = document.querySelectorAll(
-      "#section8Component #section8 .container .video .video-container .slide-container .slide-wrap iframe"
-    );
+  // 슬라이드 자동 타이머 함수
+  const autoTimer = () => {
+    if (timerId.current) clearInterval(timerId.current);
+    timerId.current = setInterval(() => {
+      setCnt((prev) => (prev + 1) % (state.영상소스.length || 9));
+    }, 4000);
+  };
 
-    // 모바일용
-    iframe.forEach((item) => {
-      item.addEventListener("dragstart", (e) => {
-        e.preventDefault();
+  // 유튜브 API 연동 및 상태 감지
+  useEffect(() => {
+    if (!window.YT) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+    }
+
+    window.onYouTubeIframeAPIReady = () => {
+      state.영상소스.forEach((item, idx) => {
+        new window.YT.Player(iframeRefs.current[idx], {
+          events: {
+            onStateChange: (event) => {
+              if (event.data === window.YT.PlayerState.PLAYING) {
+                clearInterval(timerId.current);
+              } else if (
+                event.data === window.YT.PlayerState.PAUSED ||
+                event.data === window.YT.PlayerState.ENDED
+              ) {
+                autoTimer();
+              }
+            },
+          },
+        });
       });
-    });
-
-    function mainSlide() {
-      if (cnt > 8) {
-        cnt = 0;
-        slideWrap.style.transition = "left 0.3s ease-in-out";
-        slideWrap.style.left = `${-300 * 0}px`;
-      } else {
-        slideWrap.style.transition = "left 0.3s ease-in-out";
-        slideWrap.style.left = `${-300 * cnt}px`;
-      }
-    }
-    function nextCount() {
-      cnt++;
-      mainSlide();
-    }
-    function autoTimer() {
-      clearInterval(setId);
-      setId = setInterval(nextCount, 7000);
-    }
-    autoTimer();
-
-    // 마우스 드래그앤드롭 drag & drop 구현
-    let mouseDown = false;
-    let dragStart = null;
-    let dragEnd = null;
-
-    // 1-1. 마우스 다운 이벤트 리스너 등록 touchstart
-    slideWrap.addEventListener("click", (e) => {
-      e.preventDefault();
-    });
-
-    // 1-1. 마우스 다운 이벤트 리스너 등록 touchstart
-    slideWrap.addEventListener("mousedown", (e) => {
-      autoTimer();
-      mouseDown = true;
-      dragStart = e.clientX - (slideWrap.getBoundingClientRect().left - 452.5); //
-      // 0으로 만들어준 후 빼줌 => 이동했던 좌표가 유지됨
-    });
-
-    // 1-2. 마우스 다운 이벤트 리스너 등록 touchstart
-    slideWrap.addEventListener("touchstart", (e) => {
-      mouseDown = true;
-      dragStart =
-        e.changedTouches[0].clientX -
-        (slideWrap.getBoundingClientRect().left - 452.5); //
-      // 0으로 만들어준 후 빼줌 => 이동했던 좌표가 유지됨
-    });
-
-    // 2-1. 마우스 무브 이벤트 리스너 등록 touchmove
-    slideWrap.addEventListener("mousemove", (e) => {
-      if (!mouseDown) return;
-      dragEnd = e.clientX;
-
-      slideWrap.style.transition = "left 0s ease-in-out";
-      slideWrap.style.left = `${dragEnd - dragStart}px`; // 드래그 길이만큼 이동시킴
-    });
-    // 2-2. 마우스 무브 이벤트 리스너 등록 touchmove
-    slideWrap.addEventListener("touchmove", (e) => {
-      if (!mouseDown) return;
-      dragEnd = e.changedTouches[0].clientX;
-
-      slideWrap.style.transition = "left 0s ease-in-out";
-      slideWrap.style.left = `${dragEnd - dragStart}px`; // 드래그 길이만큼 이동시킴
-    });
-
-    // 방향 설정 - 마우스업에서
-    // 'dragEnd - dragStart : 양수면 왼쪽으로 감(이전슬라이드), 음수면 => 우측으로 이동 (다음슬라이드)
-
-    // 3-1. 마우스 업 이벤트 리스너 등록 touchend (2개 -> 슬라이드랩 영역, 도큐먼트 영역(예외처리))
-    slideWrap.addEventListener("mouseup", (e) => {
-      mouseDown = false;
-
-      // 우측이동
-      if (dragEnd - dragStart < 0) {
-        // console.log("다음슬라이드");
-        cnt = Math.round(Math.abs(dragEnd - dragStart) / 300);
-        if (cnt > 8) {
-          cnt = 8;
-        }
-      }
-
-      // 왼쪽 이동
-      if (dragEnd - dragStart > 0) {
-        cnt = Math.round(Math.abs(dragEnd - dragStart) / 300);
-        if (cnt > 0) {
-          cnt = 0;
-        }
-      }
-      mainSlide();
-    });
-
-    // 3-1. 마우스 업 이벤트 (2개 -> 슬라이드랩 영역, 도큐먼트 영역)
-
-    document.addEventListener("mouseup", (e) => {
-      if (!mouseDown) return; // 도큐먼트에서는 반드시 리턴 넣어야함
-      mouseDown = false;
-
-      // 우측이동
-      if (dragEnd - dragStart < 0) {
-        // console.log("다음슬라이드");
-        cnt = Math.round(Math.abs(dragEnd - dragStart) / 300);
-        if (cnt > 8) {
-          cnt = 8;
-        }
-      }
-
-      // 왼쪽 이동
-      if (dragEnd - dragStart > 0) {
-        cnt = Math.round(Math.abs(dragEnd - dragStart) / 300);
-        if (cnt > 0) {
-          cnt = 0;
-        }
-      }
-      mainSlide();
-    });
-
-    // 3-2. 모바일  마우스 업 이벤트 리스너 등록
-    slideWrap.addEventListener("touchend", (e) => {
-      mouseDown = false;
-
-      // 우측이동
-      if (dragEnd - dragStart < 0) {
-        // console.log("다음슬라이드");
-        cnt = Math.round(Math.abs(dragEnd - dragStart) / 300);
-        if (cnt > 8) {
-          cnt = 8;
-        }
-      }
-
-      // 왼쪽 이동
-      if (dragEnd - dragStart > 0) {
-        cnt = Math.round(Math.abs(dragEnd - dragStart) / 300);
-        if (cnt > 0) {
-          cnt = 0;
-        }
-      }
-      mainSlide();
-    });
+    };
   }, [state.영상소스]);
+
+  useEffect(() => {
+    autoTimer();
+    return () => clearInterval(timerId.current);
+  }, [state.영상소스]);
+
+  // 슬라이드 위치 업데이트
+  useEffect(() => {
+    if (!slideWrap.current) return;
+    const total = state.영상소스.length;
+    let index = cnt;
+    if (index >= total) index = 0;
+    if (index < 0) index = total - 1;
+
+    slideWrap.current.style.transition = "left 0.3s ease-in-out";
+    slideWrap.current.style.left = `${-300 * index}px`;
+  }, [cnt, state.영상소스]);
+
+  // 드래그 이벤트 핸들러
+
+  const onMouseDownEvent = (e) => {
+    autoTimer();
+    mouseDown.current = true;
+    dragStart.current =
+      e.clientX - (slideWrap.current.getBoundingClientRect().left - 452.5);
+  };
+
+  const onTouchStartEvent = (e) => {
+    mouseDown.current = true;
+    dragStart.current =
+      e.changedTouches[0].clientX -
+      (slideWrap.current.getBoundingClientRect().left - 452.5);
+  };
+
+  const onMouseMoveEvent = (e) => {
+    if (!mouseDown.current) return;
+    dragEnd.current = e.clientX;
+
+    slideWrap.current.style.transition = "left 0s ease-in-out";
+    slideWrap.current.style.left = `${dragEnd.current - dragStart.current}px`;
+  };
+
+  const onTouchMoveEvent = (e) => {
+    if (!mouseDown.current) return;
+    dragEnd.current = e.changedTouches[0].clientX;
+
+    slideWrap.current.style.transition = "left 0s ease-in-out";
+    slideWrap.current.style.left = `${dragEnd.current - dragStart.current}px`;
+  };
+
+  const onMouseUpOrTouchEnd = () => {
+    mouseDown.current = false;
+
+    if (dragEnd.current - dragStart.current < 0) {
+      const moveCount = Math.round(
+        Math.abs(dragEnd.current - dragStart.current) / 300
+      );
+      setCnt((prev) =>
+        prev + moveCount >= state.영상소스.length ? 0 : prev + moveCount
+      );
+    }
+
+    if (dragEnd.current - dragStart.current > 0) {
+      const moveCount = Math.round(
+        Math.abs(dragEnd.current - dragStart.current) / 300
+      );
+      setCnt((prev) => (prev - moveCount < 0 ? 0 : prev - moveCount));
+    }
+  };
+
+  useEffect(() => {
+    // 문서 전체 mouseup 이벤트에도 drag 종료 처리
+    const onDocumentMouseUp = () => {
+      if (!mouseDown.current) return;
+      mouseDown.current = false;
+      onMouseUpOrTouchEnd();
+    };
+
+    document.addEventListener("mouseup", onDocumentMouseUp);
+
+    return () => {
+      document.removeEventListener("mouseup", onDocumentMouseUp);
+    };
+  }, []);
+
   return (
     <div id="section8Component">
       <section id="section8" className="sns">
         <div className="container">
           <div className="title">
             <div className="title-container">
-              <Link to="./Rev">
-                <h2>재즈 묘묘 후기</h2>
-              </Link>
-              <h3>memories</h3>
+              <a href="!#" onClick={(e) => onClickA(e, "/rev")}>
+                <h2>
+                  <img src="/img/section8/paw.png" alt="" />
+                  <em>묘묘와의 추억</em>
+                </h2>
+              </a>
+              <h3>...memories in myomymo</h3>
             </div>
             <div className="line"></div>
           </div>
           <div className="content">
             <div className="reviews">
               <ul>
-                {state.한줄후기.map((item, idx) => (
-                  <li key={item.ID} data-key={item.ID}>
-                    <span className="review">{item.후기1}</span>
-                    <span>
-                      &nbsp;<i className={state.아이콘[idx].클래스이름}></i>{" "}
-                      &nbsp;{" "}
-                    </span>
-                    <span className="review">{item.후기2}</span>
-                    <span>
-                      {" "}
-                      &nbsp;<i
-                        className={state.아이콘[idx].클래스이름}
-                      ></i>{" "}
-                      &nbsp;
-                    </span>
-                    <span className="review">{item.후기1}</span>
-                    <span>
-                      &nbsp;<i className={state.아이콘[idx].클래스이름}></i>{" "}
-                      &nbsp;{" "}
-                    </span>
-                    <span className="review">{item.후기2}</span>
-                    <span>
-                      {" "}
-                      &nbsp;<i
-                        className={state.아이콘[idx].클래스이름}
-                      ></i>{" "}
-                      &nbsp;
-                    </span>
+                {reviews.후기.map((item, idx) => (
+                  <li
+                    className={`col${idx + 1}`}
+                    key={item.idx}
+                    data-key={item.idx}
+                  >
+                    <img
+                      src={`/img/section8/memo${idx + 1}.png`}
+                      alt={`review${idx + 1}`}
+                    />
+                    <p>
+                      {item.wContent ? item.wContent : ""} <br />
+                      <span>- {item.wName} -</span>
+                    </p>
+                    <span></span>
                   </li>
                 ))}
               </ul>
@@ -233,14 +215,24 @@ export default function Section8Component(props) {
               <div className="video-container">
                 <div className="slide-container">
                   <div className="slide-view">
-                    <ul className="slide-wrap">
-                      {state.영상소스.map((item) => (
+                    <ul
+                      className="slide-wrap"
+                      ref={slideWrap}
+                      onMouseDown={onMouseDownEvent}
+                      onTouchStart={onTouchStartEvent}
+                      onMouseUp={onMouseUpOrTouchEnd}
+                      onTouchEnd={onMouseUpOrTouchEnd}
+                      onMouseMove={onMouseMoveEvent}
+                      onTouchMove={onTouchMoveEvent}
+                    >
+                      {state.영상소스.map((item, idx) => (
                         <li key={item.ID} data-key={item.ID}>
                           <iframe
-                            src={item["영상 링크"]}
+                            src={`${item["영상 링크"]}?enablejsapi=1`}
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerPolicy="strict-origin-when-cross-origin"
                             allowFullScreen
+                            ref={(el) => (iframeRefs.current[idx] = el)}
+                            referrerPolicy="strict-origin-when-cross-origin"
                           ></iframe>
                         </li>
                       ))}

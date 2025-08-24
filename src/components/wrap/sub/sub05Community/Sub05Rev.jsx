@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./scss/Sub05Rev.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SiteMapComponent from "../../custom/SiteMapComponent";
 import axios from "axios";
 
@@ -15,6 +15,37 @@ function Sub05Rev(props) {
 
   // 후기 불러오기
   useEffect(() => {
+    fetchReviews();
+  }, []);
+
+  // 하트 업데이트
+  // 하트 클릭 (DB 수정 작업 필요)
+  const onClickRevHeart = (idx) => {
+    const formData = new FormData();
+    formData.append("idx", idx);
+
+    axios({
+      url: "/jazzmyomyo/review_table_update.php",
+      method: "POST",
+      data: formData,
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          const serverHeart = Number(res.data);
+          if (serverHeart >= 0) {
+            // 하트가 성공적으로 반영됐을 때, 전체 후기 다시 조회해서 최신화
+            fetchReviews();
+          } else {
+            console.log("하트 실패");
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const fetchReviews = () => {
     axios({
       url: "/jazzmyomyo/review_table_select.php",
       method: "GET",
@@ -22,7 +53,7 @@ function Sub05Rev(props) {
       .then((res) => {
         if (res.status === 200 && res.data !== 0) {
           let 후기 = res.data;
-          후기 = [...후기.sort((a, b) => b.idx - a.idx)]; // 최신순
+          후기 = [...후기.sort((a, b) => b.idx - a.idx)];
           setState((prev) => ({
             ...prev,
             후기,
@@ -30,21 +61,7 @@ function Sub05Rev(props) {
         }
       })
       .catch((err) => console.log(err));
-  }, []);
-
-  // 하트 클릭 (DB 수정 작업 필요)
-  const onClickRevHeart = (idx) => {
-    // const updated = state.후기.map((review) =>
-    //   review.idx === idx
-    //     ? { ...review, Heart: (review.Heart || 0) + 1 }
-    //     : review
-    // );
-    // setState((prev) => ({
-    //   ...prev,
-    //   후기: updated,
-    // }));
   };
-
   // 글쓰기 이동
   const onClickRevWriteBtn = (e) => {
     e.preventDefault();
@@ -109,9 +126,7 @@ function Sub05Rev(props) {
           secondName="공연 후기"
         />
         <div className="title">
-          <Link to="./">
-            <h2>공연 후기</h2>
-          </Link>
+          <h2>공연 후기</h2>
           <h3>
             재즈묘묘의 밤을 기억하는 한 줄의 마음들이 이곳에 포근히 쌓여갑니다.
           </h3>
@@ -135,7 +150,7 @@ function Sub05Rev(props) {
                       <p>{item.wContent}</p>
                     </div>
                     <div className="row2">{item.wName}</div>
-                    <div className="row3">{item.wDate}</div>
+                    <div className="row3">{item.wDate.slice(0, 10)}</div>
                     <div className="row4">
                       <em>{item.wSubject}</em>
                       <span>
@@ -181,7 +196,9 @@ function Sub05Rev(props) {
                     <p>{selectedReview?.wContent}</p>
                   </div>
                   <div className="row2">{selectedReview?.wName}</div>
-                  <div className="row3">{selectedReview?.wDate}</div>
+                  <div className="row3">
+                    {selectedReview?.wDate.slice(0, 10)}
+                  </div>
                   <div className="row4">
                     <em>{selectedReview?.wSubject}</em>
                     <span>

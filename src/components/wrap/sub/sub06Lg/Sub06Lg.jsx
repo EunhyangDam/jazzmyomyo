@@ -70,7 +70,7 @@ function Sub06Lg(props) {
     axios({
       url: "/jazzmyomyo/sign_in.php",
       method: "POST",
-      data: formData,
+      data: formData, withCredentials: true, // 세션 쿠키 저장 (PHPSESSID)
     })
       .then((res) => {
         console.log(res.data);
@@ -117,6 +117,7 @@ function Sub06Lg(props) {
       });
   };
 
+
   return (
     <div id="sub06Lg">
       <section id="login" className="section login">
@@ -145,7 +146,7 @@ function Sub06Lg(props) {
                     비밀번호
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     name="userPw"
                     id="userPw"
                     value={state.비밀번호}

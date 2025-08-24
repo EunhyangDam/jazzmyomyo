@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from "../../../../store/cart";
 import { wishAction } from "../../../../store/wishlist";
 import { confirmModalAction } from "../../../../store/confirmModal";
+import SiteMapComponent from "../../custom/SiteMapComponent";
+import useCustomA from "../../custom/useCustomA";
 
 function Sub02ShopDetail(props) {
+  const { onClickA } = useCustomA();
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -25,7 +28,6 @@ function Sub02ShopDetail(props) {
     setProduct({
       data: location.state,
     });
-    // eslint-disable-next-line
   }, []);
   // 배송안내 관련
   const [delivery, setDelivery] = useState({
@@ -67,7 +69,7 @@ function Sub02ShopDetail(props) {
   const onChangeNumber = () => {};
 
   useEffect(() => {
-    fetch("./json/product.json", { method: "GET" })
+    fetch("/json/product.json", { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         setState((prev) => ({
@@ -128,9 +130,6 @@ function Sub02ShopDetail(props) {
     }
     dispatch(cartAction(arr));
   };
-  const selectEvent = (e) => {
-    alert(e.target.value);
-  };
   //카테고리 밑줄 표시
   const isGoods = product.data.상품분류 === "굿즈";
   const isDisc = product.data.상품분류 === "음반";
@@ -140,10 +139,11 @@ function Sub02ShopDetail(props) {
     <div id="sub02ShopDetail">
       <div id="wrap">
         <div className="title">
-          <Link to="/Shop">
+          <a href="!#" onClick={(e) => onClickA(e, "/shop")}>
             <h2>shop</h2>
-          </Link>
+          </a>
         </div>
+        <SiteMapComponent firstLink="/shop" firstName="shop" />
         <div className="content">
           <div className="category-name">
             <ul>
@@ -174,7 +174,21 @@ function Sub02ShopDetail(props) {
                     <h2>{product.data.상품명}</h2>
                   </li>
                   <li className="item-price">
-                    <em>{product.data.가격.toLocaleString("ko-KR")}원</em>
+                    {product.data.할인율 ? (
+                      <>
+                        <s>{state.product[3].가격.toLocaleString("ko-KR")}원</s>
+                        <br />
+                        <em>
+                          {(
+                            state.product[3].가격 *
+                            (1 - state.product[3].할인율)
+                          ).toLocaleString("ko-KR")}
+                          원
+                        </em>
+                      </>
+                    ) : (
+                      <em>{product.data.가격.toLocaleString("ko-KR")}원</em>
+                    )}
                   </li>
 
                   <li className="item-quantity">
@@ -198,7 +212,7 @@ function Sub02ShopDetail(props) {
                   </li>
                   {product.data.옵션?.length > 0 && (
                     <li className="select-option">
-                      <select name="option" id="option" onChange={selectEvent}>
+                      <select name="option" id="option">
                         {product.data.옵션.map((item) => (
                           <option value={item} key={item} data-key={item}>
                             {item}
@@ -223,7 +237,8 @@ function Sub02ShopDetail(props) {
                               .includes(product.data.id)
                               ? "-fill"
                               : ""
-                          }`}></i>
+                          }`}
+                        ></i>
                       </a>
                     </div>
                   </li>
@@ -261,17 +276,19 @@ function Sub02ShopDetail(props) {
                   return (
                     <li
                       key={idx}
-                      className={isToggleSection ? "plus" : "delivery"}>
+                      className={isToggleSection ? "plus" : "delivery"}
+                    >
                       <div
                         className="delivery-title"
-                        onClick={() => isToggleSection && handleToggle(idx)}>
+                        onClick={() => isToggleSection && handleToggle(idx)}
+                      >
                         <h3>[{title}]</h3>
-                        {/* eslint-disable-next-line */}
                         {isToggleSection && (
                           <a
                             href="#"
                             className="icon"
-                            onClick={(e) => e.preventDefault()}>
+                            onClick={(e) => e.preventDefault()}
+                          >
                             {isOpen ? (
                               <i className="bi bi-dash" />
                             ) : (
@@ -292,7 +309,8 @@ function Sub02ShopDetail(props) {
                                   <a
                                     href="!#"
                                     target="_blank"
-                                    rel="noopener noreferrer">
+                                    rel="noopener noreferrer"
+                                  >
                                     '주문내역'
                                   </a>
                                   &nbsp;에서 확인할 수 있습니다.

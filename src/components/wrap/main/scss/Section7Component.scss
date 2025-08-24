@@ -197,6 +197,7 @@
                   display: block;
                   overflow: hidden;
                   transition: all 0.3s;
+
                   img {
                     overflow: hidden;
                     width: 100%;
@@ -247,7 +248,9 @@
               .caption-box {
                 text-align: center;
                 a {
-                  font-size: $size4;
+                  font-size: 1.4rem;
+                  font-family: $font1;
+                  font-weight: 600;
                   width: 100%;
                   display: block;
                   padding-bottom: 10px;
@@ -262,7 +265,7 @@
                   width: 100%;
                   color: $grey2;
                   letter-spacing: 1.6px;
-                  font-size: 1.5rem;
+                  font-size: 1.4rem;
                 }
               }
             }

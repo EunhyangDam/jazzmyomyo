@@ -33,19 +33,25 @@
       .address-box {
         width: 70%;
         max-width: 900px;
+        margin: 0 auto;
         .head {
           margin-bottom: 30px;
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: center;
           h3 {
             font-size: $size4;
-            background: $primary-color;
+            border-bottom: 2px solid $sub-color1;
             display: inline-block;
-            color: $white;
-            width: 300px;
-            padding: 2% 0;
-            font-weight: 500;
+            color: $sub-color1;
+            width: auto;
+            padding: 1% 0;
+            font-weight: 700;
             text-align: center;
           }
           h4 {
+            width: 100%;
+            padding-top: 6px;
             text-align: right;
             color: #888;
             i {
@@ -90,18 +96,32 @@
                     align-items: center;
                     justify-content: space-between;
                     padding: 5px 0;
-                    em {
-                      font-size: 16px;
-                      font-weight: 700;
+                    .memo {
+                      width: 50%;
+                      em {
+                        font-size: 16px;
+                        font-weight: 700;
+                      }
                     }
-                    button {
-                      font-size: 14px;
-                      height: 34.27px;
-                      padding: 0 12px;
-                      background-color: #fff;
-                      border: 1px solid #ddd;
-                      border-radius: 8px;
-                      cursor: pointer;
+
+                    .button-box {
+                      width: 50%;
+                      text-align: right;
+                      button {
+                        margin-left: 6px;
+                        font-size: 14px;
+                        height: 34.27px;
+                        padding: 0 12px;
+                        background-color: #fff;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        transition: all 0.3s;
+                        cursor: pointer;
+                        &:hover {
+                          background-color: #ddd;
+                          color: $sub-color1;
+                        }
+                      }
                     }
                   }
                   &.row3 {
@@ -110,6 +130,9 @@
                     color: #777;
                     p {
                       font-size: 14px;
+                      span {
+                        color: #000;
+                      }
                       i {
                         margin: 0 5px;
                         color: rgb(200, 200, 200);
@@ -139,12 +162,12 @@
             font-size: 20px;
             transition: all 0.3s;
             border-radius: 16px;
-
-            background-color: $primary-color;
+            background-color: $sub-color1;
             color: $white;
+            border: 1px solid $sub-color1;
             &:hover {
-              background-color: $grey3;
-              color: $primary-color;
+              background-color: #fff;
+              color: $sub-color1;
             }
           }
         }

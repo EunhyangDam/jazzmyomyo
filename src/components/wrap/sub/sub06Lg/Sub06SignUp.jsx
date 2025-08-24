@@ -41,6 +41,7 @@ function Sub06SignUp(props) {
     이메일: "",
     이메일오류메시지: "",
     이메일중복확인: false, // 중복된이메일이 없으면 true
+    이메일유효: false,     // 이메일 형식 통과 여부
 
     휴대폰: "",
     휴대폰오류메시지: "",
@@ -73,7 +74,7 @@ function Sub06SignUp(props) {
       "무료배송, 할인쿠폰 등 혜택/정보 수신 동의(선택)",
       "SNS",
       "이메일",
-      "본인은 만 14세 이상입니다.(필수)",
+      "본인은 만 18세 이상입니다.(필수)",
     ],
   });
 
@@ -250,32 +251,40 @@ function Sub06SignUp(props) {
 
   // 5. 이메일
   const onChangeUserEmail = (e) => {
-    let 이메일 = e.target.value.trim();
-    let 이메일오류메시지 = "";
-    const regExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,3}$/gi;
-
-    if (regExp.test(이메일) === true) {
-      이메일오류메시지 = "";
-    } else {
-      이메일오류메시지 = "이메일 형식으로 입력해 주세요.";
-    }
-
+    const 이메일 = e.target.value.trim();
+    // TLD 길이를 2자 이상 허용 (예: .info, .travel 등)
+    const regExp = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i;
+    const isValid = regExp.test(이메일);
+  
     setState({
       ...state,
-      이메일: 이메일,
-      이메일오류메시지: 이메일오류메시지,
+      이메일,
+      이메일유효: isValid,
+      이메일중복확인: false, // 값이 바뀌면 중복확인 무효화
+      이메일오류메시지: isValid ? "" : "이메일 형식으로 입력해 주세요.",
     });
   };
-
   // 5-2. 이메일중복확인
   const onClickUserEmailCheck = (e) => {
     e.preventDefault();
 
-    if (state.이메일 === "") {
+      if (state.이메일.trim() === "") {
       dispatch(
         confirmModalAction({
           heading: "알람!",
           explain: "이메일을 입력하세요.",
+          isON: true,
+          isConfirm: false,
+        })
+      );
+      return;
+    }
+    // 형식 유효성 검사
+    if (!state.이메일유효) {
+      dispatch(
+        confirmModalAction({
+          heading: "알람!",
+          explain: "이메일 형식을 다시 확인해주세요",
           isON: true,
           isConfirm: false,
         })
@@ -314,7 +323,7 @@ function Sub06SignUp(props) {
             dispatch(
               confirmModalAction({
                 heading: "",
-                explain: "사용할 수 있는 이메일 입니다.",
+                explain: "사용가능한 이메일 입니다.",
                 isON: true,
                 isConfirm: false,
               })
@@ -548,8 +557,8 @@ function Sub06SignUp(props) {
           생년월일오류메시지 =
             "미래의 년도  생년월일이 미래로 입력 되었습니다.";
           break;
-        case 생년 >= 현재년도 - 14:
-          생년월일오류메시지 = "만 14세 미만은 가입이 불가합니다.";
+        case 생년 >= 현재년도 - 18:
+          생년월일오류메시지 = "만 18세 미만은 가입이 불가합니다.";
           break;
         case 생년 < 현재년도 - 100:
           생년월일오류메시지 =
@@ -702,6 +711,7 @@ function Sub06SignUp(props) {
       이름,
       이메일,
       이메일중복확인,
+      이메일유효,
       휴대폰,
       휴대폰인증번호성공,
       주소1,
@@ -721,6 +731,7 @@ function Sub06SignUp(props) {
       },
       { 조건: 이름 === "", 메시지: "이름을 입력하세요" },
       { 조건: 이메일 === "", 메시지: "이메일을 입력하세요" },
+      { 조건: 이메일유효 === false, 메시지: "이메일 형식을 다시 확인해주세요" },
       {
         조건: 이메일중복확인 === false,
         메시지: "이메일중복확인 검사를 하세요",
@@ -911,7 +922,7 @@ function Sub06SignUp(props) {
                       <strong>이메일</strong> <i>*</i>
                     </label>
                     <input
-                      type="text"
+                      type="email"
                       name="userEmail"
                       id="userEmail"
                       className="input-text"
@@ -919,7 +930,9 @@ function Sub06SignUp(props) {
                       onChange={onChangeUserEmail}
                       value={state.이메일}
                     />
-                    <button onClick={onClickUserEmailCheck}>중복확인</button>
+                    <button onClick={onClickUserEmailCheck}>
+                      중복확인
+                    </button>                    
                     {state.이메일오류메시지 !== "" && (
                       <p>{state.이메일오류메시지}</p>
                     )}
@@ -943,7 +956,8 @@ function Sub06SignUp(props) {
                     <button
                       className={state.인증번호받기 ? "on" : ""}
                       disabled={state.인증번호받기}
-                      onClick={onClickDisabled}>
+                      onClick={onClickDisabled}
+                    >
                       {state.버튼텍스트}
                     </button>
                     {state.휴대폰오류메시지 !== "" && (
@@ -1172,7 +1186,8 @@ function Sub06SignUp(props) {
                               ...(item.includes("본인")
                                 ? { clear: "left" }
                                 : {}),
-                            }}>
+                            }}
+                          >
                             <label>
                               <input
                                 type="checkbox"

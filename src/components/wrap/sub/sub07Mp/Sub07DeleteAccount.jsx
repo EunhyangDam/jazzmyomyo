@@ -1,11 +1,15 @@
 import React from "react";
 import "./scss/Sub07DeleteAccount.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { confirmModalAction } from "../../../../store/confirmModal";
 import Sub07MpSideMenu from "./Sub07MpSideMenu";
 import SiteMapComponent from "../../custom/SiteMapComponent";
+import useCustomA from "../../custom/useCustomA";
+import { logOutAction } from "../../../../store/signIn";
+
 function Sub07DeleteAccount(props) {
+  const { onClickA } = useCustomA();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,7 +24,7 @@ function Sub07DeleteAccount(props) {
 
     const obj = {
       heading: "탈퇴하시겠습니까?",
-      explain: "그동안 재즈묘묘를 이용해주셔서 감사합니다.\n다음에 또 만나묘",
+      explain: "그동안 재즈묘묘를 이용해주셔서 감사합니다.",
       isON: true,
       isConfirm: true,
       // 3개 추가
@@ -30,6 +34,9 @@ function Sub07DeleteAccount(props) {
     };
 
     dispatch(confirmModalAction(obj));
+
+    dispatch(logOutAction(null));
+    setTimeout(() => navigate("/"), 1000);
   };
 
   return (
@@ -42,9 +49,9 @@ function Sub07DeleteAccount(props) {
           secondName="회원탈퇴"
         />
         <div className="title">
-          <Link to="/mp">
+          <a href="/!#" onClick={(e) => onClickA(e, "/mp")}>
             <h2>My Page</h2>
-          </Link>
+          </a>
         </div>
         <div className="content">
           <Sub07MpSideMenu />
