@@ -27,20 +27,24 @@ function Sub082MmEdit() {
     id: m.id ?? Number(id),
     userId: m.userId ?? "",
     name: m.name ?? "",
-    gender: m.gender ?? "여",
+    gender:
+    m.gender === "남자" ? "남" :
+    m.gender === "여자" ? "여" :
+    m.gender === "남" || m.gender === "여" ? m.gender : "",
     birth: m.birth ?? "",
     phone: m.phone ?? "",
     email: m.email ?? "",
     addr: m.addr ?? "",
-
     consent: m.consent ?? m.agree ?? "Y",
-
-    grade: m.grade === "VIP회원" ? "일반회원" : m.grade ?? "일반회원",
+    grade:
+  m.grade === "일반" ? "일반회원" :
+  m.grade === "단골" ? "단골회원" :
+  m.grade === "관리자" ? "관리자" :
+  m.grade, // 혹시라도 다른 값 대비
     status: normalizeStatus(m.status),
     joinedAt: m.joinedAt ?? "",
   });
 
-  // 1) state로 넘어온 값 먼저 적용(깜빡임 최소화)
   useEffect(() => {
     const fromState = location.state?.member || location.state?.updatedMember;
     if (fromState && String(fromState.id) === String(id)) {
@@ -49,25 +53,21 @@ function Sub082MmEdit() {
     }
   }, [id, location.state]);
 
-  // 2) JSON에서 해당 회원 로드 (최상위 키: 회원정보)
   useEffect(() => {
-    const url = `${
-      process.env.PUBLIC_URL || ""
-    }/json/sub08/members.json?v=${Date.now()}`;
+    if (!id) return;
+
+    const url = `/jazzmyomyo/member_table_select.php`;
     setLoading(true);
     setErr(null);
 
     axios
-      .get(url, { headers: { "Cache-Control": "no-cache" } })
+      .get(url, {
+        params: { id },
+        headers: { "Cache-Control": "no-cache" },
+      })
       .then((res) => {
-        const list = Array.isArray(res.data?.회원정보)
-          ? res.data.회원정보
-          : Array.isArray(res.data?.members)
-          ? res.data.members
-          : Array.isArray(res.data)
-          ? res.data
-          : [];
-        const found = list.find((m) => String(m.id) === String(id));
+        const list = Array.isArray(res.data) ? res.data : [];
+        const found = list[0] || null;
         if (!found) {
           setForm(null);
           return;
@@ -79,7 +79,7 @@ function Sub082MmEdit() {
           ? `HTTP ${e.response.status} ${e.response.statusText}`
           : e?.message || "데이터 로드 실패";
         setErr(msg);
-        console.error("[MmEdit] fetch error:", msg, "url:", url);
+        console.error("[MmEdit] fetch error:", msg, "id:", id);
       })
       .finally(() => setLoading(false));
   }, [id]);
@@ -89,19 +89,43 @@ function Sub082MmEdit() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const onSave = () => {
-    // 실제 저장(파일/DB)은 없음. 모달만 띄우고 상세로 이동하며 state로 전달
-    dispatch(
-      confirmModalAction({
-        heading: "수정되었습니다.",
-        explain: "",
-        isON: true,
-        isConfirm: false,
-        message1: "",
-        message2: "",
-      })
-    );
+  const onSave = async () => {
+    try {
+      const payload = {
+        id: form.id,
+        name: form.name,
+        gender: form.gender,
+        birth: form.birth,
+        phone: form.phone,
+        email: form.email,
+        addr: form.addr,
+        consent: form.consent,
+        grade: form.grade, 
+        status: form.status,
+      };
+  
+      const res = await axios.post("/jazzmyomyo/member_table_update.php", payload);
+  
+      if (res.data?.ok) {
+        dispatch(
+          confirmModalAction({
+            heading: "수정되었습니다.",
+            explain: "",
+            isON: true,
+            isConfirm: false,
+            message1: "",
+            message2: "",
+          })
+        );
+      } else {
+        alert("저장 실패: " + (res.data?.msg || "서버 오류"));
+      }
+    } catch (err) {
+      console.error("[onSave error]", err);
+      alert("저장 중 오류 발생");
+    }
   };
+  
 
   useEffect(() => {
     if (modal.heading === "수정되었습니다." && modal.isON) {
@@ -191,6 +215,7 @@ function Sub082MmEdit() {
                   name="userId"
                   value={form.userId}
                   onChange={onChange}
+                  disabled
                 />
               </div>
 
@@ -201,6 +226,7 @@ function Sub082MmEdit() {
                   name="name"
                   value={form.name}
                   onChange={onChange}
+                  disabled
                 />
               </div>
 
@@ -212,6 +238,7 @@ function Sub082MmEdit() {
                   value={form.gender}
                   onChange={onChange}
                 >
+                  <option value="">선택안함</option>
                   <option value="여">여</option>
                   <option value="남">남</option>
                 </select>
@@ -309,8 +336,19 @@ function Sub082MmEdit() {
                     />
                     <span>단골회원</span>
                   </label>
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="grade"
+                      value="관리자"
+                      checked={form.grade === "관리자"}
+                      onChange={onChange}
+                    />
+                    <span>관리자</span>
+                  </label>
                 </div>
               </div>
+
 
               <div className="form-group">
                 <label>상태</label>

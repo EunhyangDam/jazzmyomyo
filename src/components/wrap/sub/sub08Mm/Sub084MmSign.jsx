@@ -164,29 +164,15 @@ function Sub084MmSign() {
                 />
                 <label htmlFor="gradeRegular">단골회원</label>
               </div>
-            </div>
-
-            <div className="form-group">
-              <label>이메일 수신 여부 기본값</label>
               <div className="form-check">
                 <input
                   type="radio"
-                  id="emailY"
-                  name="emailAgree"
-                  checked={emailAgree === "Y"}
-                  onChange={() => setEmailAgree("Y")}
+                  id="gradeAdmin"
+                  name="defaultGrade"
+                  checked={defaultGrade === "관리자"}
+                  onChange={() => setDefaultGrade("관리자")}
                 />
-                <label htmlFor="emailY">동의함</label>
-              </div>
-              <div className="form-check">
-                <input
-                  type="radio"
-                  id="emailN"
-                  name="emailAgree"
-                  checked={emailAgree === "N"}
-                  onChange={() => setEmailAgree("N")}
-                />
-                <label htmlFor="emailN">동의하지 않음</label>
+                <label htmlFor="gradeAdmin">관리자</label>
               </div>
             </div>
 

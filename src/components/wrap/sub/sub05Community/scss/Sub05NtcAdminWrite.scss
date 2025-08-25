@@ -6,7 +6,7 @@
   padding: 0 20px;
   background: #fff;
   color: #222;
-  font-family: "Pretendard";
+  font-family: $font1;
   user-select: none;
 
   .container {
@@ -93,8 +93,12 @@
             background: #fff;
             color: #000;
             cursor: pointer;
+            margin-right: -8px;
 
-            &.file:hover { background: #f4f6f8; }
+            transition: all 0.3s;
+
+            &.file:hover { background: $grey3; }
+            &.delete:hover { background: $grey2; color: #fff;}
           }
 
           .file-name {

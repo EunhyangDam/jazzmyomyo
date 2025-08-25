@@ -6,7 +6,7 @@
   padding: 0 20px;
   background: #fff;
   color: #222;
-  font-family: "Pretendard";
+  font-family: $font1;
   user-select: none;
 
   .container {
@@ -170,7 +170,7 @@
 
         .col-title {
           min-width: 0;
-          text-align: left;
+          text-align: center;
           padding-left: 18px;
 
           a {

@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import "./scss/Sub035PreView.scss";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
+import axios from "axios";
 
 function Sub035PreView() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.confirmModal);
@@ -17,32 +17,36 @@ function Sub035PreView() {
   const [err, setErr] = useState(null);
 
   useEffect(() => {
-    const url = `${process.env.PUBLIC_URL || ""}/json/sub03/preorder.json`;
     setLoading(true);
     setErr(null);
 
+    // `preorder_table_view.php`는 모든 필드를 반환하므로 추가적인 수정은 불필요
     axios
-      .get(url)
+      .get("/jazzmyomyo/preorder_table_view.php", { params: { id } })
       .then((res) => {
-        const arr = Array.isArray(res.data?.예약신청) ? res.data.예약신청 : [];
-
-        const found = arr.find((it) => String(it.idx) === String(id));
-        if (!found) {
-          setPost(null);
-          return;
+        const { data } = res;
+        
+        if (!data || typeof data !== "object" || Array.isArray(data) || !data.item) {
+          throw new Error("서버 응답 형식 오류");
         }
+        const item = data.item;
+
         setPost({
-          title: found.title ?? "",
-          writer: found.author ?? "",
-          reserveDate: found.reserveDate ?? "",
-          writeDate: found.writeDate ?? "",
-          time: found.time ?? "",
-          people: found.people ?? "",
-          wine: found.wine ?? "",
-          food: found.food ?? "",
-          note: found.note ?? "",
-          status: found.status ?? "",
-          reply: found.reply ?? "",
+          id: item.id || "",
+          userId: item.user_id || "", 
+          title: item.title || "사전주문",
+          writer: item.writer_name || "익명", 
+          reserveDate: item.reserve_date || "-", 
+          time: item.reserve_time || "-", 
+          people: item.people || "-",
+          wine: item.wine || "",
+          beverage: item.beverage || "",
+          food: item.food || "",
+          note: item.note || "",
+          status: item.status || "상태없음",
+          reply: item.reply || "",
+          replyDate: item.reply_date || "", // <-- 1. reply_date 데이터 매핑
+          writeDate: item.created_at ? item.created_at.split(" ")[0] : "-",
         });
       })
       .catch((e) => {
@@ -67,24 +71,69 @@ function Sub035PreView() {
   useEffect(() => {
     if (modal.isYes === true) {
       dispatch(confirmModalYesNoAction(false));
-      dispatch(
-        confirmModalAction({
-          heading: "삭제되었습니다.",
-          explain: "",
-          isON: true,
-          isConfirm: false,
-          message1: "",
-          message2: "",
+      
+      if (!id) {
+        dispatch(
+          confirmModalAction({
+            heading: "삭제 실패",
+            explain: "유효한 예약 정보가 없습니다.",
+            isON: true,
+            isConfirm: false,
+            message1: "확인",
+          })
+        );
+        return;
+      }
+  
+      axios
+        .get("/jazzmyomyo/preorder_table_delete.php", {
+          params: {
+            id: id,
+          }
         })
-      );
+        .then((res) => {
+          if (res.data.success) {
+            dispatch(
+              confirmModalAction({
+                heading: "삭제되었습니다.",
+                explain: "",
+                isON: true,
+                isConfirm: false,
+                message1: "확인",
+              })
+            );
+          } else {
+            dispatch(
+              confirmModalAction({
+                heading: "삭제 실패",
+                explain: res.data.message || "삭제 중 오류 발생",
+                isON: true,
+                isConfirm: false,
+                message1: "확인",
+              })
+            );
+          }
+        })
+        .catch((e) => {
+          dispatch(
+            confirmModalAction({
+              heading: "삭제 실패",
+              explain: e.message || "서버 오류 발생",
+              isON: true,
+              isConfirm: false,
+              message1: "확인",
+            })
+          );
+        });
     }
-  }, [modal.isYes, dispatch]);
+  }, [modal.isYes, post, dispatch, id, navigate]);
+  
 
   useEffect(() => {
     if (modal.heading === "삭제되었습니다." && modal.isON) {
-      navigate("/Pre");
+      navigate("/pre?deleted=" + id)
     }
-  }, [modal.heading, modal.isON, navigate]);
+  }, [modal.heading, modal.isON, navigate, id]);
 
   if (loading) {
     return (
@@ -123,37 +172,56 @@ function Sub035PreView() {
     );
   }
 
+  const user = JSON.parse(
+    localStorage.getItem("jazzmyomyo_sign_in") || sessionStorage.getItem("jazzmyomyo_sign_in")
+  );
+  const currentUserId = user?.아이디;
+  const role = localStorage.getItem("role");
+  const isAdmin = role === "admin";
+  
+  const isAuthor = currentUserId === post.userId;
+  
+  const canModify = isAuthor || isAdmin;
+
   return (
     <div id="sub_preView">
       <div className="board-view">
         <div className="view-header">
           <h2>{post.title}</h2>
           <div className="view-meta">
-            작성자: {post.writer || "-"} | 예약일: {post.reserveDate || "-"} | 작성일: {post.writeDate || "-"}
+            작성자: {post.writer} | 예약일: {post.reserveDate} | 작성일: {post.writeDate}
           </div>
         </div>
 
         <div className="view-body">
           <ul className="info-table">
-            <li><strong>시간</strong><span>{post.time || "-"}</span></li>
-            <li><strong>인원</strong><span>{post.people || "-"}</span></li>
-            <li><strong>와인</strong><span>{post.wine || "-"}</span></li>
-            <li><strong>안주</strong><span>{post.food || "-"}</span></li>
-            <li><strong>특이사항</strong><span>{post.note || "-"}</span></li>
+            <li><strong>시간</strong><span>{post.time}</span></li>
+            <li><strong>인원</strong><span>{post.people}</span></li>
+            <li><strong>와인</strong><span>{post.wine}</span></li>
+            <li><strong>음료</strong><span>{post.beverage}</span></li>
+            <li><strong>안주</strong><span>{post.food}</span></li>
+            <li><strong>특이사항</strong><span>{post.note}</span></li>
           </ul>
-
+          
           {post.reply && (
             <div className="admin-reply">
               <strong>관리자 답변</strong>
+              {/* <-- 2. reply_date가 있을 경우 표시 */}
               <p>{post.reply}</p>
+              {post.replyDate && <p className="reply-date">답변일: {post.replyDate}</p>}
             </div>
           )}
         </div>
 
         <div className="view-actions">
-          <button className="back-btn" onClick={() => navigate("/Pre")}>← 목록으로</button>
-          <button className="edit-btn" onClick={() => navigate(`/PreE/edit/${id}`)}>✏ 수정하기</button>
-          <button className="delete-btn" onClick={onClickDelete}>삭제하기</button>
+          <button className="back-btn" onClick={() => navigate("/pre")}>← 목록으로</button>
+          
+          {canModify && (
+            <>
+              <button className="edit-btn" onClick={() => navigate(`/preE/edit/${id}`)}>✏ 수정하기</button>
+              <button className="delete-btn" onClick={onClickDelete}>삭제하기</button>
+            </>
+          )}
         </div>
       </div>
     </div>

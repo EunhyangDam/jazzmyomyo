@@ -19,7 +19,6 @@
   .drink-nav {
     text-align: center;
     margin-bottom: 120px;
-    font-family: arial;
 
     ul {
       display: inline-flex;
@@ -128,7 +127,7 @@
 
         h3 {
           font-size: 30px;
-          font-family: "MaruBuriBold";
+          font-family: $font2;
           margin-bottom: 10px;
           color: #512b2b;
         }
@@ -156,14 +155,80 @@
           font-weight: bold;
           color: #6b6b6b;
         }
+
+        .reserve-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+      
+          padding: 10px 18px;
+          margin: 36px auto 0;   
+          width: auto; 
+          max-width: 220px;  
+      
+          border: 1px solid #8a5a5a;
+          border-radius: 999px;
+          background: #fff;
+          color: #512b2b;
+          font-size: 15px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+      
+          i {
+            font-size: 18px;
+          }
+      
+          &:hover {
+            background: #512b2b;
+            color: #fff;
+          }
+        }
       }
     }
   }
 
+  /* 공통 하단 예약 버튼: 항상 아래쪽 */
+  .floating-reserve {
+    position: fixed;
+    right: 90px;
+    bottom: 40px; /* ↓ 사전예약(아래) */
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 20px;
+    border: 1px solid #8a5a5a;
+    border-radius: 999px;
+    background: #fff;
+    color: #512b2b;
+    font-family: $font1;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    transition: transform .08s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
+
+    i { font-size: 18px; }
+
+    &:hover {
+      background: #512b2b;
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(81,43,43,0.28);
+    }
+    &:active { transform: translateY(1px); }
+    &:focus-visible {
+      outline: 2px solid rgba(81,43,43,0.6);
+      outline-offset: 2px;
+    }
+  }
+
+  /* TOP 버튼: 항상 위쪽(더 높은 bottom 값) */
   .top-btn {
     position: fixed;
     right: 120px;
-    bottom: 40px;
+    bottom: 110px; /* ↑ TOP(위) : 사전예약보다 위 */
     z-index: 999;
     padding: 12px 15px;
     background-color: #512b2bc8;
@@ -195,11 +260,11 @@
       }
     }
 
-    .top-btn {
-      right: 80px;
-      bottom: 36px;
-    }
+    /* 버튼 위치 재정렬: TOP이 위, 예약이 아래 */
+    .floating-reserve { right: 60px; bottom: 32px; }
+    .top-btn { right: 80px; bottom: 90px; }
   }
+
   @media all and (max-width: 800px) {
     .title {
       font-size: 120px;
@@ -212,11 +277,11 @@
       }
     }
 
-    .top-btn {
-      right: 60px;
-      bottom: 32px;
-    }
+    /* 버튼 위치 재정렬 */
+    .floating-reserve { right: 40px; bottom: 28px; }
+    .top-btn { right: 60px; bottom: 80px; }
   }
+
   @media all and (max-width: 600px) {
     .title {
       font-size: 100px;
@@ -232,30 +297,22 @@
         .card-back {
           padding: 15px;
 
-          h3 {
-            font-size: 35px;
-          }
-          .type {
-            font-size: 20px;
-          }
-          .desc {
-            font-size: 20px;
-          }
-          .pairing {
-            font-size: 18px;
-          }
-          .price {
-            font-size: 16px;
-          }
+          h3 { font-size: 35px; }
+          .type { font-size: 20px; }
+          .desc { font-size: 20px; }
+          .pairing { font-size: 18px; }
+          .price { font-size: 16px; }
+
+          .reserve-btn { width: 100%; }
         }
       }
     }
 
-    .top-btn {
-      right: 20px;
-      bottom: 30px;
-    }
+    /* 버튼 위치 재정렬 */
+    .floating-reserve { right: 20px; bottom: 24px; }
+    .top-btn { right: 20px; bottom: 80px; }
   }
+
   @media all and (max-width: 480px) {
     .title {
       font-size: 80px;
@@ -278,42 +335,26 @@
     }
 
     .drink-section {
-      h2 {
-        font-size: 48px;
-      }
-
-      .drink-grid {
-        gap: 20px;
-      }
+      h2 { font-size: 48px; }
+      .drink-grid { gap: 20px; }
 
       .drink-card {
         .card-back {
           padding: 15px;
 
-          h3 {
-            font-size: 29px;
-          }
-          .type {
-            font-size: 18px;
-          }
-          .desc {
-            font-size: 17px;
-          }
-          .pairing {
-            font-size: 15px;
-          }
-          .price {
-            font-size: 15px;
-          }
+          h3 { font-size: 29px; }
+          .type { font-size: 18px; }
+          .desc { font-size: 17px; }
+          .pairing { font-size: 15px; }
+          .price { font-size: 15px; }
+
+          .reserve-btn { padding: 10px 16px; font-size: 13.5px; }
         }
       }
     }
 
-    .top-btn {
-      right: 16px;
-      bottom: 28px;
-    }
   }
+
   @media all and (max-width: 380px) {
     .title {
       font-size: 70px;
@@ -336,37 +377,22 @@
     }
 
     .drink-section {
-      h2 {
-        font-size: 40px;
-      }
+      h2 { font-size: 40px; }
 
       .drink-card {
         .card-back {
           padding: 12px;
 
-          h3 {
-            font-size: 25px;
-          }
-          .type {
-            font-size: 16px;
-          }
-          .desc {
-            font-size: 15px;
-          }
-          .pairing {
-            font-size: 13px;
-          }
-          .price {
-            font-size: 13px;
-          }
+          h3 { font-size: 25px; }
+          .type { font-size: 16px; }
+          .desc { font-size: 15px; }
+          .pairing { font-size: 13px; }
+          .price { font-size: 13px; }
+
+          .reserve-btn { padding: 10px 14px; font-size: 12.5px; }
         }
       }
     }
 
-    .top-btn {
-      right: 14px;
-      bottom: 24px;
-    }
   }
-  
 }

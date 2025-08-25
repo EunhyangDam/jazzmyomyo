@@ -13,29 +13,86 @@ function Sub05Ntc() {
   });
 
   const [currentPage, setCurrentPage] = React.useState(1);
+  const [loaded, setLoaded] = React.useState(false);
   const itemsPerPage = 5;
+
+  const cleanupRef = React.useRef(null);
+  const CACHE_KEY = "ntc:list";
 
   const parseDate = (s) => {
     if (!s) return new Date(0);
-    return new Date(String(s).replace(/\./g, "-"));
+    const v = String(s).trim().replace(" ", "T");
+    const d = new Date(v);
+    return isNaN(d.getTime()) ? new Date(0) : d;
+  };
+
+  const dateOnly = (s) => {
+    if (!s) return "";
+    const t = String(s).trim();
+    const m = t.match(/^(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})/);
+    if (m) return `${m[1]}.${String(m[2]).padStart(2,"0")}.${String(m[3]).padStart(2,"0")}`;
+    const p = t.split(/[ T]/)[0];
+    const m2 = p.match(/^(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})$/);
+    if (m2) return `${m2[1]}.${String(m2[2]).padStart(2,"0")}.${String(m2[3]).padStart(2,"0")}`;
+    return p;
   };
 
   React.useEffect(() => {
-    axios({ url: "./json/sub05/notice.json", method: "GET" })
-      .then((res) => {
-        if (res.status === 200) {
-          let list = res.data?.공지사항 ?? [];
-          list = [...list]
-            .sort((a, b) => {
-              const d = parseDate(b.date) - parseDate(a.date);
-              if (d !== 0) return d;
-              return (b.idx ?? 0) - (a.idx ?? 0);
-            })
-            .map((item, i) => ({ ...item, _rowId: `${item.idx}-${i}` }));
-          setState((p) => ({ ...p, 공지사항: list, 필터공지사항: list }));
+    try {
+      const cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || "null");
+      if (cached && Array.isArray(cached)) {
+        setState((p) => ({ ...p, 공지사항: cached, 필터공지사항: cached }));
+        setLoaded(true);
+      }
+    } catch {}
+  }, []);
+
+  React.useEffect(() => {
+    let aborted = false;
+    const fetchList = async () => {
+      try {
+        const url = `/jazzmyomyo/notice_table_select.php?_t=${Date.now()}`;
+        const res = await axios.get(url, { validateStatus: () => true });
+        if (aborted) return;
+
+        const raw = Array.isArray(res.data) ? res.data : [];
+
+        const list = raw
+          .filter((r) => String(r.wDel ?? "0") !== "1") // 삭제 글 제외(있으면)
+          .sort((a, b) => {
+            const d = parseDate(b.wDate) - parseDate(a.wDate);
+            if (d !== 0) return d;
+            return (b.idx ?? 0) - (a.idx ?? 0);
+          })
+          .map((item, i) => ({
+            idx: item.idx,
+            subject: item.wSubject,
+            date: item.wDate,
+            name: item.wName,
+            hit: item.wHit,
+            content: item.wContent,
+            file: item.wFile,
+            _rowId: `${item.idx}-${i}`,
+          }));
+
+        setState((p) => ({ ...p, 공지사항: list, 필터공지사항: list }));
+
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify(list));
+        } catch {}
+      } catch {
+      } finally {
+        if (!aborted) {
+          const id = setTimeout(() => setLoaded(true), 0);
+          cleanupRef.current = () => clearTimeout(id);
         }
-      })
-      .catch(console.error);
+      }
+    };
+    fetchList();
+    return () => {
+      aborted = true;
+      cleanupRef.current?.();
+    };
   }, []);
 
   const onChangeSearch = (e) => {
@@ -54,20 +111,14 @@ function Sub05Ntc() {
       setCurrentPage(1);
       return;
     }
-
     const filtered = state.공지사항.filter((item) => {
       if (state.검색조건 === "subject") {
-        return String(item.subject ?? "")
-          .toLowerCase()
-          .includes(q);
+        return String(item.subject ?? "").toLowerCase().includes(q);
       } else if (state.검색조건 === "date") {
-        return String(item.date ?? "")
-          .toLowerCase()
-          .includes(q);
+        return String(item.date ?? "").toLowerCase().includes(q);
       }
       return false;
     });
-
     setState((p) => ({ ...p, 필터공지사항: filtered }));
     setCurrentPage(1);
   };
@@ -77,10 +128,15 @@ function Sub05Ntc() {
   };
 
   const totalItems = state.필터공지사항.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage));
   const indexOfLast = currentPage * itemsPerPage;
   const indexOfFirst = indexOfLast - itemsPerPage;
   const currentItems = state.필터공지사항.slice(indexOfFirst, indexOfLast);
+
+  const isEmptyAll = state.공지사항.length === 0;
+  const isEmptyFiltered = !isEmptyAll && totalItems === 0;
+
+  const ready = loaded || state.공지사항.length > 0;
 
   return (
     <div id="sub05Ntc">
@@ -89,30 +145,20 @@ function Sub05Ntc() {
           <Link to="/mainComponent" aria-label="홈으로">
             <i className="bi bi-house-door-fill" />
           </Link>
-          <span className="sep">
-            <i className="bi bi-chevron-right" />
-          </span>
+          <span className="sep"><i className="bi bi-chevron-right" /></span>
           <span>커뮤니티</span>
-          <span className="sep">
-            <i className="bi bi-chevron-right" />
-          </span>
+          <span className="sep"><i className="bi bi-chevron-right" /></span>
           <span className="notice">공지사항</span>
         </div>
 
         <div className="title-row">
           <h2>공지사항</h2>
-
           <form className="search-form" onSubmit={onSubmitSearch}>
-            <select
-              value={state.검색조건}
-              onChange={onChangeFilter}
-              aria-label="검색조건 선택"
-            >
+            <select value={state.검색조건} onChange={onChangeFilter} aria-label="검색조건 선택">
               <option value="">검색조건</option>
               <option value="subject">제목</option>
               <option value="date">날짜</option>
             </select>
-
             <input
               type="text"
               placeholder="검색어를 입력하세요"
@@ -135,54 +181,48 @@ function Sub05Ntc() {
           </div>
 
           <ul className="list-body">
-            {currentItems.length > 0 ? (
+            {!ready ? null : isEmptyAll ? (
+              <li className="no-result">존재하는 글이 없습니다.</li>
+            ) : isEmptyFiltered ? (
+              <li className="no-result">검색 결과가 없습니다.</li>
+            ) : (
               currentItems.map((item, idx) => {
                 const runningNumber = totalItems - (indexOfFirst + idx);
                 return (
                   <li key={item._rowId} className="row">
                     <span className="col-num">{runningNumber}</span>
                     <span className="col-title">
-                      <Link to={`/ntcV/${item.idx}`} state={item}>
+                      <Link
+                        to={`/ntcV/${item.idx}`}
+                        state={{
+                          idx: item.idx,
+                          subject: item.subject,
+                          date: item.date,
+                          writer: item.name,
+                          views: item.hit,
+                          content: item.content,
+                          file: item.file,
+                        }}
+                      >
                         {item.subject}
                       </Link>
                     </span>
-                    <span className="col-date">{item.date}</span>
+                    <span className="col-date">{dateOnly(item.date)}</span>
                     <span className="col-writer">{item.name}</span>
                     <span className="col-views">{item.hit}</span>
                   </li>
                 );
               })
-            ) : (
-              <li className="no-result">검색 결과가 없습니다.</li>
             )}
           </ul>
         </div>
 
-        {/* ⬇️ 리스트 바로 아래, 페이지네이션 위, 오른쪽 하단 */}
-        <div className="admin-btn-wrap">
-          <Link to="/ntcAdmin" className="admin-btn">
-            관리자페이지
-          </Link>
-        </div>
-
-        {totalPages > 1 && (
-          <div
-            className="pagenation"
-            role="navigation"
-            aria-label="페이지네이션"
-          >
-            <button
-              onClick={() => setCurrentPage(1)}
-              disabled={currentPage === 1}
-              aria-label="첫 페이지"
-            >
+        {ready && (
+          <div className="pagenation" role="navigation" aria-label="페이지네이션">
+            <button onClick={() => setCurrentPage(1)} disabled={currentPage === 1} aria-label="첫 페이지">
               <i className="bi bi-chevron-double-left" />
             </button>
-            <button
-              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              disabled={currentPage === 1}
-              aria-label="이전 페이지"
-            >
+            <button onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1} aria-label="이전 페이지">
               <i className="bi bi-chevron-left" />
             </button>
             {Array.from({ length: totalPages }, (_, i) => (

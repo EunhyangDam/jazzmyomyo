@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import './scss/Sub033Food.scss';
+import useCustomA from "../../custom/useCustomA";
 
 export default function Sub033Food (){
     
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [activeTab, setActiveTab] = useState("platter");
+  const { onClickA } = useCustomA();
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -40,78 +42,18 @@ export default function Sub033Food (){
   ];
 
   const sides = [
-    {
-      title: "크래커 & 치즈 한입 세트",
-      price: "₩10,000",
-      image: "./img/sub03Food/01food.png",
-      desc: "담백한 치즈와 고소한 크래커의 조화로 입맛을 살려줘요."
-    },
-    {
-      title: "무화과 크림치즈 바이트",
-      price: "₩9,000",
-      image: "./img/sub03Food/02food.png",
-      desc: "달콤한 무화과와 크림치즈가 입 안에서 사르르 녹아요."
-    },
-    {
-      title: "트러플 감자튀김",
-      price: "₩9,000",
-      image: "./img/sub03Food/03food.png",
-      desc: "바삭함 속 은은한 풍미, 와인에 빠질 수 없는 클래식."
-    },
-    {
-      title: "트러플 초콜릿 & 견과 세트",
-      price: "₩8,000",
-      image: "./img/sub03Food/04food.png",
-      desc: "진한 초콜릿과 고소한 견과류가 부드럽게 어우러져요."
-    },
-    {
-      title: "프로슈토 멜론 스틱",
-      price: "₩11,000",
-      image: "./img/sub03Food/05food.png",
-      desc: "짭짤한 생햄과 달콤한 멜론이 탱고를 춰요."
-    },
-    {
-      title: "바나나 푸딩",
-      price: "₩8,500",
-      image: "./img/sub03Food/06food.png",
-      desc: "달콤한 바나나와 부드러운 커스터드, 사랑스러운 디저트."
-    },
-    {
-      title: "스모어딥",
-      price: "₩10,500",
-      image: "./img/sub03Food/07food.png",
-      desc: "구운 마시멜로와 바삭한 비스킷, 바닐라향이 퍼져요."
-    },
-    {
-      title: "재즈 나초",
-      price: "₩9,000",
-      image: "./img/sub03Food/08food.png",
-      desc: "바삭한 나초와 치즈, 살사, 사워크림의 환상 조합."
-    },
-    {
-      title: "하몽 살라미 샐러드",
-      price: "₩14,000",
-      image: "./img/sub03Food/09food.png",
-      desc: "풍성한 고기와 치즈의 깊은 풍미가 느껴지는 샐러드."
-    },
-    {
-      title: "페퍼로니 피자\n(40cm / 한판)",
-      price: "₩8,000 /₩16,000",
-      image: "./img/sub03Food/10slice.png",
-      desc: "누구나 좋아 하는 클래식 페퍼로니 피자."
-    },
-    {
-      title: "하와이안 피자\n(40cm / 한판)",
-      price: "₩8,000 /₩16,000",
-      image: "./img/sub03Food/10-2slice.png",
-      desc: "달콤한 파인애플과 햄의 조화, 하와이안 리듬."
-    },
-    {
-      title: "고르곤졸라 피자\n(40cm / 한판)",
-      price: "₩8,000 /₩16,000",
-      image: "./img/sub03Food/10-3slice.png",
-      desc: "짭짤한 고르곤졸라와 꿀의 달콤한 하모니."
-    }
+    { title: "크래커 & 치즈 한입 세트", price: "₩10,000", image: "./img/sub03Food/01food.png", desc: "담백한 치즈와 고소한 크래커의 조화로 입맛을 살려줘요." },
+    { title: "무화과 크림치즈 바이트", price: "₩9,000", image: "./img/sub03Food/02food.png", desc: "달콤한 무화과와 크림치즈가 입 안에서 사르르 녹아요." },
+    { title: "트러플 감자튀김", price: "₩9,000", image: "./img/sub03Food/03food.png", desc: "바삭함 속 은은한 풍미, 와인에 빠질 수 없는 클래식." },
+    { title: "트러플 초콜릿 & 견과 세트", price: "₩8,000", image: "./img/sub03Food/04food.png", desc: "진한 초콜릿과 고소한 견과류가 부드럽게 어우러져요." },
+    { title: "프로슈토 멜론 스틱", price: "₩11,000", image: "./img/sub03Food/05food.png", desc: "짭짤한 생햄과 달콤한 멜론이 탱고를 춰요." },
+    { title: "바나나 푸딩", price: "₩8,500", image: "./img/sub03Food/06food.png", desc: "달콤한 바나나와 부드러운 커스터드, 사랑스러운 디저트." },
+    { title: "스모어딥", price: "₩10,500", image: "./img/sub03Food/07food.png", desc: "구운 마시멜로와 바삭한 비스킷, 바닐라향이 퍼져요." },
+    { title: "재즈 나초", price: "₩9,000", image: "./img/sub03Food/08food.png", desc: "바삭한 나초와 치즈, 살사, 사워크림의 환상 조합." },
+    { title: "하몽 살라미 샐러드", price: "₩14,000", image: "./img/sub03Food/09food.png", desc: "풍성한 고기와 치즈의 깊은 풍미가 느껴지는 샐러드." },
+    { title: "페퍼로니 피자\n(40cm / 한판)", price: "₩8,000 /₩16,000", image: "./img/sub03Food/10slice.png", desc: "누구나 좋아 하는 클래식 페퍼로니 피자." },
+    { title: "하와이안 피자\n(40cm / 한판)", price: "₩8,000 /₩16,000", image: "./img/sub03Food/10-2slice.png", desc: "달콤한 파인애플과 햄의 조화, 하와이안 리듬." },
+    { title: "고르곤졸라 피자\n(40cm / 한판)", price: "₩8,000 /₩16,000", image: "./img/sub03Food/10-3slice.png", desc: "짭짤한 고르곤졸라와 꿀의 달콤한 하모니." }
   ];
 
   return (
@@ -141,6 +83,16 @@ export default function Sub033Food (){
                 <p className="desc"><strong>구성:</strong> {item.desc.replace("구성: ", "")}</p>
                 <p><strong>추천 와인:</strong> {item.wine.replace("추천 와인: ", "")}</p>
                 <p className="explain">{item.explain}</p>
+
+                <button
+                  type="button"
+                  className="reserve-btn"
+                  onClick={(e) => onClickA(e, "/pre")}
+                  aria-label="사전예약 바로가기"
+                >
+                  사전예약 바로가기
+                  <i className="bi bi-arrow-right-short" aria-hidden="true" />
+                </button>
               </div>
             </div>
           ))}
@@ -169,6 +121,15 @@ export default function Sub033Food (){
             <h3>{selectedItem.title}</h3>
             <p>{selectedItem.price}</p>
             <p className="desc">맛: {selectedItem.desc || "맛 설명이 아직 없어요."}</p>
+
+            <button
+              type="button"
+              className="reserve-btn"
+              onClick={(e) => { e.stopPropagation(); onClickA(e, "/pre"); }}
+            >
+              사전예약 바로가기
+              <i className="bi bi-arrow-right-short" aria-hidden="true" />
+            </button>
           </div>
         </div>
       )}

@@ -2,12 +2,16 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./scss/Sub05NtcAdminWrite.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
+import { confirmModalAction } from "../../../../store/confirmModal";
+import axios from "axios";
 
 function Sub05NtcAdminWrite() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const modal = useSelector((state) => state.confirmModal);
+
+  const auth = useSelector((s) => s.signin || s.singin || {});
+  const wId = auth.userId || auth.아이디 || "jazzmyomyo";
+  const wName = auth.userName || auth.이름 || "관리자";
 
   const [form, setForm] = useState({
     title: "",
@@ -17,11 +21,10 @@ function Sub05NtcAdminWrite() {
     file: null,
   });
 
-  // 미리보기는 Object URL (blob:...), 본문 삽입은 Base64
   const [previewUrl, setPreviewUrl] = useState("");
-  const previewObjectUrlRef = useRef(null);     // revoke용
-  const [currentFileId, setCurrentFileId] = useState("");
+  const previewObjectUrlRef = useRef(null);
   const fileInputRef = useRef(null);
+  const titleRef = useRef(null);
   const textareaRef = useRef(null);
 
   const today = useMemo(() => {
@@ -33,7 +36,7 @@ function Sub05NtcAdminWrite() {
   }, []);
 
   useEffect(() => {
-    setForm((p) => ({ ...p, date: today }));
+    setForm((prev) => ({ ...prev, date: today }));
   }, [today]);
 
   const onChange = (e) => {
@@ -45,191 +48,120 @@ function Sub05NtcAdminWrite() {
     fileInputRef.current?.click();
   };
 
-  const makeId = () => "img_" + Math.random().toString(36).slice(2, 10);
-
-  // 파일 선택 → blob URL로 미리보기 설정
   const onFileChange = (e) => {
     const f = e.target.files?.[0] || null;
     setForm((p) => ({ ...p, file: f }));
-
-    // 기존 blob URL 정리
-    if (previewObjectUrlRef.current) {
-      URL.revokeObjectURL(previewObjectUrlRef.current);
-      previewObjectUrlRef.current = null;
-    }
-
+    if (previewObjectUrlRef.current) URL.revokeObjectURL(previewObjectUrlRef.current);
     if (!f) {
       setPreviewUrl("");
-      setCurrentFileId("");
       return;
     }
-
     const url = URL.createObjectURL(f);
     previewObjectUrlRef.current = url;
     setPreviewUrl(url);
-    setCurrentFileId(makeId());
   };
 
-  // 커서 위치에 텍스트 삽입
-  const insertAtCursor = (text) => {
-    const el = textareaRef.current;
-    if (!el) {
-      setForm((p) => ({ ...p, content: (p.content || "") + text }));
-      return;
-    }
-    const start = el.selectionStart ?? (form.content?.length || 0);
-    const end = el.selectionEnd ?? (form.content?.length || 0);
-    setForm((p) => ({
-      ...p,
-      content: (p.content || "").slice(0, start) + text + (p.content || "").slice(end),
-    }));
-    setTimeout(() => {
-      el.focus();
-      const pos = start + text.length;
-      el.setSelectionRange(pos, pos);
-    }, 0);
-  };
-
-  // 업로드 → 선택된 파일을 Base64로 읽어 본문에 <img data-id="..."> 삽입
-  const onUpload = () => {
-    const f = form.file;
-    if (!f || !currentFileId) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const dataUrl = String(reader.result || "");
-      insertAtCursor(`\n<img src="${dataUrl}" alt="${f.name || "image"}" data-id="${currentFileId}" />\n`);
-    };
-    reader.readAsDataURL(f);
-  };
-
-  // 파일삭제 → 첨부/미리보기 제거 + 같은 data-id 이미지 제거(정규식 짧음)
   const onRemove = () => {
-    setForm((p) => {
-      let content = p.content || "";
-      if (currentFileId) {
-        const id = currentFileId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        const re = new RegExp(`\\s*<img\\s+[^>]*data-id="${id}"[^>]*>\\s*`, "g");
-        content = content.replace(re, "");
-      }
-      return { ...p, file: null, content };
-    });
-
-    if (previewObjectUrlRef.current) {
-      URL.revokeObjectURL(previewObjectUrlRef.current);
-      previewObjectUrlRef.current = null;
-    }
+    setForm((p) => ({ ...p, file: null }));
+    if (previewObjectUrlRef.current) URL.revokeObjectURL(previewObjectUrlRef.current);
     setPreviewUrl("");
-    setCurrentFileId("");
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  useEffect(() => {
-    // 컴포넌트 unmount 시 blob URL 정리
-    return () => {
-      if (previewObjectUrlRef.current) {
-        URL.revokeObjectURL(previewObjectUrlRef.current);
-      }
-    };
-  }, []);
-
-  const onTempSave = () => {
-    if (!form.title.trim() && !form.content.trim()) {
-      dispatch(
-        confirmModalAction({
-          heading: "임시저장할 내용이 없습니다.",
-          explain: "",
-          isON: true,
-          isConfirm: false,
-          message1: "",
-          message2: "",
-        })
-      );
-      return;
-    }
-    dispatch(
-      confirmModalAction({
-        heading: "임시저장되었습니다.",
-        explain: "",
-        isON: true,
-        isConfirm: false,
-        message1: "",
-        message2: "",
-      })
-    );
-  };
-
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (!form.title.trim() || !form.content.trim()) {
       dispatch(
         confirmModalAction({
-          heading: "제목과 내용을 모두 입력해주세요.",
-          explain: "",
+          heading: "제목과 내용을 입력해주세요.",
           isON: true,
           isConfirm: false,
-          message1: "",
-          message2: "",
         })
       );
+      titleRef.current?.focus();
       return;
     }
-    dispatch(
-      confirmModalAction({
-        heading: "등록되었습니다.",
-        explain: "",
-        isON: true,
-        isConfirm: false,
-        message1: "",
-        message2: "",
-      })
-    );
-  };
 
-  useEffect(() => {
-    if (modal.heading === "등록되었습니다" || modal.heading === "등록되었습니다.") {
-      if (modal.isON) {
-        dispatch(confirmModalYesNoAction(false));
-        navigate("/NtcAdmin");
+    const fd = new FormData();
+    fd.append("wSubject", form.title);
+
+    const safeContent = form.content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    fd.append("wContent", safeContent);
+
+    fd.append("wId", wId);
+    fd.append("wName", wName);
+    if (form.file) fd.append("file", form.file);
+
+    try {
+      const res = await axios.post("/jazzmyomyo/notice_table_insert.php", fd);
+      const body = String(res.data ?? "").replace(/\uFEFF/g, "").trim();
+      if (res.status === 200 && (body === "1" || body.includes("성공"))) {
+        dispatch(
+          confirmModalAction({
+            heading: "등록되었습니다.",
+            isON: true,
+            isConfirm: false,
+          })
+        );
+        setForm({ title: "", content: "", writer: "관리자", date: today, file: null });
+        setPreviewUrl("");
+        if (fileInputRef.current) fileInputRef.current.value = "";
+        navigate("/ntcAdmin");
+      } else {
+        dispatch(
+          confirmModalAction({
+            heading: "작성 실패",
+            explain: body || "서버 응답 없음",
+            isON: true,
+            isConfirm: false,
+          })
+        );
       }
+    } catch (err) {
+      dispatch(
+        confirmModalAction({
+          heading: "통신 오류",
+          explain: err?.message || "서버 연결 실패",
+          isON: true,
+          isConfirm: false,
+        })
+      );
     }
-  }, [modal.heading, modal.isON, dispatch, navigate]);
+  };
 
   return (
     <div id="Sub05NtcAdminWrite">
       <div className="container">
         <div className="sangdan">
           <Link to="/"><i className="bi bi-house-door-fill" /></Link>
-          <span className="sep"><i className="bi bi-chevron-right" /></span>
-          <span className="admin">관리자페이지</span>
-          <span className="sep"><i className="bi bi-chevron-right" /></span>
-          <span className="write">글쓰기</span>
+          <i className="bi bi-chevron-right" />
+          <span>관리자페이지</span>
+          <i className="bi bi-chevron-right" />
+          <span>글쓰기</span>
         </div>
 
-        <h2 className="page-title"><i class="bi bi-gear"></i> 공지사항 관리자</h2>
+        <h2 className="page-title"><i className="bi bi-gear" /> 공지사항 관리자</h2>
 
         <form className="content-box" onSubmit={onSubmit}>
           <div className="headbar">
             <input
+              ref={titleRef}
               className="title-input"
               type="text"
               name="title"
               value={form.title}
               onChange={onChange}
               placeholder="제목을 입력하세요"
-              aria-label="제목"
             />
             <div className="meta-row">
               <div className="meta-left">
                 <span>작성자: {form.writer}</span>
                 <span>등록일: {form.date}</span>
-                <button type="button" className="badge file" onClick={onPickFile}>
-                  파일첨부
-                </button>
+                <button type="button" className="badge file" onClick={onPickFile}>파일첨부</button>
+                <button type="button" className="badge delete" onClick={onRemove}>파일삭제</button>
                 {form.file && <span className="file-name">{form.file.name}</span>}
               </div>
               <div className="meta-right">
-                <button type="button" className="btn upload" onClick={onUpload}>업로드</button>
-                <button type="button" className="btn upload" onClick={onRemove}>파일삭제</button>
                 <button type="submit" className="btn submit">등록</button>
               </div>
             </div>
@@ -237,9 +169,11 @@ function Sub05NtcAdminWrite() {
 
           <div className="body">
             <div className="image">
-              {previewUrl
-                ? <img src={previewUrl} alt={form.file?.name || "preview"} style={{maxWidth:"100%", maxHeight:"100%", objectFit:"contain"}} />
-                : (form.file ? "첨부 이미지 미리보기 자리" : "재즈묘묘 관련 이미지")}
+              {previewUrl ? (
+                <img src={previewUrl} alt="미리보기" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+              ) : (
+                "미리보기 이미지가 없습니다."
+              )}
             </div>
             <textarea
               ref={textareaRef}
@@ -247,7 +181,6 @@ function Sub05NtcAdminWrite() {
               value={form.content}
               onChange={onChange}
               placeholder="내용을 입력하세요"
-              aria-label="내용"
             />
             <input
               ref={fileInputRef}

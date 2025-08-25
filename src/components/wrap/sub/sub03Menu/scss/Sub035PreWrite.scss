@@ -6,9 +6,10 @@
   display: flex;
   justify-content: center;
   height: auto;
+  background: $sub-color3;
 
   .board-view {
-    background-color: #fffdf9;
+    background-color: #eaddc3;
     width: 800px;
     border: 1px solid #ccc;
     border-radius: 16px;
@@ -44,6 +45,11 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       background-color: #fff;
+    }
+    .writer_name {
+      background: $grey3;
+      color: $grey1;
+      cursor:not-allowed;
     }
 
     textarea {

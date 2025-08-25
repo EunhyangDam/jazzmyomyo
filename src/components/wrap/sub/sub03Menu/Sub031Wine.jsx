@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./scss/Sub031Wine.scss";
+import useCustomA from "../../custom/useCustomA";
 
 const wineData = {
   red: [
@@ -74,13 +76,16 @@ const wineData = {
 };
 
 export default function Sub03Wine() {
+  const {onClickA} = useCustomA();
+
   const [activeTab, setActiveTab] = useState("red");
+  const navigate = useNavigate();
 
   return (
     <div id="sub_wine">
       <div className="wine-container">
         <h2 className="wine-title">WINE</h2>
-        <p className="wine-event">9월 한 달간 한 잔 ₩4,000! (정가 ₩5,500)</p>
+        <p className="wine-event">9월 한 달간 한 잔 4,000원! (정가 5,500원)</p>
 
         <div className="wine-tabs">
           {["red", "white", "sparkling"].map((type) => (
@@ -89,11 +94,7 @@ export default function Sub03Wine() {
               className={activeTab === type ? "on" : ""}
               onClick={() => setActiveTab(type)}
             >
-              {type === "red"
-                ? "레드"
-                : type === "white"
-                ? "화이트"
-                : "스파클링"}
+              {type === "red" ? "레드" : type === "white" ? "화이트" : "스파클링"}
             </button>
           ))}
         </div>
@@ -109,6 +110,15 @@ export default function Sub03Wine() {
                 <p className="desc">{wine.desc}</p>
                 <p className="food">어울리는 안주: {wine.food}</p>
                 <p className="price">{wine.price}</p>
+
+                <button
+                  type="button"
+                  className="reserve-btn"
+                  onClick={(e) => onClickA(e, "/pre")}
+                >
+                  사전예약 바로가기
+                  <i className="bi bi-arrow-right-short" aria-hidden="true" />
+                </button>
               </div>
               <div className="wine-image">
                 <img src={wine.img} alt={wine.name} />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './scss/Sub034Set.scss';
+import useCustomA from "../../custom/useCustomA";
 
 const setData = [
   {
@@ -58,8 +59,8 @@ const setData = [
     ],
     wine:
       '[스파클링] Cava Estrella (₩40,000) – 산미+은은한 단맛으로 과일, 견과, 나초 모두 커버',
-    originPrice: '₩76,000',
-    salePrice: '₩68,000',
+    originPrice: '₦76,000'.replace('₦','₩'), // 표시 그대로 유지용
+    salePrice: '₦68,000'.replace('₦','₩'),
     image: './img/sub04Set/set3.png',
   },
 ];
@@ -67,6 +68,7 @@ const setData = [
 export default function Sub034Set() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [current, setCurrent] = useState(0);
+  const { onClickA } = useCustomA();
 
   const openModal = (index) => {
     setCurrent(index);
@@ -106,9 +108,9 @@ export default function Sub034Set() {
             key={idx}
           >
             <div 
-            className="set-img" 
-            onClick={() => openModal(idx)}
-            style={{ cursor: 'url(/img/main_menu/cursor-cat.png), auto' }}
+              className="set-img" 
+              onClick={() => openModal(idx)}
+              style={{ cursor: 'url(/img/main_menu/cursor-cat.png), auto' }}
             >
               <img src={set.image} alt={set.title} />
             </div>
@@ -125,6 +127,16 @@ export default function Sub034Set() {
                 <span className="origin">{set.originPrice}</span> →{' '}
                 <span className="sale">{set.salePrice}</span>
               </p>
+
+              <button
+                type="button"
+                className="reserve-btn"
+                onClick={(e) => onClickA(e, "/pre")}
+                aria-label="사전예약 바로가기"
+              >
+                사전예약 바로가기
+                <i className="bi bi-arrow-right-short" aria-hidden="true" />
+              </button>
             </div>
           </div>
         ))}
@@ -132,18 +144,18 @@ export default function Sub034Set() {
 
       {isModalOpen && (
         <div className="modal" onClick={() => setIsModalOpen(false)}>
-          {/* 왼쪽 썸네일 */}
+
           <div className="modal-thumb left" onClick={handlePrev}>
             <img src={prev.image} alt="prev" />
           </div>
 
-          {/* 왼쪽 화살표 */}
+
           <div className="modal-arrow left" onClick={handlePrev}>
             <i className="bi bi-chevron-left"></i>
           </div>
 
-          {/* 중앙 콘텐츠 */}
-          <div className="modal-inner">
+
+          <div className="modal-inner" onClick={(e)=>e.stopPropagation()}>
             <div className="modal-images">
               {main.images.map((img, i) => (
                 <div className="img-item" key={i}>
@@ -153,30 +165,36 @@ export default function Sub034Set() {
               ))}
             </div>
 
-            {/* 설명 구역 */}
+
             <div className="modal-desc">
               {main.title} <br />
               {main.tagline}
             </div>
 
-            {/* 와인 정보 */}
+
             <div className="modal-wine">{main.wine}</div>
 
-            {/* 가격 정보 */}
             <div className="modal-price">
               <span className="origin">{main.originPrice}</span>
               <span className="sale">{main.salePrice}</span>
             </div>
+
+
+            <button
+              type="button"
+              className="reserve-btn"
+              onClick={(e) => { e.stopPropagation(); onClickA(e, "/pre"); }}
+              aria-label="사전예약 바로가기"
+            >
+              사전예약 바로가기
+              <i className="bi bi-arrow-right-short" aria-hidden="true" />
+            </button>
           </div>
 
-
-
-          {/* 오른쪽 화살표 */}
           <div className="modal-arrow right" onClick={handleNext}>
             <i className="bi bi-chevron-right"></i>
           </div>
 
-          {/* 오른쪽 썸네일 */}
           <div className="modal-thumb right" onClick={handleNext}>
             <img src={next.image} alt="next" />
           </div>
