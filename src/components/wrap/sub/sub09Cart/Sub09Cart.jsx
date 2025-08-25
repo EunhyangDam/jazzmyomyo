@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "../scss/sub.scss";
 import "./scss/Sub09Cart.scss";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction, cartChkAction } from "../../../../store/cart";
 import SiteMapComponent from "../../custom/SiteMapComponent";
-import { cartLoginAction } from "../../../../store/cartLogin";
 import useCustomA from "../../custom/useCustomA";
 function Sub09Cart(props) {
   const { onClickA } = useCustomA();
   const cartAsset = useSelector((state) => state.cart.cart);
+  const checkAsset = useSelector((state) => state.cart.checkedProduct);
   const userID = useSelector((state) => state.signIn.아이디);
   const dispatch = useDispatch();
   const navigation = useNavigate();
@@ -23,26 +23,12 @@ function Sub09Cart(props) {
     setState({
       ...state,
       product: arr,
+      check: checkAsset,
     });
-  }, [cartAsset]);
+  }, [cartAsset, checkAsset]);
 
   const dispatchCondition = (frontData) => {
     dispatch(cartAction(frontData));
-    // switch (userID) {
-    //   case "":
-    //     break;
-
-    //   default:
-    //     axios
-    //       .post("/jazzmyomyo/cart_insert.php", { userID, frontData })
-    //       .then((res) => console.log(res.data))
-    //       .catch((err) => {
-    //         alert(err);
-    //         console.log(err);
-    //       });
-    //     dispatch(cartLoginAction(frontData));
-    //     break;
-    // }
   };
   /**전체 삭제*/
   const clickClean = () => {
@@ -80,6 +66,7 @@ function Sub09Cart(props) {
       ...state,
       check: arr,
     });
+    dispatch(cartChkAction(arr));
   };
   /**이전으로 돌아가기 */
   const clickPrev = (e) => {
@@ -158,7 +145,8 @@ function Sub09Cart(props) {
                   <div className="container">
                     <button
                       className={el.수량 > 1 ? "active" : ""}
-                      onClick={(e) => clickMinus(e, el)}>
+                      onClick={(e) => clickMinus(e, el)}
+                    >
                       -
                     </button>
                     <input
@@ -170,7 +158,8 @@ function Sub09Cart(props) {
                     />
                     <button
                       className={el.수량 > 0 && "active"}
-                      onClick={(e) => clickPlus(e, el)}>
+                      onClick={(e) => clickPlus(e, el)}
+                    >
                       +
                     </button>
                   </div>
