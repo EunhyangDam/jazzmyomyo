@@ -71,81 +71,11 @@ export default function Sub09Purchase(props) {
 
                   <dl>
                     <dt>
-                      <div className="col col1">
-                        <input
-                          type="checkbox"
-                          id="allChk"
-                          name="allChk"
-                          onChange={changeAll}
-                          checked={
-                            state.product.length === state.check.length &&
-                            state.product.length > 0
-                          }
-                        />
-                      </div>
                       <div className="col col2">상품정보</div>
                       <div className="col col3">수량</div>
                       <div className="col col4">배송구분</div>
                       <div className="col col5">주문금액</div>
                     </dt>
-                    <dd className={el.품절 ? "sold-out" : ""} key={el.id}>
-                      <div className="col col1">
-                        <input
-                          type="checkbox"
-                          id={`check${idx + 1}`}
-                          name={`check${idx + 1}`}
-                          onChange={(e) => changeChk(e, el)}
-                          checked={state.check
-                            .map((el) => el.id)
-                            .includes(el.id)}
-                        />
-                      </div>
-                      <div className="col col2">
-                        <div className="img-container">
-                          <img src={el.이미지[0]} alt="" />
-                        </div>
-                        <div className="txt-container">
-                          <h3>{el.상품명}</h3>
-                          <div className="bottom">
-                            <div className="box">
-                              {el.신상품 && <span className="new">신상품</span>}
-                              {el.품절 && (
-                                <span className="sold-out">품절</span>
-                              )}
-                            </div>
-                            <p>{el.옵션.length > 0 && "옵션:"}</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col col3">
-                        <div className="container">
-                          <button
-                            className={el.수량 > 1 ? "active" : ""}
-                            onClick={(e) => clickMinus(e, el)}>
-                            -
-                          </button>
-                          <input
-                            type="number"
-                            name={`inputNumber${el.idx}`}
-                            id={`inputNumber${el.idx}`}
-                            value={el.수량}
-                            readOnly
-                          />
-                          <button
-                            className={el.수량 > 0 && "active"}
-                            onClick={(e) => clickPlus(e, el)}>
-                            +
-                          </button>
-                        </div>
-                      </div>
-                      <div className="col col4">기본배송</div>
-                      <div className="col col5">
-                        <span>
-                          {(el.가격 * el.수량).toLocaleString("ko-kr")}
-                        </span>
-                        원
-                      </div>
-                    </dd>
                   </dl>
                 </div>
               </div>
