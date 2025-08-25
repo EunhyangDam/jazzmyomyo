@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { useNavigate, Link, useParams, useLocation } from "react-router-dom";
 import "./scss/Sub05NtcAdminEdit.scss";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,38 +8,72 @@ import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/c
 
 function Sub05NtcAdminEdit() {
   const { id } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const modal = useSelector((state) => state.confirmModal);
+  const modal = useSelector((s) => s.confirmModal);
 
   const [form, setForm] = useState({
     title: "",
     content: "",
     writer: "관리자",
-    date: "",
+    createdAt: "",
+    updatedAt: "",
     file: null,
   });
 
   const [previewUrl, setPreviewUrl] = useState("");
   const previewObjectUrlRef = useRef(null);
-  const [currentFileId, setCurrentFileId] = useState("");
   const fileInputRef = useRef(null);
   const textareaRef = useRef(null);
+
+  const [clearImage, setClearImage] = useState(false);
 
   const today = useMemo(() => {
     const d = new Date();
     const y = d.getFullYear();
     const m = String(d.getMonth() + 1).padStart(2, "0");
     const dd = String(d.getDate()).padStart(2, "0");
-    return `${y}.${m}.${dd}`;
+    const hh = String(d.getHours()).padStart(2, "0");
+    const mi = String(d.getMinutes()).padStart(2, "0");
+    const ss = String(d.getSeconds()).padStart(2, "0");
+    return `${y}-${m}-${dd} ${hh}:${mi}:${ss}`;
   }, []);
 
+  const fmt = (s) =>
+    !s
+      ? ""
+      : new Date(String(s).replace(" ", "T")).toLocaleString("ko-KR", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        });
+
   useEffect(() => {
+    const state = location.state;
+
+    // 1) state가 있으면 우선 화면에 표시(빠른 첫 렌더용)
+    if (state && (state.idx || state.id)) {
+      setForm({
+        title: state.subject ?? state.wSubject ?? "",
+        content: state.content ?? state.wContent ?? "",
+        writer: state.writer ?? state.wName ?? "관리자",
+        createdAt: state.wDate ?? state.date ?? "",
+        updatedAt: state.wUpdate ?? "",
+        file: null,
+      });
+    }
+
+    // 2) 항상 서버에서 최신값 재조회 → wUpdate 포함해 덮어쓰기
     const load = async () => {
       try {
-        const url = `${process.env.PUBLIC_URL || ""}/json/sub05/notice.json`;
-        const res = await axios.get(url);
-        const list = Array.isArray(res.data?.공지사항) ? res.data.공지사항 : [];
+        const res = await axios.get(`/jazzmyomyo/notice_table_select.php?_t=${Date.now()}`, {
+          validateStatus: () => true,
+        });
+        const list = Array.isArray(res.data) ? res.data : [];
         const found = list.find((it) => String(it.idx) === String(id));
         if (!found) {
           dispatch(
@@ -54,13 +88,15 @@ function Sub05NtcAdminEdit() {
           );
           return;
         }
-        setForm({
-          title: found.subject ?? "",
-          content: found.content ?? "",
-          writer: found.writer ?? found.name ?? "관리자",
-          date: found.date ?? today,
+        setForm((p) => ({
+          ...p,
+          title: found.wSubject ?? "",
+          content: found.wContent ?? "",
+          writer: found.wName ?? "관리자",
+          createdAt: found.wDate ?? "",
+          updatedAt: found.wUpdate ?? "", // ★ 최신 수정일 반영
           file: null,
-        });
+        }));
       } catch {
         dispatch(
           confirmModalAction({
@@ -74,31 +110,20 @@ function Sub05NtcAdminEdit() {
         );
       }
     };
+
     if (id) load();
-    else {
-      dispatch(
-        confirmModalAction({
-          heading: "잘못된 접근입니다.",
-          explain: "",
-          isON: true,
-          isConfirm: false,
-          message1: "",
-          message2: "",
-        })
-      );
-    }
-  }, [id, dispatch, today]);
+  }, [id]); // deps 간단화
 
   useEffect(() => {
     if (modal.heading === "수정되었습니다." && modal.isON) {
       dispatch(confirmModalYesNoAction(false));
-      navigate(`/NtcAdminV/${id}`);
+      navigate(`/ntcAdminV/${id}?r=${Date.now()}`); // 상세 재로딩 유도
     }
     if (modal.heading === "잘못된 접근입니다." && modal.isON) {
       dispatch(confirmModalYesNoAction(false));
-      navigate("/NtcAdmin");
+      navigate("/ntcAdmin");
     }
-  }, [modal.heading, modal.isON, dispatch, navigate, id]);
+  }, [modal.heading, modal.isON]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -109,73 +134,39 @@ function Sub05NtcAdminEdit() {
     fileInputRef.current?.click();
   };
 
-  const makeId = () => "img_" + Math.random().toString(36).slice(2, 10);
-
   const onFileChange = (e) => {
     const f = e.target.files?.[0] || null;
     setForm((p) => ({ ...p, file: f }));
+    setClearImage(false);
     if (previewObjectUrlRef.current) {
       URL.revokeObjectURL(previewObjectUrlRef.current);
       previewObjectUrlRef.current = null;
     }
     if (!f) {
       setPreviewUrl("");
-      setCurrentFileId("");
       return;
     }
     const url = URL.createObjectURL(f);
     previewObjectUrlRef.current = url;
     setPreviewUrl(url);
-    setCurrentFileId(makeId());
   };
 
-  const insertAtCursor = (text) => {
-    const el = textareaRef.current;
-    if (!el) {
-      setForm((p) => ({ ...p, content: (p.content || "") + text }));
+  const onDeleteFile = () => {
+    if (form.file || previewUrl) {
+      setForm((p) => ({ ...p, file: null }));
+      if (previewObjectUrlRef.current) {
+        URL.revokeObjectURL(previewObjectUrlRef.current);
+        previewObjectUrlRef.current = null;
+      }
+      setPreviewUrl("");
+      if (fileInputRef.current) fileInputRef.current.value = "";
       return;
     }
-    const start = el.selectionStart ?? (form.content?.length || 0);
-    const end = el.selectionEnd ?? (form.content?.length || 0);
     setForm((p) => ({
       ...p,
-      content: (p.content || "").slice(0, start) + text + (p.content || "").slice(end),
+      content: String(p.content || "").replace(/<img\b[^>]*>\s*/gi, ""),
     }));
-    setTimeout(() => {
-      el.focus();
-      const pos = start + text.length;
-      el.setSelectionRange(pos, pos);
-    }, 0);
-  };
-
-  const onUpload = () => {
-    const f = form.file;
-    if (!f || !currentFileId) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const dataUrl = String(reader.result || "");
-      insertAtCursor(`\n<img src="${dataUrl}" alt="${f.name || "image"}" data-id="${currentFileId}" />\n`);
-    };
-    reader.readAsDataURL(f);
-  };
-
-  const onRemove = () => {
-    setForm((p) => {
-      let content = p.content || "";
-      if (currentFileId) {
-        const idr = currentFileId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        const re = new RegExp(`\\s*<img\\s+[^>]*data-id="${idr}"[^>]*>\\s*`, "g");
-        content = content.replace(re, "");
-      }
-      return { ...p, file: null, content };
-    });
-    if (previewObjectUrlRef.current) {
-      URL.revokeObjectURL(previewObjectUrlRef.current);
-      previewObjectUrlRef.current = null;
-    }
-    setPreviewUrl("");
-    setCurrentFileId("");
-    if (fileInputRef.current) fileInputRef.current.value = "";
+    setClearImage(true);
   };
 
   useEffect(() => {
@@ -184,7 +175,7 @@ function Sub05NtcAdminEdit() {
     };
   }, []);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (!form.title.trim() || !form.content.trim()) {
       dispatch(
@@ -199,16 +190,55 @@ function Sub05NtcAdminEdit() {
       );
       return;
     }
-    dispatch(
-      confirmModalAction({
-        heading: "수정되었습니다.",
-        explain: "",
-        isON: true,
-        isConfirm: false,
-        message1: "",
-        message2: "",
-      })
-    );
+    try {
+      const fd = new FormData();
+      fd.append("idx", String(id));
+      fd.append("wSubject", form.title);
+      fd.append("wContent", form.content);
+      fd.append("clear_file", clearImage ? "1" : "0");
+      if (form.file) fd.append("file", form.file);
+
+      const res = await axios.post("/jazzmyomyo/notice_table_update.php", fd, {
+        headers: { "Content-Type": "multipart/form-data" },
+        validateStatus: () => true,
+      });
+
+      if (String(res.data).trim() === "1") {
+        setForm((p) => ({ ...p, updatedAt: today })); // 즉시 화면에도 반영
+        dispatch(
+          confirmModalAction({
+            heading: "수정되었습니다.",
+            explain: "",
+            isON: true,
+            isConfirm: false,
+            message1: "",
+            message2: "",
+          })
+        );
+      } else {
+        dispatch(
+          confirmModalAction({
+            heading: "수정 실패",
+            explain: "잠시 후 다시 시도해주세요.",
+            isON: true,
+            isConfirm: false,
+            message1: "",
+            message2: "",
+          })
+        );
+      }
+    } catch {
+      dispatch(
+        confirmModalAction({
+          heading: "수정 실패",
+          explain: "네트워크 오류입니다.",
+          isON: true,
+          isConfirm: false,
+          message1: "",
+          message2: "",
+        })
+      );
+    }
   };
 
   return (
@@ -238,13 +268,13 @@ function Sub05NtcAdminEdit() {
             <div className="meta-row">
               <div className="meta-left">
                 <span>작성자: {form.writer}</span>
-                <span>수정일: {form.date || today}</span>
+                <span>등록일: {fmt(form.createdAt)}</span>
+                <span>수정일: {form.updatedAt ? fmt(form.updatedAt) : "-"}</span>
                 <button type="button" className="badge file" onClick={onPickFile}>파일첨부</button>
+                <button type="button" className="badge delete" onClick={onDeleteFile}>파일삭제</button>
                 {form.file && <span className="file-name">{form.file.name}</span>}
               </div>
               <div className="meta-right">
-                <button type="button" className="btn upload" onClick={onUpload}>업로드</button>
-                <button type="button" className="btn upload" onClick={onRemove}>파일삭제</button>
                 <button type="submit" className="btn submit">수정</button>
               </div>
             </div>
@@ -253,8 +283,8 @@ function Sub05NtcAdminEdit() {
           <div className="body">
             <div className="image">
               {previewUrl
-                ? <img src={previewUrl} alt={form.file?.name || "preview"} style={{maxWidth:"100%", maxHeight:"100%", objectFit:"contain"}} />
-                : (form.file ? "첨부 이미지 미리보기 자리" : "재즈묘묘 관련 이미지")}
+                ? <img src={previewUrl} alt={form.file?.name || "preview"} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+                : "재즈묘묘 관련 이미지"}
             </div>
             <textarea
               ref={textareaRef}

@@ -5,6 +5,7 @@
   padding: 80px 20px;
   display: flex;
   justify-content: center;
+  background: $sub-color3;
 
   .edit-container {
     background-color: #fffdf9;
@@ -14,46 +15,6 @@
     padding: 50px 40px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     text-align: center;
-
-    .edit-form {
-        text-align: left;
-      
-        label {
-          display: block;
-          font-weight: bold;
-          margin-top: 16px;
-          font-size: 14px;
-          color: #333;
-        }
-      
-        input,
-        textarea {
-          width: 100%;
-          padding: 10px;
-          margin-top: 6px;
-          font-size: 14px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          background-color: #fff;
-        }
-      
-        textarea {
-          height: 100px;
-          resize: vertical;
-        }
-      
-        .submit-btn {
-          margin-top: 30px;
-          padding: 12px 20px;
-          background-color: #512b2b;
-          color: #fff;
-          border: none;
-          border-radius: 6px;
-          font-size: 16px;
-          cursor: pointer;
-        }
-      }
-      
 
     h2 {
       font-size: 24px;
@@ -67,17 +28,135 @@
       margin-bottom: 30px;
     }
 
-    .back-btn {
-      padding: 10px 20px;
-      background-color: #512b2b;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-size: 14px;
-      cursor: pointer;
+    .edit-form {
+      text-align: left;
 
-      &:hover {
-        background-color: #3e1f1f;
+      label {
+        display: block;
+        font-weight: bold;
+        margin-top: 16px;
+        font-size: 14px;
+        color: #333;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+      }
+      .writer_name{
+        background: $grey3;
+        color: $grey1;
+        cursor: not-allowed;
+      }
+
+      textarea {
+        height: 100px;
+        resize: vertical;
+      }
+
+      .btn-group {
+        margin-top: 30px;
+        display: flex;
+        gap: 16px;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+
+        .submit-btn {
+          padding: 12px 20px;
+          background-color: #512b2b;
+          color: #fff;
+          border: none;
+          border-radius: 6px;
+          font-size: 16px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #3e1f1f;
+          }
+        }
+
+        .back-btn {
+          padding: 12px 20px;
+          background-color: #512b2b;
+          color: #fff;
+          border: none;
+          border-radius: 6px;
+          font-size: 16px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #3e1f1f;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1060px) {
+    .edit-container {
+      width: 90%;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .edit-container {
+      padding: 40px 20px;
+
+      .edit-form {
+        .btn-group {
+          flex-direction: column;
+          align-items: stretch;
+
+          .submit-btn,
+          .back-btn {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    .edit-container {
+      padding: 30px 16px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .edit-container {
+      padding: 24px 12px;
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .edit-form {
+        label {
+          font-size: 13px;
+        }
+
+        input,
+        textarea,
+        select {
+          font-size: 13px;
+        }
+
+        .btn-group {
+          gap: 12px;
+
+          .submit-btn,
+          .back-btn {
+            font-size: 14px;
+            padding: 10px 16px;
+          }
+        }
       }
     }
   }

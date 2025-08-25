@@ -2,10 +2,9 @@
 
 #sub_preView {
   margin-top: 100px;
-  margin-bottom: 60px;
   font-family: $font1;
   color: #222;
-  background: #fff;
+  background: $sub-color3;
   user-select: none;
 
   .board-view {
@@ -17,13 +16,14 @@
     padding: 28px;
 
     .view-header {
-      border-bottom: 1px solid rgba(0,0,0,.08);
-      padding-bottom: 18px;
-      margin-bottom: 20px;
+      //border-bottom: 1px solid rgba(0,0,0,.08);
+      padding-bottom: 10px;
+      margin-bottom: 10px;
 
       h2 {
-        font-size: clamp(20px, 2.4vw, 28px);
-        margin-bottom: 10px;
+        font-size:35px;
+        border-bottom:  3px solid rgba(0, 0, 0, 0.08);
+        margin-bottom: 20px;
         font-weight: 700;
         line-height: 1.4;
       }
@@ -36,7 +36,6 @@
 
 
     .view-body {
-      margin-bottom: 24px;
 
       .info-table {
         list-style: none;
@@ -46,8 +45,8 @@
 
         li {
           display: flex;
-          border-bottom: 1px solid rgba(0,0,0,.08);
-          padding: 12px 8px;
+          //border-bottom: 1px solid rgba(0,0,0,.08);
+          padding: 20px 8px;
 
           strong {
             width: 140px;

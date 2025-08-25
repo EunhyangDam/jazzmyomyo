@@ -10,7 +10,6 @@
     display: flex;
     min-height: 100vh;
 
-
     .sidebar {
       width: 220px;
       background-color: $primary-color;
@@ -47,7 +46,6 @@
       }
     }
 
-
     .main {
       flex: 1;
       padding: 40px;
@@ -56,7 +54,6 @@
         text-align: center;
         margin-bottom: 30px;
 
- 
         h1 {
           font-family: $font2;
           line-height: 1.1;
@@ -71,10 +68,9 @@
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 
-
         .grade-head {
           display: grid;
-          grid-template-columns: 200px 1fr 1fr;
+          grid-template-columns: 200px 560px 1fr 50px;
           align-items: center;
           background-color: $sub-color1;
           color: #fff;
@@ -90,15 +86,19 @@
           }
         }
 
-
         .grade-list {
           list-style: none;
           margin: 0;
           padding: 0;
 
+          /* ★ 점(•) 완전 차단 */
+          > li { list-style: none; }
+          > li::marker { content: none; }
+
           .grade-row {
+            list-style: none;
             display: grid;
-            grid-template-columns: 200px 1fr 1fr;
+            grid-template-columns: 200px 560px 1fr 50px;
             align-items: center;
             background: #fff;
             border-left: 1px solid #e5d6cc;
@@ -119,11 +119,18 @@
             }
 
             .col {
-              padding: 12px;
+              padding: 20px;
               text-align: center;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
+
+              .grade-name-locked {
+                background-color: #f0f0f0;
+                color: #777;
+                cursor: not-allowed;
+                border-color: #ddd;
+              }
 
               input,
               select,
@@ -133,8 +140,9 @@
                 border: 1px solid #ccc;
                 border-radius: 6px;
                 font-family: inherit;
-                font-size: 14px;
+                font-size: 16px;
                 background: #fff;
+                text-align: center;
 
                 &:focus {
                   outline: none;
@@ -151,21 +159,34 @@
           }
         }
 
-        .btn {
-          margin-top: 20px;
-          padding: 10px 20px;
-          background-color: $sub-color2;
-          color: #fff;
-          border: none;
-          border-radius: 20px;
-          cursor: pointer;
-          font-weight: bold;
-          transition: filter 0.2s;
+        .grade-actions {
+          display: flex;
+          justify-content: left;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 10px;
+          padding-right: 50px;
+          margin-top: 16px;
 
-          &:hover {
-            filter: brightness(0.95);
+          .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 700;
+            background-color: $sub-color2;
+            color: #fff;
+            border: 0;
+            cursor: pointer;
+            transition: background .2s;
+
+            &:hover { background-color: $sub-color1; }
           }
         }
+
       }
     }
   }
@@ -193,7 +214,7 @@
         .grade-form {
           padding: 20px;
 
-
+          /* 테이블 헤더 숨김 (모바일 라벨은 data-label로 표시) */
           .grade-head {
             position: absolute;
             width: 1px;
@@ -232,14 +253,13 @@
                 white-space: normal;
                 border: 0;
 
-     
                 &::before {
                   content: attr(data-label);
-                  font-size: 16px;
+                  font-size: 18px;
                   font-weight: 500;
-                  color: #000;
-                  background: $sub-color4;
-                  padding: 5px;
+                  color: #fff;
+                  background: $sub-color1;
+                  padding: 5px 10px;
                   margin-bottom: 5px;
                   border-radius: 7px;
                   text-align: center;
@@ -253,11 +273,24 @@
             }
           }
 
-          .btn {
-            display: block;
-            width: 100%;
-            max-width: 320px;
-            margin: 20px auto 0;
+          .grade-actions {
+            display: flex;
+            flex-direction: column;   /* ★ 반응형부터 세로 정렬 */
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding-right: 0;
+            margin-top: 16px;
+
+            .btn {
+              display: block;
+              width: 100%;
+              max-width: 260px;       /* 원하는 최대폭 */
+              height: 32px;
+              padding: 6px 12px;      /* 얄쌍하게 유지 */
+              border-radius: 14px;
+              font-size: 14.5px;
+            }
           }
         }
       }
@@ -271,7 +304,7 @@
       .main {
         .page-header {
           h1 {
-            font-size: 40px; 
+            font-size: 40px;
           }
         }
 
@@ -310,7 +343,7 @@
 
         .page-header {
           h1 {
-            font-size: 36px; 
+            font-size: 36px;
           }
         }
 

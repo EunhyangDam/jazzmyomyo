@@ -85,16 +85,16 @@
         .btn-group {
           margin-top: 30px;
           display: flex;
-          justify-content: center; /* 중앙 정렬 */
+          justify-content: center;
           gap: 10px;
 
           .btn {
             display: inline-block;
-            padding: 10px 20px;
+            padding: 6px 14px;        /* 얄쌍하게 */
             background-color: $sub-color2;
             color: #fff;
             border: none;
-            border-radius: 20px;
+            border-radius: 16px;       /* 얄쌍하게 */
             cursor: pointer;
             font-weight: bold;
             text-decoration: none;
@@ -143,8 +143,8 @@
           }
 
           .btn-group .btn {
-            padding: 9px 18px;
-            border-radius: 18px;
+            padding: 6px 14px;        /* 얄쌍하게 */
+            border-radius: 16px;       /* 얄쌍하게 */
           }
         }
       }
@@ -164,7 +164,7 @@
             strong { width: 120px; letter-spacing: .01em; }
           }
 
-          .btn-group .btn { padding: 9px 16px; }
+          .btn-group .btn { padding: 6px 12px; border-radius: 16px; } /* 얄쌍하게 */
         }
       }
     }
@@ -176,6 +176,9 @@
     .admin-wrap {
       .main {
         padding: 20px;
+        .page-header {
+          h1 { font-size: 50px; }
+        }
 
         .member-detail {
           padding: 18px;
@@ -207,7 +210,6 @@
             border-bottom: 1px dashed #e6e6e6;
           }
 
-          /* 버튼 세로 한 줄 */
           .btn-group {
             flex-direction: column;
             align-items: center;
@@ -216,6 +218,8 @@
               width: 100%;
               max-width: 220px;
               text-align: center;
+              padding: 6px 12px;      /* 얄쌍하게 */
+              border-radius: 16px;     /* 얄쌍하게 */
             }
           }
         }
@@ -229,6 +233,9 @@
     .admin-wrap {
       .main {
         padding: 18px;
+        .page-header {
+          h1 { font-size: 40px; }
+        }
 
         .member-detail {
           padding: 16px;
@@ -240,9 +247,9 @@
           }
 
           .btn-group .btn {
-            padding: 8px 14px;
+            padding: 6px 12px;        /* 얄쌍하게 */
             font-size: 13.5px;
-            border-radius: 16px;
+            border-radius: 16px;       /* 얄쌍하게 */
           }
         }
       }
@@ -269,9 +276,9 @@
             gap: 6px;
 
             .btn {
-              padding: 8px 12px;
+              padding: 6px 10px;      /* 얄쌍하게 */
               font-size: 13px;
-              border-radius: 16px;
+              border-radius: 14px;     /* 얄쌍하게 */
               max-width: 200px;
             }
           }

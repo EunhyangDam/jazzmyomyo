@@ -1,8 +1,10 @@
 import React from "react";
 import "./scss/Sub030Menu.scss";
-import { Link } from "react-router-dom";
+import useCustomA from "../../custom/useCustomA";
 
 function Sub030Menu() {
+
+  const {onClickA} = useCustomA();
   const wineData = [
     {
       group: "레드 와인 (Red)",
@@ -101,27 +103,27 @@ function Sub030Menu() {
           <p className="subtitle">Jazz와 어울리는 한 잔, 그리고 한 입</p>
 
           <nav className="menu-nav">
-            <Link to="/wine">
+            <a href="/wine">
               <span>WINE</span>
-            </Link>
-            <Link to="/drinks">
+            </a>
+            <a href="/drinks">
               <span>DRINKS</span>
-            </Link>
-            <Link to="/food">
+            </a>
+            <a href="/food">
               <span>FOOD</span>
-            </Link>
-            <Link to="/set">
+            </a>
+            <a href="/set">
               <span>MYOHAN SET</span>
-            </Link>
-            <Link to="/pre">
+            </a>
+            <a href="/pre">
               <span>PRE-OREDER</span>
-            </Link>
+            </a>
           </nav>
 
           <div className="paper-sections">
             <div className="section" id="wine">
               <h2>
-                <Link to="/Wine">와인</Link>
+                <a href="!#" onClick={(e)=>onClickA(e, '/wine')}>와인</a>
               </h2>
               {wineData.map((group, idx) => (
                 <div className="subgroup" key={idx}>
@@ -140,7 +142,7 @@ function Sub030Menu() {
 
             <div className="section" id="drink">
               <h2>
-                <Link to="/drinks">주류 & 음료</Link>
+                <a href="!#" onClick={(e)=>onClickA(e, '/drinks')}>주류 & 음료</a>
               </h2>
               {drinkData.map((group, idx) => (
                 <div className="subgroup" key={idx}>
@@ -159,7 +161,7 @@ function Sub030Menu() {
 
             <div className="section" id="platter">
               <h2>
-                <Link to="/food">플래터 & 핑거푸드</Link>
+                <a href="!#" onClick={(e)=>onClickA(e, '/food')}>플래터 & 핑거푸드</a>
               </h2>
               <ul className="menu-ul">
                 {platterItems.map((item, idx) => (
@@ -173,7 +175,7 @@ function Sub030Menu() {
 
             <div className="section" id="set">
               <h2>
-                <Link to="/set">묘한세트</Link>
+                <a href="!#" onClick={(e)=>onClickA(e, '/set')}>묘한세트</a>
               </h2>
               <ul className="menu-ul">
                 {setItems.map((item, idx) => (
@@ -187,7 +189,7 @@ function Sub030Menu() {
 
             <div className="section" id="preorder">
               <h2>
-                <Link to="/pre">사전주문</Link>
+                <a href="!#" onClick={(e)=>onClickA(e, '/pre')}>사전주문</a>
               </h2>
               <p>
                 공연 전 미리 음식을 준비해서

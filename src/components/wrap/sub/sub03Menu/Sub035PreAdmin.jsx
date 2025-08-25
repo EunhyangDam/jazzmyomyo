@@ -1,51 +1,68 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import "./scss/Sub035Pre.scss";
-import { Link } from "react-router-dom";
+import "./scss/Sub035PreAdmin.scss";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
 export default function Sub035PreAdmin() {
-  const itemsPerPage = 5;
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  const deletedId = (() => {
+    const p = new URLSearchParams(location.search);
+    return Number(p.get("deleted")) || null;
+  })();
+
+  const itemsPerPage = 5;
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [showLocalModal, setShowLocalModal] = useState(false);
+
+  const parseDate = (s) => {
+    if (!s) return new Date(0);
+    return new Date(String(s).replace(/\./g, "-"));
+  };
 
   useEffect(() => {
-    const url = `${process.env.PUBLIC_URL || ""}/json/sub03/preorder.json`;
     setLoading(true);
-    setErr(null);
 
     axios
-      .get(url)
-      .then((res) => {
-        const arr = Array.isArray(res.data?.예약신청) ? res.data.예약신청 : [];
-        const mapped = arr.map((it, i) => ({
-          id: it.idx ?? i + 1,
-          title: it.title ?? "",
-          author: it.author ?? "",
-          date: it.reserveDate ?? "",
-          created: it.writeDate ?? "",
-          type: it.status ?? "",
-        }));
+      .get("/jazzmyomyo/preorder_table_select.php", {
+        params: { page: 1, pageSize: 200 },
+      })
+      .then(({ data }) => {
+        if (!Array.isArray(data)) {
+          throw new Error("서버 응답 형식 오류");
+        }
+
+        let mapped = data.map((it, i) => {
+          return {
+            id: it.idx ?? i + 1,
+            title: it.title || "(제목 없음)",
+            // '익명' 대신 백엔드에서 받은 writer_name을 그대로 사용
+            author: it.writer_name ?? "",
+            date: it.reserveDate ?? "",
+            created: it.wDate ?? "",
+            status: it.status ?? "상태없음",
+          };
+        });
+
+        if (deletedId !== null) {
+          mapped = mapped.filter((item) => item.id !== deletedId);
+        }
 
         const sorted = mapped.sort((a, b) => {
-          const ad = new Date((a.created || "").replaceAll(".", "-"));
-          const bd = new Date((b.created || "").replaceAll(".", "-"));
-          const diff = bd - ad;
-          return diff !== 0 ? diff : b.id - a.id;
+          const d = parseDate(b.created) - parseDate(a.created);
+          if (d !== 0) return d;
+          return (b.id ?? 0) - (a.id ?? 0);
         });
+
         setPosts(sorted);
         setCurrentPage(1);
       })
-      .catch((e) => {
-        const msg = e?.response
-          ? `HTTP ${e.response.status} ${e.response.statusText}`
-          : e?.message || "데이터 로드 실패";
-        setErr(msg);
-        console.error("[AdminList] fetch error:", msg, "url:", url);
-      })
+      .catch((e) => setErr(e?.message || "데이터 로드 실패"))
       .finally(() => setLoading(false));
   }, []);
 
@@ -97,38 +114,33 @@ export default function Sub035PreAdmin() {
       <div className="clipboard">
         <div className="clip"></div>
         <div className="paper">
-          <h1 className="h1Admin">사전 예약 게시판 (관리자)</h1>
-
-          <Link to="/preAdminW" className="write-button">
-            사전주문신청
-          </Link>
+          <h1>사전 예약 게시판 (관리자)</h1>
 
           {currentPosts.length === 0 && (
-            <div
-              className="card"
-              style={{ textAlign: "center", color: "#666" }}
-            >
+            <div className="card" style={{ textAlign: "center", color: "#666" }}>
               등록된 예약이 없습니다.
             </div>
           )}
 
           {currentPosts.map((post) => (
             <div key={post.id} className="card">
-              <Link to={`/preAdminV/view/${post.id}`} className="card-title">
+              <Link to={`/preV/view/${post.id}`} className="card-title">
                 {post.title || "(제목 없음)"}
               </Link>
 
               <p className="card-type">
                 <span
                   className={`type-label ${
-                    post.type === "예약완료"
+                    post.status === "예약완료"
                       ? "complete"
-                      : post.type === "예약중"
+                      : post.status === "예약중"
                       ? "progress"
-                      : "cancel"
+                      : post.status === "주문취소"
+                      ? "cancel"
+                      : ""
                   }`}
                 >
-                  {post.type || "상태없음"}
+                  {post.status || "상태없음"}
                 </span>
               </p>
 
@@ -139,7 +151,7 @@ export default function Sub035PreAdmin() {
                 <strong>예약일:</strong> {post.date || "-"}
               </p>
               <p>
-                <strong>작성일:</strong> {post.created || "-"}
+                <strong>작성일:</strong> {post.created ? post.created.split(" ")[0] : "-"}
               </p>
             </div>
           ))}

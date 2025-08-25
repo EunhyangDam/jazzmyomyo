@@ -26,30 +26,30 @@ function Sub080Mm() {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.confirmModal);
 
+  const getGender = (g) => {
+    if (!g || g === "선택안함") return "선택안함";
+    return g;
+  };
+
   useEffect(() => {
-    const url = `${
-      process.env.PUBLIC_URL || ""
-    }/json/sub08/members.json?v=${Date.now()}`;
+    const syncUrl = "/jazzmyomyo/member_table_sync.php";
+    const url = "/jazzmyomyo/member_table_select.php";
+  
     setLoading(true);
     setErr(null);
-
+  
+    // 1) 먼저 동기화 실행
     axios
-      .get(url, { headers: { "Cache-Control": "no-cache" } })
+      .get(syncUrl, { headers: { "Cache-Control": "no-cache" } })
+      .then(() => {
+        // 2) 그 다음 회원목록 가져오기
+        return axios.get(url, { headers: { "Cache-Control": "no-cache" } });
+      })
       .then((res) => {
-        const arr = Array.isArray(res.data?.회원정보)
-          ? res.data.회원정보
-          : Array.isArray(res.data?.members)
-          ? res.data.members
-          : Array.isArray(res.data?.data)
-          ? res.data.data
-          : Array.isArray(res.data)
-          ? res.data
-          : [];
-
-        if (!arr.length)
-          throw new Error("JSON은 로드됐지만 배열이 비었어요. (회원정보 확인)");
-
-        setMembers(arr);
+        const arr = Array.isArray(res.data) ? res.data : [];
+        const fixed = arr.map((x) => ({ ...x, consent: x.agree }));
+        if (!fixed.length) throw new Error("회원 데이터가 비었습니다.");
+        setMembers(fixed);
         setPage(1);
       })
       .catch((e) => {
@@ -61,6 +61,7 @@ function Sub080Mm() {
       })
       .finally(() => setLoading(false));
   }, []);
+  
 
   useEffect(() => {
     const fromState = location.state?.updatedMember;
@@ -136,20 +137,46 @@ function Sub080Mm() {
   useEffect(() => {
     if (modal.isYes === true && modal.isConfirm) {
       dispatch(confirmModalYesNoAction(false));
-      setMembers((prev) => prev.filter((m) => !selected.has(m.id)));
-      setSelected(new Set());
-      dispatch(
-        confirmModalAction({
-          heading: "삭제되었습니다.",
-          explain: "",
-          isON: true,
-          isConfirm: false,
-          message1: "",
-          message2: "",
+  
+      const ids = Array.from(selected);
+  
+      // 🔸 서버에 삭제 요청 보내기
+      Promise.all(
+        ids.map(idx =>
+          axios.get("/jazzmyomyo/member_table_delete.php", { params: { idx } })
+        )
+      )
+        .then(() => {
+          // 성공하면 프론트 state에서도 제거
+          setMembers(prev => prev.filter(m => !selected.has(m.id)));
+          setSelected(new Set());
+          dispatch(
+            confirmModalAction({
+              heading: "삭제되었습니다.",
+              explain: "",
+              isON: true,
+              isConfirm: false,
+              message1: "",
+              message2: "",
+            })
+          );
         })
-      );
+        .catch((err) => {
+          console.error("삭제 실패", err);
+          dispatch(
+            confirmModalAction({
+              heading: "삭제 실패",
+              explain: "서버 오류가 발생했습니다.",
+              isON: true,
+              isConfirm: false,
+              message1: "",
+              message2: "",
+            })
+          );
+        });
     }
-  }, [modal.isYes, modal.isConfirm, dispatch, selected]);
+  }, [modal.isYes, modal.isConfirm]);
+  
 
   const toTime = (s) => new Date(String(s)).getTime() || 0;
 
@@ -301,15 +328,12 @@ function Sub080Mm() {
                         aria-label={`${m.name} 선택`}
                       />
                     </div>
-
                     <div className="col col-no" data-label="번호">
                       {(page - 1) * pageSize + idx + 1}
                     </div>
-
                     <div className="col col-userId" data-label="아이디">
                       {m.userId}
                     </div>
-
                     <div className="col col-name" data-label="이름">
                       <Link
                         to={`/mmView/${m.id}`}
@@ -319,9 +343,8 @@ function Sub080Mm() {
                         {m.name}
                       </Link>
                     </div>
-
                     <div className="col col-gender" data-label="성별">
-                      {m.gender}
+                      {getGender(m.gender)}
                     </div>
                     <div className="col col-birth" data-label="생년월일">
                       {m.birth}
@@ -363,7 +386,6 @@ function Sub080Mm() {
             >
               ‹ 이전
             </button>
-
             {Array.from({ length: totalPages }, (_, i) => {
               const n = i + 1;
               return (
@@ -376,7 +398,6 @@ function Sub080Mm() {
                 </button>
               );
             })}
-
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}

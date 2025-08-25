@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import "./scss/Sub035PreWrite.scss";
+import './scss/Sub035PreEdit.scss';
 import { useNavigate, useParams } from "react-router-dom";
-
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
@@ -13,133 +12,225 @@ function Sub035PreEdit() {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.confirmModal);
 
-  const [loading, setLoading] = useState(true);
-  const [err, setErr] = useState(null);
-
   const [form, setForm] = useState({
+    id: id || "",
+    user_id: "",
+    writer_name: "",
     title: "",
-    writer: "",
-    reserveDate: "",
-    time: "",
-    people: "",
+    reserve_date: "",
+    reserve_time: "",
+    people: 1,
     wine: "",
+    beverage: "",
     food: "",
     note: "",
+    status: "예약중",
+    reply: "", 
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const url = `${process.env.PUBLIC_URL || ""}/json/sub03/preorder.json`;
-    setLoading(true);
-    setErr(null);
+    const userInfoString = localStorage.getItem("jazzmyomyo_sign_in") || sessionStorage.getItem("jazzmyomyo_sign_in");
+    const userInfo = userInfoString ? JSON.parse(userInfoString) : null;
+    const role = localStorage.getItem("role");
+    const isAdmin = role === "admin";
 
-    axios
-      .get(url)
-      .then((res) => {
-        const arr = Array.isArray(res.data?.예약신청) ? res.data.예약신청 : [];
-        const found = arr.find((it) => String(it.idx) === String(id));
-        if (!found) {
-          dispatch(
-            confirmModalAction({
-              heading: "해당 글이 없습니다.",
-              explain: "",
+    if (!userInfo || !userInfo.아이디) {
+      dispatch(confirmModalAction({
+        heading: "로그인 필요",
+        explain: "로그인 후 사전 예약을 수정할 수 있어요.",
+        isON: true,
+        isConfirm: false,
+        message1: "확인",
+      }));
+      return;
+    }
+
+    const fetchReservation = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get("/jazzmyomyo/preorder_table_select_one.php", {
+          params: { id }
+        });
+
+        if (res.data.success && res.data.item) {
+          const item = res.data.item;
+          
+          if (!isAdmin && userInfo.아이디 !== item.user_id) {
+            dispatch(confirmModalAction({
+              heading: "접근 불가",
+              explain: "본인의 예약만 수정할 수 있습니다.",
               isON: true,
               isConfirm: false,
-              message1: "",
-              message2: "",
-            })
-          );
-          setLoading(false);
-          return;
+              message1: "확인",
+            }));
+            return;
+          }
+
+          setForm({
+            id: item.id || "",
+            user_id: item.user_id || "",
+            writer_name: item.writer_name || "",
+            title: item.title || "",
+            reserve_date: item.reserve_date || "",
+            reserve_time: item.reserve_time || "",
+            people: item.people || 1,
+            wine: item.wine || "",
+            beverage: item.beverage || "",
+            food: item.food || "",
+            note: item.note || "",
+            status: item.status || "예약중",
+            reply: item.reply || "",
+          });
+          setError(null);
+        } else {
+          setError(res.data.error || "예약 정보를 불러올 수 없습니다.");
         }
-        setForm({
-          title: found.title ?? "",
-          writer: found.author ?? "",
-          reserveDate: found.reserveDate ?? "",
-          time: found.time ?? "",
-          people: found.people ?? "",
-          wine: found.wine ?? "",
-          food: found.food ?? "",
-          note: found.note ?? "",
-        });
-      })
-      .catch((e) => setErr(e?.message || "데이터 로드 실패"))
-      .finally(() => setLoading(false));
-  }, [id, dispatch]);
+      } catch (err) {
+        setError("에러 발생: " + err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchReservation();
+  }, [id, dispatch, navigate]);
 
   useEffect(() => {
-    if (modal.heading === "해당 글이 없습니다." && modal.isON === false) {
+    if (modal.heading === "로그인 필요" && modal.isON) {
       dispatch(confirmModalYesNoAction(false));
-      navigate("/Pre");
+      navigate("/lg");
     }
-  }, [modal.heading, modal.isON, dispatch, navigate]);
+    if (modal.heading === "접근 불가" && modal.isON) {
+      dispatch(confirmModalYesNoAction(false));
+      navigate("/pre");
+    }
+    if (modal.heading === "예약 정보가 수정되었습니다." && modal.isON) {
+      dispatch(confirmModalYesNoAction(false));
+      navigate("/preV/view/" + id);
+    }
+  }, [modal, navigate, dispatch]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(
-      confirmModalAction({
-        heading: "수정되었습니다.",
-        explain: "데모 모드: 실제 저장은 백엔드 연결 후 가능합니다.",
+    try {
+      const body = new FormData();
+      body.append("id", form.id);
+      body.append("title", form.title);
+      body.append("people", form.people);
+      body.append("wine", form.wine);
+      body.append("beverage", form.beverage);
+      body.append("food", form.food);
+      body.append("note", form.note);
+      body.append("status", form.status);
+      body.append("reserve_date", form.reserve_date);
+      body.append("reserve_time", form.reserve_time);
+      body.append("reply", form.reply);
+
+      const res = await axios.post("/jazzmyomyo/preorder_table_update.php", body);
+      if (res.data.success) {
+        dispatch(confirmModalAction({
+          heading: "예약 정보가 수정되었습니다.",
+          explain: "",
+          isON: true,
+          isConfirm: false,
+          message1: "확인",
+        }));
+      } else {
+        dispatch(confirmModalAction({
+          heading: "수정 실패",
+          explain: res.data.message || "수정 중 오류 발생",
+          isON: true,
+          isConfirm: false,
+          message1: "확인",
+        }));
+      }
+    } catch (err) {
+      dispatch(confirmModalAction({
+        heading: "수정 실패",
+        explain: "에러 발생: " + err.message,
         isON: true,
         isConfirm: false,
-        message1: "",
-        message2: "",
-      })
-    );
-  };
-
-  useEffect(() => {
-    if (modal.heading === "수정되었습니다." && modal.isON) {
-      dispatch(confirmModalYesNoAction(false));
-      navigate(`/PreV/view/${id}`);
+        message1: "확인",
+      }));
     }
-  }, [modal.heading, modal.isON, dispatch, navigate, id]);
+  };
 
   if (loading) {
     return (
-      <div id="sub_preWrite">
-        <div className="board-view" style={{ textAlign: "center", padding: 40 }}>불러오는 중…</div>
-      </div>
-    );
-  }
-
-  if (err) {
-    return (
-      <div id="sub_preWrite">
-        <div className="board-view" style={{ textAlign: "center", padding: 40, color: "#c00" }}>
-          데이터를 불러오지 못했어요. ({err})
+      <div id="sub_preEdit">
+        <div className="edit-container" style={{ textAlign: "center", padding: "40px" }}>
+          예약 정보를 불러오는 중...
         </div>
       </div>
     );
   }
 
+  if (error) {
+    return (
+      <div id="sub_preEdit">
+        <div className="edit-container" style={{ textAlign: "center", padding: "40px", color: "#c00" }}>
+          {error}
+          <button className="back-btn" onClick={() => navigate("/Pre")} style={{ marginTop: "10px" }}>
+            ← 목록으로 돌아가기
+          </button>
+        </div>
+      </div>
+    );
+  }
+  
+  const role = localStorage.getItem("role");
+  const isAdmin = role === "admin";
+
   return (
-    <div id="sub_preWrite">
-      <div className="board-view">
-        <h2 className="form-title">✏ 예약 정보 수정</h2>
-
-        <form className="write-form" onSubmit={handleSubmit}>
-          <label>제목</label>
-          <input name="title" value={form.title} onChange={handleChange} />
-
+    <div id="sub_preEdit">
+      <div className="edit-container">
+        <h2>예약 정보 수정</h2>
+        <form className="edit-form" onSubmit={handleSubmit}>
           <label>작성자</label>
-          <input name="writer" value={form.writer} onChange={handleChange} />
+          <input className="writer_name" type="text" name="writer_name" value={form.writer_name} readOnly />
+
+          <label>제목</label>
+          <input type="text" name="title" value={form.title} onChange={handleChange} required />
 
           <label>예약 날짜</label>
-          <input name="reserveDate" type="date" value={form.reserveDate} onChange={handleChange} />
+          <input type="date" name="reserve_date" value={form.reserve_date} readOnly />
 
           <label>예약 시간</label>
-          <input name="time" type="time" value={form.time} onChange={handleChange} />
+          <input type="time" name="reserve_time" value={form.reserve_time} onChange={handleChange} />
 
           <label>인원 수</label>
-          <input name="people" value={form.people} onChange={handleChange} />
+          <input type="number" name="people" value={form.people} onChange={handleChange} min="1" max="10" />
+          
+          {isAdmin && (
+            <>
+              <label>예약 상태</label>
+              <select name="status" value={form.status} onChange={handleChange}>
+                <option value="예약중">예약중</option>
+                <option value="예약완료">예약완료</option>
+                <option value="주문취소">주문취소</option>
+              </select>
+              
+              {/* <-- 4. 관리자 전용 댓글 입력란 추가 */}
+              <label>관리자 댓글</label>
+              <textarea
+                name="reply"
+                value={form.reply}
+                onChange={handleChange}
+                placeholder="관리자 댓글을 입력하세요."
+              ></textarea>
+            </>
+          )}
 
           <label>와인</label>
           <select name="wine" value={form.wine} onChange={handleChange}>
+            <option value="">선택 안 함</option>
             <optgroup label="레드 와인 (Red)">
               <option>Chablis</option>
               <option>Argento Malbec</option>
@@ -158,7 +249,8 @@ function Sub035PreEdit() {
           </select>
 
           <label>주류&음료</label>
-          <select>
+          <select name="beverage" value={form.beverage} onChange={handleChange}>
+            <option value="">선택 안 함</option>
             <optgroup label="맥주 (Beer)">
               <option>클라우드 생맥주 500ml</option>
               <option>스텔라 아르투아 330ml</option>
@@ -189,6 +281,7 @@ function Sub035PreEdit() {
 
           <label>안주</label>
           <select name="food" value={form.food} onChange={handleChange}>
+            <option value="">선택 안 함</option>
             <optgroup label="플래터 & 핑거푸드">
               <option>묘묘의 클래식 소파 플래터</option>
               <option>묘묘의 달빛 야식 플래터</option>
@@ -224,37 +317,11 @@ function Sub035PreEdit() {
             placeholder="알러지 등 참고사항"
           ></textarea>
 
-          <button type="submit" className="submit-btn">수정 완료</button>
+          <div className="btn-group">
+            <button type="submit" className="submit-btn">수정 완료</button>
+            <button type="button" className="back-btn" onClick={() => navigate(-1)}>← 돌아가기</button>
+          </div>
         </form>
-
-        <div className="notice">
-          <div className="notice-line">
-            <i className="bi bi-bell"></i>
-            <div className="text"><strong>결제 방식</strong> : 현장결제 (예약금 2만원, 계좌이체)</div>
-          </div>
-          <div className="notice-line">
-            <i className="bi bi-bell-fill"></i>
-            <div className="text"><strong>픽업 방식</strong> : 예약 시간에 맞춰 테이블로 서빙</div>
-          </div>
-          <div className="notice-line">
-            <i className="bi bi-bell"></i>
-            <div className="text"><strong>취소 안내</strong> : 공연 24시간 전까지 취소 가능 (이후에는 예약금 환불 불가)</div>
-          </div>
-          <div className="notice-line">
-            <i className="bi bi-bell-fill"></i>
-            <div className="text"><strong>문의사항</strong> : 기타 궁금한 점은 재즈묘묘로 연락주세요</div>
-          </div>
-          <div className="notice-line">
-            <i className="bi bi-bell"></i>
-            <div className="text"><strong>안내사항</strong> : 외부 음식 반입 금지</div>
-          </div>
-        </div>
-
-        <div className="view-actions">
-          <button className="back-btn" onClick={() => navigate(`/PreV/view/${id}`)}>
-            ← 돌아가기
-          </button>
-        </div>
       </div>
     </div>
   );

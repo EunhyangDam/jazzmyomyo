@@ -101,6 +101,11 @@ function Sub06Lg(props) {
             };
             dispatch(confirmModalAction(obj));
 
+             // [여기 추가!!] ---------------------------------
+            // 관리자 아이디면 role=admin, 아니면 user
+            localStorage.setItem("role", res.data.아이디 === "jazzmyomyo" ? "admin" : "user");
+            // -----------------------------------------------
+
             // 로그인 정보 리덕스 signIn.js
             // 자동로그인 정보 res.data {}
             dispatch(

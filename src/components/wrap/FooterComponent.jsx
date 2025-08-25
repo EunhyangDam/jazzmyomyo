@@ -3,7 +3,7 @@ import "./scss/FooterComponent.scss";
 import useCustomA from "./custom/useCustomA";
 
 
-export default function FooterComponent({ footerClass = "footer--default" }) {
+export default function FooterComponent({ footerClass = "footer--default", isAdmin }) {
   
 const{onClickA} = useCustomA();
 
@@ -123,10 +123,14 @@ const{onClickA} = useCustomA();
           <div className="footer-info">
             <div className="categories">
               <span className="CT">Categories</span><br />
-              <a href="!#" onClick={(e)=>onClickA(e, '/aboutUs' )}>About us</a> |<a href="!#" onClick={(e)=>onClickA(e, '/Shop' )}> Shop</a> |
+              <a href="!#" onClick={(e)=>onClickA(e, '/aboutUs' )}>About us</a> |<a href="!#" onClick={(e)=>onClickA(e, 'shop' )}> Shop</a> |
               <a href="!#" onClick={(e)=>onClickA(e, '/menu' )}> Menu</a> | <span className="mobile-br"></span>
-              <a href="!#" onClick={(e)=>onClickA(e, '/monthly' )}> Schedule</a> |<a href="!#" onClick={(e)=>onClickA(e, '/Ntc' )}> Community</a>
-              <a href="!#" onClick={(e)=>onClickA(e, '/mm' )}> | 회원관리 관리자페이지</a>
+              <a href="!#" onClick={(e)=>onClickA(e, '/monthly' )}> Schedule</a> |<a href="!#" onClick={(e)=>onClickA(e, '/ntc' )}> Community</a>
+              {isAdmin && (
+  <>
+    |<a href="!#" onClick={(e) => onClickA(e, "/mm")}> 회원관리 관리자페이지</a>
+  </>
+)}
             </div>
 
             <div className="address">

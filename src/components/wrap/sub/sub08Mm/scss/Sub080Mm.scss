@@ -92,7 +92,7 @@
       .member-head {
         display: grid;
         grid-template-columns:
-          40px 70px 110px 110px 70px 120px 140px 200px 240px 90px 110px 90px 120px;
+        40px 70px 100px 110px 70px 110px 140px 220px 350px 90px 110px 90px 150px;
         gap: 0;
         align-items: center;
         background: #f6f6f6;
@@ -103,6 +103,7 @@
         letter-spacing: .02em;
 
         .col {
+          
           display: flex;
           align-items: center;
           justify-content: center;
@@ -137,7 +138,7 @@
         .member-row {
           display: grid;
           grid-template-columns:
-            40px 70px 110px 110px 70px 120px 140px 200px 240px 90px 110px 90px 120px;
+          40px 70px 100px 110px 70px 110px 140px 250px 320px 90px 110px 90px 150px;
           align-items: center;
           background: #fff;
           border-left: 1px solid #e5d6cc;
@@ -163,6 +164,17 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+
+            &.col-email,
+            &.col-addr,
+            &.col-joinedAt {
+              display: block;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              max-width: 320px;
+              }
+            
 
             &.col-check {
               display: flex;
@@ -239,13 +251,13 @@
 
         .member-head {
           grid-template-columns:
-            36px 64px 100px 100px 64px 110px 130px 180px 220px 84px 100px 84px 110px;
+          40px 70px 100px 110px 70px 110px 140px 220px 350px 90px 110px 90px 150px;
         }
 
         .member-list {
           .member-row {
             grid-template-columns:
-              36px 64px 100px 100px 64px 110px 130px 180px 220px 84px 100px 84px 110px;
+            40px 70px 100px 110px 70px 110px 140px 250px 320px 90px 110px 90px 150px;
           }
         }
       }
@@ -304,6 +316,17 @@
               white-space: normal;
               border: 0;
 
+              &.col-email,
+              &.col-addr,
+              &.col-joinedAt {
+                display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          max-width: none;
+                }
+
               &::before {
                 content: attr(data-label);
                 font-size: 12.5px;
@@ -323,6 +346,7 @@
               }
             }
 
+            .col-email,
             .col-name,
             .col-userId { font-size: 14px; }
 
@@ -365,8 +389,6 @@
 
         .member-list {
           .member-row {
-            .col-addr,
-            .col-email { display: none; }
 
             .col { padding: 7px 0; }
           }
@@ -426,26 +448,48 @@
     }
   }
 
-  @media all and (max-width: 380px) {
+  @media all and (max-width:420px) {
     .admin-wrap {
       .main {
         padding: 16px;
-
-        .page-header h1 { font-size: 32px; }
-
+  
+        .page-header h1 {
+          font-size: 32px;
+        }
+  
         .member-list {
           .member-row {
             .col {
-              &::before { font-size: 11.5px; }
               font-size: 12px;
+              padding: 6px 4px;
+              text-align: center;
+  
+              // ✅ 줄바꿈 강제
+              word-break: break-word;
+              overflow-wrap: break-word;
+              white-space: normal;
+              max-width: 100%;
+  
+              &::before {
+                font-size: 11.5px;
+              }
+  
+              // ✅ 주소에만 추가로 적용
+              &.col-addr {
+                word-break: break-word;
+                overflow-wrap: break-word;
+                white-space: normal;
+                max-width: 100%;
+              }
             }
           }
         }
-
+  
         .pagination {
           gap: 4px;
-
-          button, .page {
+  
+          button,
+          .page {
             min-width: 28px;
             padding: 4px 6px;
             font-size: 11.5px;
@@ -455,4 +499,6 @@
       }
     }
   }
+  
+  
 }

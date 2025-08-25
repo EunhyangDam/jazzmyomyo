@@ -1,7 +1,7 @@
 @use "../../../../scss/variables" as *;
 
 
-#sub_pre {
+#sub_pre_admin {
   margin-top: 100px;
   width: 100%;
   min-height: 100vh;
@@ -41,7 +41,7 @@
 
       h1 {
         text-align: center;
-        font-size: 60px;
+        font-size: 70px;
         margin-bottom: 50px;
         color: $primary-color;
         font-family: $font2 !important;

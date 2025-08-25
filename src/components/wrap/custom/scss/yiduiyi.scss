@@ -1,0 +1,297 @@
+@use "../../../scss/variables" as *;
+
+.cs-inquiry {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1200;
+
+  // 폰트 공통 지정
+  font-family: $font1;
+
+  .modal-hitbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1100; // 컨테이너/버튼보다 낮게
+    pointer-events: auto;
+  }
+
+  .modal-container {
+    position: relative;
+    z-index: 1201;
+    background: $sub-color1;
+    width: 420px;
+    height: 650px;
+    border-radius: 26px;
+    padding: 24px;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 1.25rem;
+    font-family: $font2;
+    font-weight: 800;
+    margin: 30px 0 18px;
+  }
+
+  .inquiry-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex: 1;
+    margin-top: 13px;
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: $font2;
+      color: $sub-color4;
+    }
+
+    input,
+    textarea {
+      font-family: $font1;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: 0;
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(0, 0, 0, 0.12);
+      color: $white;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+      &::placeholder {
+        font-family: $font1;
+        font-size: 1rem;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.55);
+      }
+
+      &:focus {
+        border-color: $sub-color3;
+        box-shadow: 0 0 0 3px rgba(234, 211, 193, 0.22);
+        background: rgba(0, 0, 0, 0.18);
+      }
+    }
+
+    textarea {
+      resize: none;
+      line-height: 1.5;
+    }
+
+    .submit-btn {
+      margin-top: auto;
+      width: 90%;
+      align-self: center;
+      border: 0;
+      border-radius: 28px;
+      padding: 15px 0;
+      font-size: 1.1rem;
+      font-family: $font2;
+      font-weight: 400;
+      color: $white;
+      background: linear-gradient(135deg, #81544b, #6b4039);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+
+      &:hover {
+        filter: brightness(1.05);
+        transform: scale(1.02);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+
+  /* 닫기 버튼 */
+  .floating-close {
+    position: absolute;
+    right: 16px;
+    bottom: -54px;
+    width: 45px;
+    height: 45px;
+    border: 0;
+    border-radius: 10px;
+    background: $sub-color2;
+    color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1202;
+
+    /* ✅ 그림자 제거 */
+    box-shadow: none !important;
+    filter: none !important;
+    outline: none;
+
+    transition: transform .15s ease;
+
+    i {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+    &:hover {
+      filter: brightness(1.08);
+    }
+    &:active {
+      transform: translateY(1px) scale(0.98);
+    }
+  }
+}
+
+/* 미디어쿼리 반응형 */
+@media (max-width: 1200px) {
+  .cs-inquiry {
+    .modal-container {
+      width: 380px;
+      height: 600px;
+      padding: 20px;
+    }
+
+    .title {
+      font-size: 1.125rem;
+      margin: 24px 0 16px;
+    }
+
+    .inquiry-form {
+      gap: 16px;
+
+      .label {
+        font-size: 0.9rem;
+      }
+
+      input,
+      textarea {
+        font-size: 0.95rem;
+        padding: 11px 13px;
+
+        &::placeholder {
+          font-size: 0.95rem;
+        }
+      }
+
+      .submit-btn {
+        font-size: 1rem;
+        padding: 13px 0;
+      }
+    }
+
+    .floating-close {
+      width: 42px;
+      height: 42px;
+      bottom: -48px;
+      i { font-size: 1.4rem; }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .cs-inquiry {
+    .modal-container {
+      width: 320px;
+      height: 540px;
+      padding: 18px;
+    }
+
+    .title {
+      font-size: 1.05rem;
+      margin: 20px 0 14px;
+    }
+
+    .inquiry-form {
+      gap: 14px;
+
+      .label {
+        font-size: 0.85rem;
+      }
+
+      input,
+      textarea {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+
+        &::placeholder {
+          font-size: 0.9rem;
+        }
+      }
+
+      .submit-btn {
+        font-size: 0.95rem;
+        padding: 12px 0;
+      }
+    }
+
+    .floating-close {
+      width: 38px;
+      height: 38px;
+      bottom: -44px;
+      i { font-size: 1.3rem; }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-inquiry {
+    .modal-container {
+      width: 90%;
+      height: 500px;
+      padding: 16px;
+    }
+
+    .title {
+      font-size: 1rem;
+      margin: 16px 0 12px;
+    }
+
+    .inquiry-form {
+      gap: 12px;
+
+      .label {
+        font-size: 0.8rem;
+      }
+
+      input,
+      textarea {
+        font-size: 0.85rem;
+        padding: 9px 11px;
+
+        &::placeholder {
+          font-size: 0.85rem;
+        }
+      }
+
+      .submit-btn {
+        font-size: 0.9rem;
+        padding: 10px 0;
+      }
+    }
+
+    .floating-close {
+      width: 34px;
+      height: 34px;
+      bottom: -40px;
+      i { font-size: 1.2rem; }
+    }
+  }
+}
