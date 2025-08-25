@@ -74,7 +74,11 @@ export default function Sub10Wishilist(props) {
           <ul>
             <li className="col col1">
               <h2 className="name">
-                {userID ? <span>{userID.이름} 님</span> : <span>비회원</span>}
+                {userID !== "" ? (
+                  <span>{userID.이름} 님</span>
+                ) : (
+                  <span>비회원</span>
+                )}
               </h2>
               <p className="email">myomyocat@gmail.com</p>
               <p>일반회원</p>
@@ -103,7 +107,8 @@ export default function Sub10Wishilist(props) {
                 <li
                   key={el.id}
                   data-key={el.id}
-                  className={el.품절 && "sold-out"}>
+                  className={el.품절 && "sold-out"}
+                >
                   <div className="img-container">
                     <a href="!#" onClick={(e) => clickProduct(e, el)}>
                       <img src={el.이미지[0]} alt={el.설명} />
@@ -116,7 +121,8 @@ export default function Sub10Wishilist(props) {
                     <a
                       className="add-to-cart"
                       href="!#"
-                      onClick={(e) => clickCart(e, el)}>
+                      onClick={(e) => clickCart(e, el)}
+                    >
                       <p>
                         <i className="fa-solid fa-cart-arrow-down"></i> Add to
                         cart

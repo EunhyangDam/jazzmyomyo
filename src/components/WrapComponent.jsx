@@ -77,7 +77,7 @@ import Sub10Wishlist from "./wrap/sub/sub10Wishlist/Sub10Wishlist";
 import { useDispatch, useSelector } from "react-redux";
 import { wishAction } from "../store/wishlist";
 import { headerAction } from "../store/header";
-import { cartAction } from "../store/cart";
+import { cartAction, cartChkAction } from "../store/cart";
 import ConfirmModalComponent from "./wrap/ConfirmModalComponent";
 import Sub06SignUp from "./wrap/sub/sub06Lg/Sub06SignUp";
 
@@ -118,6 +118,7 @@ export default function WrapComponent(props) {
     const localStorage_arr = [
       { key: "위시리스트", action: wishAction },
       { key: "장바구니", action: cartAction },
+      { key: "cart_checked_product", action: cartChkAction },
       { key: "jazzmyomyo_sign_in", action: signInAction },
     ];
     try {
