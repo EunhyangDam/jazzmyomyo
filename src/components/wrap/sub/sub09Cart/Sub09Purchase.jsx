@@ -11,10 +11,6 @@ export default function Sub09Purchase(props) {
   useEffect(() => {
     setState({ product: cartAsset });
   }, [cartAsset]);
-  const changeAll = (e) => {};
-  const changeChk = (e) => {};
-  const clickMinus = (e) => {};
-  const clickPlus = (e) => {};
   return (
     <main id="sub09Purchase">
       <div className="inner">
@@ -23,15 +19,26 @@ export default function Sub09Purchase(props) {
           <div className="head">
             <ul>
               <li className="text">
-                <span>01 장바구니</span>
+                <span>
+                  01
+                  <br className="first" /> 장바구니
+                </span>
                 <img src="./img/sub09cart/1.png" alt="" />
               </li>
               <li className="text">
-                <span>02 주문서 작성/결제</span>
+                <span>
+                  02
+                  <br className="first" /> 주문서 작성
+                  <br className="second" />
+                  결제
+                </span>
                 <img src="./img/sub09cart/2.png" alt="" />
               </li>
               <li className="text">
-                <span>03 주문완료</span>
+                <span>
+                  03
+                  <br className="first" /> 주문완료
+                </span>
                 <img src="./img/sub09cart/3.png" alt="" />
               </li>
             </ul>
@@ -73,7 +80,11 @@ export default function Sub09Purchase(props) {
                         <div className="col col2">
                           <div className="group">
                             <input type="text" name="dAdr1" id="dAdr1" />
-                            <button>우편번호 검색</button>
+                            <button>
+                              우편번호
+                              <br />
+                              검색
+                            </button>
                           </div>
                           <input type="text" name="dAdr2" id="dAdr2" />
                           <input type="text" name="dAdr3" id="dAdr3" />

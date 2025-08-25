@@ -3,7 +3,9 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./scss/HeaderComponent.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutAction } from "../../store/signIn";
+import useCustomA from "./custom/useCustomA";
 export default function HeaderComponent(props) {
+  const { onClickA } = useCustomA();
   const navigation = useNavigate();
   const dispatch = useDispatch();
   const userAsset = useSelector((state) => state.signIn);
@@ -141,6 +143,11 @@ export default function HeaderComponent(props) {
     e.preventDefault();
     dispatch(logOutAction(null));
   };
+  const clickIcon = (e, link) => {
+    e.preventDefault();
+    setToggle((prev) => !prev);
+    navigation(link);
+  };
   return (
     <>
       <header
@@ -149,43 +156,65 @@ export default function HeaderComponent(props) {
       >
         <div className="container">
           <h1>
-            <Link to="/mainComponent">
+            <a href="!#" onClick={(e) => onClickA(e, "/mainComponent")}>
               <img src="./img/logo.png" alt="" />
-            </Link>
+            </a>
           </h1>
           <nav id="nav">
             <ul>
               {header.header.map((el, i) => (
                 <li key={el.id}>
-                  <Link to={el.link}>{el.main}</Link>
+                  <a href="!#" onClick={(e) => onClickA(e, el.link)}>
+                    {el.main}
+                  </a>
                 </li>
               ))}
             </ul>
             <aside id="aside" className={toggle ? "toggle" : ""}>
               <span className="icon">{userAsset.아이디}님!</span>
-              <Link to="/cart" className="icon">
+              <a
+                href="!#"
+                className="icon"
+                onClick={(e) => onClickA(e, "/cart")}
+              >
                 <i className="bi bi-cart2"></i>
-              </Link>
+              </a>
               {userAsset.아이디 ? (
-                <Link to="/mp" className="icon">
+                <a
+                  href="!#"
+                  className="icon"
+                  onClick={(e) => clickIcon(e, "/mp")}
+                >
                   <i className="fa-regular fa-user"></i>
-                </Link>
+                </a>
               ) : (
-                <Link to="/lg" className="icon">
+                <a
+                  href="!#"
+                  className="icon"
+                  onClick={(e) => clickIcon(e, "/lg")}
+                >
                   <i className="fa-regular fa-user"></i>
-                </Link>
+                </a>
               )}
-              <Link to="/wishlist" className="icon">
+              <a
+                href="!#"
+                className="icon"
+                onClick={(e) => clickIcon(e, "/wishlist")}
+              >
                 <i className="fa-regular fa-heart"></i>
-              </Link>
+              </a>
               {userAsset.아이디 ? (
                 <a href="!#" className="icon log-in-out" onClick={logOut}>
                   로그아웃
                 </a>
               ) : (
-                <Link to="/lg" className="icon log-in-out">
+                <a
+                  href="!#"
+                  onClick={(e) => onClickA(e, "/lg")}
+                  className="icon log-in-out"
+                >
                   로그인
-                </Link>
+                </a>
               )}
               <a href="!#" onClick={clickToggle}>
                 <span></span>
@@ -203,12 +232,13 @@ export default function HeaderComponent(props) {
                     className="nav-li"
                     ref={(node) => setLi(node, i)}
                   >
-                    <Link
+                    <a
+                      href="!#"
                       onClick={(e) => clickSubToggle(e, el.link)}
                       onMouseEnter={mouseEnterLi}
                     >
                       {el.main}
-                    </Link>
+                    </a>
                     <button
                       className="slideDown"
                       onClick={(e) => clickSubButton(e, i)}
@@ -220,12 +250,12 @@ export default function HeaderComponent(props) {
                         <ul>
                           {el.sub.map((el2) => (
                             <li key={el2.link}>
-                              <Link
-                                to={el2.link}
+                              <a
+                                href="!#"
                                 onClick={(e) => clickSubLi(e, el2.link)}
                               >
                                 {el2.name}
-                              </Link>
+                              </a>
                             </li>
                           ))}
                         </ul>
@@ -238,29 +268,37 @@ export default function HeaderComponent(props) {
                 {userAsset.이름 && (
                   <span className="icon">{userAsset.이름} 님!</span>
                 )}
-                <Link to="/cart" className="icon">
+                <a
+                  href="!#"
+                  className="icon"
+                  onClick={(e) => onClickA(e, "/cart")}
+                >
                   <i className="bi bi-cart2"></i>
-                </Link>
+                </a>
                 {userAsset.아이디 ? (
-                  <Link to="/mp" className="icon">
+                  <a className="icon" onClick={(e) => clickIcon(e, "/mp")}>
                     <i className="fa-regular fa-user"></i>
-                  </Link>
+                  </a>
                 ) : (
-                  <Link to="/lg" className="icon">
+                  <a className="icon" onClick={(e) => clickIcon(e, "/lg")}>
                     <i className="fa-regular fa-user"></i>
-                  </Link>
+                  </a>
                 )}
-                <Link to="/wishlist" className="icon">
+                <a className="icon" onClick={(e) => clickIcon(e, "/wishlist")}>
                   <i className="fa-regular fa-heart"></i>
-                </Link>
+                </a>
                 {userAsset.아이디 ? (
                   <a href="!#" className="icon log-in-out" onClick={logOut}>
                     로그아웃
                   </a>
                 ) : (
-                  <Link to="/lg" className="icon log-in-out">
+                  <a
+                    href="!#"
+                    className="icon log-in-out"
+                    onClick={(e) => onClickA(e, "/lg")}
+                  >
                     로그인
-                  </Link>
+                  </a>
                 )}
                 <a href="!#" className="toggle" onClick={clickToggle}>
                   <span></span>
