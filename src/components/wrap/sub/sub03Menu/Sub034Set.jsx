@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect, useRef } from 'react';
 import './scss/Sub034Set.scss';
 import useCustomA from "../../custom/useCustomA";
 
@@ -57,10 +58,9 @@ const setData = [
       '• 재즈 나초 (₩8,000)',
       '• 트러플 초콜릿&견과 (₩8,000)',
     ],
-    wine:
-      '[스파클링] Cava Estrella (₩40,000) – 산미+은은한 단맛으로 과일, 견과, 나초 모두 커버',
-    originPrice: '₦76,000'.replace('₦','₩'), // 표시 그대로 유지용
-    salePrice: '₦68,000'.replace('₦','₩'),
+    wine: '[스파클링] Cava Estrella (₩40,000) – 산미+은은한 단맛으로 과일, 견과, 나초 모두 커버',
+    originPrice: '₩76,000',
+    salePrice: '₩68,000',
     image: './img/sub04Set/set3.png',
   },
 ];
@@ -69,6 +69,22 @@ export default function Sub034Set() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [current, setCurrent] = useState(0);
   const { onClickA } = useCustomA();
+  const wrapRef = useRef(null);
+
+  useEffect(() => {
+    if (!wrapRef.current) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('show');
+        });
+      },
+      { threshold: 0.2 }
+    );
+    const targets = wrapRef.current.querySelectorAll('.fade-up');
+    targets.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
 
   const openModal = (index) => {
     setCurrent(index);
@@ -77,12 +93,12 @@ export default function Sub034Set() {
 
   const handlePrev = (e) => {
     e.stopPropagation();
-    setCurrent((current - 1 + setData.length) % setData.length);
+    setCurrent((prev) => (prev - 1 + setData.length) % setData.length);
   };
 
   const handleNext = (e) => {
     e.stopPropagation();
-    setCurrent((current + 1) % setData.length);
+    setCurrent((prev) => (prev + 1) % setData.length);
   };
 
   const prev = setData[(current - 1 + setData.length) % setData.length];
@@ -90,72 +106,82 @@ export default function Sub034Set() {
   const next = setData[(current + 1) % setData.length];
 
   return (
-    <div id="sub_set">
-      <section className="set-header">
-        <h2>MYOHAN SET</h2>
-        <p>묘한세트 : 플래터 + 안주 + 와인을 조합한 시그니처 세트</p>
-        <p>
-          2~3인이 핑거푸드만으로도 충분히 즐길 수 있도록, 베스트 조합의
-          플래터·안주·와인을 한 번에 묶은 세트 메뉴입니다.
-        </p>
-        <p className="highlight">※ 표기 가격은 10% 할인된 세트가입니다.</p>
-      </section>
+    <div id="sub_set" ref={wrapRef}>
+      <div className="set-container">
 
-      <div className="set-list">
-        {setData.map((set, idx) => (
-          <div
-            className={`set-item ${idx % 2 === 1 ? 'row-reverse' : ''}`}
-            key={idx}
-          >
-            <div 
-              className="set-img" 
-              onClick={() => openModal(idx)}
-              style={{ cursor: 'url(/img/main_menu/cursor-cat.png), auto' }}
+        <nav className="breadcrumbs" aria-label="breadcrumb">
+          <a href="/" className="home" onClick={(e) => onClickA(e, "/")}>
+            <i className="bi bi-house-fill" aria-hidden="true" />
+            <span className="sr">홈</span>
+          </a>
+          <span className="sep"><i className="bi bi-chevron-right" /></span>
+          <a href="/" onClick={(e) => onClickA(e, "/menu")}>MENU</a>
+          <span className="sep"><i className="bi bi-chevron-right" /></span>
+          <strong>묘한세트</strong>
+        </nav>
+
+        <section className="set-header fade-up" style={{ transitionDelay: '0.04s' }}>
+          <h2>MYOHAN SET</h2>
+          <p>묘한세트 : 플래터 + 안주 + 와인을 조합한 시그니처 세트</p>
+          <p>
+            2~3인이 핑거푸드만으로도 충분히 즐길 수 있도록, 베스트 조합의
+            플래터·안주·와인을 한 번에 묶은 세트 메뉴입니다.
+          </p>
+          <p className="highlight">※ 표기 가격은 10% 할인된 세트가입니다.</p>
+        </section>
+
+        <div className="set-list">
+          {setData.map((set, idx) => (
+            <div
+              className={`set-item ${idx % 2 === 1 ? 'row-reverse' : ''} fade-up`}
+              key={set.id}
+              style={{ transitionDelay: `${0.1 + idx * 0.08}s` }}
             >
-              <img src={set.image} alt={set.title} />
-            </div>
-            <div className="set-text">
-              <h3>{set.title}</h3>
-              <p className="tagline">{set.tagline}</p>
-              <ul>
-                {set.items.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
-              <p className="wine">{set.wine}</p>
-              <p className="price">
-                <span className="origin">{set.originPrice}</span> →{' '}
-                <span className="sale">{set.salePrice}</span>
-              </p>
-
-              <button
-                type="button"
-                className="reserve-btn"
-                onClick={(e) => onClickA(e, "/pre")}
-                aria-label="사전예약 바로가기"
+              <div
+                className="set-img"
+                onClick={() => openModal(idx)}
+                style={{ cursor: 'url(/img/main_menu/cursor-cat.png), auto' }}
               >
-                사전예약 바로가기
-                <i className="bi bi-arrow-right-short" aria-hidden="true" />
-              </button>
+                <img src={set.image} alt={set.title} />
+              </div>
+              <div className="set-text">
+                <h3>{set.title}</h3>
+                <p className="tagline">{set.tagline}</p>
+                <ul>
+                  {set.items.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+                <p className="wine">{set.wine}</p>
+                <p className="price">
+                  <span className="origin">{set.originPrice}</span> →{' '}
+                  <span className="sale">{set.salePrice}</span>
+                </p>
+                <button
+                  type="button"
+                  className="reserve-btn"
+                  onClick={(e) => onClickA(e, "/pre")}
+                  aria-label="사전예약 바로가기"
+                >
+                  사전예약 바로가기
+                  <i className="bi bi-arrow-right-short" aria-hidden="true" />
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {isModalOpen && (
         <div className="modal" onClick={() => setIsModalOpen(false)}>
-
           <div className="modal-thumb left" onClick={handlePrev}>
             <img src={prev.image} alt="prev" />
           </div>
-
-
           <div className="modal-arrow left" onClick={handlePrev}>
             <i className="bi bi-chevron-left"></i>
           </div>
 
-
-          <div className="modal-inner" onClick={(e)=>e.stopPropagation()}>
+          <div className="modal-inner" onClick={(e) => e.stopPropagation()}>
             <div className="modal-images">
               {main.images.map((img, i) => (
                 <div className="img-item" key={i}>
@@ -164,26 +190,22 @@ export default function Sub034Set() {
                 </div>
               ))}
             </div>
-
-
             <div className="modal-desc">
               {main.title} <br />
               {main.tagline}
             </div>
-
-
             <div className="modal-wine">{main.wine}</div>
-
             <div className="modal-price">
               <span className="origin">{main.originPrice}</span>
               <span className="sale">{main.salePrice}</span>
             </div>
-
-
             <button
               type="button"
               className="reserve-btn"
-              onClick={(e) => { e.stopPropagation(); onClickA(e, "/pre"); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                onClickA(e, "/pre");
+              }}
               aria-label="사전예약 바로가기"
             >
               사전예약 바로가기
@@ -194,7 +216,6 @@ export default function Sub034Set() {
           <div className="modal-arrow right" onClick={handleNext}>
             <i className="bi bi-chevron-right"></i>
           </div>
-
           <div className="modal-thumb right" onClick={handleNext}>
             <img src={next.image} alt="next" />
           </div>

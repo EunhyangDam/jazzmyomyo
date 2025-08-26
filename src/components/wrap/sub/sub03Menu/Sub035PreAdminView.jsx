@@ -150,7 +150,7 @@ function Sub035PreAdminView() {
 
         <div className="view-actions">
           <button className="back-btn" onClick={() => navigate("/PreAdmin")}>← 목록으로</button>
-          <button className="edit-btn" onClick={() => navigate(`/PreAdminE/edit/${id}`)}>✏ 수정하기</button>
+          <button className="edit-btn" onClick={() => navigate(`/PreAdminE/edit/${id}`)}> 수정하기</button>
           <button className="delete-btn" onClick={onClickDelete}>삭제하기</button>
         </div>
       </div>

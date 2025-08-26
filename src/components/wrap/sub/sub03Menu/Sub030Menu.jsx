@@ -1,35 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./scss/Sub030Menu.scss";
 import useCustomA from "../../custom/useCustomA";
 
 function Sub030Menu() {
+  const { onClickA } = useCustomA();
+  const [isVisible, setIsVisible] = useState(false);
 
-  const {onClickA} = useCustomA();
   const wineData = [
     {
       group: "레드 와인 (Red)",
       items: [
         { name: "Chablis", price: "₩35,000" },
         { name: "Argento Malbec", price: "₩42,000" },
-        { name: "Shiraz Whisper", price: "₩46,000" },
-      ],
+        { name: "Shiraz Whisper", price: "₩46,000" }
+      ]
     },
     {
       group: "화이트 와인 (White)",
       items: [
         { name: "Riesling Touch", price: "₩39,000" },
         { name: "Brut Rosé", price: "₩45,000" },
-        { name: "Petit Chablis", price: "₩41,000" },
-      ],
+        { name: "Petit Chablis", price: "₩41,000" }
+      ]
     },
     {
       group: "스파클링 와인 (Sparkling)",
       items: [
         { name: "Moscato Dream", price: "₩48,000" },
         { name: "Crémant Rosé", price: "₩52,000" },
-        { name: "Cava Estrella", price: "₩40,000" },
-      ],
-    },
+        { name: "Cava Estrella", price: "₩40,000" }
+      ]
+    }
   ];
 
   const drinkData = [
@@ -39,8 +40,8 @@ function Sub030Menu() {
         { name: "클라우드 생맥주 500ml", price: "₩8,000" },
         { name: "스텔라 아르투아 330ml", price: "₩9,000" },
         { name: "허니문배 Draft 330ml", price: "₩8,500" },
-        { name: "흑맥주", price: "₩9,000" },
-      ],
+        { name: "흑맥주", price: "₩9,000" }
+      ]
     },
     {
       group: "칵테일 (Cocktail)",
@@ -48,8 +49,8 @@ function Sub030Menu() {
         { name: "깔루아밀크", price: "₩10,000" },
         { name: "모스카토 선셋", price: "₩11,000" },
         { name: "클래식 네그로니", price: "₩12,000" },
-        { name: "마티니 드라이", price: "₩12,000" },
-      ],
+        { name: "마티니 드라이", price: "₩12,000" }
+      ]
     },
     {
       group: "위스키 (Whisky)",
@@ -57,8 +58,8 @@ function Sub030Menu() {
         { name: "글렌리벳 12년", price: "₩14,000" },
         { name: "제임슨", price: "₩13,000" },
         { name: "잭다니엘", price: "₩13,000" },
-        { name: "시바스대갈", price: "₩14,000" },
-      ],
+        { name: "시바스대갈", price: "₩14,000" }
+      ]
     },
     {
       group: "무알콜 / 음료 (Non-Alcoholic)",
@@ -66,9 +67,9 @@ function Sub030Menu() {
         { name: "샤인머스캣 에이드", price: "₩7,000" },
         { name: "자몽에이드", price: "₩7,000" },
         { name: "탄산음료", price: "₩3,000" },
-        { name: "에비앙", price: "₩4,000" },
-      ],
-    },
+        { name: "에비앙", price: "₩4,000" }
+      ]
+    }
   ];
 
   const platterItems = [
@@ -85,17 +86,22 @@ function Sub030Menu() {
     { name: "재즈 나초", price: "₩8,000" },
     { name: "하몽 살라미 샐러드", price: "₩10,000" },
     { name: "피자 1조각 (40cm)", price: "₩8,000" },
-    { name: "피자 한판", price: "₩18,000" },
+    { name: "피자 한판", price: "₩18,000" }
   ];
 
   const setItems = [
     { name: "클래식 나잇 듀오라묘", price: "₩64,000" },
     { name: "문라이트 로맨틱라묘", price: "₩70,000" },
-    { name: "샤르르 달콤하묘", price: "₩68,000" },
+    { name: "샤르르 달콤하묘", price: "₩68,000" }
   ];
 
+  useEffect(() => {
+    const t = setTimeout(() => setIsVisible(true), 150);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
-    <div id="sub_menu">
+    <div id="sub_menu" className={isVisible ? "show" : ""}>
       <div className="clipboard">
         <div className="clip"></div>
         <div className="paper">
@@ -103,27 +109,17 @@ function Sub030Menu() {
           <p className="subtitle">Jazz와 어울리는 한 잔, 그리고 한 입</p>
 
           <nav className="menu-nav">
-            <a href="/wine">
-              <span>WINE</span>
-            </a>
-            <a href="/drinks">
-              <span>DRINKS</span>
-            </a>
-            <a href="/food">
-              <span>FOOD</span>
-            </a>
-            <a href="/set">
-              <span>MYOHAN SET</span>
-            </a>
-            <a href="/pre">
-              <span>PRE-OREDER</span>
-            </a>
+            <a href="/" onClick={(e) => onClickA(e, "/wine")}><span>WINE</span></a>
+            <a href="/" onClick={(e) => onClickA(e, "/drinks")}><span>DRINKS</span></a>
+            <a href="/" onClick={(e) => onClickA(e, "/food")}><span>FOOD</span></a>
+            <a href="/" onClick={(e) => onClickA(e, "/set")}><span>MYOHAN SET</span></a>
+            <a href="/" onClick={(e) => onClickA(e, "/pre")}><span>PRE-ORDER</span></a>
           </nav>
 
           <div className="paper-sections">
             <div className="section" id="wine">
               <h2>
-                <a href="!#" onClick={(e)=>onClickA(e, '/wine')}>와인</a>
+                <a href="!#" onClick={(e) => onClickA(e, "/wine")}>와인</a>
               </h2>
               {wineData.map((group, idx) => (
                 <div className="subgroup" key={idx}>
@@ -142,7 +138,7 @@ function Sub030Menu() {
 
             <div className="section" id="drink">
               <h2>
-                <a href="!#" onClick={(e)=>onClickA(e, '/drinks')}>주류 & 음료</a>
+                <a href="/" onClick={(e) => onClickA(e, "/drinks")}>주류 & 음료</a>
               </h2>
               {drinkData.map((group, idx) => (
                 <div className="subgroup" key={idx}>
@@ -161,7 +157,7 @@ function Sub030Menu() {
 
             <div className="section" id="platter">
               <h2>
-                <a href="!#" onClick={(e)=>onClickA(e, '/food')}>플래터 & 핑거푸드</a>
+                <a href="/" onClick={(e) => onClickA(e, "/food")}>플래터 & 핑거푸드</a>
               </h2>
               <ul className="menu-ul">
                 {platterItems.map((item, idx) => (
@@ -175,7 +171,7 @@ function Sub030Menu() {
 
             <div className="section" id="set">
               <h2>
-                <a href="!#" onClick={(e)=>onClickA(e, '/set')}>묘한세트</a>
+                <a href="/" onClick={(e) => onClickA(e, "/set")}>묘한세트</a>
               </h2>
               <ul className="menu-ul">
                 {setItems.map((item, idx) => (
@@ -189,7 +185,7 @@ function Sub030Menu() {
 
             <div className="section" id="preorder">
               <h2>
-                <a href="!#" onClick={(e)=>onClickA(e, '/pre')}>사전주문</a>
+                <a href="!#" onClick={(e) => onClickA(e, "/pre")}>사전주문</a>
               </h2>
               <p>
                 공연 전 미리 음식을 준비해서

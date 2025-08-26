@@ -1,8 +1,9 @@
-import React, { forwardRef, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef } from "react";
 import "./scss/Section10Component.scss";
+import useCustomA from "../custom/useCustomA";
 
-const Section10Component = forwardRef((props, ref) => {
+export default function Section10Component() {
+  const { onClickA } = useCustomA();
   const slides = [
     {
       no: "No.1",
@@ -16,7 +17,7 @@ const Section10Component = forwardRef((props, ref) => {
       no: "No.2",
       title: "문라이트 로맨틱라묘",
       wine: "Brut Rosé (화이트)",
-      items: ["묘묘의 달빛 야식 플래터", "프로슈토 멜론 스틱", "바나나 푸딩"],
+      items: ["묘묘의 달빛 야식 플래터", "프로슈토 멜론 스틱", "바나나 푸딩"],
       img: "./img/main_menu/set02.png",
       price: "73,000",
     },
@@ -69,16 +70,14 @@ const Section10Component = forwardRef((props, ref) => {
   };
 
   return (
-    <section id="section10" ref={ref}>
+    <section id="section10">
       <div className="horizontal-wrapper">
         <div className="horizontal-title">
           <h2>이달의 묘묘's Pick!</h2>
           <p>
             재즈엔 뭘 곁들여야 할지 잘 모르시겠다구요?
-            <br />
-            그럴 땐 고민 말고 묘묘를 따라오세요!
-            <br />
-            분위기까지 챙긴 조합을 추천해드릴게요.
+            <br />그럴 땐 고민 말고 묘묘를 따라오세요!
+            <br />분위기까지 챙긴 조합을 추천해드릴게요.
           </p>
         </div>
 
@@ -94,28 +93,21 @@ const Section10Component = forwardRef((props, ref) => {
               <img
                 src={slide.img}
                 alt={slide.title}
-                style={{
-                  cursor: `url("/img/main_menu/cursor-cat.png") 8 8, default`,
-                }}
+                style={{ cursor: `url("/img/main_menu/cursor-cat.png") 8 8, default` }}
               />
               <div
                 className="info"
-                style={{
-                  cursor: `url("/img/main_menu/cursor-cat.png") 8 8, grab`,
-                }}
+                style={{ cursor: `url("/img/main_menu/cursor-cat.png") 8 8, grab` }}
                 onMouseDown={handleMouseDown}
                 onMouseLeave={handleMouseLeave}
                 onMouseUp={handleMouseUp}
                 onMouseMove={handleMouseMove}
               >
                 <h3>{slide.no}</h3>
-                <h4 className="title">
-                  {slide.title.split("\n").map((line, idx) => (
-                    <React.Fragment key={idx}>
-                      {line}
-                      <br />
-                    </React.Fragment>
-                  ))}
+
+                {/* Fragment 제거: \n 줄바꿈을 CSS로 처리 */}
+                <h4 className="title" style={{ whiteSpace: "pre-line" }}>
+                  {slide.title}
                 </h4>
 
                 <ul>
@@ -128,16 +120,15 @@ const Section10Component = forwardRef((props, ref) => {
                 <p className="price">₩{slide.price}</p>
 
                 <div className="detail-links">
-                  <Link
-                    to={i < 2 ? "/Set" : "/Food"}
+                  <a
+                    href={i < 2 ? "/set" : "/food"}
+                    onClick={(e) => onClickA(e, i < 2 ? "/set" : "/food")}
                     className="link-item"
-                    style={{
-                      cursor: `url("/img/main_menu/cursor-cat2.png") 8 8, pointer`,
-                    }}
+                    style={{ cursor: `url("/img/main_menu/cursor-cat2.png") 8 8, pointer` }}
                   >
                     <i className="bi bi-box-arrow-in-right"></i>
                     <span>상세보기</span>
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>
@@ -146,5 +137,4 @@ const Section10Component = forwardRef((props, ref) => {
       </div>
     </section>
   );
-});
-export default Section10Component;
+}

@@ -20,24 +20,21 @@ function Sub035PreView() {
     setLoading(true);
     setErr(null);
 
-    // `preorder_table_view.php`는 모든 필드를 반환하므로 추가적인 수정은 불필요
     axios
       .get("/jazzmyomyo/preorder_table_view.php", { params: { id } })
       .then((res) => {
         const { data } = res;
-        
         if (!data || typeof data !== "object" || Array.isArray(data) || !data.item) {
           throw new Error("서버 응답 형식 오류");
         }
         const item = data.item;
-
         setPost({
           id: item.id || "",
-          userId: item.user_id || "", 
+          userId: item.user_id || "",
           title: item.title || "사전주문",
-          writer: item.writer_name || "익명", 
-          reserveDate: item.reserve_date || "-", 
-          time: item.reserve_time || "-", 
+          writer: item.writer_name || "익명",
+          reserveDate: item.reserve_date || "-",
+          time: item.reserve_time || "-",
           people: item.people || "-",
           wine: item.wine || "",
           beverage: item.beverage || "",
@@ -45,7 +42,7 @@ function Sub035PreView() {
           note: item.note || "",
           status: item.status || "상태없음",
           reply: item.reply || "",
-          replyDate: item.reply_date || "", // <-- 1. reply_date 데이터 매핑
+          replyDate: item.reply_date || "",
           writeDate: item.created_at ? item.created_at.split(" ")[0] : "-",
         });
       })
@@ -71,7 +68,6 @@ function Sub035PreView() {
   useEffect(() => {
     if (modal.isYes === true) {
       dispatch(confirmModalYesNoAction(false));
-      
       if (!id) {
         dispatch(
           confirmModalAction({
@@ -84,13 +80,8 @@ function Sub035PreView() {
         );
         return;
       }
-  
       axios
-        .get("/jazzmyomyo/preorder_table_delete.php", {
-          params: {
-            id: id,
-          }
-        })
+        .get("/jazzmyomyo/preorder_table_delete.php", { params: { id } })
         .then((res) => {
           if (res.data.success) {
             dispatch(
@@ -127,11 +118,10 @@ function Sub035PreView() {
         });
     }
   }, [modal.isYes, post, dispatch, id, navigate]);
-  
 
   useEffect(() => {
     if (modal.heading === "삭제되었습니다." && modal.isON) {
-      navigate("/pre?deleted=" + id)
+      navigate("/pre?deleted=" + id);
     }
   }, [modal.heading, modal.isON, navigate, id]);
 
@@ -178,10 +168,15 @@ function Sub035PreView() {
   const currentUserId = user?.아이디;
   const role = localStorage.getItem("role");
   const isAdmin = role === "admin";
-  
   const isAuthor = currentUserId === post.userId;
-  
   const canModify = isAuthor || isAdmin;
+
+  const [replyDateStr, replyTimeStr] = (() => {
+    const s = String(post.replyDate || "");
+    if (!s) return ["", ""];
+    const [d = "", t = ""] = s.split(" ");
+    return [d, t ? t.slice(0, 5) : ""];
+  })();
 
   return (
     <div id="sub_preView">
@@ -202,23 +197,27 @@ function Sub035PreView() {
             <li><strong>안주</strong><span>{post.food}</span></li>
             <li><strong>특이사항</strong><span>{post.note}</span></li>
           </ul>
-          
+
           {post.reply && (
             <div className="admin-reply">
               <strong>관리자 답변</strong>
-              {/* <-- 2. reply_date가 있을 경우 표시 */}
               <p>{post.reply}</p>
-              {post.replyDate && <p className="reply-date">답변일: {post.replyDate}</p>}
+              {(replyDateStr || replyTimeStr) && (
+                <p className="reply-date">
+                  {isAdmin
+                    ? `답변일: ${replyDateStr}${replyTimeStr ? " " + replyTimeStr : ""}`
+                    : `답변일: ${replyDateStr}`}
+                </p>
+              )}
             </div>
           )}
         </div>
 
         <div className="view-actions">
           <button className="back-btn" onClick={() => navigate("/pre")}>← 목록으로</button>
-          
           {canModify && (
             <>
-              <button className="edit-btn" onClick={() => navigate(`/preE/edit/${id}`)}>✏ 수정하기</button>
+              <button className="edit-btn" onClick={() => navigate(`/preE/edit/${id}`)}>수정하기</button>
               <button className="delete-btn" onClick={onClickDelete}>삭제하기</button>
             </>
           )}

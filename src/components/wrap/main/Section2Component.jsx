@@ -4,7 +4,7 @@ const Section2Component = forwardRef((props, ref) => {
   const [state, setState] = React.useState({
     section: [],
   });
-  const [active, setActive] = useState(false);
+  const [arr, setArr] = useState([0, 0, 0]);
   React.useEffect(() => {
     fetch("./json/section2/section2.json", { method: "GET" })
       .then((res) => res.json())
@@ -14,23 +14,12 @@ const Section2Component = forwardRef((props, ref) => {
         });
       })
       .catch((err) => alert(err));
-
-    const scrollFunction = () => {
-      if (
-        document
-          .querySelector("#section2Component")
-          .classList.contains("active")
-      ) {
-      }
-    };
-    window.addEventListener("scroll", scrollFunction);
-    return () => window.removeEventListener("scroll", scrollFunction);
   }, []);
   return (
     <div id="section2Component" className="section" ref={ref}>
       <div className="inner">
         <ul>
-          {state.section.map((el) => (
+          {state.section.map((el, idx) => (
             <li key={el.id}>
               <p className="number">{el.number}</p>
               <p className="text">{el.text.toLocaleString("ko-KR")}</p>

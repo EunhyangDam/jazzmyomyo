@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import "./scss/Sub035PreAdmin.scss";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
+import useCustomA from "../../custom/useCustomA";
 
 export default function Sub035PreAdmin() {
-  const navigate = useNavigate();
+  const { onClickA } = useCustomA();
   const location = useLocation();
 
   const deletedId = (() => {
@@ -18,7 +19,6 @@ export default function Sub035PreAdmin() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [showLocalModal, setShowLocalModal] = useState(false);
 
   const parseDate = (s) => {
     if (!s) return new Date(0);
@@ -38,14 +38,15 @@ export default function Sub035PreAdmin() {
         }
 
         let mapped = data.map((it, i) => {
+          const cleanStatus = (it.status ?? "상태없음").trim();
+
           return {
             id: it.idx ?? i + 1,
             title: it.title || "(제목 없음)",
-            // '익명' 대신 백엔드에서 받은 writer_name을 그대로 사용
             author: it.writer_name ?? "",
             date: it.reserveDate ?? "",
             created: it.wDate ?? "",
-            status: it.status ?? "상태없음",
+            status: cleanStatus,
           };
         });
 
@@ -77,11 +78,13 @@ export default function Sub035PreAdmin() {
 
   if (loading) {
     return (
-      <section id="sub_pre">
+      <section id="sub_pre_admin">
         <div className="clipboard">
           <div className="clip" />
           <div className="paper">
-            <h1>사전 예약 게시판(관리자)</h1>
+          
+
+            <h1>사전 예약 게시판 (관리자)</h1>
             <p style={{ textAlign: "center", padding: "40px 0" }}>
               불러오는 중…
             </p>
@@ -93,7 +96,7 @@ export default function Sub035PreAdmin() {
 
   if (err) {
     return (
-      <section id="sub_pre">
+      <section id="sub_pre_admin">
         <div className="clipboard">
           <div className="clip" />
           <div className="paper">
@@ -110,10 +113,20 @@ export default function Sub035PreAdmin() {
   }
 
   return (
-    <section id="sub_pre">
+    <section id="sub_pre_admin">
       <div className="clipboard">
         <div className="clip"></div>
         <div className="paper">
+        <nav className="breadcrumbs" aria-label="breadcrumb">
+            <a href="/" className="home" onClick={(e) => onClickA(e, "/")}> 
+              <i className="bi bi-house-fill" aria-hidden="true" />
+              <span className="sr"></span>
+            </a>
+            <span className="sep"><i className="bi bi-chevron-right" /></span>
+            <a href="/menu" onClick={(e) => onClickA(e, "/menu")}>MENU</a>
+            <span className="sep"><i className="bi bi-chevron-right" /></span>
+            <strong>사전예약(관리자용)</strong>
+          </nav>
           <h1>사전 예약 게시판 (관리자)</h1>
 
           {currentPosts.length === 0 && (
@@ -124,9 +137,13 @@ export default function Sub035PreAdmin() {
 
           {currentPosts.map((post) => (
             <div key={post.id} className="card">
-              <Link to={`/preV/view/${post.id}`} className="card-title">
+              <a
+                href={`/preV/view/${post.id}`}
+                className="card-title"
+                onClick={(e) => onClickA(e, `/preV/view/${post.id}`)}
+              >
                 {post.title || "(제목 없음)"}
-              </Link>
+              </a>
 
               <p className="card-type">
                 <span
@@ -135,7 +152,7 @@ export default function Sub035PreAdmin() {
                       ? "complete"
                       : post.status === "예약중"
                       ? "progress"
-                      : post.status === "주문취소"
+                      : post.status === "예약취소"
                       ? "cancel"
                       : ""
                   }`}
@@ -151,7 +168,8 @@ export default function Sub035PreAdmin() {
                 <strong>예약일:</strong> {post.date || "-"}
               </p>
               <p>
-                <strong>작성일:</strong> {post.created ? post.created.split(" ")[0] : "-"}
+                <strong>작성일:</strong>{" "}
+                {post.created ? post.created.split(" ")[0] : "-"}
               </p>
             </div>
           ))}

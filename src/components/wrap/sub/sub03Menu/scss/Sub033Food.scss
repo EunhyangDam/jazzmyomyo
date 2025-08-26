@@ -6,13 +6,56 @@
   margin-top: 100px;
   margin-bottom: 100px;
   background-color: #fff;
+  .food-container {
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 40px;
+    margin: 0 auto;
+  }
+
+  .breadcrumbs {
+    
+    font-family: $font1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 40px 0 24px 0;
+    padding-top: 30px;
+    font-size: 14px;
+    color: #666;
+    cursor: default;
+
+    .home {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      color: #666;
+      text-decoration: none;
+
+      i { font-size: 18px; line-height: 1; }
+      .sr { position: absolute; left: -9999px; }
+    }
+
+    a {
+      color: #666;
+      text-decoration: none;
+
+      &:hover { color: #000; text-decoration: underline; }
+    }
+
+    .sep { opacity: .5; }
+    strong { color: #000; }
+  }
 
   .food-header {
     text-align: center;
     margin-bottom: 80px;
 
     h2 {
-      font-size: 150px;
+      font-size: 90px;
       font-family: $font2;
       letter-spacing: 4px;
       margin-bottom: 30px;
@@ -23,7 +66,6 @@
       display: flex;
       justify-content: center;
       gap: 20px;
-      
 
       button {
         font-family: $font1;
@@ -37,14 +79,8 @@
         cursor: pointer;
         transition: all 0.3s ease;
 
-        &.on {
-          background-color: $primary-color;
-          color: #fff;
-        }
-
-        &:hover:not(.on) {
-          background-color: #ddd;
-        }
+        &.on { background-color: $primary-color; color: #fff; }
+        &:hover:not(.on) { background-color: #ddd; }
       }
     }
   }
@@ -107,10 +143,7 @@
             font-weight: 700;
           }
 
-          &.desc {
-            white-space: pre-line;
-            margin-bottom: 15px;
-          }
+          &.desc { white-space: pre-line; margin-bottom: 15px; }
 
           &.explain {
             font-family: $font2;
@@ -122,7 +155,6 @@
           }
         }
 
-        /* 추가: 플래터 영역 예약 버튼 */
         .reserve-btn {
           display: inline-flex;
           align-items: center;
@@ -143,7 +175,6 @@
           transition: transform .08s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
 
           i { font-size: 18px; line-height: 1; }
-
           &:hover { background: #512b2b; color: #fff; box-shadow: 0 8px 20px rgba(81,43,43,.25); }
           &:active { transform: translateY(1px); }
           &:focus-visible { outline: 2px solid rgba(81,43,43,.6); outline-offset: 2px; }
@@ -168,6 +199,15 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+
+        &.show {
+          opacity: 1;
+          transform: translateY(0);
+        }
 
         img {
           cursor: pointer;
@@ -254,12 +294,9 @@
         cursor: pointer;
         color: #888;
 
-        &:hover {
-          color: #222;
-        }
+        &:hover { color: #222; }
       }
 
-      /* 추가: 모달 내 예약 버튼 */
       .reserve-btn {
         display: inline-flex;
         align-items: center;
@@ -280,19 +317,29 @@
         transition: transform .08s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
 
         i { font-size: 18px; }
-
         &:hover { background: #512b2b; color: #fff; box-shadow: 0 8px 20px rgba(81,43,43,.25); }
         &:active { transform: translateY(1px); }
         &:focus-visible { outline: 2px solid rgba(81,43,43,.6); outline-offset: 2px; }
       }
     }
   }
-  
+
+  /* 등장 애니메이션 (opacity 0 → 1) */
+  .platter-section .platter-box,
+  .side-section .side-box,
+  .modal-overlay .modal-content {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+
+    &.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
   @media all and (max-width: 1320px) {
-    .food-header h2 {
-      font-size: 130px;
-    }
+
     .platter-section .platter-box {
       flex-direction: column;
       text-align: center;
@@ -312,199 +359,136 @@
         }
       }
     }
-    .side-section .side-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+
+    .side-section .side-grid { grid-template-columns: repeat(2, 1fr); }
+
     .modal-overlay .modal-content {
       max-width: 90%;
       height: auto;
       padding: 20px;
     }
   }
+
   @media all and (max-width: 800px) {
-    .side-section {
-      padding: 0 16px;
-    }
+    .side-section { padding: 0 16px; }
   }
+
   @media all and (max-width: 700px) {
-    .food-header h2 {
-      font-size: 100px;
-    }
 
     .platter-section {
       .platter-desc {
         h2 {
           font-size: 45px !important;
 
-          span {
-            font-size: 22px !important;
-          }
+          span { font-size: 22px !important; }
         }
 
         p,
         p strong,
-        p.explain {
-          font-size: 17px !important;
-        }
+        p.explain { font-size: 17px !important; }
       }
     }
 
     .modal-overlay .modal-content {
       padding: 16px;
 
-      img {
-        max-height: 250px;
-      }
-
-      h3 {
-        font-size: 20px;
-      }
-
-      .desc {
-        font-size: 14px !important;
-      }
+      img { max-height: 250px; }
+      h3 { font-size: 20px; }
+      .desc { font-size: 14px !important; }
     }
   }
+
   @media all and (max-width: 600px) {
     padding: 0 16px;
 
-    .food-header h2 {
-      font-size: 90px;
-    }
+    .food-header h2 { font-size: 90px; }
 
     .platter-section {
       .platter-desc {
         h2 {
           font-size: 38px !important;
 
-          span {
-            font-size: 18px !important;
-          }
+          span { font-size: 18px !important; }
         }
 
         p,
         p strong,
-        p.explain {
-          font-size: 15px !important;
-        }
+        p.explain { font-size: 15px !important; }
       }
     }
 
     .side-section {
       .side-box {
-        h3 {
-          font-size: 18px !important;
-        }
-
-        p {
-          font-size: 13px !important;
-        }
+        h3 { font-size: 18px !important; }
+        p { font-size: 13px !important; }
       }
     }
   }
+
   @media all and (max-width: 480px) {
-    .food-header h2 {
-      font-size: 80px;
-    }
+    .food-header h2 { font-size: 80px; }
 
     .platter-section {
       .platter-desc {
         h2 {
           font-size: 33px !important;
 
-          span {
-            font-size: 16px !important;
-          }
+          span { font-size: 16px !important; }
         }
 
         p,
         p strong,
-        p.explain {
-          font-size: 14px !important;
-        }
+        p.explain { font-size: 14px !important; }
       }
     }
 
     .side-section {
       .side-box {
-        h3 {
-          font-size: 15px !important;
-        }
-
-        p {
-          font-size: 11px !important;
-        }
+        h3 { font-size: 15px !important; }
+        p { font-size: 11px !important; }
       }
     }
 
     .modal-overlay .modal-content {
       padding: 14px !important;
 
-      img {
-        max-height: 200px !important;
-      }
-
-      h3 {
-        font-size: 18px !important;
-      }
-
-      .desc {
-        font-size: 13px !important;
-      }
+      img { max-height: 200px !important; }
+      h3 { font-size: 18px !important; }
+      .desc { font-size: 13px !important; }
     }
   }
+
   @media all and (max-width: 380px) {
-    .food-header h2 {
-      font-size: 80px;
-    }
+    .food-header h2 { font-size: 80px; }
 
     .platter-section {
       .platter-desc {
         h2 {
           font-size: 30px !important;
 
-          span {
-            font-size: 14px !important;
-          }
+          span { font-size: 14px !important; }
         }
 
         p,
         p strong,
-        p.explain {
-          font-size: 12px;
-        }
+        p.explain { font-size: 12px; }
       }
     }
 
     .side-section {
       .side-box {
-        h3 {
-          font-size: 12px !important;
-        }
-
-        p {
-          font-size: 10px !important;
-        }
+        h3 { font-size: 12px !important; }
+        p { font-size: 10px !important; }
       }
     }
 
     .modal-overlay .modal-content {
       padding: 12px;
-
-      img {
-        max-height: 160px;
-      }
-
-      h3 {
-        font-size: 16px;
-      }
-
-      .desc {
-        font-size: 12px;
-      }
+      img { max-height: 160px; }
+      h3 { font-size: 16px; }
+      .desc { font-size: 12px; }
     }
   }
-
 }
 
 @media all and (max-width: 600px) {

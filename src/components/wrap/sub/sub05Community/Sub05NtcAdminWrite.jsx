@@ -1,15 +1,21 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./scss/Sub05NtcAdminWrite.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { confirmModalAction } from "../../../../store/confirmModal";
 import axios from "axios";
+import useCustomA from "../../custom/useCustomA.js";
 
 function Sub05NtcAdminWrite() {
+  const { onClickA } = useCustomA();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const auth = useSelector((s) => s.signin || s.singin || {});
+  // useSelector 안에서 빈 객체 직접 리턴하지 않고 밖에서 fallback 처리
+  const signin = useSelector((s) => s.signin);
+  const singin = useSelector((s) => s.singin);
+  const auth = signin || singin || {};
+
   const wId = auth.userId || auth.아이디 || "jazzmyomyo";
   const wName = auth.userName || auth.이름 || "관리자";
 
@@ -133,7 +139,13 @@ function Sub05NtcAdminWrite() {
     <div id="Sub05NtcAdminWrite">
       <div className="container">
         <div className="sangdan">
-          <Link to="/"><i className="bi bi-house-door-fill" /></Link>
+          <a
+            href="/"
+            onClick={(e) => onClickA(e, "/")}
+            aria-label="홈으로"
+          >
+            <i className="bi bi-house-door-fill" />
+          </a>
           <i className="bi bi-chevron-right" />
           <span>관리자페이지</span>
           <i className="bi bi-chevron-right" />

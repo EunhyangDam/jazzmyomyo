@@ -1,13 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import axios from "axios";
-import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import "./scss/Sub05NtcView.scss";
+
+import useCustomA from "../../custom/useCustomA";
 
 function Sub05NtcView() {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const { onClickA } = useCustomA();
 
   const [notice, setNotice] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
@@ -121,9 +124,13 @@ function Sub05NtcView() {
     <div id="noticeView">
       <div className="container">
         <div className="sangdan">
-          <Link to="/mainComponent" aria-label="홈으로">
+          <a
+            href="/mainComponent"
+            aria-label="홈으로"
+            onClick={(e) => onClickA(e, "/mainComponent")}
+          >
             <i className="bi bi-house-door-fill" />
-          </Link>
+          </a>
           <span className="sep"><i className="bi bi-chevron-right" /></span>
           <span>커뮤니티</span>
           <span className="sep"><i className="bi bi-chevron-right" /></span>
@@ -144,8 +151,6 @@ function Sub05NtcView() {
           </div>
 
           <div className="notice-body">
-            {/* 필요시 대표 이미지 위치 */}
-            {/* <div className="notice-image">재즈묘묘 이미지</div> */}
             <div
               className="notice-content-html"
               dangerouslySetInnerHTML={{ __html: html }}
@@ -153,7 +158,7 @@ function Sub05NtcView() {
           </div>
 
           <div className="btn-wrap">
-          <button onClick={() => navigate("/ntc")}>목록</button>
+            <button onClick={() => navigate(-1)}>목록</button>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 //추가
-import {getIsAdmin} from "../auth.js"; 
+import { getIsAdmin } from "../auth.js";
 
 import HeaderComponent from "./wrap/HeaderComponent";
 import MainComponent from "./wrap/MainComponent";
@@ -90,9 +90,6 @@ export default function WrapComponent(props) {
   const dispatch = useDispatch();
   const location = useLocation();
 
-
-
-
   //추가 : 공통 가드/게이트
   const AdminRoute = ({ children }) => {
     if (!getIsAdmin()) return <Navigate to="/" replace />;
@@ -100,12 +97,9 @@ export default function WrapComponent(props) {
   };
 
   const Gate = ({ adminPath, children }) => {
-     if (getIsAdmin()) return <Navigate to={adminPath} replace />;
-      return children;
-   };
-
-
-
+    if (getIsAdmin()) return <Navigate to={adminPath} replace />;
+    return children;
+  };
 
   // 주소
   const isOpen = useSelector((state) => state.daumPostcode.isOpen);
@@ -255,16 +249,51 @@ export default function WrapComponent(props) {
           <Route path="/food" element={<Sub033Food />} />
           <Route path="/set" element={<Sub034Set />} />
 
-         <Route path="/pre" element={<Gate adminPath="/preAdmin"><Sub035Pre /></Gate>} />
+          <Route
+            path="/pre"
+            element={
+              <Gate adminPath="/preAdmin">
+                <Sub035Pre />
+              </Gate>
+            }
+          />
 
           <Route path="/preV/view/:id" element={<Sub035PreView />} />
           <Route path="/preW" element={<Sub035PreWrite />} />
           <Route path="/preE/edit/:id" element={<Sub035PreEdit />} />
 
-          <Route path="/preAdmin" element={<AdminRoute><Sub035PreAdmin /></AdminRoute>} />
-          <Route path="/preAdminW" element={<AdminRoute><Sub035PreAdminWrite /></AdminRoute>} />
-          <Route path="/preAdminV/view/:id" element={<AdminRoute><Sub035PreAdminView /></AdminRoute>} />
-          <Route path="/preAdminE/edit/:id" element={<AdminRoute><Sub035PreAdminEdit /></AdminRoute>} />
+          <Route
+            path="/preAdmin"
+            element={
+              <AdminRoute>
+                <Sub035PreAdmin />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/preAdminW"
+            element={
+              <AdminRoute>
+                <Sub035PreAdminWrite />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/preAdminV/view/:id"
+            element={
+              <AdminRoute>
+                <Sub035PreAdminView />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/preAdminE/edit/:id"
+            element={
+              <AdminRoute>
+                <Sub035PreAdminEdit />
+              </AdminRoute>
+            }
+          />
 
           <Route path="/aboutLive" element={<Sub04AboutLive />} />
           <Route path="/artist" element={<Sub04Artist />} />
@@ -275,17 +304,52 @@ export default function WrapComponent(props) {
           <Route path="/faq" element={<Sub05Faq />} />
           <Route path="/gall" element={<Sub05Gall />} />
 
-          <Route path="/ntc" element={<Gate adminPath="/ntcAdmin"><Sub05Ntc /></Gate>} />
+          <Route
+            path="/ntc"
+            element={
+              <Gate adminPath="/ntcAdmin">
+                <Sub05Ntc />
+              </Gate>
+            }
+          />
 
           <Route path="/rev" element={<Sub05Rev />} />
           <Route path="/revWrite" element={<Sub05RevWrite />} />
           <Route path="/sns" element={<Sub05Sns />} />
 
           <Route path="/ntcV/:id" element={<Sub05NtcView />} />
-          <Route path="/ntcAdminV/:id" element={<AdminRoute><Sub05NtcAdminView /></AdminRoute>} />
-          <Route path="/ntcAdminE/:id" element={<AdminRoute><Sub05NtcAdminEdit /></AdminRoute>} />
-          <Route path="/ntcAdmin" element={<AdminRoute><Sub05NtcAdmin /></AdminRoute>} />
-          <Route path="/ntcAdminW" element={<AdminRoute><Sub05NtcAdminWrite /></AdminRoute>} />
+          <Route
+            path="/ntcAdminV/:id"
+            element={
+              <AdminRoute>
+                <Sub05NtcAdminView />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/ntcAdminE/:id"
+            element={
+              <AdminRoute>
+                <Sub05NtcAdminEdit />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/ntcAdmin"
+            element={
+              <AdminRoute>
+                <Sub05NtcAdmin />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/ntcAdminW"
+            element={
+              <AdminRoute>
+                <Sub05NtcAdminWrite />
+              </AdminRoute>
+            }
+          />
 
           <Route path="/lg" element={<Sub06Lg />} />
           <Route path="/searchId" element={<Sub06SearchId />} />
@@ -309,11 +373,46 @@ export default function WrapComponent(props) {
           <Route path="/myOrderTk" element={<Sub07MyOrderTk />} />
           <Route path="/myOrderRental" element={<Sub07MyOrderRental />} />
 
-          <Route path="/mm" element={<AdminRoute><Sub080Mm /></AdminRoute>} />
-          <Route path="/mmView/:id" element={<AdminRoute><Sub081MmView /></AdminRoute>} />
-          <Route path="/mmEdit/:id" element={<AdminRoute><Sub082MmEdit /></AdminRoute>} />
-          <Route path="/mmGrade" element={<AdminRoute><Sub083MmGrade /></AdminRoute>} />
-          <Route path="/mmSign" element={<AdminRoute><Sub084MmSign /></AdminRoute>} />
+          <Route
+            path="/mm"
+            element={
+              <AdminRoute>
+                <Sub080Mm />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/mmView/:id"
+            element={
+              <AdminRoute>
+                <Sub081MmView />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/mmEdit/:id"
+            element={
+              <AdminRoute>
+                <Sub082MmEdit />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/mmGrade"
+            element={
+              <AdminRoute>
+                <Sub083MmGrade />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/mmSign"
+            element={
+              <AdminRoute>
+                <Sub084MmSign />
+              </AdminRoute>
+            }
+          />
 
           <Route path="/cart" element={<Sub09Cart />} />
           <Route path="/purchase" element={<Sub09Purchase />} />
@@ -322,9 +421,7 @@ export default function WrapComponent(props) {
         </Route>
       </Routes>
 
-
       <FooterComponent footerClass={footerClass} isAdmin={getIsAdmin()} />
-
 
       {confirmIsOn && <ConfirmModalComponent />}
 

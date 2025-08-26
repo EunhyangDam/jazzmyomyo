@@ -256,7 +256,7 @@ function Sub035PreWrite() {
         <div className="notice">
           <div className="notice-line">
             <i className="bi bi-bell"></i>
-            <div className="text"><strong>결제 방식</strong> : 현장결제 (예약금 2만원, 계좌이체)</div>
+            <div className="text"><strong>결제 방식</strong> : 현장결제 (예약금 2만원, 계좌이체 - 계좌번호는 문자로 알려드려요)</div>
           </div>
           <div className="notice-line">
             <i className="bi bi-bell-fill"></i>
