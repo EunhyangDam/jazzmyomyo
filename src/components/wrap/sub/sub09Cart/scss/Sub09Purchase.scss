@@ -12,7 +12,6 @@ main#sub09Purchase {
         margin-block: 50px 70px;
         ul {
           display: flex;
-
           li {
             &.text {
               position: relative;
@@ -21,10 +20,60 @@ main#sub09Purchase {
                 width: 100%;
               }
               span {
+                text-align: center;
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
+                br {
+                  &.first {
+                    display: none;
+                  }
+                  &.second {
+                    display: none;
+                  }
+                }
+              }
+              @media all and (max-width: 817px) {
+                img {
+                  height: 60px;
+                }
+                span {
+                  font-size: 15px;
+                }
+              }
+              @media all and (max-width: 770px) {
+                span {
+                  font-size: 14px;
+                }
+              }
+              @media all and (max-width: 770px) {
+                span {
+                  font-size: 13px;
+                }
+              }
+              @media all and (max-width: 665px) {
+                span {
+                  br {
+                    &.first {
+                      display: block;
+                    }
+                  }
+                }
+              }
+              @media all and (max-width: 550px) {
+                span {
+                  br {
+                    &.second {
+                      display: block;
+                    }
+                  }
+                }
+              }
+              @media all and (max-width: 375px) {
+                span {
+                  white-space: nowrap;
+                }
               }
               &:nth-child(2) {
                 span {
@@ -89,6 +138,17 @@ main#sub09Purchase {
                         font-size: 14px;
                         flex-shrink: 0;
                       }
+                      @media all and (max-width: 550px) {
+                        &.col1 {
+                          width: 150px;
+                        }
+                      }
+                      @media all and (max-width: 485px) {
+                        &.col1 {
+                          width: 120px;
+                          padding-left: 10px;
+                        }
+                      }
                       &.col2 {
                         flex-grow: 1;
                         background: #fff;
@@ -99,6 +159,16 @@ main#sub09Purchase {
                           width: 350px;
                           height: 45px;
                           border: 1px solid #ccc;
+                        }
+                        @media all and (max-width: 630px) {
+                          input {
+                            width: 100%;
+                          }
+                        }
+                      }
+                      @media all and (max-width: 427px) {
+                        &.col2 {
+                          padding: 10px;
                         }
                       }
                     }
@@ -123,11 +193,51 @@ main#sub09Purchase {
                               font-family: $font1;
                               font-weight: 600;
                               border: 0;
+                              br {
+                                display: none;
+                              }
+                            }
+                            @media all and (max-width: 570px) {
+                              button {
+                                padding-inline: 15px;
+                              }
+                            }
+                            @media all and (max-width: 540px) {
+                              button {
+                                width: 80px;
+                                padding: 0;
+                                br {
+                                  display: block;
+                                }
+                              }
+                            }
+                          }
+
+                          @media all and (max-width: 425px) {
+                            .group {
+                              display: block;
+                              input {
+                                width: 100%;
+                                margin-bottom: 1vh;
+                              }
+                              button {
+                                width: 100%;
+                                height: auto;
+                                padding-block: 1.5vh;
+                              }
                             }
                           }
                           > * {
                             &:not(:last-child) {
                               margin-bottom: 10px;
+                            }
+                          }
+                          @media all and (max-width: 793px) {
+                            input {
+                              width: 100%;
+                            }
+                            .group {
+                              width: 100%;
                             }
                           }
                         }
@@ -424,6 +534,17 @@ main#sub09Purchase {
                         font-size: 14px;
                         flex-shrink: 0;
                       }
+                      @media all and (max-width: 550px) {
+                        &.col1 {
+                          width: 150px;
+                        }
+                      }
+                      @media all and (max-width: 485px) {
+                        &.col1 {
+                          width: 120px;
+                          padding-left: 10px;
+                        }
+                      }
                       &.col2 {
                         flex-grow: 1;
                         padding: 20px;
@@ -433,8 +554,6 @@ main#sub09Purchase {
                     &.row1 {
                       border-bottom: 1px solid #ccc;
                       > .col {
-                        &.col1 {
-                        }
                         &.col2 {
                           display: flex;
                           align-items: center;
@@ -454,6 +573,20 @@ main#sub09Purchase {
                             border: 1px solid #ccc;
                             font-weight: 600;
                           }
+                          @media all and (max-width: 515px) {
+                            select#selectCard {
+                              width: 100%;
+                            }
+                          }
+                        }
+                        @media all and (max-width: 671px) {
+                          &.col2 {
+                            display: block;
+                            label {
+                              display: block;
+                              margin-bottom: 1vh;
+                            }
+                          }
                         }
                       }
                     }
@@ -466,6 +599,18 @@ main#sub09Purchase {
                             color: #747474;
                             font-weight: 600;
                             font-size: 14px;
+                          }
+                        }
+                        @media all and (max-width: 750px) {
+                          &.col2 {
+                            display: block;
+                            span {
+                              display: inline-block;
+                              width: 100%;
+                              &:not(:last-child) {
+                                margin-bottom: 1vh;
+                              }
+                            }
                           }
                         }
                       }
@@ -577,6 +722,21 @@ main#sub09Purchase {
             }
             > * {
               box-shadow: 5px 8px 15px rgba($color: #222, $alpha: 0.2);
+            }
+          }
+          @media all and (max-width: 1280px) {
+            &.col2 {
+              padding-inline: 2vw;
+            }
+          }
+        }
+      }
+      @media all and (max-width: 1305px) {
+        .body {
+          display: block;
+          > .col {
+            &.col2 {
+              position: static;
             }
           }
         }

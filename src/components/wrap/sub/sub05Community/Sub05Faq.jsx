@@ -59,9 +59,9 @@ export default function Sub05Faq(props) {
     <div id="sub05Faq">
       {/* 상단 페이지 경로 */}
       <SiteMapComponent
-        firstLink="/Ntc"
+        firstLink="/ntc"
         firstName="커뮤니티"
-        secondLink="/Faq"
+        secondLink="/faq"
         secondName="FAQ"
       />
 

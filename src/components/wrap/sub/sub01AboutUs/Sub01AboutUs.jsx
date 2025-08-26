@@ -6,7 +6,10 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import SplitText from "../../custom/SplitText";
+import useCustomA from "../../custom/useCustomA";
 export default function Sub01AboutUs(props) {
+  const { onClickA } = useCustomA();
+
   const [hover, setHover] = useState(false);
   const [state, setState] = useState({
     list: [],
@@ -126,7 +129,8 @@ export default function Sub01AboutUs(props) {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         className={`section ${hover ? "active" : ""}`}
-        ref={section2}>
+        ref={section2}
+      >
         <div className="img-container" ref={section2Img}>
           <img src={`./img/sub01/pic${state.rowIdx + 1}.jpg`} alt="" />
         </div>
@@ -134,7 +138,8 @@ export default function Sub01AboutUs(props) {
           <div
             className={`row row${idx + 1}`}
             onMouseEnter={(e) => mouseEnterRow(e, idx)}
-            key={idx}>
+            key={idx}
+          >
             <div className="inner">
               <p>{el.left}</p>
               <p>{el.right}</p>
@@ -255,7 +260,10 @@ export default function Sub01AboutUs(props) {
               거예요.
             </p>
             <p>
-              첫 방문 손님도 단골처럼 만드는 <Link>재즈 묘묘 마법</Link>
+              첫 방문 손님도 단골처럼 만드는{" "}
+              <a href="!#" onClick={(e) => onClickA(e, "/menu")}>
+                재즈 묘묘 마법
+              </a>
             </p>
           </div>
         </div>
