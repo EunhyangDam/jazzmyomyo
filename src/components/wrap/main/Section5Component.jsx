@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, forwardRef } from "react";
 import "./scss/Section5Component.scss";
 
-export default function Section5Component(props) {
+const Section5Component = forwardRef((props, ref) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const slideRef = useRef(null);
   const startX = useRef(0);
@@ -50,7 +50,7 @@ export default function Section5Component(props) {
   }, [currentIndex]);
 
   return (
-    <div id="section5Component" className="section">
+    <div id="section5Component" className="section" ref={ref}>
       <section id="section5" className="artist-section">
         <div className="container">
           <h2 className="artist-title">Artist</h2>
@@ -59,7 +59,8 @@ export default function Section5Component(props) {
               className="artist-list"
               onTouchStart={isMobile ? handleTouchStart : null}
               onTouchMove={isMobile ? handleTouchMove : null}
-              onTouchEnd={isMobile ? handleTouchEnd : null}>
+              onTouchEnd={isMobile ? handleTouchEnd : null}
+            >
               <div className="slide-track" ref={slideRef}>
                 {artistData.map((artist, idx) => (
                   <div key={idx} className="artist-card">
@@ -81,9 +82,8 @@ export default function Section5Component(props) {
                 {artistData.map((_, idx) => (
                   <div
                     key={idx}
-                    className={`dot ${
-                      currentIndex === idx ? "active" : ""
-                    }`}></div>
+                    className={`dot ${currentIndex === idx ? "active" : ""}`}
+                  ></div>
                 ))}
               </div>
             )}
@@ -104,4 +104,5 @@ export default function Section5Component(props) {
       </section>
     </div>
   );
-}
+});
+export default Section5Component;

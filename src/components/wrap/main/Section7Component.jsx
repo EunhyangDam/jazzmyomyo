@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import "./scss/Section7Component.scss";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { wishAction } from "../../../store/wishlist";
 import useCustomA from "../custom/useCustomA";
 
-export default function Section7Component(props) {
+const Section7Component = forwardRef((props, ref) => {
   const { onClickA } = useCustomA();
   const [state, setState] = useState({
     product: [],
@@ -35,7 +35,7 @@ export default function Section7Component(props) {
   };
   if (!state.product || state.product.length < 24) return <div>Loading…</div>;
   return (
-    <div id="Section7Component">
+    <div id="Section7Component" ref={ref}>
       <section id="section7" className="shop">
         <div className="container">
           <div className="title">
@@ -199,4 +199,5 @@ export default function Section7Component(props) {
       </section>
     </div>
   );
-}
+});
+export default Section7Component;

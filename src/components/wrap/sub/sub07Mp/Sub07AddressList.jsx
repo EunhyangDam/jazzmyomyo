@@ -57,14 +57,23 @@ function Sub07AddressList(props) {
     navigate("/addressListEdit", { state: { address: item } });
   };
 
-  const onClickDelete = (e, item) => {
-    setState({
-      ...state,
-      selectedAddress: item,
-    });
+  const onClickDelete = (e, idx, deliveryDefault) => {
+    e.preventDefault();
+
+    if(deliveryDefault===1){
+
+      let obj = {
+        heading: "기본배송지는 삭제할 수 없습니다묘!.",
+        explain: "",
+        isON: true,
+        isConfirm: false,
+      };
+      dispatch(confirmModalAction(obj));
+      return;
+    }
 
     const formData = new FormData();
-    formData.append("idx", item.idx);
+    formData.append("idx", idx);
 
     axios({
       url: "/jazzmyomyo/delivery_table_delete.php",
@@ -81,11 +90,10 @@ function Sub07AddressList(props) {
               isConfirm: false,
             };
             dispatch(confirmModalAction(obj));
+            setTimeout(()=>{
+              navigate(0);  // 새로고침 0 그대로 제자리
+          }, 1000)
 
-            setState({
-              ...state,
-              배송지: state.배송지.filter((item2) => item2.idx !== item.idx),
-            });
           } else {
             console.log("삭제 실패");
           }
@@ -140,7 +148,7 @@ function Sub07AddressList(props) {
                           <button onClick={(e) => onClickEdit(e, item)}>
                             수정
                           </button>
-                          <button onClick={(e) => onClickDelete(e, item)}>
+                          <button onClick={(e) => onClickDelete(e, item.idx, Number(item.deliveryDefault))}>
                             삭제
                           </button>
                         </div>

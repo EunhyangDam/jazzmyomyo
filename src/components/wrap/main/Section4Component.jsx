@@ -1,8 +1,8 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import "./scss/Section4Component.scss";
 import { useEffect, useState, useRef } from "react";
 
-export default function Section4Component(props) {
+const Section4Component = forwardRef((props, ref) => {
   const [slides, setSlides] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(
     new Date().getDay() === 0 ? 6 : new Date().getDay() - 1
@@ -165,7 +165,7 @@ export default function Section4Component(props) {
   }, []);
 
   return (
-    <div id="section4Component">
+    <div id="section4Component" ref={ref}>
       <section id="schedule" className="section">
         <div className="container">
           <div className="top-area">
@@ -245,4 +245,5 @@ export default function Section4Component(props) {
       </section>
     </div>
   );
-}
+});
+export default Section4Component;

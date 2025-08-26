@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, forwardRef } from "react";
 import "./scss/Section8Component.scss";
 import useCustomA from "../custom/useCustomA";
 import axios from "axios";
 
-export default function Section8Component() {
+const Section8Component = forwardRef((props, ref) => {
   const { onClickA } = useCustomA();
 
   const [state, setState] = useState({ 영상소스: [] });
@@ -174,7 +174,7 @@ export default function Section8Component() {
   }, []);
 
   return (
-    <div id="section8Component">
+    <div id="section8Component" ref={ref}>
       <section id="section8" className="sns">
         <div className="container">
           <div className="title">
@@ -246,4 +246,5 @@ export default function Section8Component() {
       </section>
     </div>
   );
-}
+});
+export default Section8Component;

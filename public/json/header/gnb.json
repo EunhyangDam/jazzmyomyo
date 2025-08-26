@@ -49,7 +49,6 @@
       "sub": [
         { "name": "공지사항", "link": "ntc" },
         { "name": "FAQ", "link": "faq" },
-        { "name": "1:1 문의", "link": "yiduiyi" },
         { "name": "공연 후기", "link": "rev" }
       ]
     }

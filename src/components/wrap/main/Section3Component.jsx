@@ -1,8 +1,8 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import "./scss/Section3Component.scss";
 import ArtistModalComponent from "./ArtistModalComponent";
 
-export default function Section3Component() {
+const Section3Component = forwardRef((props, ref) => {
   const [artists, setArtists] = React.useState([]);
   const [selectedArtist, setSelectedArtist] = React.useState(null);
 
@@ -21,7 +21,7 @@ export default function Section3Component() {
   }, []);
 
   return (
-    <div id="section3Component" className="section">
+    <div id="section3Component" className="section" ref={ref}>
       <div className="con-info">
         <div className="con-head">
           <h2>공연정보</h2>
@@ -51,4 +51,5 @@ export default function Section3Component() {
       )}
     </div>
   );
-}
+});
+export default Section3Component;

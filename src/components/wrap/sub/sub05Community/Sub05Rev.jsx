@@ -11,8 +11,42 @@ function Sub05Rev(props) {
     isOpen: false,
     selectedId: null,
     후기: [],
+    필터목록:[],
+    페이지번호:[]
   });
 
+
+
+// 페이지네이션 
+
+const [page, setPage]=React.useState(1);
+    
+// 계산에만 사용하는 일반 변수 선언
+const list = 9; // 한페이지당 게시글 개수 
+const 시작번호 = (page -1) * list; 
+const 끝번호 = 시작번호 + list; 
+const 슬라이스 = state.필터목록.slice( 시작번호 , 끝번호 ) // 한페이지 단위로 5줄씩 배열 저장
+const 총페이지수 = Math.ceil(state.필터목록.length / list );
+const 페이지그룹 = 5;
+const 현재그룹번호 = Math.floor((page-1)/페이지그룹);
+const 총그룹수 = Math.ceil(총페이지수/페이지그룹);
+const 그룹시작= (현재그룹번호 *페이지그룹)+ 1;
+const 그룹끝= Math.min ((그룹시작+페이지그룹-1) , 총페이지수 )
+const 페이지번호 = [...Array(그룹끝 - 그룹시작 +1)].map((item,i)=>그룹시작+i)
+
+const onClickPage = (e,n)=>{
+  e.preventDefault()
+  setPage(n)
+
+}
+
+useEffect(() => {
+  const total = Math.ceil(state.필터목록.length / list);
+  if (total === 0) return;
+  if (page > total) setPage(total);
+}, [state.필터목록.length, page]);
+
+/// 
   // 후기 불러오기
   useEffect(() => {
     fetchReviews();
@@ -53,10 +87,11 @@ function Sub05Rev(props) {
       .then((res) => {
         if (res.status === 200 && res.data !== 0) {
           let 후기 = res.data;
-          후기 = [...후기.sort((a, b) => b.idx - a.idx)];
+          후기 = [...후기].sort((a, b) => b.wDate.localeCompare(a.wDate));
           setState((prev) => ({
             ...prev,
-            후기,
+            후기: 후기,
+            필터목록: 후기
           }));
         }
       })
@@ -137,13 +172,13 @@ function Sub05Rev(props) {
             <button onClick={onClickRevWriteBtn}>나도 한줄 후기 남기기</button>
             <h4>
               <i className="bi bi-bell-fill"></i>
-              <span>후기는 가장 최근 순으로 최대 9개까지만 노출됩니다.</span>
+              <span>후기는 최근 업데이트된 순서로 노출됩니다.</span>
             </h4>
           </div>
 
           <div className="review-box">
             <ul>
-              {state.후기.slice(0, 9).map((item) => (
+              {슬라이스.map((item) => (
                 <li key={item.idx}>
                   <div className="gap" onClick={() => onClickGap(item.idx)}>
                     <div className="row1">
@@ -170,6 +205,38 @@ function Sub05Rev(props) {
               ))}
             </ul>
           </div>
+
+          <div className="pagination-box" style={{paddingTop:'100px'}} >
+          {/* 버튼 위치 */}
+          {/* 처음 */}
+          { 현재그룹번호 > 0 &&
+            <button className="icon1" onClick={(e)=>onClickPage(e,1)} ><i className="bi bi-chevron-bar-left"></i></button>  
+          }  
+          {/* 이전 */}
+          { 그룹시작 >1 &&    
+              <button className="icon2" onClick={(e)=>onClickPage(e, 그룹시작-1)}><i className="bi  bi-chevron-left"></i></button>  
+          }
+              <ul>
+                  {
+                      페이지번호.map((n)=>
+                          <li key={n} data-key={n}>
+                              <a 
+                                  href="!#" 
+                                  title={n} 
+                                  className={page === n? " on": ''}
+                                  onClick={(e)=>onClickPage(e,n)}
+                              >{n}</a>
+                          </li>)
+                  }
+              </ul>      
+              {/* 다음 */}
+              { 그룹끝 < 총페이지수 && 
+              <button className="icon2" onClick={(e)=>onClickPage(e, 그룹끝+1)}><i className="bi bi-chevron-right"></i></button>   
+              }
+              { 현재그룹번호 < (총그룹수 -1) &&
+              <button className="icon1" onClick={(e)=>onClickPage(e, 총페이지수)} ><i className="bi bi-chevron-bar-right"></i></button>   
+            }
+           </div>
         </div>
       </div>
 
@@ -218,7 +285,6 @@ function Sub05Rev(props) {
                 </div>
               </div>
             </div>
-
             <div className="nav next">
               {currentIndex !== -1 && currentIndex < state.후기.length - 1 && (
                 <i className="bi bi-chevron-right" onClick={onClickNext}></i>

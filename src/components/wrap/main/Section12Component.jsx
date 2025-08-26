@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import "./scss/Section12Component.scss";
 
-export default function Section12Component(props) {
+const Section12Component = forwardRef((props, ref) => {
   const [state, setState] = useState({
     오시는길: {},
   });
@@ -20,7 +20,7 @@ export default function Section12Component(props) {
   }, []);
 
   return (
-    <div id="section12Component">
+    <div id="section12Component" ref={ref}>
       <section id="section12" className="visit">
         <div className="container">
           <div className="title">
@@ -67,4 +67,5 @@ export default function Section12Component(props) {
       </section>
     </div>
   );
-}
+});
+export default Section12Component;

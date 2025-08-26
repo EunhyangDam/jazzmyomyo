@@ -1,6 +1,6 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import "./scss/Section1Component.scss";
-export default function Section1Component(props) {
+const Section1Component = forwardRef((props, ref) => {
   const [state, setState] = React.useState({
     slide1: [],
     slide2: [],
@@ -47,7 +47,7 @@ export default function Section1Component(props) {
     return () => window.removeEventListener("mousemove", mouseMove);
   }, []);
   return (
-    <div id="section1Component" className="section">
+    <div id="section1Component" className="section" ref={ref}>
       <div className="inner">
         <div className="heading-container">
           <div className="heading heading1">
@@ -93,4 +93,5 @@ export default function Section1Component(props) {
       </div>
     </div>
   );
-}
+});
+export default Section1Component;

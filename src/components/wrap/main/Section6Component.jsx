@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import "./scss/Section6Component.scss";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { confirmModalAction } from "../../../store/confirmModal";
-export default function Section6Component(props) {
+const Section6Component = forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const [state, setState] = useState({
     name: "",
@@ -129,7 +129,7 @@ export default function Section6Component(props) {
       });
   };
   return (
-    <div id="section6Component" className="section">
+    <div id="section6Component" className="section" ref={ref}>
       <div className="inner">
         <div className="left">
           <h2>
@@ -204,4 +204,5 @@ export default function Section6Component(props) {
       </div>
     </div>
   );
-}
+});
+export default Section6Component;

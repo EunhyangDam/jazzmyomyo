@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import './scss/Section11Component.scss';
+import React, { forwardRef, useEffect, useRef, useState } from "react";
+import "./scss/Section11Component.scss";
 
-export default function Section11Component() {
+const Section11Component = forwardRef((props, ref) => {
   const isMobile = window.innerWidth <= 440;
 
   const data = [
@@ -105,14 +105,16 @@ export default function Section11Component() {
     return Array.from({ length: pageCount }).map((_, i) => (
       <button
         key={i}
-        className={`dot ${Math.floor(currentIndex / moveStep) === i ? "active" : ""}`}
+        className={`dot ${
+          Math.floor(currentIndex / moveStep) === i ? "active" : ""
+        }`}
         onClick={() => moveTo(i * moveStep)}
       ></button>
     ));
   };
 
   return (
-    <section id="Section11Component" className="gallery section">
+    <section id="Section11Component" className="gallery section" ref={ref}>
       <div className="container">
         <h2 className="section-title">Gallery</h2>
 
@@ -138,10 +140,18 @@ export default function Section11Component() {
                 <img src="./img/고양이_슬라이드.png" alt="장식 고양이" />
               </div>
               <div className="button-group">
-                <button className="btn prev" onClick={() => handleMove(-moveStep)} disabled={currentIndex <= 0}>
+                <button
+                  className="btn prev"
+                  onClick={() => handleMove(-moveStep)}
+                  disabled={currentIndex <= 0}
+                >
                   &lt;
                 </button>
-                <button className="btn next" onClick={() => handleMove(moveStep)} disabled={currentIndex >= maxIndex}>
+                <button
+                  className="btn next"
+                  onClick={() => handleMove(moveStep)}
+                  disabled={currentIndex >= maxIndex}
+                >
                   &gt;
                 </button>
               </div>
@@ -151,4 +161,5 @@ export default function Section11Component() {
       </div>
     </section>
   );
-}
+});
+export default Section11Component;

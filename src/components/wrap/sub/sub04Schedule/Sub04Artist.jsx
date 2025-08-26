@@ -3,14 +3,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { wishAction } from "../../../../store/wishlist";
-import { confirmModalYesNoAction } from "../../../../store/confirmModal";
 import { confirmModalAction } from "../../../../store/confirmModal";
 import "./scss/Sub04Artist.scss";
-import SiteMapComponent from "../../custom/SiteMapComponent"
-
+import SiteMapComponent from "../../custom/SiteMapComponent";
 
 function Sub04Artist(props) {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,8 +22,6 @@ function Sub04Artist(props) {
   const [selected, setSelected] = useState(null);
   const itemsPerPage = 12;
 
-
-
   useEffect(() => {
     fetch("./json/sub04/artist-data.json")
       .then((res) => res.json())
@@ -36,15 +31,13 @@ function Sub04Artist(props) {
       });
   }, []);
 
-
   // 즐겨찾기, 이름순, 최신순 재정렬
   useEffect(() => {
-
     let filtered = [...artists];
 
     // 즐겨찾기 모드일 경우
     if (sortType === "wish") {
-     filtered = filtered.filter((a) => wishlist.includes(a.name));
+      filtered = filtered.filter((a) => wishlist.includes(a.name));
     }
 
     // 검색 필터
@@ -63,11 +56,9 @@ function Sub04Artist(props) {
       filtered.sort((a, b) => a.name.localeCompare(b.name, "ko"));
     }
 
-  setFiltered(filtered);
-  setCurrentPage(1);
-
+    setFiltered(filtered);
+    setCurrentPage(1);
   }, [searchQuery, sortType, wishlist, artists]);
-
 
   // 동영상 출력
   const extractYoutubeId = (url) => {
@@ -77,7 +68,6 @@ function Sub04Artist(props) {
     return match ? match[1] : null;
   };
 
-
   // 페이지네이션 계산
   const paginated = filtered.slice(
     (currentPage - 1) * itemsPerPage,
@@ -85,31 +75,32 @@ function Sub04Artist(props) {
   );
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
 
-
   // 즐겨찾기 추가 & 로그인 여부
   const [pendingLike, setPendingLike] = useState(null);
-  
-  const 로그인정보 = useSelector((state) => state.signIn);
-  const isLogin = 로그인정보?.아이디 !== '';
 
-  console.log(로그인정보)
-  
+  const 로그인정보 = useSelector((state) => state.signIn);
+  const isLogin = 로그인정보?.아이디 !== "";
+
+  console.log(로그인정보);
+
   // 로그인 여부 판단
   const onClickLikeArtist = (name) => {
     if (!isLogin) {
-      setPendingLike(name);  // 나중에 사용할 이름 기억
-      dispatch(confirmModalAction({
-        heading: "로그인 해주세요!",
-        explain: "로그인 페이지로 이동 할까요?",
-        isON: true,
-        isConfirm: true,
-        message1: "예",
-        message2: "아니오"
-      }));
+      setPendingLike(name); // 나중에 사용할 이름 기억
+      dispatch(
+        confirmModalAction({
+          heading: "로그인 해주세요!",
+          explain: "로그인 페이지로 이동 할까요?",
+          isON: true,
+          isConfirm: true,
+          message1: "예",
+          message2: "아니오",
+        })
+      );
       return;
     }
-  
-    toggleLike(name);  // 로그인 되어 있을 경우 바로 토글
+
+    toggleLike(name); // 로그인 되어 있을 경우 바로 토글
   };
 
   const toggleLike = (name) => {
@@ -117,61 +108,52 @@ function Sub04Artist(props) {
     const newList = isWished
       ? wishlist.filter((n) => n !== name)
       : [...wishlist, name];
-  
-    dispatch(wishAction(newList));
   };
 
-
-  
   useEffect(() => {
     if (!isLogin && isYes !== null) {
       if (isYes) {
-        navigate('/Lg');
+        navigate("/Lg");
       } else if (pendingLike) {
         // "아니오"를 눌렀을 때는 강제로 하트 해제
         const isWished = wishlist.includes(pendingLike);
         if (isWished) {
-          dispatch(wishAction(wishlist.filter((n) => n !== pendingLike)));
         }
       }
       setPendingLike(null); // 초기화
-        const obj = {
-          heading: "",
-          explain: "",
-          isON: false,
-          isConfirm: false,
-          message1: "",
-          message2: ""
-        }
-      dispatch(confirmModalAction(obj))  // 모달 닫기
+      const obj = {
+        heading: "",
+        explain: "",
+        isON: false,
+        isConfirm: false,
+        message1: "",
+        message2: "",
+      };
+      dispatch(confirmModalAction(obj)); // 모달 닫기
     }
-  }, [isYes]);  
-
+  }, [isYes]);
 
   // 월간일정 페이지에서 여기로 이동
   const [searchParams] = useSearchParams();
   const targetArtist = searchParams.get("artist");
-  
+
   useEffect(() => {
     if (!targetArtist || artists.length === 0) return;
-  
+
     const index = artists.findIndex(
       (a) => a.name.toLowerCase() === targetArtist.toLowerCase()
     );
-  
+
     if (index !== -1) {
       const page = Math.floor(index / itemsPerPage) + 1;
       setCurrentPage(page);
-  
+
       // 딜레이를 주고 모달 열기 (페이지가 설정된 다음)
       setTimeout(() => {
         setSelected(artists[index]);
       }, 100);
     }
   }, [targetArtist, artists]);
-  
-  
-
 
   return (
     <div id="sub04Artist">
@@ -231,11 +213,19 @@ function Sub04Artist(props) {
                 <div className="card-inner">
                   <div className="img-box">
                     <img src={item.image} alt={item.name} />
-                    <button 
-                      className={`heart-button ${wishlist.includes(item.name) ? "on" : ""}`}
+                    <button
+                      className={`heart-button ${
+                        wishlist.includes(item.name) ? "on" : ""
+                      }`}
                       onClick={() => onClickLikeArtist(item.name)}
                     >
-                      <i className={`bi ${wishlist.includes(item.name) ? "bi-heart-fill" : "bi-heart"}`}></i>
+                      <i
+                        className={`bi ${
+                          wishlist.includes(item.name)
+                            ? "bi-heart-fill"
+                            : "bi-heart"
+                        }`}
+                      ></i>
                     </button>
                   </div>
                 </div>

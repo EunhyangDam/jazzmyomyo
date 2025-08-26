@@ -25,7 +25,7 @@ function Sub07AddressListEdit(props) {
   const [state, setState] = useState({
     idx: address.idx,
     아이디: address.userId,
-    기본배송지: address.deliveryDefault,
+    기본배송지: Number(address.deliveryDefault),
     메모: address.memo,
     이름: address.recipient,
     연락처: address.deliveryHp,
@@ -130,23 +130,48 @@ function Sub07AddressListEdit(props) {
     navigate("/addressList");
   };
 
-  // 배송지 추가 폼 제출
+  // 배송지 수정 폼 제출
   const onSubmitAddAddress = (e) => {
     e.preventDefault();
 
+    // 1. state 모든 속성 비구조화 변수 정리
+     const {
+      idx, 아이디, 기본배송지, 메모, 이름, 연락처,  배송요청, 우편번호, 주소1, 주소2
+      } = state;
+
+    const switchData = [
+    {조건: 이름==='', 메시지: "이름을 입력하세요"},
+    {조건: 연락처==='', 메시지: "휴대폰 번호를 하세요"},
+    {조건: 주소1===null, 메시지: "주소를 등록하세요"},
+    ]
+
+    for(const {조건, 메시지} of switchData){ 
+      if(조건){
+          let obj = {
+            heading: 메시지,
+            explain: "",
+            isON: true,
+            isConfirm: false,
+          };
+          dispatch( confirmModalAction(obj));
+          return;  
+      }
+  }
+
+  const 휴대폰형식포멧 = 연락처.replace(/^(\d{3})(\d{3,4})(\d{4})$/g,'$1-$2-$3') // 010 -0000-0000 형태로 저장
+
     const formData = new FormData();
 
-    formData.append("idx", state.idx);
-    formData.append("userId", state.아이디);
-
-    formData.append("deliveryDefault", state.기본배송지);
-    formData.append("memo", state.메모);
-    formData.append("recipient", state.이름);
-    formData.append("deliveryHp", state.연락처);
-    formData.append("deliveryRequest", state.배송요청);
-    formData.append("zipCode", state.우편번호);
-    formData.append("deliveryaddress1", state.주소1);
-    formData.append("deliveryaddress2", state.주소2);
+    formData.append("idx", idx);
+    formData.append("userId", 아이디);
+    formData.append("deliveryDefault", 기본배송지);
+    formData.append("memo", 메모);
+    formData.append("recipient", 이름);
+    formData.append("deliveryHp", 휴대폰형식포멧);
+    formData.append("deliveryRequest", 배송요청);
+    formData.append("zipCode", 우편번호);
+    formData.append("deliveryaddress1", 주소1);
+    formData.append("deliveryaddress2", 주소2);
 
     axios({
       url: "/jazzmyomyo/delivery_table_update.php",
