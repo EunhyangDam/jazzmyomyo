@@ -20,6 +20,7 @@ import review from "./store/review";
 import signIn from "./store/signIn";
 import daumPostcode from "./store/daumPostcode";
 import cartLogin from "./store/cartLogin";
+import inquiry from "./store/inquiry";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin, SplitText);
 let store = configureStore({
@@ -32,6 +33,7 @@ let store = configureStore({
     signIn,
     daumPostcode,
     cartLogin,
+    inquiry
   },
 });
 

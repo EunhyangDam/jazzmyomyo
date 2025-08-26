@@ -1,3 +1,5 @@
+@use "../../../scss/_variables" as *;
+
 .artist-modal {
   position: fixed;
   z-index: 999;
@@ -38,6 +40,18 @@
       border-radius: 6px;
       font-size: 14px;
       cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: linear-gradient(135deg, #8a5950, #6b423b);
+        transform: scale(1.01);
+        box-shadow: 0 3px 8px rgba(0,0,0,0.18);
+        filter: brightness(1.005);
+      }
+
+      &:active {
+        transform: scale(.985);
+      }
     }
 
     .modal-inner {
@@ -135,6 +149,7 @@
         h3 {
           font-family: "TTHakgyoansimMulgyeolB", sans-serif;
           font-size: 1.4rem;
+          font-weight: 700;
           margin-bottom: 16px;
           color: #5d3136;
         }
@@ -178,6 +193,88 @@
             }
           }
         }
+      }
+    }
+  }
+
+  /* 반응형 미디어쿼리 */
+  @media (max-width: 1200px) {
+    .modal-container {
+      max-width: 90%;
+      padding: 30px;
+
+      .top-box {
+        gap: 24px;
+
+        .artist-img-box {
+          width: 200px;
+          height: 200px;
+        }
+
+        .artist-info h2 {
+          font-size: 22px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .modal-container {
+      max-width: 95%;
+      padding: 24px;
+
+      .top-box {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        .artist-img-box {
+          width: 180px;
+          height: 180px;
+        }
+
+        .artist-info h2 {
+          font-size: 20px;
+          margin-bottom: 12px;
+        }
+      }
+
+      .band-members .member-list {
+        justify-content: center;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .modal-container {
+      padding: 20px;
+
+      .close-btn {
+        padding: 5px 12px;
+        font-size: 12px;
+      }
+
+      .top-box {
+        .artist-img-box {
+          width: 150px;
+          height: 150px;
+        }
+
+        .artist-info h2 {
+          font-size: 18px;
+        }
+
+        .artist-info .description {
+          font-size: 14px;
+        }
+      }
+
+      .band-members h3 {
+        font-size: 1.1rem;
+      }
+
+      .band-members .member-list .member span {
+        font-size: 0.85rem;
       }
     }
   }

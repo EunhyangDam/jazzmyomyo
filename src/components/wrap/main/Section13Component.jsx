@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./scss/Section13Component.scss"
 
 export default function Section13Component(props) {
- const 공지 = [
+  const 공지 = [
     '묘묘 굿즈샵 1차 재입고 안내',
     '여름 한정 신메뉴 "재즈베리 하이볼" 출시',
     '8월 정기 공연 세션 공개!',
@@ -26,30 +27,32 @@ export default function Section13Component(props) {
           <ul>
             {공지.map((item, index) => (
               <li key={index}>
-                <div className="text-wrap">
+                <Link to="/ntc" className="text-wrap">   {/* 공지 클릭 시 공지사항 전체로 이동 */}
                   <span className="tag">[공지]</span>
                   <span className="text">{item}</span>
-                </div>
-                <span className="more">more &gt;</span>
+                </Link>
+                <Link to="/ntc" className="more">more &gt;</Link>  {/* more 클릭 시 공지사항 전체로 이동 */}
               </li>
             ))}
           </ul>
         </div>
 
+        {/* FAQ */}
         <div className="box">
           <h3>자주 묻는 묘한 질문들</h3>
           <ul>
             {질문.map((item, index) => (
               <li key={index}>
-                <div className="text-wrap">
+                <Link to="/faq" className="text-wrap">   {/* FAQ 클릭 시 FAQ 전체로 이동 */}
                   <span className="tag">[FAQ]</span>
                   <span className="text">{item}</span>
-                </div>
-                <span className="more">more &gt;</span>
+                </Link>
+                <Link to="/faq" className="more">more &gt;</Link> {/*  more 클릭 시 FAQ 전체로 이동 */}
               </li>
             ))}
           </ul>
         </div>
+
       </div>
     </div>
   );
