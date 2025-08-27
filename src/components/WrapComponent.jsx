@@ -67,7 +67,7 @@ import Sub086MmTk from "./wrap/sub/sub08Mm/Sub086MmTk.jsx";
 
 import Sub09Cart from "./wrap/sub/sub09Cart/Sub09Cart";
 import Page404Component from "./wrap/Page404Component";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./scss/WrapComponent.scss";
 import Sub10Wishlist from "./wrap/sub/sub10Wishlist/Sub10Wishlist";
 import { useDispatch, useSelector } from "react-redux";
@@ -79,12 +79,15 @@ import Sub06SignUp from "./wrap/sub/sub06Lg/Sub06SignUp";
 
 import ReactDaumPostcode from "./wrap/ReactDaumPostcode.jsx";
 import { signInAction } from "../store/signIn.js";
+import Sub035PreAdmin from "./wrap/sub/sub03Menu/Sub035PreAdmin.jsx";
+import Sub035PreAdminView from "./wrap/sub/sub03Menu/Sub035PreAdminView.jsx";
+import Sub035PreAdminEdit from "./wrap/sub/sub03Menu/Sub035PreAdminEdit.jsx";
 
 export default function WrapComponent(props) {
   /**인스턴스 생성 */
   const dispatch = useDispatch();
   const location = useLocation();
-
+  const Navigate = useNavigate();
   //추가 : 공통 가드/게이트
   const AdminRoute = ({ children }) => {
     if (!getIsAdmin()) return <Navigate to="/" replace />;
@@ -268,7 +271,7 @@ export default function WrapComponent(props) {
             path="/preAdminW"
             element={
               <AdminRoute>
-                <Sub035PreAdminWrite />
+                <Sub035PreWrite />
               </AdminRoute>
             }
           />
