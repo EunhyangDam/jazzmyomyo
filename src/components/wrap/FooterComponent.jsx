@@ -128,7 +128,7 @@ const{onClickA} = useCustomA();
               <a href="!#" onClick={(e)=>onClickA(e, '/monthly' )}> Schedule</a> |<a href="!#" onClick={(e)=>onClickA(e, '/ntc' )}> Community</a>
               {isAdmin && (
   <>
-    |<a href="!#" onClick={(e) => onClickA(e, "/mm")}> 회원관리 관리자페이지</a>
+     <br /> <a href="!#" onClick={(e) => onClickA(e, "/mm")}> 회원관리 관리자페이지</a>
   </>
 )}
             </div>

@@ -7,9 +7,53 @@
   font-family: $font1;
   color: #2c2c2c;
 
+  .drinks-container {
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 40px;
+    margin: 0 auto;
+  }
+
+  .breadcrumbs {
+    
+    font-family: $font1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 40px 0 24px 0;
+    padding-top: 30px;
+    font-size: 14px;
+    color: #666;
+    cursor: default;
+
+    .home {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      color: #666;
+      text-decoration: none;
+
+      i { font-size: 18px; line-height: 1; }
+      .sr { position: absolute; left: -9999px; }
+    }
+
+    a {
+      color: #666;
+      text-decoration: none;
+
+      &:hover { color: #000; text-decoration: underline; }
+    }
+
+    .sep { opacity: .5; }
+    strong { color: #000; }
+  }
+
   .title {
     text-align: center;
-    font-size: 150px;
+    font-size: 90px;
     font-weight: bold;
     color: $primary-color;
     margin-bottom: 40px;
@@ -189,11 +233,10 @@
     }
   }
 
-  /* 공통 하단 예약 버튼: 항상 아래쪽 */
   .floating-reserve {
     position: fixed;
     right: 90px;
-    bottom: 40px; /* ↓ 사전예약(아래) */
+    bottom: 40px;
     z-index: 1000;
     display: inline-flex;
     align-items: center;
@@ -224,11 +267,10 @@
     }
   }
 
-  /* TOP 버튼: 항상 위쪽(더 높은 bottom 값) */
   .top-btn {
     position: fixed;
     right: 120px;
-    bottom: 110px; /* ↑ TOP(위) : 사전예약보다 위 */
+    bottom: 110px; 
     z-index: 999;
     padding: 12px 15px;
     background-color: #512b2bc8;
@@ -248,9 +290,7 @@
   }
 
   @media all and (max-width: 1220px) {
-    .title {
-      font-size: 130px;
-    }
+
 
     .drink-section {
       .drink-grid {
@@ -260,15 +300,11 @@
       }
     }
 
-    /* 버튼 위치 재정렬: TOP이 위, 예약이 아래 */
     .floating-reserve { right: 60px; bottom: 32px; }
     .top-btn { right: 80px; bottom: 90px; }
   }
 
   @media all and (max-width: 800px) {
-    .title {
-      font-size: 120px;
-    }
 
     .drink-section {
       .drink-grid {
@@ -277,15 +313,11 @@
       }
     }
 
-    /* 버튼 위치 재정렬 */
     .floating-reserve { right: 40px; bottom: 28px; }
     .top-btn { right: 60px; bottom: 80px; }
   }
 
   @media all and (max-width: 600px) {
-    .title {
-      font-size: 100px;
-    }
 
     .drink-section {
       .drink-grid {
@@ -308,7 +340,6 @@
       }
     }
 
-    /* 버튼 위치 재정렬 */
     .floating-reserve { right: 20px; bottom: 24px; }
     .top-btn { right: 20px; bottom: 80px; }
   }
@@ -355,22 +386,28 @@
 
   }
 
-  @media all and (max-width: 380px) {
+  @media all and (max-width: 420px) {
     .title {
       font-size: 70px;
     }
 
     .drink-nav {
       ul {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); // 2개씩 한 줄
         gap: 10px;
-
+        justify-content: center;
+        padding: 0 20px;
+  
         li {
+          width: 100%;
+  
           a {
+            display: block;
+            width: 100%;
             font-size: 14px;
-            padding: 6px 14px;
+            padding: 8px 0; // 세로만 padding
+            text-align: center;
           }
         }
       }
@@ -393,6 +430,15 @@
         }
       }
     }
+
+  }
+
+  @media all and (max-width: 360px) {
+    .title {
+      font-size: 50px;
+    }
+
+
 
   }
 }

@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import "./scss/Sub035Pre.scss";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import useCustomA from "../../custom/useCustomA";
 
 export default function Sub03Pre() {
+  const { onClickA } = useCustomA();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -33,21 +35,16 @@ export default function Sub03Pre() {
         params: { page: 1, pageSize: 200 },
       })
       .then(({ data }) => {
-        if (!Array.isArray(data)) {
-          throw new Error("서버 응답 형식 오류");
-        }
+        if (!Array.isArray(data)) throw new Error("서버 응답 형식 오류");
 
-        let mapped = data.map((it, i) => {
-          return {
-            id: it.idx ?? i + 1,
-            title: it.title || "(제목 없음)",
-            author: it.writer_name ?? "익명",
-            date: it.reserveDate ?? "",
-            created: it.wDate ?? "",
-            // 'status' 필드명으로 통일하여 사용
-            status: it.status ?? "상태없음",
-          };
-        });
+        let mapped = data.map((it, i) => ({
+          id: it.idx ?? i + 1,
+          title: it.title || "(제목 없음)",
+          author: it.writer_name ?? "익명",
+          date: it.reserveDate ?? "",
+          created: it.wDate ?? "",
+          status: it.status ?? "상태없음",
+        }));
 
         if (deletedId !== null) {
           mapped = mapped.filter((item) => item.id !== deletedId);
@@ -55,8 +52,7 @@ export default function Sub03Pre() {
 
         const sorted = mapped.sort((a, b) => {
           const d = parseDate(b.created) - parseDate(a.created);
-          if (d !== 0) return d;
-          return (b.id ?? 0) - (a.id ?? 0);
+          return d !== 0 ? d : (b.id ?? 0) - (a.id ?? 0);
         });
 
         setPosts(sorted);
@@ -72,24 +68,21 @@ export default function Sub03Pre() {
   const currentPosts = posts.slice(indexOfFirst, indexOfLast);
 
   const goToPrev = () => currentPage > 1 && setCurrentPage((p) => p - 1);
-  const goToNext = () =>
-    currentPage < totalPages && setCurrentPage((p) => p + 1);
+  const goToNext = () => currentPage < totalPages && setCurrentPage((p) => p + 1);
 
   const handleWriteClick = () => {
     const isLoggedIn = (() => {
-      const userInfo = JSON.parse(localStorage.getItem("jazzmyomyo_sign_in")) || JSON.parse(sessionStorage.getItem("jazzmyomyo_sign_in"));
-         
-      console.log('userInfo:', userInfo);
-      console.log('isLoggedIn:', !!(userInfo && userInfo.아이디));
-      
+      const userInfo =
+        JSON.parse(localStorage.getItem("jazzmyomyo_sign_in")) ||
+        JSON.parse(sessionStorage.getItem("jazzmyomyo_sign_in"));
       return !!(userInfo && userInfo.아이디);
     })();
-    
+
     if (!isLoggedIn) {
       setShowLocalModal(true);
       return;
     }
-  
+
     navigate("/preW");
   };
 
@@ -98,113 +91,66 @@ export default function Sub03Pre() {
     navigate("/lg");
   };
 
-  const handleModalClose = () => {
-    setShowLocalModal(false);
-  };
+  const handleModalClose = () => setShowLocalModal(false);
 
   useEffect(() => {
-    const onEsc = (e) => {
-      if (e.key === "Escape") setShowLocalModal(false);
-    };
+    const onEsc = (e) => e.key === "Escape" && setShowLocalModal(false);
     window.addEventListener("keydown", onEsc);
     return () => window.removeEventListener("keydown", onEsc);
   }, []);
 
-  if (loading) {
-    return (
-      <section id="sub_pre">
-        <div className="clipboard">
-          <div className="clip" />
-          <div className="paper">
-            <h1>사전 예약 게시판</h1>
-            <p style={{ textAlign: "center", padding: "40px 0" }}>
-              불러오는 중…
-            </p>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (err) {
-    return (
-      <section id="sub_pre">
-        <div className="clipboard">
-          <div className="clip" />
-          <div className="paper">
-            <h1>사전 예약 게시판</h1>
-            <p
-              style={{ color: "#c00", textAlign: "center", padding: "40px 0" }}
-            >
-              데이터를 불러오지 못했어요. ({err})
-            </p>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section id="sub_pre">
       <div className="clipboard">
-        <div className="clip"></div>
+        <div className="clip" />
         <div className="paper">
+          <nav className="breadcrumbs" aria-label="breadcrumb">
+            <a href="/" className="home" onClick={(e) => onClickA(e, "/")}> 
+              <i className="bi bi-house-fill" aria-hidden="true" />
+              <span className="sr"></span>
+            </a>
+            <span className="sep"><i className="bi bi-chevron-right" /></span>
+            <a href="/menu" onClick={(e) => onClickA(e, "/menu")}>MENU</a>
+            <span className="sep"><i className="bi bi-chevron-right" /></span>
+            <strong>사전예약</strong>
+          </nav>
+
           <h1>사전 예약 게시판</h1>
+          <button className="write-button" onClick={handleWriteClick}>사전주문신청</button>
 
-          <button className="write-button" onClick={handleWriteClick}>
-            사전주문신청
-          </button>
+          {loading && <p style={{ textAlign: "center", padding: "40px 0" }}>불러오는 중…</p>}
+          {err && <p style={{ color: "#c00", textAlign: "center", padding: "40px 0" }}>데이터를 불러오지 못했어요. ({err})</p>}
 
-          {currentPosts.length === 0 && (
-            <div className="card" style={{ textAlign: "center", color: "#666" }}>
-              등록된 예약이 없습니다.
-            </div>
+          {!loading && !err && currentPosts.length === 0 && (
+            <div className="card" style={{ textAlign: "center", color: "#666" }}>등록된 예약이 없습니다.</div>
           )}
 
-          {currentPosts.map((post) => (
+          {!loading && !err && currentPosts.map((post) => (
             <div key={post.id} className="card">
-              <Link to={`/preV/view/${post.id}`} className="card-title">
+              <a
+                href={`/preV/view/${post.id}`}
+                className="card-title"
+                onClick={(e) => onClickA(e, `/preV/view/${post.id}`)}
+              >
                 {post.title || "(제목 없음)"}
-              </Link>
-
+              </a>
               <p className="card-type">
                 <span
-                  className={`type-label ${
-                    post.status === "예약완료"
-                      ? "complete"
-                      : post.status === "예약중"
-                      ? "progress"
-                      : post.status === "주문취소"
-                      ? "cancel"
-                      : ""
-                  }`}
+                  className={`type-label ${post.status === "예약완료" ? "complete" : post.status === "예약중" ? "progress" : post.status === "예약취소" ? "cancel" : ""}`}
                 >
                   {post.status || "상태없음"}
                 </span>
               </p>
-
-              <p>
-                <strong>작성자:</strong> {post.author || "-"}
-              </p>
-              <p>
-                <strong>예약일:</strong> {post.date || "-"}
-              </p>
-              <p>
-                <strong>작성일:</strong> {post.created ? post.created.split(" ")[0] : "-"}
-              </p>
+              <p><strong>작성자:</strong> {post.author || "-"}</p>
+              <p><strong>예약일:</strong> {post.date || "-"}</p>
+              <p><strong>작성일:</strong> {post.created ? post.created.split(" ")[0] : "-"}</p>
             </div>
           ))}
 
           <div className="pagination">
-            <button onClick={goToPrev} disabled={currentPage === 1}>
-              이전
-            </button>
-            <span>
-              {currentPage} / {totalPages}
-            </span>
-            <button onClick={goToNext} disabled={currentPage === totalPages}>
-              다음
-            </button>
+            <button onClick={goToPrev} disabled={currentPage === 1}>이전</button>
+            <span>{currentPage} / {totalPages}</span>
+            <button onClick={goToNext} disabled={currentPage === totalPages}>다음</button>
           </div>
         </div>
       </div>

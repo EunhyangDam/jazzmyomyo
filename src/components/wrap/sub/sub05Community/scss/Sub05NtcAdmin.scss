@@ -109,7 +109,7 @@
 
     .list-header {
       display: grid;
-      grid-template-columns: 90px 1fr 180px 140px 110px; 
+      grid-template-columns: 90px 1fr 180px 140px 110px;
       background: #efefef;
       border-bottom: 1px solid #d9dee3;
       padding: 30px 16px;
@@ -143,11 +143,7 @@
 
         &:hover { background: #fafbfc; }
 
-        .col-num {
-          text-align: center;
-          color: #333;
-          font-variant-numeric: tabular-nums;
-        }
+        .col-num { text-align: center; color: #333; font-variant-numeric: tabular-nums; }
 
         .col-title {
           min-width: 0;
@@ -160,7 +156,7 @@
             color: #1e2a2f;
             text-decoration: none;
             overflow: hidden;
-            white-space: nowrap;  
+            white-space: nowrap;
             text-overflow: ellipsis;
             font-weight: 500;
 
@@ -168,20 +164,12 @@
           }
         }
 
-        .col-date,
-        .col-writer,
-        .col-views {
-          text-align: center;
-          color: #4b545a;
-          font-variant-numeric: tabular-nums;
+        .col-date, .col-writer, .col-views {
+          text-align: center; color: #4b545a; font-variant-numeric: tabular-nums;
         }
       }
 
-      .no-result {
-        padding: 40px 16px;
-        text-align: center;
-        color: #7a858c;
-      }
+      .no-result { padding: 40px 16px; text-align: center; color: #7a858c; }
     }
   }
 
@@ -214,32 +202,64 @@
     }
   }
 
+  /* ============== 페이지네이션(박스형, 전역스타일 차단) ============== */
   .pagenation {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 6px;
-    margin-top: 10px;
+    margin-top: 16px;
 
     button {
-      min-width: 34px;
-      height: 34px;
-      padding: 0 8px;
-      border: 1px solid #d6dce0;
-      background: #fff;
-      color: #3a4247;
-      font-size: 13px;
+      /* 박스형 고정 */
+      min-width: 45px;
+      height: 40px;
+      padding: 0;
+
+      /* 전역/부트스트랩 리셋 */
+      appearance: none;
+      outline: none !important;
+      box-shadow: none !important;
+      border: 1px solid #999 !important;
+
+      background: #fff !important;
+      color: #3a4247 !important;
+      font-size: 14px;
       border-radius: 4px;
       cursor: pointer;
-      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      transition: background .15s, color .15s, border-color .15s;
 
-      &:hover:not(:disabled) { background: #f4f6f8; color: #000; }
-      &:disabled { opacity: 0.45; cursor: not-allowed; }
-      &.active { background: #1e2a2f; border-color: #1e2a2f; color: #fff; font-weight: 800; }
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      i.bi { font-size: 16px; line-height: 1; }
+
+      &:hover {
+        background: #f4f6f8 !important;
+        color: #000 !important;
+        border-color: #000 !important;
+      }
+
+      &.active {
+        background: #1e2a2f !important;
+        border-color: #1e2a2f !important;
+        color: #fff !important;
+        font-weight: 800;
+      }
+
+      &:disabled {
+        opacity: .45;
+        cursor: not-allowed;
+      }
     }
+
+    /* 양 끝 더블 화살표만 살짝 크게 */
+    button:first-child i.bi,
+    button:last-child  i.bi { font-size: 21px; }
   }
 
-
+  /* =================== 반응형 =================== */
   @media all and (max-width: 980px) {
     .title-row {
       grid-template-columns: 1fr;
@@ -293,8 +313,8 @@
     }
 
     .pagenation button {
-      min-width: 32px;
-      height: 32px;
+      min-width: 38px;
+      height: 34px;
       font-size: 12.5px;
     }
   }
@@ -316,7 +336,7 @@
     .notice-list {
       .list-header,
       .list-body .row {
-        grid-template-columns: 60px 1fr 130px; 
+        grid-template-columns: 60px 1fr 130px;
       }
 
       .list-header .col-writer,
@@ -348,7 +368,7 @@
 
     .pagenation { gap: 4px; }
     .pagenation button {
-      min-width: 30px;
+      min-width: 34px;
       height: 30px;
       font-size: 12px;
       padding: 0 6px;

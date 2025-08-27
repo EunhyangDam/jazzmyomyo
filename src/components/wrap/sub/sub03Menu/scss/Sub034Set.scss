@@ -8,13 +8,57 @@
   background: #fff;
   user-select: none;
 
+  .set-container {
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 40px;
+    margin: 0 auto;
+  }
+
+  .breadcrumbs {
+    
+    font-family: $font1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 40px 0 24px 0;
+    padding-top: 30px;
+    font-size: 14px;
+    color: #666;
+    cursor: default;
+
+    .home {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      color: #666;
+      text-decoration: none;
+
+      i { font-size: 18px; line-height: 1; }
+      .sr { position: absolute; left: -9999px; }
+    }
+
+    a {
+      color: #666;
+      text-decoration: none;
+
+      &:hover { color: #000; text-decoration: underline; }
+    }
+
+    .sep { opacity: .5; }
+    strong { color: #000; }
+  }
+
   .set-header {
     text-align: center;
     margin-bottom: 80px;
 
     h2 {
       font-family: $font2;
-      font-size: 150px;
+      font-size: 90px;
       margin-bottom: 10px;
       color: $primary-color;
     }
@@ -42,9 +86,7 @@
       align-items: center;
       justify-content: space-between;
 
-      &.row-reverse {
-        flex-direction: row-reverse;
-      }
+      &.row-reverse { flex-direction: row-reverse; }
 
       .set-img {
         cursor: pointer;
@@ -85,11 +127,7 @@
 
         ul {
           margin-bottom: 30px;
-
-        li {
-          font-size: 18px;
-          margin-bottom: 10px;
-        }
+          li { font-size: 18px; margin-bottom: 10px; }
         }
 
         .wine {
@@ -108,12 +146,9 @@
             color: #888;
           }
 
-          .sale {
-            color: #b62424;
-          }
+          .sale { color: #b62424; }
         }
 
-        /* 추가: 세트 카드 예약 버튼 */
         .reserve-btn {
           display: inline-flex;
           align-items: center;
@@ -121,7 +156,7 @@
           gap: 6px;
           margin-top: 16px;
           padding: 10px 18px;
-          width: auto;          /* 내용만큼 */
+          width: auto;
           max-width: 220px;
           border: 1px solid #8a5a5a;
           border-radius: 999px;
@@ -134,7 +169,6 @@
           transition: transform .08s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
 
           i { font-size: 18px; line-height: 1; }
-
           &:hover { background: #512b2b; color: #fff; box-shadow: 0 8px 20px rgba(81,43,43,.25); }
           &:active { transform: translateY(1px); }
           &:focus-visible { outline: 2px solid rgba(81,43,43,.6); outline-offset: 2px; }
@@ -200,7 +234,7 @@
         font-size: 25px;
         font-weight: 700;
         line-height: 1.8;
-        font-family: $font2;
+        font-family: $primary-color;
         color: $primary-color;
         text-align: center;
       }
@@ -233,7 +267,6 @@
         }
       }
 
-      /* 추가: 모달 예약 버튼 */
       .reserve-btn {
         display: inline-flex;
         align-items: center;
@@ -254,7 +287,6 @@
         transition: transform .08s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
 
         i { font-size: 18px; }
-
         &:hover { background: #512b2b; color: #fff; box-shadow: 0 8px 20px rgba(81,43,43,.25); }
         &:active { transform: translateY(1px); }
         &:focus-visible { outline: 2px solid rgba(81,43,43,.6); outline-offset: 2px; }
@@ -270,20 +302,10 @@
       cursor: pointer;
       background: none;
       border: none;
-      box-shadow: none;
 
-      i {
-        font-size: 40px;
-        color: #ffffff;
-      }
-
-      &.left {
-        left: calc(50% - 460px);
-      }
-
-      &.right {
-        right: calc(50% - 460px);
-      }
+      i { font-size: 40px; color: #fff; }
+      &.left { left: calc(50% - 460px); }
+      &.right { right: calc(50% - 460px); }
     }
 
     .modal-thumb {
@@ -296,25 +318,17 @@
       transition: all 0.3s ease;
       z-index: 1;
 
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      &:hover {
-        opacity: 0.6;
-        transform: scale(1.05);
-      }
-
-      &.left { order: 0; }
-      &.right { order: 4; }
+      img { width: 100%; height: 100%; object-fit: cover; }
+      &:hover { opacity: 0.6; transform: scale(1.05); }
     }
   }
+
+
 
   @media all and (max-width: 1340px) {
     padding: 0 20px;
   }
+
   @media all and (max-width: 1140px) {
     .modal {
       gap: 20px;
@@ -333,14 +347,12 @@
           flex-wrap: wrap;
           justify-content: center;
 
-          .img-item {
-            flex: 1 1 30%;
-            max-width: 200px;
-          }
+          .img-item { flex: 1 1 30%; max-width: 200px; }
         }
       }
     }
   }
+
   @media all and (max-width: 820px) {
     .modal {
       flex-direction: column;
@@ -350,15 +362,9 @@
         max-width: 95%;
         padding: 20px;
 
-        .modal-images {
-          .img-item {
-            max-width: 280px;
-            width: 100%;
-          }
-
-          .img-caption {
-            font-size: 13px;
-          }
+        .modal-images .img-item {
+          max-width: 280px;
+          width: 100%;
         }
       }
 
@@ -374,28 +380,23 @@
     }
 
     .set-header {
-      h2 { font-size: 90px; }
-      p {
-        font-size: 20px;
-        padding: 0 30px;
-      }
+      h2 { font-size:  80px; }
+      p { font-size: 20px; padding: 0 30px; }
     }
 
     .set-list .set-item {
       flex-direction: column !important;
       text-align: center;
 
-      .set-img {
-        max-width: 100%;
-        margin-bottom: 30px;
-      }
+      .set-img { max-width: 100%; margin-bottom: 30px; }
     }
   }
+
   @media all and (max-width: 620px) {
     .modal {
       flex-direction: column;
       align-items: center;
-  
+
       .modal-thumb {
         display: flex !important;
         flex-direction: row;
@@ -405,7 +406,7 @@
         margin-bottom: 20px;
         opacity: 0.4;
         gap: 12px;
-        
+
         img {
           width: 100px;
           aspect-ratio: 4 / 5;
@@ -415,57 +416,62 @@
           border-radius: 10px;
         }
       }
-  
+
       .modal-inner {
         max-width: 95%;
         padding: 20px;
-        .modal-images {
-          display: flex;
-          .img-item { max-width: 100px; }
-        }
+
+        .modal-images { display: flex; .img-item { max-width: 100px; } }
       }
     }
   }
+
   @media all and (max-width: 600px) {
-    .modal {
-      .modal-inner {
-        .modal-desc { font-size: 23px; line-height: 1.5; }
-        .modal-wine { font-size: 13px; margin-bottom: 10px; }
-        .modal-price { font-size: 14px; }
-      }
+    .modal .modal-inner {
+      .modal-desc { font-size: 23px; line-height: 1.5; }
+      .modal-wine { font-size: 13px; margin-bottom: 10px; }
+      .modal-price { font-size: 14px; }
     }
 
-    /* 선택: 모바일에선 예약 버튼을 꽉 차게 */
+    .set-header { h2 { font-size: 55px; } p {font-size: 18px;} }
+    .set-list .set-text { h3 { font-size: 35px !important; }  }
     .set-list .set-text .reserve-btn,
     .modal .modal-inner .reserve-btn {
       width: 100%;
       max-width: none;
     }
   }
+
   @media all and (max-width: 480px) {
-    .modal {
-      .modal-inner {
-        padding: 14px;
-        .modal-desc { font-size: 20px; line-height: 1.5; }
-        .modal-wine { font-size: 11px; margin-bottom: 10px; }
-        .modal-price { font-size: 12px; }
-      }
+    .modal .modal-inner {
+      padding: 14px;
+      .modal-desc { font-size: 20px; }
+      .modal-wine { font-size: 11px; }
+      .modal-price { font-size: 12px; }
     }
-    
+
     .modal-images .img-item .img-caption { font-size: 12px; }
-    .set-header {
-      h2 { font-size: 60px; }
-      p { font-size: 12px; }
-    }
-    .set-list .set-text {
-      h3 { font-size: 38px !important; }
-      ul li { font-size: 15px !important; }
-    }
+    .set-header { h2 { font-size: 45px; } p { font-size: 12px; } }
+    .set-list .set-text { h3 { font-size: 30px !important; } ul li { font-size: 15px !important; } }
   }
-  @media all and (max-width: 380px) {
+
+  @media all and (max-width: 400px) {
     .modal-inner { padding: 12px; }
     .modal-images .img-item .img-caption { font-size: 11px; }
-    .set-header h2 { font-size: 50px; }
-    .set-list .set-text h3 { font-size: 30px !important; }
+    .set-list .set-text h3 { font-size: 25px !important; }
   }
+
+  @media all and (max-width: 360px) {
+    .set-header { h2 { font-size: 40px; } p { font-size: 10px; } }
+  }
+}
+
+.set-item.fade-up {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s ease-out;
+}
+.set-item.show.fade-up {
+  opacity: 1;
+  transform: translateY(0);
 }

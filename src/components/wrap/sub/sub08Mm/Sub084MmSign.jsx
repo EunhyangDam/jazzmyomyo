@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./scss/Sub084MmSign.scss";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +6,8 @@ import {
   confirmModalAction,
   confirmModalYesNoAction,
 } from "../../../../store/confirmModal";
+
+import useCustomA from "../../custom/useCustomA";
 
 const STORAGE_KEY = "mm_signup_settings";
 const DEFAULT_SETTING = {
@@ -16,6 +17,8 @@ const DEFAULT_SETTING = {
 };
 
 function Sub084MmSign() {
+  const { onClickA } = useCustomA();
+
   const [approval, setApproval] = useState(DEFAULT_SETTING.approval);
   const [defaultGrade, setDefaultGrade] = useState(
     DEFAULT_SETTING.defaultGrade
@@ -25,7 +28,6 @@ function Sub084MmSign() {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.confirmModal);
 
-  // 초기 로드: 저장된 값 복원 / 없으면 기본값 저장
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -82,7 +84,6 @@ function Sub084MmSign() {
     }
   };
 
-  // 모달 닫힌 뒤 내부 초기화 (선택)
   useEffect(() => {
     if (
       (modal.heading === "회원가입 설정이 저장되었습니다." ||
@@ -101,13 +102,19 @@ function Sub084MmSign() {
           <h2>회원관리</h2>
           <ul>
             <li>
-              <Link to="/mm">회원리스트</Link>
+              <a href="/mm" onClick={(e) => onClickA(e, "/mm")}>
+                회원리스트
+              </a>
             </li>
             <li>
-              <Link to="/mmGrade">회원등급설정</Link>
+              <a href="/mmGrade" onClick={(e) => onClickA(e, "/mmGrade")}>
+                회원등급설정
+              </a>
             </li>
             <li className="active">
-              <Link to="/mmSign">회원가입설정</Link>
+              <a href="/mmSign" onClick={(e) => onClickA(e, "/mmSign")}>
+                회원가입설정
+              </a>
             </li>
           </ul>
         </aside>

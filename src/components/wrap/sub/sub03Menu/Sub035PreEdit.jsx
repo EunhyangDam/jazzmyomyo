@@ -214,7 +214,7 @@ function Sub035PreEdit() {
               <select name="status" value={form.status} onChange={handleChange}>
                 <option value="예약중">예약중</option>
                 <option value="예약완료">예약완료</option>
-                <option value="주문취소">주문취소</option>
+                <option value="예약취소">예약취소</option>
               </select>
               
               {/* <-- 4. 관리자 전용 댓글 입력란 추가 */}

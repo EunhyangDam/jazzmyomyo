@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import './scss/Sub033Food.scss';
 import useCustomA from "../../custom/useCustomA";
 
 export default function Sub033Food (){
-    
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [activeTab, setActiveTab] = useState("platter");
   const { onClickA } = useCustomA();
+
+  const rootRef = useRef(null);
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -56,66 +57,131 @@ export default function Sub033Food (){
     { title: "고르곤졸라 피자\n(40cm / 한판)", price: "₩8,000 /₩16,000", image: "./img/sub03Food/10-3slice.png", desc: "짭짤한 고르곤졸라와 꿀의 달콤한 하모니." }
   ];
 
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+  
+    let targets;
+    if (activeTab === "platter") {
+      targets = root.querySelectorAll(".platter-section .platter-box");
+    } else {
+      targets = root.querySelectorAll(".side-section .side-box");
+    }
+  
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+    );
+  
+    let cols = 3;
+    if (activeTab === "side") {
+      const grid = root.querySelector(".side-section .side-grid");
+      if (grid) {
+        const cs = getComputedStyle(grid);
+        cols = cs.gridTemplateColumns.split(" ").length || 3;
+      }
+    } else {
+      cols = 1;
+    }
+  
+    targets.forEach((el, i) => {
+      const row = Math.floor(i / cols);
+      el.style.transitionDelay = `${row * 0.12}s`;
+      io.observe(el);
+    });
+  
+    requestAnimationFrame(() => {
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      targets.forEach((el) => {
+        if (el.getBoundingClientRect().top < vh * 0.9) {
+          el.classList.add("show");
+        }
+      });
+    });
+  
+    return () => io.disconnect();
+  }, [activeTab]);
+
   return (
-    <div id="sub_food">
-      <div className="food-header">
-        <h2>FOOD</h2>
-        <div className="food-tabs">
-          <button className={activeTab === "platter" ? "on" : ""} onClick={() => setActiveTab("platter")}>플래터</button>
-          <button className={activeTab === "side" ? "on" : ""} onClick={() => setActiveTab("side")}>핑거푸드</button>
+    <div id="sub_food" ref={rootRef}>
+      <div className="food-container">
+        <nav className="breadcrumbs" aria-label="breadcrumb">
+          <a href="/" className="home" onClick={(e) => onClickA(e, "/")}>
+            <i className="bi bi-house-fill" aria-hidden="true" />
+            <span className="sr"></span>
+          </a>
+          <span className="sep"><i className="bi bi-chevron-right" /></span>
+          <a href="/" onClick={(e) => onClickA(e, "/menu")}>MENU</a>
+          <span className="sep"><i className="bi bi-chevron-right" /></span>
+          <strong>플래터&핑거푸드</strong>
+        </nav>
+
+        <div className="food-header">
+          <h2>FOOD</h2>
+          <div className="food-tabs">
+            <button className={activeTab === "platter" ? "on" : ""} onClick={() => setActiveTab("platter")}>플래터</button>
+            <button className={activeTab === "side" ? "on" : ""} onClick={() => setActiveTab("side")}>핑거푸드</button>
+          </div>
         </div>
-      </div>
 
-      {activeTab === "platter" && (
-        <section className="platter-section">
-          {platters.map((item, index) => (
-            <div className="platter-box" key={index}>
-              <div className="platter-img">
-                <img src={item.image} alt={item.title} />
-              </div>
-              <div className="platter-desc">
-                <h2>
-                  {item.title.split('\n').map((line, i) => (
-                    <React.Fragment key={i}>{line}<br/></React.Fragment>
-                  ))}
-                  <span>{item.price}</span>
-                </h2>
-                <p className="desc"><strong>구성:</strong> {item.desc.replace("구성: ", "")}</p>
-                <p><strong>추천 와인:</strong> {item.wine.replace("추천 와인: ", "")}</p>
-                <p className="explain">{item.explain}</p>
+        {activeTab === "platter" && (
+          <section className="platter-section">
+            {platters.map((item, index) => (
+              <div className="platter-box" key={index}>
+                <div className="platter-img">
+                  <img src={item.image} alt={item.title} />
+                </div>
+                <div className="platter-desc">
+                  <h2>
+                    {item.title.split('\n').map((line, i) => (
+                      <React.Fragment key={i}>{line}<br/></React.Fragment>
+                    ))}
+                    <span>{item.price}</span>
+                  </h2>
+                  <p className="desc"><strong>구성:</strong> {item.desc.replace("구성: ", "")}</p>
+                  <p><strong>추천 와인:</strong> {item.wine.replace("추천 와인: ", "")}</p>
+                  <p className="explain">{item.explain}</p>
 
-                <button
-                  type="button"
-                  className="reserve-btn"
-                  onClick={(e) => onClickA(e, "/pre")}
-                  aria-label="사전예약 바로가기"
-                >
-                  사전예약 바로가기
-                  <i className="bi bi-arrow-right-short" aria-hidden="true" />
-                </button>
-              </div>
-            </div>
-          ))}
-        </section>
-      )}
-
-      {activeTab === "side" && (
-        <section className="side-section">
-          <div className="side-grid">
-            {sides.map((item, index) => (
-              <div className="side-box" key={index} onClick={() => handleItemClick(item)}>
-                <img src={item.image} alt={item.title} />
-                <h3>{item.title}</h3>
-                <p>{item.price}</p>
+                  <button
+                    type="button"
+                    className="reserve-btn"
+                    onClick={(e) => onClickA(e, "/pre")}
+                    aria-label="사전예약 바로가기"
+                  >
+                    사전예약 바로가기
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
+                  </button>
+                </div>
               </div>
             ))}
-          </div>
-        </section>
-      )}
+          </section>
+        )}
+
+        {activeTab === "side" && (
+          <section className="side-section">
+            <div className="side-grid">
+              {sides.map((item, index) => (
+                <div className="side-box" key={index} onClick={() => handleItemClick(item)}>
+                  <img src={item.image} alt={item.title} />
+                  <h3>{item.title}</h3>
+                  <p>{item.price}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
 
       {modalOpen && selectedItem && (
         <div className="modal-overlay" onClick={() => setModalOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-content show" onClick={(e) => e.stopPropagation()}>
             <button className="close-btn" onClick={() => setModalOpen(false)}>×</button>
             <img src={selectedItem.image} alt={selectedItem.title} />
             <h3>{selectedItem.title}</h3>

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./scss/Sub081MmView.scss";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,11 @@ import {
   confirmModalYesNoAction,
 } from "../../../../store/confirmModal";
 
+import useCustomA from "../../custom/useCustomA";
+
 function Sub081MmView() {
+  const { onClickA } = useCustomA();
+
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,7 +24,6 @@ function Sub081MmView() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
 
-  // 1. location.state 값이 있는 경우 우선 반영
   useEffect(() => {
     const fromState = location.state?.member || location.state?.updatedMember;
     if (fromState && String(fromState.id) === String(id)) {
@@ -29,7 +32,6 @@ function Sub081MmView() {
     }
   }, [id, location.state]);
 
-  // 2. 서버에서 회원 상세 데이터 fetch
   useEffect(() => {
     if (!id) return;
     const url = `/jazzmyomyo/member_table_select.php`;
@@ -61,12 +63,10 @@ function Sub081MmView() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  // 삭제 후 목록 이동
   const goList = () => {
     navigate("/Mm", { state: member ? { updatedMember: member } : undefined });
   };
 
-  // 삭제 전 모달 열기
   const onAskDelete = () => {
     if (!member?.id) return alert("잘못된 접근입니다.");
     dispatch(
@@ -81,7 +81,6 @@ function Sub081MmView() {
     );
   };
 
-  // 삭제 확정 처리
   const deleteMember = async () => {
     try {
       const res = await axios.get("/jazzmyomyo/member_table_delete.php", {
@@ -99,7 +98,6 @@ function Sub081MmView() {
     }
   };
 
-  // 모달 응답 처리
   useEffect(() => {
     if (modal.isYes === true) {
       dispatch(confirmModalYesNoAction(false));
@@ -107,7 +105,6 @@ function Sub081MmView() {
     }
   }, [modal.isYes]);
 
-  // 등급 한글 변환
   const getGrade = (g) => {
     if (!g) return "-";
     if (g === "admin") return "관리자";
@@ -116,7 +113,6 @@ function Sub081MmView() {
     return g;
   };
 
-  // 성별 변환
   const getGender = (g) => {
     if (g === "남") return "남자";
     if (g === "여") return "여자";
@@ -139,7 +135,10 @@ function Sub081MmView() {
     return (
       <div id="sub081MmView">
         <div className="admin-wrap">
-          <main className="main" style={{ padding: 40, textAlign: "center", color: "#c00" }}>
+          <main
+            className="main"
+            style={{ padding: 40, textAlign: "center", color: "#c00" }}
+          >
             데이터를 불러오지 못했어요. ({err})
           </main>
         </div>
@@ -153,10 +152,34 @@ function Sub081MmView() {
         <aside className="sidebar">
           <h2>회원관리</h2>
           <ul>
-            <li><Link to="/mm" state={member ? { updatedMember: member } : undefined}>회원리스트</Link></li>
-            <li><Link to="/mmGrade">회원등급설정</Link></li>
-            <li><Link to="/mmSign">회원가입설정</Link></li>
-            <li className="active"><Link to={`/mmView/${id}`}>회원상세</Link></li>
+            <li>
+              <a
+                href="/mm"
+                onClick={(e) =>
+                  onClickA(e, "/mm", member ? { updatedMember: member } : undefined)
+                }
+              >
+                회원리스트
+              </a>
+            </li>
+            <li>
+              <a href="/mmGrade" onClick={(e) => onClickA(e, "/mmGrade")}>
+                회원등급설정
+              </a>
+            </li>
+            <li>
+              <a href="/mmSign" onClick={(e) => onClickA(e, "/mmSign")}>
+                회원가입설정
+              </a>
+            </li>
+            <li className="active">
+              <a
+                href={`/mmView/${id}`}
+                onClick={(e) => onClickA(e, `/mmView/${id}`)}
+              >
+                회원상세
+              </a>
+            </li>
           </ul>
         </aside>
 
@@ -167,31 +190,67 @@ function Sub081MmView() {
 
           {!member ? (
             <div className="member-detail">
-              <p style={{ textAlign: "center" }}>해당 회원 정보를 찾을 수 없습니다.</p>
+              <p style={{ textAlign: "center" }}>
+                해당 회원 정보를 찾을 수 없습니다.
+              </p>
               <div className="btn-group">
-                <button className="btn back" onClick={goList}>목록으로</button>
+                <button className="btn back" onClick={goList}>
+                  목록으로
+                </button>
               </div>
             </div>
           ) : (
             <div className="member-detail">
               <ul>
-                <li><strong>아이디</strong> {member.userId}</li>
-                <li><strong>이름</strong> {member.name}</li>
-                <li><strong>성별</strong> {getGender(member.gender)}</li>
-                <li><strong>생년월일</strong> {member.birth}</li>
-                <li><strong>연락처</strong> {member.phone}</li>
-                <li><strong>이메일</strong> {member.email}</li>
-                <li><strong>주소</strong> {member.addr}</li>
-                <li><strong>이메일 수신동의</strong> {member.consent}</li>
-                <li><strong>등급</strong> {getGrade(member.grade)}</li>
-                <li><strong>상태</strong> {member.status}</li>
-                <li><strong>가입일</strong> {member.joinedAt}</li>
+                <li>
+                  <strong>아이디</strong> {member.userId}
+                </li>
+                <li>
+                  <strong>이름</strong> {member.name}
+                </li>
+                <li>
+                  <strong>성별</strong> {getGender(member.gender)}
+                </li>
+                <li>
+                  <strong>생년월일</strong> {member.birth}
+                </li>
+                <li>
+                  <strong>연락처</strong> {member.phone}
+                </li>
+                <li>
+                  <strong>이메일</strong> {member.email}
+                </li>
+                <li>
+                  <strong>주소</strong> {member.addr}
+                </li>
+                <li>
+                  <strong>이메일 수신동의</strong> {member.consent}
+                </li>
+                <li>
+                  <strong>등급</strong> {getGrade(member.grade)}
+                </li>
+                <li>
+                  <strong>상태</strong> {member.status}
+                </li>
+                <li>
+                  <strong>가입일</strong> {member.joinedAt}
+                </li>
               </ul>
 
               <div className="btn-group">
-                <button className="btn back" onClick={goList}>목록으로</button>
-                <Link to={`/mmEdit/${member.id}`} className="btn" state={{ member }}>수정하기</Link>
-                <button className="btn delete" onClick={onAskDelete}>삭제하기</button>
+                <button className="btn back" onClick={goList}>
+                  목록으로
+                </button>
+                <a
+                  href={`/mmEdit/${member.id}`}
+                  className="btn"
+                  onClick={(e) => onClickA(e, `/mmEdit/${member.id}`, { member })}
+                >
+                  수정하기
+                </a>
+                <button className="btn delete" onClick={onAskDelete}>
+                  삭제하기
+                </button>
               </div>
             </div>
           )}

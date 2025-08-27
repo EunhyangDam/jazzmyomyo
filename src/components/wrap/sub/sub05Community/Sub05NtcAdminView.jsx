@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { useParams, useNavigate, useLocation, Link } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./scss/Sub05NtcAdminView.scss";
 import "../../scss/ConfirmModalComponent.scss";
@@ -124,31 +124,24 @@ function Sub05NtcAdminView() {
       </div>
     );
 
+  const html = String(notice.content || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/&lt;img\b([^&]*?)\/?&gt;/gi, (m, attrs) => {
+      const srcMatch =
+        attrs.match(/src\s*=\s*"([^"]*)"/i) || attrs.match(/src\s*=\s*'([^']*)'/i);
+      const altMatch =
+        attrs.match(/alt\s*=\s*"([^"]*)"/i) || attrs.match(/alt\s*=\s*'([^']*)'/i);
 
-const html = String(notice.content || "")
-  // 1) 전체 이스케이프
-  .replace(/&/g, "&amp;")
-  .replace(/</g, "&lt;")
-  .replace(/>/g, "&gt;")
-  // 2) 이스케이프된 <img ...>만 화이트리스트로 복원 (src만 허용)
-  .replace(/&lt;img\b([^&]*?)\/?&gt;/gi, (m, attrs) => {
-    const srcMatch =
-      attrs.match(/src\s*=\s*"([^"]*)"/i) || attrs.match(/src\s*=\s*'([^']*)'/i);
-    const altMatch =
-      attrs.match(/alt\s*=\s*"([^"]*)"/i) || attrs.match(/alt\s*=\s*'([^']*)'/i);
+      const src = srcMatch ? srcMatch[1] : "";
+      if (!/^\/|^https?:\/\//i.test(src)) return "";
+      const alt = altMatch ? altMatch[1] : "";
 
-    const src = srcMatch ? srcMatch[1] : "";
-    // src 안전성 간단 체크: /로 시작하거나 http(s)만 허용
-    if (!/^\/|^https?:\/\//i.test(src)) return "";
-    const alt = altMatch ? altMatch[1] : "";
-
-    return `<img src="${src}" alt="${alt}">`;
-  })
-  // 3) 줄바꿈 처리
-  .replace(/\r\n/g, "\n")
-  .replace(/\n/g, "<br />");
-
-
+      return `<img src="${src}" alt="${alt}">`;
+    })
+    .replace(/\r\n/g, "\n")
+    .replace(/\n/g, "<br />");
 
   const onClickDelete = () => {
     if (!notice?.id) {
@@ -179,7 +172,7 @@ const html = String(notice.content || "")
       if (txt.startsWith("1")) {
         setAskOpen(false);
         showToast("삭제 완료");
-        setTimeout(() => navigate("/ntcAdmin", { replace: true }), 250);
+        setTimeout(() => navigate(-1, { replace: true }), 250);
       } else {
         showToast("삭제 실패");
       }
@@ -194,9 +187,13 @@ const html = String(notice.content || "")
     <div id="Sub05NtcAdminView">
       <div className="container">
         <div className="sangdan">
-          <Link to="/">
+          <a
+            href="/mainComponent"
+            aria-label="홈으로"
+            onClick={(e) => onClickA(e, "/mainComponent")}
+          >
             <i className="bi bi-house-door-fill" />
-          </Link>
+          </a>
           <span className="sep">
             <i className="bi bi-chevron-right" />
           </span>
@@ -236,14 +233,17 @@ const html = String(notice.content || "")
           </div>
 
           <div className="foot">
-            <a href="!#" className="btn list" onClick={(e) => onClickA(e, "/ntcAdmin")}>
+            <a
+              href="/ntcAdmin"
+              className="btn list"
+              onClick={(e) => onClickA(e, "/ntcAdmin")}
+            >
               목록
             </a>
           </div>
         </div>
       </div>
 
-      {/* 여기부터: 모달 HTML만 ConfirmModalComponent 스타일 구조로 교체 */}
       {askOpen && (
         <div id="confirmModalComponent" onClick={confirmNo}>
           <div className="container">

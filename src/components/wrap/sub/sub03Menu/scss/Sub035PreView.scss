@@ -4,7 +4,7 @@
   margin-top: 100px;
   font-family: $font1;
   color: #222;
-  background: $sub-color3;
+  background: transparent;
   user-select: none;
 
   .board-view {
@@ -155,4 +155,42 @@
       }
     }
   }
+
+  @media (max-width: 500px) {
+    .board-view {
+      .view-header {
+        h2 {
+          font-size: 25px;
+        }
+        .view-meta {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+  @media (max-width: 420px) {
+    .board-view {
+      .view-header {
+        h2 {
+          font-size: 20px;
+        }
+        .view-meta {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+  @media (max-width: 380px) {
+    .board-view {
+      .view-header {
+        h2 {
+          font-size: 18px;
+        }
+        .view-meta {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+  
 }

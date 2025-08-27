@@ -71,8 +71,8 @@ export default function Sub032Drinks() {
                     type="button"
                     className="reserve-btn"
                     onClick={(e) => {
-                      e.stopPropagation();       // 카드 재뒤집힘 방지
-                      onClickA(e, "/pre");       // 사전예약 페이지 이동
+                      e.stopPropagation();
+                      onClickA(e, "/pre");
                     }}
                   >
                     사전예약 바로가기
@@ -89,41 +89,55 @@ export default function Sub032Drinks() {
 
   return (
     <div id="sub_drinks">
-      <h1 className="title">DRINKS</h1>
+      <div className="drinks-container"> 
 
-      <nav className="drink-nav">
-        <ul>
-          <li><a href="#beer" className={activeTab === 'beer' ? 'active' : ''} onClick={() => setActiveTab('beer')}>맥주</a></li>
-          <li><a href="#cocktail" className={activeTab === 'cocktail' ? 'active' : ''} onClick={() => setActiveTab('cocktail')}>칵테일</a></li>
-          <li><a href="#whisky" className={activeTab === 'whisky' ? 'active' : ''} onClick={() => setActiveTab('whisky')}>위스키</a></li>
-          <li><a href="#nonalcohol" className={activeTab === 'nonalcohol' ? 'active' : ''} onClick={() => setActiveTab('nonalcohol')}>무알콜</a></li>
-        </ul>
-      </nav>
+        <nav className="breadcrumbs" aria-label="breadcrumb">
+          <a href="/" className="home" onClick={(e) => onClickA(e, "/")}>
+            <i className="bi bi-house-fill" aria-hidden="true" />
+            <span className="sr">홈</span>
+          </a>
+          <span className="sep"><i className="bi bi-chevron-right" /></span>
+          <a href="/" onClick={(e) => onClickA(e, "/menu")}>MENU</a>
+          <span className="sep"><i className="bi bi-chevron-right" /></span>
+          <strong>주류&음료</strong>
+        </nav>
 
-      {renderSection('beer', '맥주', drinksData.beer)}
-      {renderSection('cocktail', '칵테일', drinksData.cocktail)}
-      {renderSection('whisky', '위스키', drinksData.whisky)}
-      {renderSection('nonalcohol', '무알콜 & 음료', drinksData.nonalcohol)}
+        <h1 className="title">DRINKS</h1>
 
-      <button
-        className="floating-reserve"
-        onClick={(e) => onClickA(e, "/pre")}
-        aria-label="사전예약 바로가기"
-      >
-        사전예약
-        <i className="bi bi-arrow-right-short" aria-hidden="true" />
-      </button>
+        <nav className="drink-nav">
+          <ul>
+            <li><a href="#beer" className={activeTab === 'beer' ? 'active' : ''} onClick={() => setActiveTab('beer')}>맥주</a></li>
+            <li><a href="#cocktail" className={activeTab === 'cocktail' ? 'active' : ''} onClick={() => setActiveTab('cocktail')}>칵테일</a></li>
+            <li><a href="#whisky" className={activeTab === 'whisky' ? 'active' : ''} onClick={() => setActiveTab('whisky')}>위스키</a></li>
+            <li><a href="#nonalcohol" className={activeTab === 'nonalcohol' ? 'active' : ''} onClick={() => setActiveTab('nonalcohol')}>무알콜</a></li>
+          </ul>
+        </nav>
 
-      <button
-        className="top-btn"
-        onClick={() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
-          document.body.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-      >
-        TOP
-      </button>
+        {renderSection('beer', '맥주', drinksData.beer)}
+        {renderSection('cocktail', '칵테일', drinksData.cocktail)}
+        {renderSection('whisky', '위스키', drinksData.whisky)}
+        {renderSection('nonalcohol', '무알콜 & 음료', drinksData.nonalcohol)}
+
+        <button
+          className="floating-reserve"
+          onClick={(e) => onClickA(e, "/pre")}
+          aria-label="사전예약 바로가기"
+        >
+          사전예약
+          <i className="bi bi-arrow-right-short" aria-hidden="true" />
+        </button>
+
+        <button
+          className="top-btn"
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
+            document.body.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        >
+          TOP
+        </button>
+      </div>
     </div>
   );
 }

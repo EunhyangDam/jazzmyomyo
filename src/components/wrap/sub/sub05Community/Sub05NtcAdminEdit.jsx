@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate, Link, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import "./scss/Sub05NtcAdminEdit.scss";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { confirmModalAction, confirmModalYesNoAction } from "../../../../store/confirmModal";
+
+import useCustomA from "../../custom/useCustomA";
 
 function Sub05NtcAdminEdit() {
   const { id } = useParams();
@@ -12,6 +14,7 @@ function Sub05NtcAdminEdit() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const modal = useSelector((s) => s.confirmModal);
+  const { onClickA } = useCustomA();
 
   const [form, setForm] = useState({
     title: "",
@@ -54,8 +57,6 @@ function Sub05NtcAdminEdit() {
 
   useEffect(() => {
     const state = location.state;
-
-    // 1) state가 있으면 우선 화면에 표시(빠른 첫 렌더용)
     if (state && (state.idx || state.id)) {
       setForm({
         title: state.subject ?? state.wSubject ?? "",
@@ -67,7 +68,6 @@ function Sub05NtcAdminEdit() {
       });
     }
 
-    // 2) 항상 서버에서 최신값 재조회 → wUpdate 포함해 덮어쓰기
     const load = async () => {
       try {
         const res = await axios.get(`/jazzmyomyo/notice_table_select.php?_t=${Date.now()}`, {
@@ -94,7 +94,7 @@ function Sub05NtcAdminEdit() {
           content: found.wContent ?? "",
           writer: found.wName ?? "관리자",
           createdAt: found.wDate ?? "",
-          updatedAt: found.wUpdate ?? "", // ★ 최신 수정일 반영
+          updatedAt: found.wUpdate ?? "",
           file: null,
         }));
       } catch {
@@ -112,12 +112,12 @@ function Sub05NtcAdminEdit() {
     };
 
     if (id) load();
-  }, [id]); // deps 간단화
+  }, [id]);
 
   useEffect(() => {
     if (modal.heading === "수정되었습니다." && modal.isON) {
       dispatch(confirmModalYesNoAction(false));
-      navigate(`/ntcAdminV/${id}?r=${Date.now()}`); // 상세 재로딩 유도
+      navigate(`/ntcAdminV/${id}?r=${Date.now()}`);
     }
     if (modal.heading === "잘못된 접근입니다." && modal.isON) {
       dispatch(confirmModalYesNoAction(false));
@@ -204,7 +204,7 @@ function Sub05NtcAdminEdit() {
       });
 
       if (String(res.data).trim() === "1") {
-        setForm((p) => ({ ...p, updatedAt: today })); // 즉시 화면에도 반영
+        setForm((p) => ({ ...p, updatedAt: today }));
         dispatch(
           confirmModalAction({
             heading: "수정되었습니다.",
@@ -245,7 +245,12 @@ function Sub05NtcAdminEdit() {
     <div id="Sub05NtcAdminEdit">
       <div className="container">
         <div className="sangdan">
-          <Link to="/"><i className="bi bi-house-door-fill" /></Link>
+          <a
+            href="/"
+            onClick={(e) => onClickA(e, "/")}
+          >
+            <i className="bi bi-house-door-fill" />
+          </a>
           <span className="sep"><i className="bi bi-chevron-right" /></span>
           <span className="admin">관리자페이지</span>
           <span className="sep"><i className="bi bi-chevron-right" /></span>

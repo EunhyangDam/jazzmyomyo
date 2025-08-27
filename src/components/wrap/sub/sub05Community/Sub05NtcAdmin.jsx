@@ -1,10 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import "./scss/Sub05NtcAdmin.scss";
 
+import useCustomA from "../../custom/useCustomA";
+
 function Sub05NtcAdmin() {
+  const { onClickA } = useCustomA();
+
   const [state, setState] = React.useState({
     공지사항: [],
     필터공지사항: [],
@@ -29,26 +33,35 @@ function Sub05NtcAdmin() {
   const dateOnly = (s) => {
     if (!s) return "";
     const t = String(s).trim();
-    const m = t.match(/^(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})/);
-    if (m) return `${m[1]}.${String(m[2]).padStart(2,"0")}.${String(m[3]).padStart(2,"0")}`;
+
+    const m = t.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/);
+    if (m) {
+      return `${m[1]}.${String(m[2]).padStart(2, "0")}.${String(m[3]).padStart(2, "0")}`;
+    }
+
     const p = t.split(/[ T]/)[0];
-    const m2 = p.match(/^(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})$/);
-    if (m2) return `${m2[1]}.${String(m2[2]).padStart(2,"0")}.${String(m2[3]).padStart(2,"0")}`;
+    const m2 = p.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})$/);
+    if (m2) {
+      return `${m2[1]}.${String(m2[2]).padStart(2, "0")}.${String(m2[3]).padStart(2, "0")}`;
+    }
+
     return p;
   };
 
-  // 1) 캐시가 있으면 즉시 그걸로 렌더(깜빡임 방지)
   React.useEffect(() => {
     try {
       const cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || "null");
       if (cached && Array.isArray(cached)) {
-        setState((p) => ({ ...p, 공지사항: cached, 필터공지사항: cached }));
-        setLoaded(true); // 캐시가 있으면 즉시 보여줌
+        setState((p) => ({
+          ...p,
+          공지사항: cached,
+          필터공지사항: cached,
+        }));
+        setLoaded(true);
       }
     } catch {}
   }, []);
 
-  // 2) 실제 최신 목록은 백그라운드로 가져와서 덮어쓰기
   React.useEffect(() => {
     let aborted = false;
     const fetchList = async () => {
@@ -75,15 +88,15 @@ function Sub05NtcAdmin() {
             _rowId: `${item.idx}-${i}`,
           }));
 
-        setState((p) => ({ ...p, 공지사항: list, 필터공지사항: list }));
-
-        // 캐시 갱신
+        setState((p) => ({
+          ...p,
+          공지사항: list,
+          필터공지사항: list,
+        }));
         try {
           sessionStorage.setItem(CACHE_KEY, JSON.stringify(list));
         } catch {}
-
       } catch {
-        // 실패해도 기존 화면 유지
       } finally {
         if (!aborted) {
           const id = setTimeout(() => setLoaded(true), 0);
@@ -138,25 +151,35 @@ function Sub05NtcAdmin() {
 
   const isEmptyAll = state.공지사항.length === 0;
   const isEmptyFiltered = !isEmptyAll && totalItems === 0;
-
-  // 캐시가 있으면 loaded가 아직 false여도 즉시 렌더
   const ready = loaded || state.공지사항.length > 0;
 
   return (
     <div id="sub05NtcAdmin">
       <div className="container">
         <div className="sangdan">
-          <Link to="/mainComponent" aria-label="홈으로">
+          <a
+            href="/mainComponent"
+            aria-label="홈으로"
+            onClick={(e) => onClickA(e, "/mainComponent")}
+          >
             <i className="bi bi-house-door-fill" />
-          </Link>
-          <span className="sep"><i className="bi bi-chevron-right"></i></span>
+          </a>
+        <span className="sep">
+            <i className="bi bi-chevron-right"></i>
+          </span>
           <span className="admin">관리자페이지</span>
         </div>
 
         <div className="title-row">
-          <h2><i className="bi bi-gear"></i> 공지사항 관리자</h2>
+          <h2>
+            <i className="bi bi-gear"></i> 공지사항 관리자
+          </h2>
           <form className="search-form" onSubmit={onSubmitSearch}>
-            <select value={state.검색조건} onChange={onChangeFilter} aria-label="검색조건 선택">
+            <select
+              value={state.검색조건}
+              onChange={onChangeFilter}
+              aria-label="검색조건 선택"
+            >
               <option value="">검색조건</option>
               <option value="subject">제목</option>
               <option value="date">날짜</option>
@@ -194,20 +217,22 @@ function Sub05NtcAdmin() {
                   <li key={item._rowId} className="row">
                     <span className="col-num">{runningNumber}</span>
                     <span className="col-title">
-                      <Link
-                        to={`/ntcAdminV/${item.idx}`}
-                        state={{
-                          idx: item.idx,
-                          subject: item.subject,
-                          date: item.date,
-                          writer: item.name,
-                          views: item.hit,
-                          content: item.content,
-                          file: item.file,
-                        }}
+                      <a
+                        href={`/ntcAdminV/${item.idx}`}
+                        onClick={(e) =>
+                          onClickA(e, `/ntcAdminV/${item.idx}`, {
+                            idx: item.idx,
+                            subject: item.subject,
+                            date: item.date,
+                            writer: item.name,
+                            views: item.hit,
+                            content: item.content,
+                            file: item.file,
+                          })
+                        }
                       >
                         {item.subject}
-                      </Link>
+                      </a>
                     </span>
                     <span className="col-date">{dateOnly(item.date)}</span>
                     <span className="col-writer">{item.name}</span>
@@ -220,17 +245,32 @@ function Sub05NtcAdmin() {
         </div>
 
         <div className="list-actions">
-          <Link to="/ntcAdminW" className="write-btn">글쓰기</Link>
+          <a
+            href="/ntcAdminW"
+            className="write-btn"
+            onClick={(e) => onClickA(e, "/ntcAdminW")}
+          >
+            글쓰기
+          </a>
         </div>
 
-        {ready && (
+        {ready && totalPages > 1 && (
           <div className="pagenation" role="navigation" aria-label="페이지네이션">
-            <button onClick={() => setCurrentPage(1)} disabled={currentPage === 1} aria-label="첫 페이지">
-              <i className="bi bi-chevron-double-left"></i>
-            </button>
-            <button onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1} aria-label="이전 페이지">
-              <i className="bi bi-chevron-left"></i>
-            </button>
+            {/* 맨처음 */}
+            {currentPage > 1 && (
+              <button onClick={() => setCurrentPage(1)} aria-label="첫 페이지">
+                <i className="bi bi-chevron-double-left"></i>
+              </button>
+            )}
+
+            {/* 이전 */}
+            {currentPage > 1 && (
+              <button onClick={() => setCurrentPage((p) => p - 1)} aria-label="이전 페이지">
+                <i className="bi bi-chevron-left"></i>
+              </button>
+            )}
+
+            {/* 페이지 번호 */}
             {Array.from({ length: totalPages }, (_, i) => (
               <button
                 key={`page-${i + 1}`}
@@ -241,20 +281,23 @@ function Sub05NtcAdmin() {
                 {i + 1}
               </button>
             ))}
-            <button
-              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              disabled={currentPage === totalPages}
-              aria-label="다음 페이지">
-              <i className="bi bi-chevron-right"></i>
-            </button>
-            <button
-              onClick={() => setCurrentPage(totalPages)}
-              disabled={currentPage === totalPages}
-              aria-label="마지막 페이지">
-              <i className="bi bi-chevron-double-right"></i>
-            </button>
+
+            {/* 다음 */}
+            {currentPage < totalPages && (
+              <button onClick={() => setCurrentPage((p) => p + 1)} aria-label="다음 페이지">
+                <i className="bi bi-chevron-right"></i>
+              </button>
+            )}
+
+            {/* 맨끝 */}
+            {currentPage < totalPages && (
+              <button onClick={() => setCurrentPage(totalPages)} aria-label="마지막 페이지">
+                <i className="bi bi-chevron-double-right"></i>
+              </button>
+            )}
           </div>
         )}
+
       </div>
     </div>
   );

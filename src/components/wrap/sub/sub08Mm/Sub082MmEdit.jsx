@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./scss/Sub082MmEdit.scss";
 import axios from "axios";
 
@@ -10,7 +10,11 @@ import {
   confirmModalYesNoAction,
 } from "../../../../store/confirmModal";
 
+import useCustomA from "../../custom/useCustomA";
+
 function Sub082MmEdit() {
+  const { onClickA } = useCustomA();
+
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,19 +32,19 @@ function Sub082MmEdit() {
     userId: m.userId ?? "",
     name: m.name ?? "",
     gender:
-    m.gender === "남자" ? "남" :
-    m.gender === "여자" ? "여" :
-    m.gender === "남" || m.gender === "여" ? m.gender : "",
+      m.gender === "남자" ? "남" :
+      m.gender === "여자" ? "여" :
+      m.gender === "남" || m.gender === "여" ? m.gender : "",
     birth: m.birth ?? "",
     phone: m.phone ?? "",
     email: m.email ?? "",
     addr: m.addr ?? "",
     consent: m.consent ?? m.agree ?? "Y",
     grade:
-  m.grade === "일반" ? "일반회원" :
-  m.grade === "단골" ? "단골회원" :
-  m.grade === "관리자" ? "관리자" :
-  m.grade, // 혹시라도 다른 값 대비
+      m.grade === "일반" ? "일반회원" :
+      m.grade === "단골" ? "단골회원" :
+      m.grade === "관리자" ? "관리자" :
+      m.grade,
     status: normalizeStatus(m.status),
     joinedAt: m.joinedAt ?? "",
   });
@@ -100,12 +104,12 @@ function Sub082MmEdit() {
         email: form.email,
         addr: form.addr,
         consent: form.consent,
-        grade: form.grade, 
+        grade: form.grade,
         status: form.status,
       };
-  
+
       const res = await axios.post("/jazzmyomyo/member_table_update.php", payload);
-  
+
       if (res.data?.ok) {
         dispatch(
           confirmModalAction({
@@ -125,7 +129,6 @@ function Sub082MmEdit() {
       alert("저장 중 오류 발생");
     }
   };
-  
 
   useEffect(() => {
     if (modal.heading === "수정되었습니다." && modal.isON) {
@@ -187,16 +190,27 @@ function Sub082MmEdit() {
           <h2>회원관리</h2>
           <ul>
             <li>
-              <Link to="/mm">회원리스트</Link>
+              <a href="/mm" onClick={(e) => onClickA(e, "/mm")}>
+                회원리스트
+              </a>
             </li>
             <li>
-              <Link to="/mmGrade">회원등급설정</Link>
+              <a href="/mmGrade" onClick={(e) => onClickA(e, "/mmGrade")}>
+                회원등급설정
+              </a>
             </li>
             <li>
-              <Link to="/mmSign">회원가입설정</Link>
+              <a href="/mmSign" onClick={(e) => onClickA(e, "/mmSign")}>
+                회원가입설정
+              </a>
             </li>
             <li className="active">
-              <Link to={`/mmEdit/${form.id}`}>회원수정</Link>
+              <a
+                href={`/mmEdit/${form.id}`}
+                onClick={(e) => onClickA(e, `/mmEdit/${form.id}`)}
+              >
+                회원수정
+              </a>
             </li>
           </ul>
         </aside>
@@ -208,6 +222,7 @@ function Sub082MmEdit() {
 
           <div className="edit-form">
             <div className="grid">
+              {/* 폼 구성 그대로 유지 */}
               <div className="form-group">
                 <label htmlFor="userId">아이디</label>
                 <input
@@ -348,7 +363,6 @@ function Sub082MmEdit() {
                   </label>
                 </div>
               </div>
-
 
               <div className="form-group">
                 <label>상태</label>

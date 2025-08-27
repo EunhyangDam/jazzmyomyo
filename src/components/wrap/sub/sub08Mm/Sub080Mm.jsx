@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useMemo, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./scss/Sub080Mm.scss";
 import axios from "axios";
 
@@ -10,7 +10,11 @@ import {
   confirmModalYesNoAction,
 } from "../../../../store/confirmModal";
 
+import useCustomA from "../../custom/useCustomA";
+
 function Sub080Mm() {
+  const { onClickA } = useCustomA();
+
   const [members, setMembers] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [sortKey, setSortKey] = useState("joinDesc");
@@ -38,11 +42,9 @@ function Sub080Mm() {
     setLoading(true);
     setErr(null);
   
-    // 1) 먼저 동기화 실행
     axios
       .get(syncUrl, { headers: { "Cache-Control": "no-cache" } })
       .then(() => {
-        // 2) 그 다음 회원목록 가져오기
         return axios.get(url, { headers: { "Cache-Control": "no-cache" } });
       })
       .then((res) => {
@@ -140,14 +142,12 @@ function Sub080Mm() {
   
       const ids = Array.from(selected);
   
-      // 🔸 서버에 삭제 요청 보내기
       Promise.all(
         ids.map(idx =>
           axios.get("/jazzmyomyo/member_table_delete.php", { params: { idx } })
         )
       )
         .then(() => {
-          // 성공하면 프론트 state에서도 제거
           setMembers(prev => prev.filter(m => !selected.has(m.id)));
           setSelected(new Set());
           dispatch(
@@ -244,13 +244,13 @@ function Sub080Mm() {
           <h2>회원관리</h2>
           <ul>
             <li className="active">
-              <a href="#!">회원리스트</a>
+              <a href="/" onClick={(e) => onClickA(e, "/mm")}>회원리스트</a>
             </li>
             <li>
-              <Link to="/mmGrade">회원등급설정</Link>
+              <a href="/mmGrade" onClick={(e) => onClickA(e, "/mmGrade")}>회원등급설정</a>
             </li>
             <li>
-              <a href="/mmSign">회원가입설정</a>
+              <a href="/mmSign" onClick={(e) => onClickA(e, "/mmSign")}>회원가입설정</a>
             </li>
           </ul>
         </aside>
@@ -317,7 +317,7 @@ function Sub080Mm() {
             {paged.length === 0 ? (
               <div className="empty">검색 결과가 없습니다.</div>
             ) : (
-              <ul className="member-list" role="list">
+              <ul className="member-list">
                 {paged.map((m, idx) => (
                   <li className="member-row" key={m.id}>
                     <div className="col col-check" data-label="선택">
@@ -335,13 +335,13 @@ function Sub080Mm() {
                       {m.userId}
                     </div>
                     <div className="col col-name" data-label="이름">
-                      <Link
-                        to={`/mmView/${m.id}`}
+                      <a
+                        href={`/mmView/${m.id}`}
                         className="name-link"
-                        state={{ member: m }}
+                        onClick={(e) => onClickA(e, `/mmView/${m.id}`, { member: m })}
                       >
                         {m.name}
-                      </Link>
+                      </a>
                     </div>
                     <div className="col col-gender" data-label="성별">
                       {getGender(m.gender)}

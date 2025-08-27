@@ -183,7 +183,7 @@ export default function HeaderComponent(props) {
                 <a
                   href="!#"
                   className="icon"
-                  onClick={(e) => clickIcon(e, "/mp")}
+                  onClick={(e) => onClickA(e, "/mp")}
                 >
                   <i className="fa-regular fa-user"></i>
                 </a>
@@ -191,7 +191,7 @@ export default function HeaderComponent(props) {
                 <a
                   href="!#"
                   className="icon"
-                  onClick={(e) => clickIcon(e, "/lg")}
+                  onClick={(e) => onClickA(e, "/lg")}
                 >
                   <i className="fa-regular fa-user"></i>
                 </a>
@@ -199,7 +199,7 @@ export default function HeaderComponent(props) {
               <a
                 href="!#"
                 className="icon"
-                onClick={(e) => clickIcon(e, "/wishlist")}
+                onClick={(e) => onClickA(e, "/wishlist")}
               >
                 <i className="fa-regular fa-heart"></i>
               </a>
