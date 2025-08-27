@@ -224,21 +224,19 @@ export default function Sub085MmLental(){
                         </tr>
                       ) : (
                         rows.map((r, i) => (
-                          <tr key={r.id}>
-                            <td>{startNo + i}</td>
-                            <td>{(r.created_at || "").slice(0, 10)}</td>
-                            <td>{r.name}</td>
-                            <td>
+                          <tr key={r.id} className="card-row">
+                            <td data-label="번호">{startNo + i}</td>
+                            <td data-label="신청일">{(r.created_at || "").slice(0, 10)}</td>
+                            <td data-label="이름">{r.name}</td>
+                            <td data-label="대관신청서">
                               {r.file_orig_name ? (
                                 <button type="button" className="file-link" onClick={() => onClickFile(r)}>
                                   {r.file_orig_name}
                                 </button>
-                              ) : (
-                                "-"
-                              )}
+                              ) : ("-")}
                             </td>
-                            <td>{r.phone}</td>
-                            <td>{r.email}</td>
+                            <td data-label="연락처">{r.phone}</td>
+                            <td data-label="이메일">{r.email}</td>
                           </tr>
                         ))
                       )}

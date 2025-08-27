@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { confirmModalAction } from "../../../../store/confirmModal";
-import "./scss/Sub085MmLental.scss";
+import "./scss/Sub086MmTk.scss";
 
 export default function Sub086MmTk() {
   const dispatch = useDispatch();
@@ -135,7 +135,7 @@ export default function Sub086MmTk() {
   }, [derivedRows, page, perPage]);
 
   return (
-    <div id="Sub085MmLental">
+    <div id="Sub086MmTk">
       <div className="rental-list">
         <aside className="sidebar">
           <h2>회원관리</h2>
@@ -232,7 +232,7 @@ export default function Sub086MmTk() {
               <thead>
                 <tr>
                   <th>예약번호</th>
-                  <th>회원유무</th>
+                  <th>공연명</th>
                   <th>예매일</th>
                   <th>공연일</th>
                   <th>예매인원</th>
@@ -246,23 +246,21 @@ export default function Sub086MmTk() {
               <tbody>
                 {pagedRows.length === 0 ? (
                   <tr>
-                    <td colSpan={10} className="empty">
-                      데이터가 없습니다.
-                    </td>
+                    <td colSpan={10} className="empty">데이터가 없습니다.</td>
                   </tr>
                 ) : (
                   pagedRows.map((r) => (
-                    <tr key={r.id}>
-                      <td>{r.id}</td>
-                      <td>{transResType(r.resType)}</td>
-                      <td>{asDate(r.createdAt)}</td>
-                      <td>{asDate(r.scheduleDate)}</td>
-                      <td>{r.peopleCount}</td>
-                      <td>{r.userName}</td>
-                      <td>{displayUserId(r)}</td>
-                      <td>{r.userHp}</td>
-                      <td>{r.userEmail}</td>
-                      <td>{transOrderStatus(r.orderStatus)}</td>
+                    <tr key={r.id} className="card-row">{/* ← 추가: 모바일 카드형용 클래스 */}
+                      <td data-label="예약번호">{r.id}</td>
+                      <td data-label="공연명">{r.productName}</td>
+                      <td data-label="예매일">{asDate(r.createdAt)}</td>
+                      <td data-label="공연일">{asDate(r.scheduleDate)}</td>
+                      <td data-label="예매인원">{r.peopleCount}</td>
+                      <td data-label="이름">{r.userName}</td>
+                      <td data-label="아이디">{displayUserId(r)}</td>
+                      <td data-label="연락처">{r.userHp}</td>
+                      <td data-label="이메일">{r.userEmail}</td>
+                      <td data-label="예매상태">{transOrderStatus(r.orderStatus)}</td>
                     </tr>
                   ))
                 )}

@@ -2,6 +2,7 @@ import React from "react";
 import "./scss/Sub04Lental.scss";
 import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { confirmModalAction } from "../../../../store/confirmModal";
 import SiteMapComponent from "../../custom/SiteMapComponent"
@@ -502,7 +503,6 @@ function Sub04Lental(props) {
           <p className="apply-notice">
             대관신청 전 반드시 대관규약 확인 후 신청 바랍니다.
           </p>
-
           <div className="apply-box">
             {/* <!-- 왼쪽 --> */}
             <div className="contact-info">
@@ -521,7 +521,16 @@ function Sub04Lental(props) {
                   <p>jazzmyomyo@gmail.com</p>
                 </li>
               </ul>
+              <div className="gap-lental">
+                <div className="move-btn">
+                  <Link to="/lentalCh">
+                      대관조회 바로가기
+                  </Link>
+                </div>
+              </div>
+
             </div>
+
 
             {/* <!-- 오른쪽 --> */}
             <form 

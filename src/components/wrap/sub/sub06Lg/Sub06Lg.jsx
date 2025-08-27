@@ -70,7 +70,7 @@ function Sub06Lg(props) {
     axios({
       url: "/jazzmyomyo/sign_in.php",
       method: "POST",
-      data: formData, withCredentials: true, // 세션 쿠키 저장 (PHPSESSID)
+      data: formData, withCredentials: true,
     })
       .then((res) => {
         console.log(res.data);
@@ -100,11 +100,6 @@ function Sub06Lg(props) {
               isConfirm: false,
             };
             dispatch(confirmModalAction(obj));
-
-             // [여기 추가!!] ---------------------------------
-            // 관리자 아이디면 role=admin, 아니면 user
-            localStorage.setItem("role", res.data.아이디 === "jazzmyomyo" ? "admin" : "user");
-            // -----------------------------------------------
 
             // 로그인 정보 리덕스 signIn.js
             // 자동로그인 정보 res.data {}
@@ -141,6 +136,7 @@ function Sub06Lg(props) {
                     type="text"
                     name="userId"
                     id="userId"
+                    placeholder="아이디를 입력해주세요"
                     value={state.아이디}
                     onChange={onChangeUserId}
                   />
@@ -154,6 +150,7 @@ function Sub06Lg(props) {
                     type="password"
                     name="userPw"
                     id="userPw"
+                    placeholder="비밀번호를 입력해주세요"
                     value={state.비밀번호}
                     onChange={onChangeUserPw}
                   />
@@ -173,9 +170,9 @@ function Sub06Lg(props) {
                   </label>
 
                   <div className="find">
-                    <a href="/find-id">아이디</a>
+                    <Link to="/searchId?tab=findId">아이디</Link>
                     <span className="bar">|</span>
-                    <a href="/find-password">비밀번호 찾기</a>
+                    <Link to="/searchId?tab=findPw">비밀번호 찾기</Link>
                   </div>
                 </div>
 
@@ -185,9 +182,8 @@ function Sub06Lg(props) {
               </form>
             </div>
 
-            {/* <!-- Right: 회원가입 CTA 일러스트 --> */}
             <div className="login-right">
-              <Link to="/signUp" className="signup-cat">
+              <Link to="/lentalCh" className="signup-cat">
                 <div className="gap">
                   <img
                     src="img/login_cat.png"

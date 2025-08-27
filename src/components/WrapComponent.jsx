@@ -1,8 +1,4 @@
 import React, { useEffect } from "react";
-
-//추가
-import {getIsAdmin} from "../auth.js"; 
-
 import HeaderComponent from "./wrap/HeaderComponent";
 import MainComponent from "./wrap/MainComponent";
 import FooterComponent from "./wrap/FooterComponent";
@@ -22,17 +18,13 @@ import Sub035PreView from "./wrap/sub/sub03Menu/Sub035PreView";
 import Sub035PreWrite from "./wrap/sub/sub03Menu/Sub035PreWrite";
 import Sub035PreEdit from "./wrap/sub/sub03Menu/Sub035PreEdit";
 
-//추가
-import Sub035PreAdmin from "./wrap/sub/sub03Menu/Sub035PreAdmin";
-import Sub035PreAdminWrite from "./wrap/sub/sub03Menu/Sub035PreAdminWrite";
-import Sub035PreAdminEdit from "./wrap/sub/sub03Menu/Sub035PreAdminEdit";
-import Sub035PreAdminView from "./wrap/sub/sub03Menu/Sub035PreAdminView";
-
 import Sub04AboutLive from "./wrap/sub/sub04Schedule/Sub04AboutLive";
 import Sub04Artist from "./wrap/sub/sub04Schedule/Sub04Artist";
 import Sub04BuyTicket from "./wrap/sub/sub04Schedule/Sub04BuyTicket ";
 import Sub04Lental from "./wrap/sub/sub04Schedule/Sub04Lental";
 import Sub04Monthly from "./wrap/sub/sub04Schedule/Sub04Monthly";
+import Sub04LentalCh from "./wrap/sub/sub04Schedule/Sub04LentalCh.jsx";
+
 import Sub05Faq from "./wrap/sub/sub05Community/Sub05Faq";
 import Sub05Gall from "./wrap/sub/sub05Community/Sub05Gall";
 import Sub05Ntc from "./wrap/sub/sub05Community/Sub05Ntc";
@@ -51,8 +43,6 @@ import Sub06SearchId from "./wrap/sub/sub06Lg/Sub06SearchId";
 import Sub06SearchRs from "./wrap/sub/sub06Lg/Sub06SearchRs";
 
 import Sub07AddressList from "./wrap/sub/sub07Mp/Sub07AddressList";
-import Sub07AddressListCreate from "./wrap/sub/sub07Mp/Sub07AddressListCreate";
-import Sub07AddressListEdit from "./wrap/sub/sub07Mp/Sub07AddressListEdit";
 import Sub07DeleteAccount from "./wrap/sub/sub07Mp/Sub07DeleteAccount";
 import Sub07EditProfile from "./wrap/sub/sub07Mp/Sub07EditProfile";
 import Sub07Mp from "./wrap/sub/sub07Mp/Sub07Mp";
@@ -68,44 +58,28 @@ import Sub081MmView from "./wrap/sub/sub08Mm/Sub081MmView";
 import Sub082MmEdit from "./wrap/sub/sub08Mm/Sub082MmEdit";
 import Sub083MmGrade from "./wrap/sub/sub08Mm/Sub083MmGrade";
 import Sub084MmSign from "./wrap/sub/sub08Mm/Sub084MmSign";
+import Sub085MmLental from "./wrap/sub/sub08Mm/Sub085MmLental.jsx";
+import Sub086MmTk from "./wrap/sub/sub08Mm/Sub086MmTk.jsx";
 
 import Sub09Cart from "./wrap/sub/sub09Cart/Sub09Cart";
 import Page404Component from "./wrap/Page404Component";
-import { Route, Routes, useLocation, Navigate } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./scss/WrapComponent.scss";
 import Sub10Wishlist from "./wrap/sub/sub10Wishlist/Sub10Wishlist";
 import { useDispatch, useSelector } from "react-redux";
 import { wishAction } from "../store/wishlist";
 import { headerAction } from "../store/header";
-import { cartAction, cartChkAction } from "../store/cart";
+import { cartAction } from "../store/cart";
 import ConfirmModalComponent from "./wrap/ConfirmModalComponent";
 import Sub06SignUp from "./wrap/sub/sub06Lg/Sub06SignUp";
 
 import ReactDaumPostcode from "./wrap/ReactDaumPostcode.jsx";
 import { signInAction } from "../store/signIn.js";
-import Sub09Purchase from "./wrap/sub/sub09Cart/Sub09Purchase.jsx";
 
 export default function WrapComponent(props) {
   /**인스턴스 생성 */
   const dispatch = useDispatch();
   const location = useLocation();
-
-
-
-
-  //추가 : 공통 가드/게이트
-  const AdminRoute = ({ children }) => {
-    if (!getIsAdmin()) return <Navigate to="/" replace />;
-    return children;
-  };
-
-  const Gate = ({ adminPath, children }) => {
-     if (getIsAdmin()) return <Navigate to={adminPath} replace />;
-      return children;
-   };
-
-
-
 
   // 주소
   const isOpen = useSelector((state) => state.daumPostcode.isOpen);
@@ -118,7 +92,6 @@ export default function WrapComponent(props) {
     const localStorage_arr = [
       { key: "위시리스트", action: wishAction },
       { key: "장바구니", action: cartAction },
-      { key: "cart_checked_product", action: cartChkAction },
       { key: "jazzmyomyo_sign_in", action: signInAction },
     ];
     try {
@@ -254,17 +227,10 @@ export default function WrapComponent(props) {
           <Route path="/drinks" element={<Sub032Drinks />} />
           <Route path="/food" element={<Sub033Food />} />
           <Route path="/set" element={<Sub034Set />} />
-
-         <Route path="/pre" element={<Gate adminPath="/preAdmin"><Sub035Pre /></Gate>} />
-
+          <Route path="/pre" element={<Sub035Pre />} />
           <Route path="/preV/view/:id" element={<Sub035PreView />} />
           <Route path="/preW" element={<Sub035PreWrite />} />
           <Route path="/preE/edit/:id" element={<Sub035PreEdit />} />
-
-          <Route path="/preAdmin" element={<AdminRoute><Sub035PreAdmin /></AdminRoute>} />
-          <Route path="/preAdminW" element={<AdminRoute><Sub035PreAdminWrite /></AdminRoute>} />
-          <Route path="/preAdminV/view/:id" element={<AdminRoute><Sub035PreAdminView /></AdminRoute>} />
-          <Route path="/preAdminE/edit/:id" element={<AdminRoute><Sub035PreAdminEdit /></AdminRoute>} />
 
           <Route path="/aboutLive" element={<Sub04AboutLive />} />
           <Route path="/artist" element={<Sub04Artist />} />
@@ -274,30 +240,24 @@ export default function WrapComponent(props) {
 
           <Route path="/faq" element={<Sub05Faq />} />
           <Route path="/gall" element={<Sub05Gall />} />
-
-          <Route path="/ntc" element={<Gate adminPath="/ntcAdmin"><Sub05Ntc /></Gate>} />
-
+          <Route path="/ntc" element={<Sub05Ntc />} />
           <Route path="/rev" element={<Sub05Rev />} />
           <Route path="/revWrite" element={<Sub05RevWrite />} />
           <Route path="/sns" element={<Sub05Sns />} />
 
           <Route path="/ntcV/:id" element={<Sub05NtcView />} />
-          <Route path="/ntcAdminV/:id" element={<AdminRoute><Sub05NtcAdminView /></AdminRoute>} />
-          <Route path="/ntcAdminE/:id" element={<AdminRoute><Sub05NtcAdminEdit /></AdminRoute>} />
-          <Route path="/ntcAdmin" element={<AdminRoute><Sub05NtcAdmin /></AdminRoute>} />
-          <Route path="/ntcAdminW" element={<AdminRoute><Sub05NtcAdminWrite /></AdminRoute>} />
+          <Route path="/ntcAdminV/:id" element={<Sub05NtcAdminView />} />
+          <Route path="/ntcAdminE/:id" element={<Sub05NtcAdminEdit />} />
+          <Route path="/ntcAdmin" element={<Sub05NtcAdmin />} />
+          <Route path="/ntcAdminW" element={<Sub05NtcAdminWrite />} />
 
           <Route path="/lg" element={<Sub06Lg />} />
           <Route path="/searchId" element={<Sub06SearchId />} />
           <Route path="/searchRs" element={<Sub06SearchRs />} />
           <Route path="/signUp" element={<Sub06SignUp />} />
+          <Route path="/lentalCh" element={<Sub04LentalCh />} />
+
           {/* 배송지 관리 컴포넌트 추가 */}
-          <Route path="/addressList" element={<Sub07AddressList />} />
-          <Route path="/addressListEdit" element={<Sub07AddressListEdit />} />
-          <Route
-            path="/addressListCreate"
-            element={<Sub07AddressListCreate />}
-          />
           <Route path="/addressList" element={<Sub07AddressList />} />
           <Route path="/deleteAccount" element={<Sub07DeleteAccount />} />
           <Route path="/editProfile" element={<Sub07EditProfile />} />
@@ -309,23 +269,20 @@ export default function WrapComponent(props) {
           <Route path="/myOrderTk" element={<Sub07MyOrderTk />} />
           <Route path="/myOrderRental" element={<Sub07MyOrderRental />} />
 
-          <Route path="/mm" element={<AdminRoute><Sub080Mm /></AdminRoute>} />
-          <Route path="/mmView/:id" element={<AdminRoute><Sub081MmView /></AdminRoute>} />
-          <Route path="/mmEdit/:id" element={<AdminRoute><Sub082MmEdit /></AdminRoute>} />
-          <Route path="/mmGrade" element={<AdminRoute><Sub083MmGrade /></AdminRoute>} />
-          <Route path="/mmSign" element={<AdminRoute><Sub084MmSign /></AdminRoute>} />
+          <Route path="/mm" element={<Sub080Mm />} />
+          <Route path="/mmView/:id" element={<Sub081MmView />} />
+          <Route path="/mmEdit/:id" element={<Sub082MmEdit />} />
+          <Route path="/mmGrade" element={<Sub083MmGrade />} />
+          <Route path="/mmSign" element={<Sub084MmSign />} />
+          <Route path="/mmLental" element={<Sub085MmLental />} />
+          <Route path="/mmTk" element={<Sub086MmTk />} />
 
           <Route path="/cart" element={<Sub09Cart />} />
-          <Route path="/purchase" element={<Sub09Purchase />} />
           <Route path="/wishlist" element={<Sub10Wishlist />} />
           <Route path="/*" element={<Page404Component />} />
         </Route>
       </Routes>
-
-
-      <FooterComponent footerClass={footerClass} isAdmin={getIsAdmin()} />
-
-
+      <FooterComponent footerClass={footerClass} />
       {confirmIsOn && <ConfirmModalComponent />}
 
       {/* 카카오주속검색 API */}

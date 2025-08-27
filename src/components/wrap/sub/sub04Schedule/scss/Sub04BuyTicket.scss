@@ -11,43 +11,35 @@
       .content {
         max-width: 1200px;
         margin: 0 auto;
-        .breadcrumb {
-          font-size: 1.2rem;
-          color: #666;
-          margin-bottom: 30px;
-          span {
-            margin: 0 8px;
-          }
-          strong {
-            color: #000;
-          }
+        .breadcrumb{
+          margin-bottom: 10px;
         }
         .section-title {
           font-size: $size3;
           font-weight: 700;
           margin-bottom: 10px;
         }
-        // 440
-        @media (max-width: 440px) {
-          .breadcrumb {
-            font-size: 0.8rem;
-            span {
-              font-size: 0.7rem;
-              i {
-                font-size: 0.8rem;
-              }
-            }
-            strong {
-              font-size: 0.7rem;
-            }
+      }
+    }
+  }
+  @media (max-width: 440px) {
+    #section1{
+      margin-top: 100px;
+      padding-top: 0;
+      .reservation-header{
+        .content{
+          .breadcrumb{
+            margin-bottom: 10px;
           }
           .section-title {
-            font-size: 1.8rem;
+            font-size: 26px;
           }
         }
       }
     }
   }
+  // 440
+  
 
   #section2.reservation-type {
     margin-top: 50px;
@@ -532,6 +524,7 @@
         .contents {
           width: 100%;
           max-width: 440px;
+          flex-flow: column;
           .calendar-area {
             width: 100%;
             .calendar-header {
@@ -547,7 +540,6 @@
                 font-size: 1.4rem;
               }
             }
-
             .calendar-grid {
               display: grid;
               grid-template-columns: repeat(7, 1fr);
@@ -717,7 +709,7 @@
         padding: 0;
         position: relative;
         &.no-selection {
-          font-size: 1.4rem;
+          font-size: 16px;
           padding: 0;
         }
         .contents {
@@ -726,15 +718,17 @@
           max-width: 440px;
           margin: 0;
           justify-content: center;
+          margin-bottom: 50px;
           strong {
-            font-size: 1.6rem;
+            font-size: 24px;
             font-weight: 700;
             margin: 0;
           }
           .question {
             position: relative;
-            top: -85px;
-            font-size: 1rem;
+            top: 5px;
+            margin-left: 15px;
+            font-size: 14px;
             font-weight: 500;
           }
         }
@@ -742,7 +736,7 @@
           position: absolute;
           margin: 0px;
           width: 100%;
-          bottom: 30px;
+          bottom: 10px;
           left: 0;
           display: flex;
           justify-content: center;
@@ -752,7 +746,10 @@
             height: 30px;
             color: #5d3136;
             padding: 5px 10px;
-            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
           }
         }
       }

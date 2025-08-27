@@ -2,16 +2,22 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { wishAction } from "../../../../store/wishlist";
 import { confirmModalAction } from "../../../../store/confirmModal";
 import "./scss/Sub04Artist.scss";
 import SiteMapComponent from "../../custom/SiteMapComponent";
 
+const LS_KEY = "myomyo_wishlist"; //  로컬 스토리지 키
+
+
 function Sub04Artist(props) {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const wishlist = useSelector((state) => state.wishlist.위시리스트);
+  //  로컬스토리지 기반 위시리스트
+  const [wishlist, setWishlist] = useState([]);
+
+  // 확인 모달 응답
   const isYes = useSelector((state) => state.confirmModal.isYes);
 
   const [artists, setArtists] = useState([]);
@@ -22,6 +28,20 @@ function Sub04Artist(props) {
   const [selected, setSelected] = useState(null);
   const itemsPerPage = 12;
 
+  //  위시리스트 로드(초기 1회)
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(LS_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) setWishlist(parsed);
+      }
+    } catch (e) {
+      console.warn("wishlist load error:", e);
+    }
+  }, []);
+
+  // 아티스트 데이터 로드
   useEffect(() => {
     fetch("./json/sub04/artist-data.json")
       .then((res) => res.json())
@@ -31,36 +51,37 @@ function Sub04Artist(props) {
       });
   }, []);
 
-  // 즐겨찾기, 이름순, 최신순 재정렬
+  // 즐겨찾기/검색/정렬 가공
   useEffect(() => {
-    let filtered = [...artists];
+    let arr = [...artists];
 
-    // 즐겨찾기 모드일 경우
+    // 즐겨찾기 모드
     if (sortType === "wish") {
-      filtered = filtered.filter((a) => wishlist.includes(a.name));
+      arr = arr.filter((a) => wishlist.includes(a.name));
     }
 
     // 검색 필터
     if (searchQuery) {
-      filtered = filtered.filter(
+      const q = searchQuery.toLowerCase();
+      arr = arr.filter(
         (a) =>
-          a.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          a.instrument.toLowerCase().includes(searchQuery.toLowerCase())
+          a.name.toLowerCase().includes(q) ||
+          a.instrument.toLowerCase().includes(q)
       );
     }
 
     // 정렬
     if (sortType === "new") {
-      filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      arr.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     } else if (sortType === "name") {
-      filtered.sort((a, b) => a.name.localeCompare(b.name, "ko"));
+      arr.sort((a, b) => a.name.localeCompare(b.name, "ko"));
     }
 
-    setFiltered(filtered);
+    setFiltered(arr);
     setCurrentPage(1);
   }, [searchQuery, sortType, wishlist, artists]);
 
-  // 동영상 출력
+  // 동영상 ID 추출
   const extractYoutubeId = (url) => {
     const match = url.match(
       /(?:youtube\.com\/(?:.*v=|v\/|embed\/|shorts\/)|youtu\.be\/)([^&?/]+)/
@@ -68,25 +89,33 @@ function Sub04Artist(props) {
     return match ? match[1] : null;
   };
 
-  // 페이지네이션 계산
+  // 페이지네이션
   const paginated = filtered.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
 
-  // 즐겨찾기 추가 & 로그인 여부
-  const [pendingLike, setPendingLike] = useState(null);
+  //  위시리스트 저장 헬퍼
+  const saveWishlist = (next) => {
+    setWishlist(next);
+    try {
+      localStorage.setItem(LS_KEY, JSON.stringify(next));
+    } catch (e) {
+      console.warn("wishlist save error:", e);
+    }
+  };
 
+  // 로그인 여부
   const 로그인정보 = useSelector((state) => state.signIn);
   const isLogin = 로그인정보?.아이디 !== "";
 
-  console.log(로그인정보);
+  // 하트 클릭 시 로그인 유도
+  const [pendingLike, setPendingLike] = useState(null);
 
-  // 로그인 여부 판단
   const onClickLikeArtist = (name) => {
     if (!isLogin) {
-      setPendingLike(name); // 나중에 사용할 이름 기억
+      setPendingLike(name);
       dispatch(
         confirmModalAction({
           heading: "로그인 해주세요!",
@@ -99,28 +128,34 @@ function Sub04Artist(props) {
       );
       return;
     }
-
-    toggleLike(name); // 로그인 되어 있을 경우 바로 토글
+    toggleLike(name);
   };
 
+  //  로컬스토리지 기반 토글
   const toggleLike = (name) => {
     const isWished = wishlist.includes(name);
-    const newList = isWished
+    const next = isWished
       ? wishlist.filter((n) => n !== name)
       : [...wishlist, name];
+    saveWishlist(next);
   };
 
+  // 모달 응답에 따른 처리 (비로그인일 때)
   useEffect(() => {
     if (!isLogin && isYes !== null) {
       if (isYes) {
         navigate("/Lg");
       } else if (pendingLike) {
-        // "아니오"를 눌렀을 때는 강제로 하트 해제
+        // "아니오" 눌렀을 때 강제로 하트 해제 (이미 켜져 있었다면)
         const isWished = wishlist.includes(pendingLike);
         if (isWished) {
+          const next = wishlist.filter((n) => n !== pendingLike);
+          saveWishlist(next);
         }
       }
-      setPendingLike(null); // 초기화
+      setPendingLike(null);
+
+      // 모달 닫기
       const obj = {
         heading: "",
         explain: "",
@@ -129,11 +164,11 @@ function Sub04Artist(props) {
         message1: "",
         message2: "",
       };
-      dispatch(confirmModalAction(obj)); // 모달 닫기
+      dispatch(confirmModalAction(obj));
     }
-  }, [isYes]);
+  }, [isYes]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // 월간일정 페이지에서 여기로 이동
+  // 월간일정 → 아티스트 페이지 인입 처리
   const [searchParams] = useSearchParams();
   const targetArtist = searchParams.get("artist");
 
@@ -148,12 +183,13 @@ function Sub04Artist(props) {
       const page = Math.floor(index / itemsPerPage) + 1;
       setCurrentPage(page);
 
-      // 딜레이를 주고 모달 열기 (페이지가 설정된 다음)
       setTimeout(() => {
         setSelected(artists[index]);
       }, 100);
     }
-  }, [targetArtist, artists]);
+  }, [targetArtist, artists]);  
+  
+
 
   return (
     <div id="sub04Artist">
@@ -208,50 +244,42 @@ function Sub04Artist(props) {
           </div>
 
           <ul className="artist-list">
-            {paginated.map((item, idx) => (
-              <li className="artist-card" key={idx}>
-                <div className="card-inner">
-                  <div className="img-box">
-                    <img src={item.image} alt={item.name} />
-                    <button
-                      className={`heart-button ${
-                        wishlist.includes(item.name) ? "on" : ""
-                      }`}
-                      onClick={() => onClickLikeArtist(item.name)}
-                    >
-                      <i
-                        className={`bi ${
-                          wishlist.includes(item.name)
-                            ? "bi-heart-fill"
-                            : "bi-heart"
-                        }`}
-                      ></i>
-                    </button>
+            {paginated.map((item, idx) => {
+              const isWished = wishlist.includes(item.name);
+              return (
+                <li className="artist-card" key={idx}>
+                  <div className="card-inner">
+                    <div className="img-box">
+                      <img src={item.image} alt={item.name} />
+                      <button
+                        className={`heart-button ${isWished ? "on" : ""}`}
+                        onClick={() => onClickLikeArtist(item.name)}
+                      >
+                        <i className={`bi ${isWished ? "bi-heart-fill" : "bi-heart"}`}></i>
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div className="title-contents">
-                  <span className="instrument">{item.instrument}</span>
-                  <a
-                    href="!#"
-                    className="arrow"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setSelected(item);
-                    }}
-                  >
-                    <i className="fa fa-arrow-right"></i>
-                  </a>
-                  <h3 className="name">{item.name}</h3>
-                </div>
-              </li>
-            ))}
+                  <div className="title-contents">
+                    <span className="instrument">{item.instrument}</span>
+                    <a
+                      href="!#"
+                      className="arrow"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setSelected(item);
+                      }}
+                    >
+                      <i className="fa fa-arrow-right"></i>
+                    </a>
+                    <h3 className="name">{item.name}</h3>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
 
           <div className="pagination">
-            <button
-              onClick={() => setCurrentPage(1)}
-              disabled={currentPage === 1}
-            >
+            <button onClick={() => setCurrentPage(1)} disabled={currentPage === 1}>
               <i className="fa fa-angle-double-left"></i>
             </button>
             <button
@@ -265,9 +293,7 @@ function Sub04Artist(props) {
               {Array.from({ length: totalPages }, (_, i) => (
                 <button
                   key={i}
-                  className={
-                    currentPage === i + 1 ? "page-btn active" : "page-btn"
-                  }
+                  className={currentPage === i + 1 ? "page-btn active" : "page-btn"}
                   onClick={() => setCurrentPage(i + 1)}
                 >
                   {i + 1}
@@ -276,7 +302,9 @@ function Sub04Artist(props) {
             </div>
 
             <button
-              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              onClick={() =>
+                setCurrentPage((p) => Math.min(totalPages, p + 1))
+              }
               disabled={currentPage === totalPages}
             >
               <i className="fa fa-angle-right"></i>
@@ -321,9 +349,7 @@ function Sub04Artist(props) {
                         ),
                       }}
                     ></p>
-                    <p className="modal-social">
-                      {selected.social?.join(", ")}
-                    </p>
+                    <p className="modal-social">{selected.social?.join(", ")}</p>
                   </div>
                 </div>
 

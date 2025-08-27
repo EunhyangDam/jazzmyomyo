@@ -1,9 +1,10 @@
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./scss/Section9Component.scss";
 import useCustomA from "../custom/useCustomA";
 
-const Section9Component = forwardRef((props, ref) => {
-  const { onClickA } = useCustomA();
+export default function Section9Component() {
+
+  const {onClickA}= useCustomA();
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 6;
@@ -65,7 +66,7 @@ const Section9Component = forwardRef((props, ref) => {
   ];
 
   return (
-    <section id="section9" ref={ref}>
+    <section id="section9">
       <div className="slide-container">
         {[...Array(totalSlides)].map((_, index) => (
           <div
@@ -120,22 +121,13 @@ const Section9Component = forwardRef((props, ref) => {
                     <div className="link-buttons">
                       <ul>
                         <li>
-                          <a
-                            href="!#"
-                            onClick={(e) => onClickA(e, "/interior")}
-                          >
-                            VIEW MORE
-                          </a>
+                          <a href="!#" onClick={(e)=>onClickA(e, '/interior' )}>VIEW MORE</a>
                         </li>
                         <li>
-                          <a href="!#" onClick={(e) => onClickA(e, "/monthly")}>
-                            공연일정
-                          </a>
+                          <a href="!#" onClick={(e)=>onClickA(e, '/monthly' )}>공연일정</a>
                         </li>
                         <li>
-                          <a href="!#" onClick={(e) => onClickA(e, "/lental")}>
-                            대관문의
-                          </a>
+                          <a href="!#" onClick={(e)=>onClickA(e, '/lental' )}>대관문의</a>
                         </li>
                       </ul>
                     </div>
@@ -209,5 +201,4 @@ const Section9Component = forwardRef((props, ref) => {
       </div>
     </section>
   );
-});
-export default Section9Component;
+}

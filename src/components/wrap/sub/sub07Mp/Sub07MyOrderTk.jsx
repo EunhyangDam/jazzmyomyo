@@ -283,14 +283,13 @@ function Sub07MyOrderTk(props) {
                                     {/* 가운데 : 텍스트 정보 */}
                                     <div className="rd-middle">
                                       <p>
-                                        <strong>공연명</strong> : {item.productName}
+                                        <strong>공연명 :</strong> <span>{item.productName}</span>
                                       </p>
                                       <p>
-                                        <strong>공연시간</strong> : {fmtTime(item.timeStart)}
-                                        {item.timeEnd ? ` ~ ${fmtTime(item.timeEnd)}` : ""}
+                                        <strong>공연시간 : </strong> <span>{fmtTime(item.timeStart)}{item.timeEnd ? ` ~ ${fmtTime(item.timeEnd)}` : ""}</span>
                                       </p>
                                       <p>
-                                        <strong>관람인원</strong> : {item.peopleCount}명
+                                        <strong>관람인원: </strong> <span>{item.peopleCount}명</span>
                                       </p>
                                     </div>
                                         

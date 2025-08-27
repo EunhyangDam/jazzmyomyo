@@ -1,0 +1,246 @@
+#Sub04LentalCh {
+  margin-top: 150px;
+  margin-bottom: 100px;
+  .container{
+    ul{
+      li.order4{
+        div{
+          .search-form-card {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 18px 8px 28px;
+            h3.hero-title {
+              text-align: center;
+              font-size: 2rem; /* 32px 근접 */
+              font-weight: 700;
+              color: #111;
+              letter-spacing: .01em;
+              margin: 6px 0 22px;
+              @media (max-width: 440px) {
+                font-size: 22px;
+              }
+            }          
+            .search-form {
+              display: grid;
+              gap: 16px;
+              .field {
+                display: grid;
+                gap: 8px;
+                label {
+                  font-weight: 800;
+                  color: #2b2b2b;
+                  font-size: 0.98rem;
+                }
+                .input-wrap {
+                  position: relative;
+                  input[type="text"] {
+                    width: 100%;
+                    height: 44px;
+                    border: 1px solid #dedede;
+                    border-radius: 8px;
+                    padding: 0 42px 0 14px; /* 오른쪽 X 버튼 여백 */
+                    font-size: 0.95rem;
+                    color: #222;
+                    background: #fff;
+                    &::placeholder {
+                      color: #b9b9b9;
+                    }
+                  }
+                  .btn-clear {
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    width: 24px;
+                    height: 24px;
+                    transform: translateY(-50%);
+                    border: 1px solid #d6d6d6;
+                    border-radius: 50%;
+                    background: #efefef;
+                    color: #9d9d9d;
+                    font-size: 16px;
+                    line-height: 1;
+                    font-weight: 700;
+                    cursor: pointer;
+                    &:hover {
+                      background: #e8e8e8;
+                      color: #7a7a7a;
+                    }
+                  
+                  }
+                
+                }
+              
+              }
+              /* 둥근 버튼 + 위쪽 삼각 데코 */
+              .btn-submit {
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 52px;
+                margin: 30px auto 0;
+                border: none;
+                border-radius: 28px;
+                background: #532c2a; /* 진한 브라운 */
+                color: #fff;
+                font-weight: 900;
+                letter-spacing: .04em;
+                box-shadow: none;
+                cursor: pointer;
+                &::before,
+                &::after {
+                  content: "";
+                  position: absolute;
+                  bottom: 100%;
+                  width: 0; height: 0;
+                  border-left: 12px solid transparent;
+                  border-right: 12px solid transparent;
+                  border-bottom: 10px solid #532c2a; /* 버튼과 동일색 */
+                }   
+                &::before { left: 25%; }
+                &::after  { right: 25%; }                         
+                &:hover { background: #5e312e; }
+                &:disabled { opacity: .65; cursor: default; }              
+              }
+            }
+          }
+          .search-result{
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            .head-box {
+              background: #5e312e;
+              border-radius: 10px 10px 0 0;
+              .column-box {
+                display: flex;
+                align-items: center;
+                padding: 12px 14px;
+                .col { 
+                  text-align: center;
+                  &.col1{
+                    width: 20%; 
+                  }
+                  &.col2{
+                    width: 50%; 
+                  }
+                  &.col3{
+                    width: 30%;
+                  }
+                  h3 {
+                    color: #fff;
+                    font-size: 18px;
+                    font-weight: 800;
+                  }
+                }
+              }
+            }
+            .list-box{
+              ul{
+                li{
+                  ul.column-contents{
+                    display: flex;
+                    gap: 8px 16px;
+                    padding: 30px 14px;
+                    border-bottom: 1px solid #eeeeee;
+                    li.col{
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      &.col1{
+                        width: 20%;
+                      }
+                      &.col2{
+                        width: 50%;
+                      }
+                      &.col3{
+                        width: 30%;
+                      }
+                      h3{
+                        font-size: 18px;
+                        font-weight: 700;
+                        color: #222;
+                      }
+                      .dim { color: #a8a8a8; }
+                      .btn-download {
+                        display: inline-block;
+                        padding: 8px 30px;
+                        border-radius: 10px;
+                        font-size: 18px;
+                        font-weight: 800;
+                        border: 1px solid #5e312e;
+                        background: #fff;
+                        color: #5e312e;
+                        transition: all 0.2s;
+                        &:hover {
+                          background: #1c2a2e;
+                          color: #fff;
+                          border-color: #1c2a2e;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            .result-actions {
+              margin-top: 20px;
+              display: flex;
+              justify-content: flex-end;
+              padding: 12px 2px 6px;
+              margin-right: 20px;
+              .btn-back {
+                height: 60px;
+                width: 150px;
+                padding: 10px 14px;
+                border-radius: 10px;
+                border: 1px solid #5e312e;
+                background: #5e312e;
+                color: #fff;
+                font-size: 18px;
+                font-weight: 800;
+                transition: all 0.2s;
+                &:hover{
+                  background: #fff;
+                  color: #5e312e;
+                }
+              }
+            
+            }
+          
+          }         
+        }
+      }
+    }
+  }
+
+
+
+
+
+  /* 반응형 카드형 */
+  @media (max-width: 900px) {
+    .search-result .head-box { display: none; }
+    .search-result .list-box > ul > li ul.column-contents {
+      grid-template-columns: 1fr 1fr;
+      border-radius: 12px;
+      margin: 10px 0;
+    }
+    .search-result .column-contents .col {
+      position: relative;
+      padding-left: 112px;
+      min-height: 52px;
+    }
+    .search-result .column-contents .col::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 12px; top: 50%;
+      transform: translateY(-50%);
+      width: 96px; text-align: left;
+      font-weight: 800; color: #6b7280; font-size: .92rem;
+    }
+    .search-result .column-contents .col:nth-child(3) { grid-column: 1 / -1; }
+  }
+  @media (max-width: 440px) {
+    .search-form-card { padding: 12px 4px 24px; }
+    .search-result .list-box > ul > li ul.column-contents { grid-template-columns: 1fr; }
+  }
+}
