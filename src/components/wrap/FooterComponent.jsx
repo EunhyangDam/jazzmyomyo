@@ -1,11 +1,14 @@
 import React from "react";
 import "./scss/FooterComponent.scss";
 import useCustomA from "./custom/useCustomA";
+import { useSelector } from "react-redux";
 
 
-export default function FooterComponent({ footerClass = "footer--default", isAdmin }) {
+
+export default function FooterComponent({ footerClass = "footer--default"/*isAdmin*/ }) {
   
 const{onClickA} = useCustomA();
+const admin = useSelector((state) => state.signIn.admin);
 
 
   return (
@@ -126,11 +129,14 @@ const{onClickA} = useCustomA();
               <a href="!#" onClick={(e)=>onClickA(e, '/aboutUs' )}>About us</a> |<a href="!#" onClick={(e)=>onClickA(e, 'shop' )}> Shop</a> |
               <a href="!#" onClick={(e)=>onClickA(e, '/menu' )}> Menu</a> | <span className="mobile-br"></span>
               <a href="!#" onClick={(e)=>onClickA(e, '/monthly' )}> Schedule</a> |<a href="!#" onClick={(e)=>onClickA(e, '/ntc' )}> Community</a>
-              {isAdmin && (
+              {admin && (
+                <a href="!#" onClick={(e) => onClickA(e, "/mm")}> 회원관리 관리자페이지</a>
+              )}
+              {/* {isAdmin && (
   <>
-     <br /> <a href="!#" onClick={(e) => onClickA(e, "/mm")}> 회원관리 관리자페이지</a>
+    |<a href="!#" onClick={(e) => onClickA(e, "/mm")}> 회원관리 관리자페이지</a>
   </>
-)}
+)} */}
             </div>
 
             <div className="address">

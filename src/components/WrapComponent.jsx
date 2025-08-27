@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
 
-//추가
-import { getIsAdmin } from "../auth.js";
-
 import HeaderComponent from "./wrap/HeaderComponent";
 import MainComponent from "./wrap/MainComponent";
 import FooterComponent from "./wrap/FooterComponent";
@@ -91,17 +88,6 @@ export default function WrapComponent(props) {
   const dispatch = useDispatch();
   const location = useLocation();
   const Navigate = useNavigate();
-  //추가 : 공통 가드/게이트
-  const AdminRoute = ({ children }) => {
-    if (!getIsAdmin()) return <Navigate to="/" replace />;
-    return children;
-  };
-
-  const Gate = ({ adminPath, children }) => {
-    if (getIsAdmin()) return <Navigate to={adminPath} replace />;
-    return children;
-  };
-
   // 주소
   const isOpen = useSelector((state) => state.daumPostcode.isOpen);
 
@@ -248,115 +234,34 @@ export default function WrapComponent(props) {
           <Route path="/drinks" element={<Sub032Drinks />} />
           <Route path="/food" element={<Sub033Food />} />
           <Route path="/set" element={<Sub034Set />} />
-
-          <Route
-            path="/pre"
-            element={
-              <Gate adminPath="/preAdmin">
-                <Sub035Pre />
-              </Gate>
-            }
-          />
-
+          <Route path="/pre" element={<Sub035Pre />} />
           <Route path="/preV/view/:id" element={<Sub035PreView />} />
           <Route path="/preW" element={<Sub035PreWrite />} />
           <Route path="/preE/edit/:id" element={<Sub035PreEdit />} />
-
-          <Route
-            path="/preAdmin"
-            element={
-              <AdminRoute>
-                <Sub035PreAdmin />
-              </AdminRoute>
-            }
-          />
-          <Route
-            path="/preAdminW"
-            element={
-              <AdminRoute>
-                <Sub035PreWrite />
-              </AdminRoute>
-            }
-          />
-          <Route
-            path="/preAdminV/view/:id"
-            element={
-              <AdminRoute>
-                <Sub035PreAdminView />
-              </AdminRoute>
-            }
-          />
-          <Route
-            path="/preAdminE/edit/:id"
-            element={
-              <AdminRoute>
-                <Sub035PreAdminEdit />
-              </AdminRoute>
-            }
-          />
-
+          <Route path="/preAdmin" element={<Sub035PreAdmin />} />
+          <Route path="/preAdminW" element={<Sub035PreAdminWrite />} />
+          <Route path="/preAdminV/view/:id" element={<Sub035PreAdminView />} />
+          <Route path="/preAdminE/edit/:id" element={<Sub035PreAdminEdit />} />
           <Route path="/aboutLive" element={<Sub04AboutLive />} />
           <Route path="/artist" element={<Sub04Artist />} />
           <Route path="/buyTicket" element={<Sub04BuyTicket />} />
           <Route path="/lental" element={<Sub04Lental />} />
           <Route path="/monthly" element={<Sub04Monthly />} />
-
-          <Route path="/faq" element={<Sub05Faq />} />
-          <Route path="/gall" element={<Sub05Gall />} />
-
-          <Route
-            path="/ntc"
-            element={
-              <Gate adminPath="/ntcAdmin">
-                <Sub05Ntc />
-              </Gate>
-            }
-          />
-
+          <Route path="/faq" element={<Sub05Faq />} />{" "}
+          <Route path="/ntc" element={<Sub05Ntc />} />
           <Route path="/rev" element={<Sub05Rev />} />
           <Route path="/revWrite" element={<Sub05RevWrite />} />
           <Route path="/sns" element={<Sub05Sns />} />
-
           <Route path="/ntcV/:id" element={<Sub05NtcView />} />
-          <Route
-            path="/ntcAdminV/:id"
-            element={
-              <AdminRoute>
-                <Sub05NtcAdminView />
-              </AdminRoute>
-            }
-          />
-          <Route
-            path="/ntcAdminE/:id"
-            element={
-              <AdminRoute>
-                <Sub05NtcAdminEdit />
-              </AdminRoute>
-            }
-          />
-          <Route
-            path="/ntcAdmin"
-            element={
-              <AdminRoute>
-                <Sub05NtcAdmin />
-              </AdminRoute>
-            }
-          />
-          <Route
-            path="/ntcAdminW"
-            element={
-              <AdminRoute>
-                <Sub05NtcAdminWrite />
-              </AdminRoute>
-            }
-          />
-
+          <Route path="/ntcAdminV/:id" element={<Sub05NtcAdminView />} />
+          <Route path="/ntcAdminE/:id" element={<Sub05NtcAdminEdit />} />
+          <Route path="/ntcAdmin" element={<Sub05NtcAdmin />} />
+          <Route path="/ntcAdminW" element={<Sub05NtcAdminWrite />} />
           <Route path="/lg" element={<Sub06Lg />} />
           <Route path="/searchId" element={<Sub06SearchId />} />
           <Route path="/searchRs" element={<Sub06SearchRs />} />
           <Route path="/signUp" element={<Sub06SignUp />} />
           <Route path="/lentalCh" element={<Sub04LentalCh />} />
-
           {/* 배송지 관리 컴포넌트 추가 */}
           <Route path="/addressList" element={<Sub07AddressList />} />
           <Route
@@ -373,48 +278,46 @@ export default function WrapComponent(props) {
           <Route path="/myOrderMenu" element={<Sub07MyOrderMenu />} />
           <Route path="/myOrderTk" element={<Sub07MyOrderTk />} />
           <Route path="/myOrderRental" element={<Sub07MyOrderRental />} />
-
           <Route
             path="/mm"
             element={
-              <AdminRoute>
+              <>
                 <Sub080Mm />
-              </AdminRoute>
+              </>
             }
           />
           <Route
             path="/mmView/:id"
             element={
-              <AdminRoute>
+              <>
                 <Sub081MmView />
-              </AdminRoute>
+              </>
             }
           />
           <Route
             path="/mmEdit/:id"
             element={
-              <AdminRoute>
+              <>
                 <Sub082MmEdit />
-              </AdminRoute>
+              </>
             }
           />
           <Route
             path="/mmGrade"
             element={
-              <AdminRoute>
+              <>
                 <Sub083MmGrade />
-              </AdminRoute>
+              </>
             }
           />
           <Route
             path="/mmSign"
             element={
-              <AdminRoute>
+              <>
                 <Sub084MmSign />
-              </AdminRoute>
+              </>
             }
           />
-
           <Route path="/cart" element={<Sub09Cart />} />
           <Route path="/wishlist" element={<Sub10Wishlist />} />
           <Route path="/purchase" element={<Sub09Purchase />} />
