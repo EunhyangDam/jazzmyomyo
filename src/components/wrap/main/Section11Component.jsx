@@ -137,7 +137,7 @@ const Section11Component = forwardRef((props, ref) => {
           <div className="button-row">
             <div className="button-align">
               <div className="cat-deco">
-                <img src="./img/고양이_슬라이드.png" alt="장식 고양이" />
+                <img src="./img/cat_slide.png" alt="장식 고양이" />
               </div>
               <div className="button-group">
                 <button

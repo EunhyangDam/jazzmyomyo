@@ -10,7 +10,7 @@ const wineData = {
     { name: "Cabernet Soul", desc: "깊은 탄닌과 블랙베리 향이 특징", food: "하몽살라미샐러드", price: "₩44,000", img: "./img/sub01Wine/red03.png" }
   ],
   white: [
-    { name: "Chardonnay Dream", desc: "바닐라와 과일향이 어우러진 화이트 와인", food: "리코타 샐러드", price: "₩39,000", img: "/img/sub01Wine/white01.png" },
+    { name: "Chardonnay Dream", desc: "바닐라와 과일향이 어우러진 화이트 와인", food: "리코타 샐러드", price: "₩39,000", img: "./img/sub01Wine/white01.png" },
     { name: "Sauvignon Breeze", desc: "상큼하고 가벼운 바디감", food: "감바스", price: "₩41,000", img: "./img/sub01Wine/white02.png" },
     { name: "Riesling Light", desc: "은은한 단맛과 산미의 조화", food: "그릴드 치킨", price: "₩43,000", img: "./img/sub01Wine/white03.jpg" }
   ],

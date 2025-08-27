@@ -1,6 +1,7 @@
 # 홈페이지
 
 "homepage": "https://jazzmyomyo.dothome.co.kr/jazzmyomyo",
+"homepage": "https://eunhyangdam.github.io/jazzmyomyo_deploy/",
 
 # 약어 가이드
 

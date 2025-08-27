@@ -56,7 +56,7 @@ const Section7Component = forwardRef((props, ref) => {
                 </div>
                 <div className="pick">
                   <div className="gap">
-                    <Link to="ShopDetail" state={state.product[3]}>
+                    <Link to="shopDetail" state={state.product[3]}>
                       <img
                         src={state.product[3].이미지[1]}
                         alt={state.product[3].상품명}
@@ -74,7 +74,7 @@ const Section7Component = forwardRef((props, ref) => {
                   </div>
                   <div className="caption-box">
                     <h3>Best Seller</h3>
-                    <Link to="/ShopDetail" state={state.product[3]}>
+                    <Link to="/shopDetail" state={state.product[3]}>
                       {state.product[3].상품명}
                     </Link>
                     <s>{state.product[3].가격.toLocaleString("ko-KR")}원</s>
@@ -94,7 +94,7 @@ const Section7Component = forwardRef((props, ref) => {
               <ul className="item">
                 <li className="item1">
                   <div className="gap">
-                    <Link to="/ShopDetail" state={state.product[23]}>
+                    <Link to="/shopDetail" state={state.product[23]}>
                       <img src={state.product[23].이미지[0]} alt="카펜터스" />
                     </Link>
                     <div className="wish-list">
@@ -108,7 +108,7 @@ const Section7Component = forwardRef((props, ref) => {
                     </div>
                   </div>
                   <div className="caption-box">
-                    <Link to="/ShopDetail" state={state.product[23]}>
+                    <Link to="/shopDetail" state={state.product[23]}>
                       {state.product[23].상품명.split("-")[0]}
                       <br />
                       {state.product[23].상품명.split("-")[1]}
@@ -120,7 +120,7 @@ const Section7Component = forwardRef((props, ref) => {
                 </li>
                 <li className="item2">
                   <div className="gap">
-                    <Link to="/ShopDetail" state={state.product[12]}>
+                    <Link to="/shopDetail" state={state.product[12]}>
                       <img src={state.product[12].이미지[0]} alt="잭킹콩" />
                     </Link>
                     <div className="wish-list">
@@ -134,7 +134,7 @@ const Section7Component = forwardRef((props, ref) => {
                     </div>
                   </div>
                   <div className="caption-box">
-                    <Link to="/ShopDetail" state={state.product[12]}>
+                    <Link to="/shopDetail" state={state.product[12]}>
                       {state.product[12].상품명.split("-")[0]}
                       <br />
                       {state.product[12].상품명.split("-")[1]}
@@ -146,7 +146,7 @@ const Section7Component = forwardRef((props, ref) => {
                 </li>
                 <li className="item3">
                   <div className="gap">
-                    <Link to="/ShopDetail" state={state.product[1]}>
+                    <Link to="/shopDetail" state={state.product[1]}>
                       <img src={state.product[1].이미지[0]} alt="코스터" />
                     </Link>
                     <div className="wish-list">
@@ -160,7 +160,7 @@ const Section7Component = forwardRef((props, ref) => {
                     </div>
                   </div>
                   <div className="caption-box">
-                    <Link to="/ShopDetail" state={state.product[1]}>
+                    <Link to="/shopDetail" state={state.product[1]}>
                       {state.product[1].상품명}
                     </Link>
                     <strong>
@@ -170,7 +170,7 @@ const Section7Component = forwardRef((props, ref) => {
                 </li>
                 <li className="item4">
                   <div className="gap">
-                    <Link to="/ShopDetail" state={state.product[5]}>
+                    <Link to="/shopDetail" state={state.product[5]}>
                       <img src={state.product[5].이미지[0]} alt="라이터" />
                     </Link>
                     <div className="wish-list">
@@ -184,7 +184,7 @@ const Section7Component = forwardRef((props, ref) => {
                     </div>
                   </div>
                   <div className="caption-box">
-                    <Link to="/ShopDetail" state={state.product[5]}>
+                    <Link to="/shopDetail" state={state.product[5]}>
                       {state.product[5].상품명}
                     </Link>
                     <strong>

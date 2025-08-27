@@ -67,8 +67,8 @@
       .text-box {
         margin-bottom: 30px;
         text-align: center;
-        font-size: 30px;
-        font-weight: bold;
+        font-size: 25px;
+        font-weight: 400;
         line-height: 1.5;
         text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 
@@ -157,9 +157,9 @@
         .text-box {
           width: 30%;
           height: 300px;
-          font-family: $font3;
 
           h2 {
+            font-family: $font2;
             font-size: 45px;
             margin-bottom: 16px;
             font-weight: 600;
@@ -167,15 +167,15 @@
           }
 
           p {
-            font-size: 25px;
-            line-height: 1.6;
+            font-family: $font1;
+            font-size: 20px;
+            line-height: 1.8;
           }
 
           .chapter-label {
             display: inline-block;
-            font-size: 89px;
+            font-size: 40px;
             color: $sub-color4;
-            font-weight: bold;
             font-style: italic;
             font-family: $font1;
           }

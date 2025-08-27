@@ -16,7 +16,8 @@
         'dob'=>$item['userBirth'],
         'gender'=>$item['userGender'],
         'email'=>$item['userEmail'],
-        'service'=>$item['userService']
+        'service'=>$item['userService'],
+        'dateAt'=>$item['dateAt']
     ];
     echo json_encode($arr,JSON_UNESCAPED_UNICODE);       
   } else{

@@ -181,7 +181,7 @@ const Section8Component = forwardRef((props, ref) => {
             <div className="title-container">
               <a href="!#" onClick={(e) => onClickA(e, "/rev")}>
                 <h2>
-                  <img src="/img/section8/paw.png" alt="" />
+                  <img src="./img/section8/paw.png" alt="" />
                   <em>묘묘와의 추억</em>
                 </h2>
               </a>
@@ -199,7 +199,7 @@ const Section8Component = forwardRef((props, ref) => {
                     data-key={item.idx}
                   >
                     <img
-                      src={`/img/section8/memo${idx + 1}.png`}
+                      src={`./img/section8/memo${idx + 1}.png`}
                       alt={`review${idx + 1}`}
                     />
                     <p>

@@ -76,8 +76,10 @@ export default function Section10Component() {
           <h2>이달의 묘묘's Pick!</h2>
           <p>
             재즈엔 뭘 곁들여야 할지 잘 모르시겠다구요?
-            <br />그럴 땐 고민 말고 묘묘를 따라오세요!
-            <br />분위기까지 챙긴 조합을 추천해드릴게요.
+            <br />
+            그럴 땐 고민 말고 묘묘를 따라오세요!
+            <br />
+            분위기까지 챙긴 조합을 추천해드릴게요.
           </p>
         </div>
 
@@ -85,7 +87,7 @@ export default function Section10Component() {
           className="horizontal-scroll"
           ref={scrollRef}
           style={{
-            cursor: `url("/img/main_menu/cursor-cat.png") 8 8, grab`,
+            cursor: `url("./img/main_menu/cursor-cat.png") 8 8, grab`,
           }}
         >
           {slides.map((slide, i) => (
@@ -93,11 +95,15 @@ export default function Section10Component() {
               <img
                 src={slide.img}
                 alt={slide.title}
-                style={{ cursor: `url("/img/main_menu/cursor-cat.png") 8 8, default` }}
+                style={{
+                  cursor: `url("./img/main_menu/cursor-cat.png") 8 8, default`,
+                }}
               />
               <div
                 className="info"
-                style={{ cursor: `url("/img/main_menu/cursor-cat.png") 8 8, grab` }}
+                style={{
+                  cursor: `url("./img/main_menu/cursor-cat.png") 8 8, grab`,
+                }}
                 onMouseDown={handleMouseDown}
                 onMouseLeave={handleMouseLeave}
                 onMouseUp={handleMouseUp}
@@ -124,7 +130,9 @@ export default function Section10Component() {
                     href={i < 2 ? "/set" : "/food"}
                     onClick={(e) => onClickA(e, i < 2 ? "/set" : "/food")}
                     className="link-item"
-                    style={{ cursor: `url("/img/main_menu/cursor-cat2.png") 8 8, pointer` }}
+                    style={{
+                      cursor: `url("./img/main_menu/cursor-cat2.png") 8 8, pointer`,
+                    }}
                   >
                     <i className="bi bi-box-arrow-in-right"></i>
                     <span>상세보기</span>

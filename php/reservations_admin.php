@@ -6,11 +6,7 @@
 
 
 // 없다면 간단 연결 (값 바꿔서 사용)
-if (!isset($CONN) || !($CONN instanceof mysqli)) {
-  mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-  $CONN = new mysqli('localhost', 'db_user', 'db_password', 'db_name');
-  $CONN->set_charset('utf8mb4');
-}
+
 
 $page  = max(1, (int)($_GET['page'] ?? 1));
 $size  = max(1, min(100, (int)($_GET['size'] ?? 20)));
@@ -43,7 +39,7 @@ $total = (int)$cnt['c'];
 $sql = "
   SELECT
     id, resType, createdAt, scheduleDate, peopleCount,
-    userName, userId, userHp, userEmail, orderStatus
+    userName, userId, userHp, userEmail, orderStatus, productName
   FROM ticket_resavation_table
   {$whereSql}
   ORDER BY createdAt DESC
@@ -67,6 +63,7 @@ while ($r = $res->fetch_assoc()) {
     'userHp'      => $r['userHp'],
     'userEmail'   => $r['userEmail'],
     'orderStatus' => $r['orderStatus'],
+    'productName' => $r['productName'],
   ];
 }
 

@@ -14,7 +14,7 @@ const Section1Component = forwardRef((props, ref) => {
           slide2: data.slide2,
         });
       })
-      .catch((err) => alert(err));
+      .catch((err) => {});
 
     const pic1 = document.querySelector(".pic1 .wrapper");
     const pic2 = document.querySelector(".pic2 .wrapper");

@@ -6,7 +6,6 @@
   $name =$_POST['name'];
   $number =$_POST['number'];
   $userID =$_POST['userID'];
-  
   $SQL = "UPDATE `signup_table`
             SET `userBirth`='$dob',
                 `userEmail`='$email',

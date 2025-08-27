@@ -37,7 +37,7 @@ export default function CSModal({ onClose }) {
           {/* 헤더 */}
           <div className="header">
             <div className="profile">
-              <img src="/img/CSmodal/CS_modal_cat.png" alt="1:1 문의 모달" />
+              <img src="./img/CSmodal/CS_modal_cat.png" alt="1:1 문의 모달" />
             </div>
             <span className="title">재즈묘묘 1:1 문의</span>
           </div>
@@ -46,7 +46,7 @@ export default function CSModal({ onClose }) {
           <div className="chat-box" role="region" aria-label="안내 메시지">
             <div className="chat">
               <div className="profile small">
-                <img src="/img/CSmodal/CS_modal_cat.png" alt="프로필이미지" />
+                <img src="./img/CSmodal/CS_modal_cat.png" alt="프로필이미지" />
               </div>
               <p className="chat-text">
                 안녕,
@@ -57,7 +57,7 @@ export default function CSModal({ onClose }) {
 
             <div className="chat">
               <div className="profile small">
-                <img src="/img/CSmodal/CS_modal_cat.png" alt="프로필이미지" />
+                <img src="./img/CSmodal/CS_modal_cat.png" alt="프로필이미지" />
               </div>
               <p className="chat-text">
                 공연, 메뉴, 예약 등<br />

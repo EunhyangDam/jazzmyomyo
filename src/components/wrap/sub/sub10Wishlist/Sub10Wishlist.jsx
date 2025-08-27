@@ -8,6 +8,7 @@ import SiteMapComponent from "../../custom/SiteMapComponent";
 import useCustomA from "../../custom/useCustomA";
 import { cartAction } from "../../../../store/cart";
 import { confirmModalAction } from "../../../../store/confirmModal";
+import axios from "axios";
 export default function Sub10Wishilist(props) {
   const { onClickA } = useCustomA();
   const dispatch = useDispatch();
@@ -19,12 +20,30 @@ export default function Sub10Wishilist(props) {
   const [state, setState] = useState({
     위시리스트: [],
   });
+  const [data, setData] = useState({});
   useEffect(() => {
     setState((prev) => ({
       ...prev,
       위시리스트: list.위시리스트,
     }));
   }, [list]);
+
+  useEffect(() => {
+    const formData = new FormData();
+    formData.append("ID", userID.아이디);
+    axios({ url: "/jazzmyomyo/user_info.php", method: "POST", data: formData })
+      .then((res) => {
+        switch (res.status) {
+          case 200:
+            setData(res.data);
+            break;
+          default:
+            alert("a");
+            break;
+        }
+      })
+      .catch();
+  }, [userID]);
   const clickWishDel = (e, data) => {
     let del = state.위시리스트.filter((el) => el.id !== data.id);
     setState({
@@ -74,27 +93,39 @@ export default function Sub10Wishilist(props) {
           <ul>
             <li className="col col1">
               <h2 className="name">
-                {userID !== "" ? (
-                  <span>{userID.이름} 님</span>
-                ) : (
+                {userID.아이디 === "" ? (
                   <span>비회원</span>
+                ) : (
+                  <span>{userID.이름} 님</span>
                 )}
               </h2>
-              <p className="email">myomyocat@gmail.com</p>
-              <p>일반회원</p>
+              {userID.아이디 && <p className="email">{data.email}</p>}
+              {userID.아이디 && <p>일반회원</p>}
             </li>
-            <li className="col col2">
-              <h3>나의 첫 방문일</h3>
-              <p className="content">2025.09.10</p>
-            </li>
-            <li className="col col3">
-              <h3>나의 감상횟수</h3>
-              <p className="content">6회</p>
-            </li>
-            <li className="col col4">
-              <h3>보유 티켓 수</h3>
-              <p className="content">8장</p>
-            </li>
+            {userID.아이디 && (
+              <li className="col col2">
+                <h3>나의 첫 방문일</h3>
+                <p className="content">
+                  {data.dateAt
+                    .split(" ")[0]
+                    .split("-")
+                    .map((v, i) => (i === 0 ? v.slice(2) : v))
+                    .join(".")}
+                </p>
+              </li>
+            )}
+            {userID.아이디 && (
+              <li className="col col3">
+                <h3>나의 감상횟수</h3>
+                <p className="content">6회</p>
+              </li>
+            )}
+            {userID.아이디 && (
+              <li className="col col4">
+                <h3>보유 티켓 수</h3>
+                <p className="content">8장</p>
+              </li>
+            )}
           </ul>
         </div>
         <div className="body">

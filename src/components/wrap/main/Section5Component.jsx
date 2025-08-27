@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, forwardRef } from "react";
 import "./scss/Section5Component.scss";
+import { Link} from "react-router-dom";
 
 const Section5Component = forwardRef((props, ref) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -90,13 +91,13 @@ const Section5Component = forwardRef((props, ref) => {
 
             <ul className="link-list">
               <li>
-                <a href="#">모든 Artist</a>
+                <Link to="/artist">모든 Artist</Link>
               </li>
               <li>
-                <a href="#">weekly Artist</a>
+                <Link to="/artist">weekly Artist</Link>
               </li>
               <li>
-                <a href="#">more</a>
+                <Link to="/artist">more</Link>
               </li>
             </ul>
           </div>

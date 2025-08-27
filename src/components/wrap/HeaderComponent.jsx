@@ -137,6 +137,7 @@ export default function HeaderComponent(props) {
   };
 
   const logOut = (e) => {
+    e.preventDefault();
     dispatch(logOutAction(null));
   };
   const clickLogOut = (e) => {

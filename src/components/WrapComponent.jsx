@@ -82,6 +82,9 @@ import { signInAction } from "../store/signIn.js";
 import Sub035PreAdmin from "./wrap/sub/sub03Menu/Sub035PreAdmin.jsx";
 import Sub035PreAdminView from "./wrap/sub/sub03Menu/Sub035PreAdminView.jsx";
 import Sub035PreAdminEdit from "./wrap/sub/sub03Menu/Sub035PreAdminEdit.jsx";
+import Sub09Purchase from "./wrap/sub/sub09Cart/Sub09Purchase.jsx";
+import Sub07AddressListCreate from "./wrap/sub/sub07Mp/Sub07AddressListCreate.jsx";
+import Sub07AddressListEdit from "./wrap/sub/sub07Mp/Sub07AddressListEdit.jsx";
 
 export default function WrapComponent(props) {
   /**인스턴스 생성 */
@@ -356,6 +359,11 @@ export default function WrapComponent(props) {
 
           {/* 배송지 관리 컴포넌트 추가 */}
           <Route path="/addressList" element={<Sub07AddressList />} />
+          <Route
+            path="/addressListCreate"
+            element={<Sub07AddressListCreate />}
+          />
+          <Route path="/addressListEdit" element={<Sub07AddressListEdit />} />
           <Route path="/deleteAccount" element={<Sub07DeleteAccount />} />
           <Route path="/editProfile" element={<Sub07EditProfile />} />
           <Route path="/mp" element={<Sub07Mp />} />
@@ -409,6 +417,7 @@ export default function WrapComponent(props) {
 
           <Route path="/cart" element={<Sub09Cart />} />
           <Route path="/wishlist" element={<Sub10Wishlist />} />
+          <Route path="/purchase" element={<Sub09Purchase />} />
           <Route path="/*" element={<Page404Component />} />
         </Route>
       </Routes>

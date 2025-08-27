@@ -1,5 +1,7 @@
 import React, { forwardRef } from "react";
 import "./scss/Section4Component.scss";
+import { Link } from "react-router-dom";
+
 import { useEffect, useState, useRef } from "react";
 
 const Section4Component = forwardRef((props, ref) => {
@@ -226,9 +228,9 @@ const Section4Component = forwardRef((props, ref) => {
                       i === todayWeekday ? "today-slide" : ""
                     } ${i === currentIndex ? "center" : ""}`}
                   >
-                    <a href="!#">
-                      <img src={item.image} alt={`slide-${i}`} />
-                    </a>
+                    <Link to="/monthly">
+                      <img src={`./img/${item.image}`} alt={`slide-${i}`} />
+                    </Link>
                   </li>
                 ))}
               </ul>

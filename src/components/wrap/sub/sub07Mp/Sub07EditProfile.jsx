@@ -25,7 +25,7 @@ function Sub07EditProfile(props) {
   useEffect(() => {
     const formData = new FormData();
     formData.append("ID", userID.아이디);
-    axios({ url: "./jazzmyomyo/user_info.php", method: "POST", data: formData })
+    axios({ url: "/jazzmyomyo/user_info.php", method: "POST", data: formData })
       .then((res) => {
         switch (res.status) {
           case 200:

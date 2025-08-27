@@ -15,26 +15,22 @@ const signIn = createSlice({
       state.이름 = action.payload.이름;
       state.자동로그인 = action.payload.자동로그인;
 
+      // //추가
+      // const userInfo = {
+      //   아이디: action.payload.아이디,
+      //   이름: action.payload.이름,
+      // };
 
+      // // 기존 정보 제거
+      // localStorage.removeItem("jazzmyomyo_sign_in");
+      // sessionStorage.removeItem("jazzmyomyo_sign_in");
 
-      //추가
-      const userInfo = { 
-        아이디: action.payload.아이디,
-        이름: action.payload.이름,
-      };
-    
-      // 기존 정보 제거
-      localStorage.removeItem("jazzmyomyo_sign_in");
-      sessionStorage.removeItem("jazzmyomyo_sign_in");
-    
       // 둘 다 저장
-      sessionStorage.setItem("jazzmyomyo_sign_in", JSON.stringify(userInfo));
+      sessionStorage.setItem("jazzmyomyo_sign_in", JSON.stringify(state));
       if (action.payload.자동로그인) {
-        localStorage.setItem("jazzmyomyo_sign_in", JSON.stringify(userInfo));
+        localStorage.setItem("jazzmyomyo_sign_in", JSON.stringify(state));
       }
     },
-
-
 
     logOutAction(state, action) {
       // 로그아웃 저장소 모두 삭제
@@ -43,11 +39,8 @@ const signIn = createSlice({
       localStorage.removeItem("jazzmyomyo_sign_in");
       sessionStorage.removeItem("jazzmyomyo_sign_in");
 
-
-       //추가
-      localStorage.removeItem("role");
-
-
+      // //추가
+      // localStorage.removeItem("role");
 
       state.아이디 = "";
       state.이름 = "";

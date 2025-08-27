@@ -1,37 +1,45 @@
 <?
+
 header('Content-Type: application/json; charset=utf-8');
-// /jazzmyomyo/lental_list_api.php
 include_once('./header.php'); 
 date_default_timezone_set('Asia/Seoul');
 
-// 화이트리스트
-$sort  = in_array($sort,  ['created','name'], true) ? $sort  : 'created';
-$order = in_array($order, ['asc','desc'], true)      ? $order : 'desc';
+// 1) 쿼리 파라미터 먼저 읽기
+$sort  = $_GET['sort']  ?? 'created'; // 'created' | 'name'
+$order = $_GET['order'] ?? 'desc';    // 'asc' | 'desc'
+$month = trim($_GET['month'] ?? '');  // 'YYYY-MM' | 'all' | ''
 
-$month = trim($_GET['month'] ?? ''); // 'YYYY-MM' or ''
 $page  = max(1, (int)($_GET['page'] ?? 1));
 $per   = min(100, max(1, (int)($_GET['perPage'] ?? 10)));
 $offset = ($page - 1) * $per;
 
-// ORDER BY 만들기
+// 2) 화이트리스트
+$sort  = in_array($sort,  ['created','name'], true) ? $sort  : 'created';
+$order = in_array($order, ['asc','desc'], true)      ? $order : 'desc';
+
+// 3) ORDER BY
 if ($sort === 'name') {
-  // 이름순: asc/desc 모두 지원
   $orderBy = ($order === 'desc')
     ? 'ORDER BY name DESC, id DESC'
     : 'ORDER BY name ASC,  id ASC';
 } else {
-  // 신청순(= created_at 기준)
-  // asc → 오래된 순, desc → 최신 순
   $orderBy = ($order === 'asc')
     ? 'ORDER BY created_at ASC,  id ASC'
     : 'ORDER BY created_at DESC, id DESC';
 }
-// WHERE
+
+// 4) WHERE (month='all'은 필터 해제!)
 $where = '';
 $params = [];
 $types  = '';
 
-if ($month !== '') {
+// 'all'은 필터 없음으로 간주
+if ($month === 'all') {
+  $month = '';
+}
+
+// YYYY-MM 형식일 때만 필터 적용
+if ($month !== '' && preg_match('/^\d{4}-(0[1-9]|1[0-2])$/', $month)) {
   $where = "WHERE DATE_FORMAT(created_at, '%Y-%m') = ?";
   $params[] = $month;
   $types   .= 's';
@@ -79,7 +87,7 @@ while ($r = mysqli_fetch_assoc($res)) {
     'phone'        => $r['phone'],
     'email'        => $r['email'],
     'file_orig_name' => $r['file_orig_name'],
-    'created_at'   => $r['created_at'],
+    'created_at'   => $r['created_at']
   ];
 }
 mysqli_stmt_close($stmt);

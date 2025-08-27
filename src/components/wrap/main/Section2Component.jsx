@@ -12,8 +12,8 @@ const Section2Component = forwardRef((props, ref) => {
         setState({
           section: data.section,
         });
-      })
-      .catch((err) => alert(err));
+      });
+    // .catch((err) => {alert(err)});
   }, []);
   return (
     <div id="section2Component" className="section" ref={ref}>

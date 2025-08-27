@@ -70,7 +70,8 @@ function Sub06Lg(props) {
     axios({
       url: "/jazzmyomyo/sign_in.php",
       method: "POST",
-      data: formData, withCredentials: true,
+      data: formData,
+      withCredentials: true,
     })
       .then((res) => {
         console.log(res.data);
@@ -83,7 +84,7 @@ function Sub06Lg(props) {
               isConfirm: false,
             };
             dispatch(confirmModalAction(obj));
-            navigate("/SignUp");
+            navigate("/signUp");
           } else if (res.data === -1) {
             const obj = {
               heading: "로그인 실패",
@@ -116,7 +117,6 @@ function Sub06Lg(props) {
         console.log(err);
       });
   };
-
 
   return (
     <div id="sub06Lg">
@@ -183,7 +183,7 @@ function Sub06Lg(props) {
             </div>
 
             <div className="login-right">
-              <Link to="/lentalCh" className="signup-cat">
+              <Link to="/signup" className="signup-cat">
                 <div className="gap">
                   <img
                     src="img/login_cat.png"

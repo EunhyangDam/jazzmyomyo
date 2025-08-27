@@ -69,7 +69,7 @@ function Sub02ShopDetail(props) {
   const onChangeNumber = () => {};
 
   useEffect(() => {
-    fetch("/json/product.json", { method: "GET" })
+    fetch("./json/product.json", { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         setState((prev) => ({
@@ -81,7 +81,7 @@ function Sub02ShopDetail(props) {
         console.log(err);
       });
 
-    fetch("/json/sub02/delivery.json", { method: "GET" })
+    fetch("./json/sub02/delivery.json", { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         setDelivery((prev) => ({
@@ -148,12 +148,12 @@ function Sub02ShopDetail(props) {
           <div className="category-name">
             <ul>
               <li>
-                <a href="/Shop?category=굿즈">
+                <a href="/shop?category=굿즈">
                   <span className={isGoods ? "on" : ""}>굿즈</span>
                 </a>
               </li>
               <li>
-                <a href="Shop?category=음반">
+                <a href="shop?category=음반">
                   <span className={isDisc ? "on" : ""}>음반/LP</span>
                 </a>
               </li>
@@ -306,11 +306,8 @@ function Sub02ShopDetail(props) {
                               {item.includes("'주문내역'") ? (
                                 <>
                                   - 주문한 내용 및 배송 현황은&nbsp;
-                                  <a
-                                    href="!#"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
+
+                                  <a href="!#" onClick={(e) => onClickA(e, "/myOrderMd")}>
                                     '주문내역'
                                   </a>
                                   &nbsp;에서 확인할 수 있습니다.

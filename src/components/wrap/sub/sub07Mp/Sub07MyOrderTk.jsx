@@ -304,7 +304,7 @@ function Sub07MyOrderTk(props) {
                                       </div>
                                       <div className="cat">
                                         {/* 고양이 이미지는 네가 넣을 이미지 경로로 교체 */}
-                                        <img src="/img/resavation_check_cat.png" alt="" />
+                                        <img src="./img/resavation_check_cat.png" alt="" />
                                       </div>
                                     </div>
                                   </div>

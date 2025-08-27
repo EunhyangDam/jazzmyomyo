@@ -126,10 +126,18 @@ function Sub07Mp(props) {
             <ul>
               <li>
                 <h3>계정관리</h3>
-                <a href="/MyProfile">회원정보 확인</a>
-                <a href="/EditProfile">회원정보 수정</a>
-                <a href="/AddressList">배송지 관리</a>
-                <a href="/DeleteAccount">회원 탈퇴</a>
+                <a href="!#" onClick={(e) => onClickA(e, "/myProfile")}>
+                  회원정보 확인
+                </a>
+                <a href="!#" onClick={(e) => onClickA(e, "/editProfile")}>
+                  회원정보 수정
+                </a>
+                <a href="!#" onClick={(e) => onClickA(e, "/addressList")}>
+                  배송지 관리
+                </a>
+                <a href="!#" onClick={(e) => onClickA(e, "/deleteAccount")}>
+                  회원 탈퇴
+                </a>
               </li>
               <li>
                 <h3>이용내역</h3>
