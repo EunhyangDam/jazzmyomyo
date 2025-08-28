@@ -239,7 +239,7 @@ export default function WrapComponent(props) {
           <Route path="/preW" element={<Sub035PreWrite />} />
           <Route path="/preE/edit/:id" element={<Sub035PreEdit />} />
           <Route path="/preAdmin" element={<Sub035PreAdmin />} />
-          <Route path="/preAdminW" element={<Sub035PreAdminWrite />} />
+          <Route path="/preAdminW" element={<Sub035PreWrite />} />
           <Route path="/preAdminV/view/:id" element={<Sub035PreAdminView />} />
           <Route path="/preAdminE/edit/:id" element={<Sub035PreAdminEdit />} />
           <Route path="/aboutLive" element={<Sub04AboutLive />} />
@@ -325,7 +325,7 @@ export default function WrapComponent(props) {
         </Route>
       </Routes>
 
-      <FooterComponent footerClass={footerClass} isAdmin={getIsAdmin()} />
+      <FooterComponent footerClass={footerClass} />
 
       {confirmIsOn && <ConfirmModalComponent />}
 
